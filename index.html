@@ -1,796 +1,1843 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cassia — Painel de Conteúdo</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Cassia Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080706;
+  --s1:#0f0d0b;
+  --s2:#161310;
+  --s3:#1e1a16;
+  --s4:#26211c;
+  --b0:rgba(255,255,255,0.04);
+  --b1:rgba(255,255,255,0.07);
+  --b2:rgba(255,255,255,0.13);
+  --b3:rgba(255,255,255,0.22);
+  --gold:#c8a55e;
+  --gold2:#e2c47a;
+  --gold3:#f0d898;
+  --goldg:rgba(200,165,94,0.10);
+  --goldb:rgba(200,165,94,0.20);
+  --tx:#ede8df;
+  --tm:#9a8f80;
+  --ts:#554d44;
+  --tss:#332e28;
+  --rose:rgba(220,140,140,0.8);
+  --teal:rgba(100,200,190,0.8);
+  --r:12px;
+  --rs:8px;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Outfit',sans-serif;
+  --transition:.18s ease;
+}
 
-  :root {
-    --bg: #0e0c0a;
-    --surface: #161410;
-    --card: #1c1916;
-    --border: rgba(255,255,255,0.07);
-    --border-hover: rgba(255,255,255,0.14);
-    --gold: #c9a96e;
-    --gold-light: #e2c88a;
-    --gold-dim: rgba(201,169,110,0.15);
-    --text: #f0ebe3;
-    --text-muted: #8a8070;
-    --text-subtle: #4a4540;
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Jost', sans-serif;
-    --radius: 12px;
-    --radius-sm: 8px;
-  }
+html{font-size:15px;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-weight:300;min-height:100vh;line-height:1.65;overflow-x:hidden}
 
-  html { font-size: 16px; }
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--ts);border-radius:2px}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-weight: 300;
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+/* APP SHELL */
+.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
 
-  /* ── NOISE TEXTURE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.5;
-  }
+/* ════ SIDEBAR ════ */
+.sidebar{
+  background:var(--s1);
+  border-right:1px solid var(--b1);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;
+  overflow-y:auto;overflow-x:hidden;
+}
 
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-    position: relative;
-    z-index: 1;
-  }
+.sidebar-logo{
+  padding:28px 22px 22px;
+  border-bottom:1px solid var(--b1);
+  position:relative;
+  overflow:hidden;
+}
+.sidebar-logo::before{
+  content:'';
+  position:absolute;
+  top:-30px;right:-30px;
+  width:120px;height:120px;
+  background:radial-gradient(circle, rgba(200,165,94,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.logo-tag{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--ts);margin-bottom:8px;display:block;
+}
+.logo-name{
+  font-family:var(--serif);font-size:32px;font-weight:600;
+  font-style:italic;color:var(--gold2);letter-spacing:-0.5px;
+  line-height:1;display:block;
+}
+.logo-sub{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ts);margin-top:6px;display:block;
+}
+.logo-dot{
+  display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gold);margin-right:6px;
+  animation:pulse 2.5s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 
-  /* ── HEADER ── */
-  header {
-    padding: 52px 0 40px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 48px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
+/* SIDEBAR STATS */
+.sidebar-stats{
+  padding:14px 22px;
+  border-bottom:1px solid var(--b1);
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.ss{text-align:center}
+.ss-num{font-family:var(--serif);font-size:20px;color:var(--gold2);line-height:1;display:block}
+.ss-lbl{font-size:9px;color:var(--ts);letter-spacing:.5px;margin-top:2px;display:block}
 
-  .brand h1 {
-    font-family: var(--serif);
-    font-size: 42px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--gold-light);
-    letter-spacing: -0.5px;
-    line-height: 1;
-  }
+/* NAV */
+.nav{padding:16px 14px;flex:1}
+.nav-group{margin-bottom:20px}
+.nav-group-label{
+  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--tss);padding:0 8px;margin-bottom:6px;display:block;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  width:100%;padding:9px 10px;
+  background:transparent;border:none;
+  border-radius:var(--rs);
+  color:var(--tm);font-family:var(--sans);
+  font-size:13px;font-weight:400;
+  cursor:pointer;text-align:left;
+  transition:all var(--transition);
+  margin-bottom:1px;position:relative;
+}
+.nav-item svg{width:16px;height:16px;opacity:.55;flex-shrink:0;transition:opacity var(--transition)}
+.nav-item:hover{background:var(--s2);color:var(--tx)}
+.nav-item:hover svg{opacity:.9}
+.nav-item.on{
+  background:var(--goldg);color:var(--gold2);
+  border:1px solid var(--goldb);
+}
+.nav-item.on svg{opacity:1}
+.nav-item .nav-count{
+  margin-left:auto;font-size:10px;
+  background:var(--s4);color:var(--ts);
+  padding:2px 7px;border-radius:10px;
+}
+.nav-item.on .nav-count{background:var(--goldb);color:var(--gold)}
 
-  .brand p {
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 6px;
-  }
+/* SIDEBAR QUOTE */
+.sidebar-quote{
+  padding:16px 22px;border-top:1px solid var(--b1);
+  font-family:var(--serif);font-style:italic;
+  font-size:13px;color:var(--ts);line-height:1.6;
+}
 
-  .header-meta {
-    text-align: right;
-    font-size: 12px;
-    color: var(--text-subtle);
-    letter-spacing: 0.5px;
-  }
+/* ════ MAIN ════ */
+.main{overflow-y:auto;overflow-x:hidden;background:var(--bg)}
+.page{display:none;min-height:100vh;animation:fadeIn .3s ease}
+.page.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-  .header-meta span {
-    display: block;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
+/* PAGE HERO */
+.page-hero{
+  padding:36px 44px 28px;
+  border-bottom:1px solid var(--b1);
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg, var(--s1) 0%, transparent 100%);
+}
+.page-hero::after{
+  content:'';position:absolute;
+  top:0;right:0;bottom:0;
+  width:300px;
+  background:radial-gradient(ellipse at 80% 50%, rgba(200,165,94,0.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);opacity:.5}
+.page-hero h1{
+  font-family:var(--serif);font-size:40px;font-weight:300;
+  font-style:italic;color:var(--gold2);letter-spacing:-0.5px;
+  line-height:1.1;margin-bottom:8px;
+}
+.page-hero p{font-size:13px;color:var(--tm);line-height:1.65;max-width:520px}
 
-  /* ── SECTION TITLE ── */
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+/* PAGE CONTENT */
+.page-body{padding:28px 44px 60px}
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+/* ════ SECTION HEADERS ════ */
+.sec-title{
+  display:flex;align-items:center;gap:12px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--b1)}
 
-  /* ── CONFIGURAÇÃO ── */
-  .config-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 48px;
-  }
+/* ════ CARDS ════ */
+.card{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);overflow:hidden;
+  transition:border-color var(--transition);
+}
+.card:hover{border-color:var(--b2)}
+.card-head{
+  padding:14px 18px;border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--s1);
+}
+.card-body{padding:20px 20px}
 
-  .config-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 16px;
-    transition: border-color 0.2s;
-  }
+/* GLASS CARD */
+.card-glass{
+  background:rgba(22,19,16,0.6);
+  border:1px solid var(--b1);border-radius:var(--r);
+  backdrop-filter:blur(8px);
+}
 
-  .config-card:hover { border-color: var(--border-hover); }
+/* ════ INPUTS ════ */
+textarea,input[type=text],input[type=search],select{
+  width:100%;background:var(--s3);
+  border:1px solid var(--b1);border-radius:var(--rs);
+  padding:11px 14px;font-family:var(--sans);font-size:14px;
+  color:var(--tx);outline:none;transition:border var(--transition);
+  resize:none;appearance:none;
+}
+textarea::placeholder,input::placeholder{color:var(--tss)}
+textarea:focus,input:focus,select:focus{border-color:rgba(200,165,94,.5);box-shadow:0 0 0 3px rgba(200,165,94,0.06)}
+select option{background:var(--s2)}
 
-  .config-card label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-  }
+/* ════ BUTTONS ════ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--sans);font-weight:500;
+  border:none;cursor:pointer;border-radius:var(--rs);
+  transition:all var(--transition);white-space:nowrap;
+}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
 
-  .config-card select,
-  .config-card input[type=text] {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 400;
-    color: var(--text);
-    cursor: pointer;
-    appearance: none;
-  }
+.btn-gold{
+  padding:11px 22px;background:var(--gold);
+  color:#08070600;color:#08070f;color:#000;
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(8,7,6,0.92);
+}
+.btn-gold:hover:not(:disabled){background:var(--gold2);box-shadow:0 4px 20px rgba(200,165,94,.25)}
 
-  .config-card select option {
-    background: #1c1916;
-    color: var(--text);
-  }
+.btn-ghost{
+  padding:9px 16px;background:transparent;
+  color:var(--tm);font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--b2);
+}
+.btn-ghost:hover{border-color:var(--b3);color:var(--tx);background:var(--s3)}
 
-  /* ── TEMA INPUT ── */
-  .tema-block {
-    margin-bottom: 48px;
-  }
+.btn-xs{padding:5px 11px;font-size:10px;letter-spacing:1.2px}
+.btn-sm{padding:7px 14px;font-size:11px;letter-spacing:1px}
+.btn-icon{
+  padding:8px;background:var(--s3);border:1px solid var(--b1);
+  color:var(--tm);border-radius:var(--rs);
+}
+.btn-icon:hover{border-color:var(--b2);color:var(--tx)}
 
-  .tema-textarea {
-    width: 100%;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    font-family: var(--serif);
-    font-size: 19px;
-    font-style: italic;
-    color: var(--text);
-    outline: none;
-    resize: none;
-    line-height: 1.65;
-    transition: border-color 0.2s;
-    min-height: 90px;
-  }
+.btn-danger{border:1px solid rgba(220,80,80,.2);color:rgba(220,120,120,.8)}
+.btn-danger:hover{background:rgba(220,80,80,.08);border-color:rgba(220,80,80,.35)}
 
-  .tema-textarea::placeholder { color: var(--text-subtle); }
-  .tema-textarea:focus { border-color: var(--gold); }
+/* ════ BADGES ════ */
+.badge{
+  font-size:9px;letter-spacing:1.8px;text-transform:uppercase;
+  padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;
+}
+.badge-gold{color:var(--gold);background:var(--goldg);border:1px solid var(--goldb)}
+.badge-rose{color:var(--rose);background:rgba(220,140,140,0.08);border:1px solid rgba(220,140,140,0.18)}
+.badge-teal{color:var(--teal);background:rgba(100,200,190,0.08);border:1px solid rgba(100,200,190,0.18)}
+.badge-muted{color:var(--ts);background:var(--s3);border:1px solid var(--b1)}
 
-  /* ── BOTÃO PRINCIPAL ── */
-  .btn-generate {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 16px;
-    padding: 13px 28px;
-    background: var(--gold);
-    color: var(--bg);
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
+/* ════ CHIPS ════ */
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{
+  font-family:var(--serif);font-style:italic;font-size:14.5px;
+  padding:6px 14px;border:1px solid var(--b1);border-radius:20px;
+  color:var(--tm);background:transparent;cursor:pointer;
+  transition:all var(--transition);white-space:nowrap;
+}
+.chip:hover,.chip.on{border-color:var(--gold);color:var(--gold2);background:var(--goldg)}
 
-  .btn-generate:hover { background: var(--gold-light); }
-  .btn-generate:active { transform: scale(0.98); }
-  .btn-generate:disabled { opacity: 0.4; cursor: not-allowed; }
+/* ════ SETTINGS GRID ════ */
+.settings-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px}
+.sbox{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;transition:border-color var(--transition)}
+.sbox:hover{border-color:var(--b2)}
+.sbox label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ts);display:block;margin-bottom:7px}
+.sbox select,.sbox input{padding:0;background:transparent;border:none;font-size:15px;font-family:var(--serif);font-style:italic;color:var(--tx);box-shadow:none}
 
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: transparent;
-    color: var(--text-muted);
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+/* ════ SPINNER ════ */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(8,7,6,.25);border-top-color:rgba(8,7,6,.85);border-radius:50%;animation:rot .65s linear infinite}
+.spin-w{border:2px solid rgba(255,255,255,.15);border-top-color:var(--gold)}
+.spin-lg{width:28px;height:28px;border:2px solid var(--b2);border-top-color:var(--gold)}
+@keyframes rot{to{transform:rotate(360deg)}}
 
-  .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+/* ════ LOADING ════ */
+.loading-box{display:none;padding:48px 0;text-align:center}
+.loading-box.on{display:block}
+.loading-box p{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--tm);margin-top:16px}
 
-  /* ── SPINNER ── */
-  .spinner {
-    width: 14px; height: 14px;
-    border: 2px solid rgba(14,12,10,0.3);
-    border-top-color: var(--bg);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    display: inline-block;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ════ RESULT ELEMENTS ════ */
+.result-box{animation:riseUp .4s ease both}
+@keyframes riseUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ── OUTPUT BLOCK ── */
-  .output-section { margin-bottom: 52px; }
+.post-title-display{
+  font-family:var(--serif);font-size:30px;font-weight:400;
+  font-style:italic;color:var(--gold2);line-height:1.25;margin-bottom:14px;
+}
+.post-body-display{
+  font-size:14px;color:var(--tx);line-height:1.85;
+  white-space:pre-wrap;word-break:break-word;
+}
+.post-hashtags-display{
+  margin-top:14px;font-size:12.5px;color:var(--gold);
+  line-height:2.1;word-break:break-all;
+}
 
-  .output-section.hidden { display: none; }
+/* PROMPT CODE BOX */
+.prompt-code{
+  font-family:'Courier New',monospace;font-size:12px;
+  color:rgba(200,165,94,.75);
+  background:rgba(200,165,94,.04);
+  border:1px solid rgba(200,165,94,.1);
+  border-radius:var(--rs);padding:13px 15px;
+  line-height:1.75;word-break:break-word;
+  position:relative;
+}
+.prompt-negative{
+  font-family:'Courier New',monospace;font-size:11px;
+  color:var(--ts);line-height:1.65;
+  margin-top:8px;padding-top:8px;
+  border-top:1px solid var(--b1);
+}
+.prompt-negative span{color:rgba(220,140,140,.5);margin-right:5px}
 
-  /* ── POST CARD ── */
-  .post-result {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 16px;
-  }
+/* PCARD */
+.pcard{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:20px;
+  margin-bottom:12px;position:relative;
+}
+.pcard:hover{border-color:var(--b2)}
+.pcard-num{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.pcard-num::after{content:'';flex:1;height:1px;background:var(--b1)}
+.pcard-name{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--tx);margin-bottom:4px}
+.pcard-desc{font-size:12.5px;color:var(--tm);font-style:italic;margin-bottom:12px;line-height:1.55}
+.pcard-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px}
 
-  .post-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+/* COPY INLINE */
+.copy-inline{
+  position:absolute;top:14px;right:14px;
+  padding:4px 10px;background:transparent;
+  border:1px solid var(--b1);border-radius:6px;
+  color:var(--ts);font-size:10px;font-family:var(--sans);
+  cursor:pointer;transition:all var(--transition);letter-spacing:.5px;
+}
+.copy-inline:hover{border-color:var(--gold);color:var(--gold)}
 
-  .post-type-badge {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    background: var(--gold-dim);
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
+/* ════ TEMAS PAGE ════ */
+.temas-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  margin-bottom:24px;
+}
+.tstat{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:14px 16px;
+  text-align:center;
+}
+.tstat-n{font-family:var(--serif);font-size:28px;color:var(--gold2);line-height:1}
+.tstat-l{font-size:10px;color:var(--ts);margin-top:4px}
 
-  .post-actions { display: flex; gap: 8px; }
+.search-wrap{position:relative;margin-bottom:18px}
+.search-wrap input{padding-left:38px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ts);pointer-events:none}
 
-  .post-body { padding: 22px 20px; }
+.tema-section{margin-bottom:32px}
+.tema-sec-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:14px;
+}
+.tema-sec-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--goldg);border:1px solid var(--goldb);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.tema-sec-title{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--gold2)}
+.tema-sec-count{font-size:10px;color:var(--ts);letter-spacing:.5px;margin-left:auto}
+.tema-line{flex:1;height:1px;background:var(--b1)}
 
-  .post-title {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--gold-light);
-    line-height: 1.3;
-    margin-bottom: 14px;
-  }
+.tema-pills{display:flex;flex-wrap:wrap;gap:8px}
+.tema-pill{
+  font-family:var(--serif);font-style:italic;font-size:15px;
+  padding:7px 18px;border:1px solid var(--b1);border-radius:24px;
+  color:var(--tm);background:transparent;cursor:pointer;
+  transition:all var(--transition);
+}
+.tema-pill:hover{
+  border-color:var(--gold);color:var(--gold2);
+  background:var(--goldg);transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(200,165,94,.1);
+}
 
-  .post-legenda {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.8;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
+/* RANDOM TEMA BTN */
+.random-btn{
+  display:flex;align-items:center;gap:10px;
+  width:100%;padding:16px 20px;
+  background:var(--goldg);border:1px solid var(--goldb);
+  border-radius:var(--r);color:var(--gold2);
+  font-family:var(--serif);font-size:18px;font-style:italic;
+  cursor:pointer;transition:all var(--transition);margin-bottom:20px;
+  text-align:left;
+}
+.random-btn:hover{background:rgba(200,165,94,.16);border-color:var(--gold);box-shadow:0 4px 24px rgba(200,165,94,.12)}
+.random-btn svg{flex-shrink:0;opacity:.7}
+#random-display{flex:1}
 
-  .post-hashtags {
-    margin-top: 14px;
-    font-size: 13px;
-    color: var(--gold);
-    line-height: 1.9;
-    word-break: break-all;
-  }
+/* ════ LIBRARY PAGE ════ */
+.lib-card{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:18px 20px;
+  margin-bottom:10px;cursor:pointer;
+  transition:all var(--transition);position:relative;
+}
+.lib-card:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.lib-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.lib-card-name{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--tx)}
+.lib-card-desc{font-size:12.5px;color:var(--tm);line-height:1.55;margin-bottom:10px}
+.lib-prompt-box{
+  font-family:'Courier New',monospace;font-size:11.5px;
+  color:rgba(200,165,94,.65);background:rgba(200,165,94,.04);
+  border:1px solid rgba(200,165,94,.1);
+  border-radius:var(--rs);padding:10px 12px;
+  line-height:1.7;word-break:break-word;
+}
+.lib-neg{font-size:11px;color:var(--ts);margin-top:8px;font-family:'Courier New',monospace;line-height:1.5}
 
-  /* ── DIVIDER ORNAMENTO ── */
-  .ornament {
-    text-align: center;
-    color: var(--text-subtle);
-    font-size: 18px;
-    letter-spacing: 8px;
-    margin: 32px 0;
-    font-family: var(--serif);
-  }
+/* ════ TIPS PAGE ════ */
+.tips-hero{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:22px 24px;
+  margin-bottom:24px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.tips-metric{text-align:center}
+.tm-num{font-family:var(--serif);font-size:36px;color:var(--gold2);line-height:1}
+.tm-unit{font-size:11px;color:var(--ts);margin-top:4px}
+.tip-card{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);margin-bottom:10px;overflow:hidden;
+}
+.tip-head{
+  padding:16px 20px;border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;gap:14px;cursor:pointer;
+  transition:background var(--transition);
+}
+.tip-head:hover{background:var(--s3)}
+.tip-icon-box{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--goldg);border:1px solid var(--goldb);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.tip-icon-box svg{width:16px;height:16px;color:var(--gold)}
+.tip-title{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--gold2)}
+.tip-platforms{margin-top:4px;display:flex;gap:5px}
+.tip-body{padding:16px 20px;display:block}
+.tip-body p{font-size:13px;color:var(--tm);line-height:1.75;margin-bottom:12px}
+.tip-list{list-style:none}
+.tip-list li{
+  font-size:13px;color:var(--tm);padding:8px 0;
+  border-bottom:1px solid var(--b0);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.6;
+}
+.tip-list li:last-child{border-bottom:none}
+.tip-arrow{color:var(--gold);font-size:11px;flex-shrink:0;margin-top:2px;opacity:.7}
 
-  /* ── PROMPTS DE IMAGEM ── */
-  .prompt-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    margin-bottom: 14px;
-    position: relative;
-    transition: border-color 0.2s;
-  }
+/* HASHTAG BANK */
+.htag-cloud{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.htag{
+  font-size:12px;padding:4px 10px;
+  border:1px solid var(--b1);border-radius:14px;
+  color:var(--tm);background:transparent;cursor:pointer;
+  transition:all var(--transition);
+}
+.htag:hover{border-color:var(--gold);color:var(--gold);background:var(--goldg)}
+.htag.vol-high{border-color:rgba(200,165,94,.25);color:rgba(200,165,94,.7)}
+.htag.vol-mid{border-color:var(--b2);color:var(--tm)}
+.htag.vol-low{border-color:var(--b1);color:var(--ts)}
 
-  .prompt-card:hover { border-color: var(--border-hover); }
+/* ════ CALENDAR PAGE ════ */
+.cal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.cal-month{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--gold2)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:24px}
+.cal-day-name{font-size:10px;letter-spacing:1px;color:var(--ts);text-align:center;padding:6px 0;text-transform:uppercase}
+.cal-day{
+  aspect-ratio:1;border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:12px;color:var(--tm);cursor:pointer;
+  position:relative;transition:all var(--transition);border:1px solid transparent;
+}
+.cal-day:hover{background:var(--s3);border-color:var(--b1)}
+.cal-day.today{border-color:var(--gold);color:var(--gold2)}
+.cal-day.has-post{background:var(--goldg);color:var(--gold2);border-color:var(--goldb)}
+.cal-day.empty{opacity:.2}
+.cal-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:2px}
+.cal-post-type{font-size:8px;letter-spacing:.5px;color:rgba(200,165,94,.5);margin-top:1px}
 
-  .prompt-number {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
-    display: block;
-  }
+/* WEEK PLAN */
+.week-card{
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);margin-bottom:10px;overflow:hidden;
+}
+.week-head{
+  padding:12px 18px;border-bottom:1px solid var(--b1);
+  background:var(--s1);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.week-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
+.week-body{padding:0}
+.week-item{
+  padding:12px 18px;border-bottom:1px solid var(--b0);
+  display:flex;gap:14px;align-items:flex-start;
+  transition:background var(--transition);cursor:pointer;
+}
+.week-item:last-child{border-bottom:none}
+.week-item:hover{background:var(--s3)}
+.week-date{font-size:11px;color:var(--ts);width:28px;flex-shrink:0;padding-top:2px}
+.week-content{flex:1}
+.week-tema{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--tx);margin-bottom:3px}
+.week-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 
-  .prompt-label-name {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-style: italic;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
+/* ════ DIVIDER ════ */
+.divider{height:1px;background:var(--b1);margin:22px 0}
+.ornament{
+  text-align:center;font-family:var(--serif);
+  font-size:22px;letter-spacing:8px;color:var(--tss);
+  margin:28px 0;
+}
 
-  .prompt-text {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-family: 'Courier New', monospace;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-  }
+/* ════ GRID UTILITIES ════ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.flex{display:flex}
+.flex-c{display:flex;align-items:center}
+.flex-sb{display:flex;align-items:center;justify-content:space-between}
+.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}
+.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
+.mb20{margin-bottom:20px}.mb24{margin-bottom:24px}
+.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
 
-  .copy-btn {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    padding: 5px 12px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text-muted);
-    font-size: 11px;
-    font-family: var(--sans);
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.5px;
-  }
+/* ════ HIDDEN ════ */
+.hidden{display:none!important}
 
-  .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+/* ════ TOAST ════ */
+.toast{
+  position:fixed;bottom:28px;right:28px;
+  background:var(--s3);border:1px solid var(--goldb);
+  border-radius:var(--rs);padding:10px 18px;
+  font-size:13px;color:var(--gold2);
+  display:flex;align-items:center;gap:8px;
+  transform:translateY(20px);opacity:0;
+  transition:all .25s ease;z-index:1000;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
 
-  /* ── SUGGESTION CHIPS ── */
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-  }
+/* ════ SIZE PILLS ════ */
+.size-pill{
+  display:flex;align-items:center;gap:12px;
+  flex:1;min-width:160px;
+  background:var(--s2);border:1px solid var(--b1);
+  border-radius:var(--r);padding:12px 16px;cursor:pointer;
+  transition:all var(--transition);
+}
+.size-pill:hover{border-color:var(--b2)}
+.size-pill.on{border-color:var(--gold);background:var(--goldg)}
+.size-pill.tiktok-pill.on{border-color:var(--teal);background:rgba(100,200,190,.08)}
+.size-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:var(--s3);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:16px;font-weight:600;
+  color:var(--gold);flex-shrink:0;
+}
+.tk-i{color:var(--teal) !important}
+.size-pill.on .size-icon{background:var(--goldg);border-color:var(--goldb)}
+.size-name{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:2px}
+.size-desc{font-size:10px;color:var(--ts);line-height:1.4}
 
-  .chip {
-    font-size: 12px;
-    padding: 6px 14px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    transition: all 0.2s;
-    background: transparent;
-  }
+/* ════ TIKTOK RESULT BOX ════ */
+.tiktok-result{
+  background:rgba(100,200,190,.05);
+  border:1px solid rgba(100,200,190,.2);
+  border-radius:var(--r);padding:20px;
+}
+.tiktok-screen{
+  background:var(--s1);border:1px solid var(--b2);
+  border-radius:var(--rs);padding:14px 16px;
+  margin-bottom:8px;
+  font-family:var(--serif);font-size:17px;font-style:italic;
+  color:var(--tx);line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.tiktok-screen-num{
+  font-family:var(--sans);font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);flex-shrink:0;
+  margin-top:3px;
+}
+.tiktok-caption-box{
+  background:var(--s3);border:1px solid var(--b1);
+  border-radius:var(--rs);padding:12px 14px;
+  font-size:13px;color:var(--tx);line-height:1.7;
+}
 
-  .chip:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--gold-dim);
-  }
+/* ════ LENGTH INDICATOR ════ */
+.length-bar{
+  display:flex;align-items:center;gap:8px;
+  margin-top:8px;font-size:11px;color:var(--ts);
+}
+.length-track{flex:1;height:3px;background:var(--s4);border-radius:2px;overflow:hidden}
+.length-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s ease}
 
-  /* ── PLACEHOLDER STATE ── */
-  .placeholder-state {
-    padding: 52px 24px;
-    text-align: center;
-    color: var(--text-subtle);
-  }
 
-  .placeholder-state .icon {
-    font-family: var(--serif);
-    font-size: 48px;
-    color: var(--text-subtle);
-    display: block;
-    margin-bottom: 16px;
-    opacity: 0.4;
-  }
+  padding:40px 0;text-align:center;
+  font-family:var(--serif);font-size:18px;font-style:italic;color:var(--tss);
+}
 
-  .placeholder-state p {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-style: italic;
-    color: var(--text-subtle);
-  }
-
-  /* ── LOADING STATE ── */
-  .loading-block {
-    padding: 48px 24px;
-    text-align: center;
-    display: none;
-  }
-
-  .loading-block.visible { display: block; }
-
-  .loading-block p {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-style: italic;
-    color: var(--text-muted);
-    margin-top: 16px;
-  }
-
-  .loading-spinner-lg {
-    width: 28px; height: 28px;
-    border: 2px solid var(--border);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
-    display: inline-block;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 0;
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    color: var(--text-subtle);
-    text-transform: uppercase;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-up { animation: fadeUp 0.45s ease both; }
-  .fade-up-2 { animation: fadeUp 0.45s 0.1s ease both; }
-  .fade-up-3 { animation: fadeUp 0.45s 0.2s ease both; }
-
-  /* ── SCROLLBAR ── */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--text-subtle); border-radius: 2px; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 640px) {
-    .config-grid { grid-template-columns: 1fr; }
-    .brand h1 { font-size: 32px; }
-    header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  }
+/* ════ RESPONSIVE ════ */
+@media(max-width:768px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-270px;width:270px;z-index:100;transition:left .3s;height:100%}
+  .sidebar.open{left:0}
+  .page-hero{padding:24px 20px 20px}
+  .page-body{padding:20px 20px 48px}
+  .temas-stats{grid-template-columns:1fr 1fr}
+  .tips-hero{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<div class="container">
+<div class="toast" id="toast"><span class="toast-dot"></span><span id="toast-msg">Copiado!</span></div>
 
-  <header>
-    <div class="brand">
-      <h1>Cassia</h1>
-      <p>Painel de conteúdo · Motivação & Reflexão</p>
-    </div>
-    <div class="header-meta">
-      Instagram
-      <span id="current-date"></span>
-    </div>
-  </header>
+<div class="app">
 
-  <!-- CONFIGURAÇÕES -->
-  <div class="section-label">Configurar post</div>
-
-  <div class="config-grid">
-    <div class="config-card">
-      <label>Tipo de post</label>
-      <select id="tipo-post">
-        <option value="Feed">Feed</option>
-        <option value="Carrossel">Carrossel</option>
-        <option value="Reels">Reels</option>
-        <option value="Stories">Stories</option>
-      </select>
-    </div>
-    <div class="config-card">
-      <label>Tom da mensagem</label>
-      <select id="tom">
-        <option value="Inspirador e poético">Inspirador e poético</option>
-        <option value="Reflexivo e profundo">Reflexivo e profundo</option>
-        <option value="Encorajador e acolhedor">Encorajador e acolhedor</option>
-        <option value="Poderoso e transformador">Poderoso e transformador</option>
-        <option value="Suave e contemplativo">Suave e contemplativo</option>
-      </select>
-    </div>
-    <div class="config-card">
-      <label>Paleta da imagem</label>
-      <select id="paleta">
-        <option value="tons quentes, dourado, âmbar e creme">Dourado & Creme</option>
-        <option value="tons terrosos, marrom, bege e siena">Terroso & Natural</option>
-        <option value="tons frios, azul acinzentado, névoa e pérola">Névoa & Pérola</option>
-        <option value="tons escuros, preto, carvão e ouro">Dark & Luxo</option>
-        <option value="tons suaves, rosa antigo, lavanda e linho">Rosa Antigo & Lavanda</option>
-        <option value="tons verdes, musgo, salva e creme">Verde & Musgo</option>
-      </select>
-    </div>
+<!-- ════════════════════ SIDEBAR ════════════════════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <span class="logo-tag">Content Studio</span>
+    <span class="logo-name">Cassia</span>
+    <span class="logo-sub"><span class="logo-dot"></span>Instagram · TikTok · IA</span>
   </div>
 
-  <!-- TEMA DO POST -->
-  <div class="section-label">Tema ou intenção</div>
+  <div class="sidebar-stats">
+    <div class="ss"><span class="ss-num">360</span><span class="ss-lbl">temas</span></div>
+    <div class="ss"><span class="ss-num">12</span><span class="ss-lbl">prompts</span></div>
+    <div class="ss"><span class="ss-num">5</span><span class="ss-lbl">modelos</span></div>
+  </div>
 
-  <div class="tema-block">
-    <textarea class="tema-textarea" id="tema-input" rows="3"
-      placeholder="Escreva o tema, uma frase de intenção, ou uma palavra que inspira este post…"></textarea>
-
-    <!-- SUGESTÕES RÁPIDAS -->
-    <div class="chips" id="chips-container">
-      <button class="chip" onclick="setTema(this)">Recomeçar depois da dor</button>
-      <button class="chip" onclick="setTema(this)">Presença no momento atual</button>
-      <button class="chip" onclick="setTema(this)">Força interior silenciosa</button>
-      <button class="chip" onclick="setTema(this)">Gratidão pelas pequenas coisas</button>
-      <button class="chip" onclick="setTema(this)">Soltar o que não serve mais</button>
-      <button class="chip" onclick="setTema(this)">Fé quando tudo parece incerto</button>
-      <button class="chip" onclick="setTema(this)">Autoconhecimento e cura</button>
-      <button class="chip" onclick="setTema(this)">Leveza como escolha diária</button>
-    </div>
-
-    <div style="margin-top:20px; display:flex; gap:12px; align-items:center;">
-      <button class="btn-generate" id="btn-main" onclick="gerarConteudo()">
-        Gerar post completo
+  <div class="nav">
+    <div class="nav-group">
+      <span class="nav-group-label">Criar conteúdo</span>
+      <button class="nav-item on" onclick="nav('criar')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+        Criar post
       </button>
-      <button class="btn-secondary" onclick="limpar()">Limpar tudo</button>
+      <button class="nav-item" onclick="nav('temas')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+        Banco de temas
+        <span class="nav-count">360+</span>
+      </button>
+      <button class="nav-item" onclick="nav('hashtags')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+        Hashtags
+        <span class="nav-count">banco</span>
+      </button>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-group-label">Imagens IA</span>
+      <button class="nav-item" onclick="nav('library')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Biblioteca Leonardo AI
+        <span class="nav-count">12</span>
+      </button>
+      <button class="nav-item" onclick="nav('guia')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+        Guia de modelos IA
+      </button>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-group-label">Ferramentas extras ✦</span>
+      <button class="nav-item" onclick="nav('roteiro')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.069A1 1 0 0121 8.868V17a1 1 0 01-1.447.894L15 16M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+        Roteiro Reels & TikTok
+        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
+      </button>
+      <button class="nav-item" onclick="nav('carrossel')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+        Carrossel completo
+        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
+      </button>
+      <button class="nav-item" onclick="nav('ganchos')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Banco de ganchos
+        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
+      </button>
+      <button class="nav-item" onclick="nav('overlay')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4"/></svg>
+        Frases para imagem
+        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
+      </button>
+      <button class="nav-item" onclick="nav('bio')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        Reescrever bio & perfil
+        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
+      </button>
+    </div>
+
+    <div class="nav-group">
+      <span class="nav-group-label">Crescer</span>
+      <button class="nav-item" onclick="nav('tips')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        Estratégia & crescimento
+      </button>
+      <button class="nav-item" onclick="nav('calendario')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Calendário editorial
+      </button>
     </div>
   </div>
 
-  <!-- LOADING -->
-  <div class="loading-block" id="loading-block">
-    <div class="loading-spinner-lg"></div>
-    <p id="loading-msg">Encontrando as palavras certas…</p>
+  <div class="sidebar-quote" id="sidebar-quote">
+    "Tudo o que você precisa já existe dentro de você. O trabalho é encontrar o caminho de volta."
   </div>
+</nav>
 
-  <!-- RESULTADO: POST -->
-  <div class="output-section hidden" id="output-post">
-    <div class="section-label">Sugestão de post</div>
-    <div class="post-result fade-up">
-      <div class="post-header">
-        <span class="post-type-badge" id="badge-tipo">Feed</span>
-        <div class="post-actions">
-          <button class="btn-secondary" onclick="copiarLegenda()">Copiar legenda</button>
+<!-- ════════════════════ MAIN ════════════════════ -->
+<main class="main">
+
+<!-- ═══ PAGE: CRIAR ═══ -->
+<div class="page on" id="page-criar">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Cassia Studio</div>
+    <h1>Criar post completo</h1>
+    <p>Legenda, hashtags e 3 prompts para o Leonardo AI — gerados com IA em segundos.</p>
+  </div>
+  <div class="page-body">
+
+    <!-- SETTINGS -->
+    <div class="sec-title">Configurações do post</div>
+    <div class="settings-row mb20">
+      <div class="sbox">
+        <label>Plataforma</label>
+        <select id="plataforma">
+          <option>Instagram Feed</option>
+          <option>Instagram Reels</option>
+          <option>Instagram Stories</option>
+          <option>TikTok</option>
+          <option>Instagram + TikTok</option>
+        </select>
+      </div>
+      <div class="sbox">
+        <label>Tamanho do texto</label>
+        <select id="tamanho">
+          <option value="curto">Curto — 1 parágrafo impactante</option>
+          <option value="medio" selected>Médio — 3 parágrafos</option>
+          <option value="longo">Longo — 5–7 parágrafos</option>
+          <option value="tiktok">TikTok — texto de tela (máx 150 car.)</option>
+        </select>
+      </div>
+      <div class="sbox">
+        <label>Tom da mensagem</label>
+        <select id="tom">
+          <option>Inspirador e poético</option>
+          <option>Reflexivo e profundo</option>
+          <option>Encorajador e acolhedor</option>
+          <option>Poderoso e transformador</option>
+          <option>Suave e contemplativo</option>
+          <option>Direto e impactante</option>
+          <option>Pergunta reflexiva ao público</option>
+        </select>
+      </div>
+      <div class="sbox">
+        <label>Modelo Leonardo AI</label>
+        <select id="leo-model">
+          <option value="Lucid Origin">Lucid Origin</option>
+          <option value="Phoenix 1.0">Phoenix 1.0</option>
+          <option value="Kino XL">Kino XL (cinemático)</option>
+          <option value="Vision XL + PhotoReal v2">Vision XL PhotoReal</option>
+          <option value="Flux Dev">Flux Dev (realismo)</option>
+        </select>
+      </div>
+      <div class="sbox">
+        <label>Paleta visual</label>
+        <select id="paleta">
+          <option value="warm golden tones, amber, cream, soft candlelight">Dourado & Âmbar</option>
+          <option value="earthy tones, terracotta, warm beige, sienna">Terroso & Natural</option>
+          <option value="misty cold tones, pearl white, ash gray, blue fog">Névoa & Pérola</option>
+          <option value="dark luxury, deep black, charcoal, gold accents">Dark Luxo</option>
+          <option value="soft dusty rose, antique pink, lavender, linen">Rosa Antigo</option>
+          <option value="sage green, moss, cream, botanical elements">Verde & Musgo</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SIZE PREVIEW STRIP -->
+    <div id="size-preview" style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
+      <div class="size-pill on" onclick="selectSize(this,'curto')">
+        <span class="size-icon">S</span>
+        <div>
+          <div class="size-name">Curto</div>
+          <div class="size-desc">~80 palavras · 1 parágrafo · para citar sobre imagem</div>
         </div>
       </div>
-      <div class="post-body">
-        <div class="post-title" id="result-titulo"></div>
-        <div class="post-legenda" id="result-legenda"></div>
-        <div class="post-hashtags" id="result-hashtags"></div>
+      <div class="size-pill" onclick="selectSize(this,'medio')">
+        <span class="size-icon">M</span>
+        <div>
+          <div class="size-name">Médio</div>
+          <div class="size-desc">~200 palavras · 3 parágrafos · padrão Instagram</div>
+        </div>
+      </div>
+      <div class="size-pill" onclick="selectSize(this,'longo')">
+        <span class="size-icon">L</span>
+        <div>
+          <div class="size-name">Longo</div>
+          <div class="size-desc">~450 palavras · 5–7 parágrafos · storytelling</div>
+        </div>
+      </div>
+      <div class="size-pill tiktok-pill" onclick="selectSize(this,'tiktok')">
+        <span class="size-icon tk-i">T</span>
+        <div>
+          <div class="size-name">TikTok</div>
+          <div class="size-desc">≤150 car. legenda + 5 frases de tela para o vídeo</div>
+        </div>
       </div>
     </div>
+
+    <!-- TEMA INPUT -->
+    <div class="sec-title">Tema ou intenção</div>
+    <textarea id="tema-input" rows="3" class="mb12" placeholder="Escreva o tema, uma emoção, uma frase que inspira este post…"></textarea>
+
+    <!-- SUGESTÕES RÁPIDAS -->
+    <div class="sec-title">Sugestões rápidas de tema</div>
+    <div style="margin-bottom:10px">
+      <div class="chips mb8" id="quick-chips">
+        <button class="chip on" onclick="filterQuickCat(this,'todos')">Todos</button>
+        <button class="chip" onclick="filterQuickCat(this,'cura')">🌿 Cura</button>
+        <button class="chip" onclick="filterQuickCat(this,'forca')">⚡ Força</button>
+        <button class="chip" onclick="filterQuickCat(this,'fe')">✨ Fé</button>
+        <button class="chip" onclick="filterQuickCat(this,'amor')">🤍 Amor próprio</button>
+        <button class="chip" onclick="filterQuickCat(this,'proposito')">🔥 Propósito</button>
+        <button class="chip" onclick="filterQuickCat(this,'mudanca')">🌊 Mudança</button>
+        <button class="chip" onclick="filterQuickCat(this,'gratidao')">🌸 Gratidão</button>
+        <button class="chip" onclick="filterQuickCat(this,'reflexao')">🪞 Reflexão</button>
+        <button class="chip" onclick="filterQuickCat(this,'conquista')">🏆 Conquista</button>
+        <button class="chip" onclick="filterQuickCat(this,'presente')">🍃 Presença</button>
+        <button class="chip" onclick="filterQuickCat(this,'relacionamentos')">💛 Vínculos</button>
+      </div>
+    </div>
+    <div id="quick-pills-wrap" class="chips mb20" style="max-height:180px;overflow-y:auto;padding:4px 0"></div>
+
+    <div class="flex gap10 mb8">
+      <button class="btn btn-gold" id="btn-gerar" onclick="gerarTudo()">Gerar post + prompts</button>
+      <button class="btn btn-ghost" onclick="temaAleatorioRapido()">🎲 Tema aleatório</button>
+      <button class="btn btn-ghost" onclick="nav('temas')">Ver todos os temas</button>
+      <button class="btn btn-ghost btn-danger" onclick="limpar()">Limpar</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-box" id="loading-criar">
+      <div class="spin-w spin-lg"></div>
+      <p id="loading-msg">Criando sua legenda…</p>
+    </div>
+
+    <!-- RESULTADO -->
+    <div id="result-area" class="hidden result-box">
+      <div class="divider" style="margin-top:28px"></div>
+      <div class="sec-title">Sugestão de post</div>
+
+      <div class="card mb20">
+        <div class="card-head">
+          <div class="flex gap8 flex-c">
+            <span class="badge badge-gold" id="r-plataforma">Instagram Feed</span>
+            <span class="badge badge-muted" id="r-tamanho-badge">Médio</span>
+          </div>
+          <div class="flex gap8">
+            <button class="btn btn-ghost btn-xs" onclick="copiarPost()">Copiar legenda</button>
+            <button class="btn btn-ghost btn-xs" onclick="gerarTudo()">↻ Gerar novamente</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="post-title-display" id="r-titulo"></div>
+          <div id="r-tiktok-area" class="hidden tiktok-result mb14"></div>
+          <div class="post-body-display" id="r-legenda"></div>
+          <div id="r-length-bar" class="length-bar">
+            <span id="r-wordcount" style="white-space:nowrap">— palavras</span>
+            <div class="length-track"><div class="length-fill" id="r-length-fill" style="width:50%"></div></div>
+          </div>
+          <div class="post-hashtags-display" id="r-hashtags"></div>
+        </div>
+      </div>
+
+      <div class="ornament">· · ·</div>
+
+      <div class="sec-title">Prompts para o Leonardo AI</div>
+      <div id="prompts-area"></div>
+    </div>
+
   </div>
+</div>
 
-  <!-- ORNAMENTO DIVISOR -->
-  <div class="ornament hidden" id="ornament">· · ·</div>
-
-  <!-- RESULTADO: PROMPTS DE IMAGEM -->
-  <div class="output-section hidden" id="output-prompts">
-    <div class="section-label">Prompts para gerar a imagem</div>
-    <div id="prompts-container" class="fade-up-2"></div>
+<!-- ═══ PAGE: TEMAS ═══ -->
+<div class="page" id="page-temas">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Banco de inspiração</div>
+    <h1>Temas & intenções</h1>
+    <p>+360 temas em 11 categorias. Clique em qualquer um para usar direto no gerador de posts.</p>
   </div>
+  <div class="page-body">
 
-  <footer>
-    Cassia &nbsp;·&nbsp; Motivação & Reflexão &nbsp;·&nbsp; Instagram
-  </footer>
+    <div class="temas-stats">
+      <div class="tstat"><div class="tstat-n">363</div><div class="tstat-l">temas no banco</div></div>
+      <div class="tstat"><div class="tstat-n">11</div><div class="tstat-l">categorias</div></div>
+      <div class="tstat"><div class="tstat-n">33</div><div class="tstat-l">temas por cat.</div></div>
+      <div class="tstat"><div class="tstat-n">∞</div><div class="tstat-l">posts possíveis</div></div>
+    </div>
 
+    <!-- RANDOM -->
+    <button class="random-btn" onclick="temaAleatorio()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+      <span id="random-display">Clique para um tema aleatório ✦</span>
+      <span style="font-size:11px;color:rgba(200,165,94,.5);font-style:normal;font-family:var(--sans);letter-spacing:1px;text-transform:uppercase;white-space:nowrap">→ usar</span>
+    </button>
+
+    <!-- BUSCA -->
+    <div class="search-wrap mb16">
+      <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+      <input type="search" id="tema-search" placeholder="Buscar em todos os temas…" oninput="filtrarTemas()"/>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="chips mb24" id="cat-filter">
+      <button class="chip on" onclick="setCat(this,'todos')">Todos</button>
+      <button class="chip" onclick="setCat(this,'cura')">🌿 Cura</button>
+      <button class="chip" onclick="setCat(this,'forca')">⚡ Força</button>
+      <button class="chip" onclick="setCat(this,'fe')">✨ Fé</button>
+      <button class="chip" onclick="setCat(this,'amor')">🤍 Amor próprio</button>
+      <button class="chip" onclick="setCat(this,'proposito')">🔥 Propósito</button>
+      <button class="chip" onclick="setCat(this,'presente')">🍃 Presença</button>
+      <button class="chip" onclick="setCat(this,'mudanca')">🌊 Mudança</button>
+      <button class="chip" onclick="setCat(this,'gratidao')">🌸 Gratidão</button>
+      <button class="chip" onclick="setCat(this,'relacionamentos')">💛 Relacionamentos</button>
+      <button class="chip" onclick="setCat(this,'conquista')">🏆 Conquista</button>
+      <button class="chip" onclick="setCat(this,'reflexao')">🪞 Reflexão</button>
+    </div>
+
+    <div id="temas-grid"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: HASHTAGS ═══ -->
+<div class="page" id="page-hashtags">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Banco estratégico</div>
+    <h1>Hashtags</h1>
+    <p>Banco completo de hashtags por volume e nicho. Copie conjuntos prontos ou gere com IA.</p>
+  </div>
+  <div class="page-body">
+    <div id="hashtags-content"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: LIBRARY ═══ -->
+<div class="page" id="page-library">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Leonardo AI</div>
+    <h1>Biblioteca de prompts</h1>
+    <p>12 prompts prontos, otimizados por modelo. Copie e use direto no Leonardo AI.</p>
+  </div>
+  <div class="page-body">
+    <div class="chips mb20" id="lib-filter">
+      <button class="chip on" onclick="filtLib(this,'todos')">Todos</button>
+      <button class="chip" onclick="filtLib(this,'editorial')">Editorial</button>
+      <button class="chip" onclick="filtLib(this,'cinematic')">Cinemático</button>
+      <button class="chip" onclick="filtLib(this,'natureza')">Natureza</button>
+      <button class="chip" onclick="filtLib(this,'abstrato')">Abstrato</button>
+      <button class="chip" onclick="filtLib(this,'retrato')">Retrato</button>
+      <button class="chip" onclick="filtLib(this,'flat')">Flat Lay</button>
+    </div>
+    <div id="lib-cards"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: GUIA MODELOS ═══ -->
+<div class="page" id="page-guia">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Leonardo AI — Guia</div>
+    <h1>Modelos & como usar</h1>
+    <p>Entenda cada modelo, quando usar e como montar o prompt perfeito para cada estilo.</p>
+  </div>
+  <div class="page-body" id="guia-content"></div>
+</div>
+
+<!-- ═══ PAGE: TIPS ═══ -->
+<div class="page" id="page-tips">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Estratégia de conteúdo</div>
+    <h1>Como bombar no Instagram & TikTok</h1>
+    <p>Táticas testadas para crescer no nicho de motivação e reflexão em 2025.</p>
+  </div>
+  <div class="page-body" id="tips-content"></div>
+</div>
+
+<!-- ═══ PAGE: CALENDÁRIO ═══ -->
+<div class="page" id="page-calendario">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Planejamento editorial</div>
+    <h1>Calendário de conteúdo</h1>
+    <p>Pauta mensal com temas, formatos e ganchos prontos para março 2026.</p>
+  </div>
+  <div class="page-body">
+    <div class="flex-sb mb20">
+      <div class="cal-month">Março 2026</div>
+      <button class="btn btn-gold" id="btn-cal" onclick="gerarCalendario()">Gerar pauta completa com IA</button>
+    </div>
+
+    <!-- CALENDAR VISUAL -->
+    <div class="cal-grid" id="cal-visual"></div>
+
+    <div class="loading-box" id="loading-cal">
+      <div class="spin-w spin-lg"></div>
+      <p>Montando seu calendário editorial…</p>
+    </div>
+
+    <div id="cal-result" class="hidden"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: ROTEIRO REELS/TIKTOK ═══ -->
+<div class="page" id="page-roteiro">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Ferramenta nova ✦</div>
+    <h1>Roteiro para Reels & TikTok</h1>
+    <p>Gere um roteiro completo segundo a segundo — gancho, desenvolvimento, CTA — pronto para gravar.</p>
+  </div>
+  <div class="page-body">
+    <div class="settings-row mb16">
+      <div class="sbox"><label>Tema ou mensagem</label><input type="text" id="rot-tema" placeholder="Ex: recomeçar depois da dor…"/></div>
+      <div class="sbox"><label>Duração</label><select id="rot-duracao"><option>15 segundos</option><option>30 segundos</option><option selected>60 segundos</option><option>90 segundos</option></select></div>
+      <div class="sbox"><label>Estilo de narração</label><select id="rot-estilo"><option>Voz narrativa poética</option><option>Conversa direta com a câmera</option><option>Texto na tela (sem fala)</option><option>Reflexão em voz over</option></select></div>
+      <div class="sbox"><label>Plataforma</label><select id="rot-plat"><option>Instagram Reels</option><option>TikTok</option><option>Ambas</option></select></div>
+    </div>
+    <div class="chips mb16" id="rot-chips">
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Força para recomeçar</button>
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Fé no processo</button>
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Amor próprio primeiro</button>
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Deixar ir sem culpa</button>
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Gratidão que transforma</button>
+      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">A dor que ensina</button>
+    </div>
+    <button class="btn btn-gold" id="btn-roteiro" onclick="gerarRoteiro()">Gerar roteiro completo</button>
+    <div class="loading-box" id="loading-rot"><div class="spin-w spin-lg"></div><p>Escrevendo seu roteiro…</p></div>
+    <div id="rot-result" class="hidden mt16"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: CARROSSEL ═══ -->
+<div class="page" id="page-carrossel">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Ferramenta nova ✦</div>
+    <h1>Gerador de carrossel</h1>
+    <p>Crie todos os slides do carrossel com texto, título e gancho de cada tela — pronto para montar no Canva.</p>
+  </div>
+  <div class="page-body">
+    <div class="settings-row mb16">
+      <div class="sbox"><label>Tema do carrossel</label><input type="text" id="carr-tema" placeholder="Ex: 7 verdades sobre se curar…"/></div>
+      <div class="sbox"><label>Número de slides</label><select id="carr-slides"><option>5 slides</option><option selected>7 slides</option><option>8 slides</option><option>10 slides</option></select></div>
+      <div class="sbox"><label>Formato do conteúdo</label><select id="carr-formato"><option>Lista de dicas / verdades</option><option>Reflexão aprofundada</option><option>Antes e depois (transformação)</option><option>Passo a passo prático</option><option>Perguntas reflexivas</option></select></div>
+    </div>
+    <div class="chips mb16">
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">7 coisas que ninguém te conta sobre se curar</button>
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Sinais de que você está evoluindo sem perceber</button>
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">O que significa realmente amar a si mesma</button>
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Hábitos que drenam sua energia sem você notar</button>
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Como recomeçar quando tudo parece perdido</button>
+      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Frases que você precisa parar de dizer para si mesma</button>
+    </div>
+    <button class="btn btn-gold" id="btn-carr" onclick="gerarCarrossel()">Gerar slides do carrossel</button>
+    <div class="loading-box" id="loading-carr"><div class="spin-w spin-lg"></div><p>Criando seus slides…</p></div>
+    <div id="carr-result" class="hidden mt16"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: GANCHOS ═══ -->
+<div class="page" id="page-ganchos">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Ferramenta nova ✦</div>
+    <h1>Banco de ganchos</h1>
+    <p>As primeiras frases que param o scroll. Organizadas por emoção e intenção.</p>
+  </div>
+  <div class="page-body" id="ganchos-content"></div>
+</div>
+
+<!-- ═══ PAGE: OVERLAY ═══ -->
+<div class="page" id="page-overlay">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Ferramenta nova ✦</div>
+    <h1>Frases para overlay de imagem</h1>
+    <p>Textos curtos e poderosos para colocar sobre as fotos geradas no Leonardo AI. Copie e cole no Canva.</p>
+  </div>
+  <div class="page-body">
+    <div class="settings-row mb16">
+      <div class="sbox"><label>Tema ou emoção</label><input type="text" id="ov-tema" placeholder="Ex: recomeço, gratidão, força…"/></div>
+      <div class="sbox"><label>Estilo da frase</label><select id="ov-estilo"><option>Poética e metafórica</option><option>Direta e impactante</option><option>Pergunta reflexiva</option><option>Declaração de poder</option><option>Sussurro suave</option></select></div>
+      <div class="sbox"><label>Tamanho</label><select id="ov-tam"><option>Uma linha (muito curta)</option><option selected>Duas linhas</option><option>Três linhas</option></select></div>
+    </div>
+    <div class="chips mb16">
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Recomeço</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Cura</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Força</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Fé</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Gratidão</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Amor próprio</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Mudança</button>
+      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Propósito</button>
+    </div>
+    <button class="btn btn-gold" id="btn-ov" onclick="gerarOverlay()">Gerar 10 frases para imagem</button>
+    <div class="loading-box" id="loading-ov"><div class="spin-w spin-lg"></div><p>Criando frases para sua imagem…</p></div>
+    <div id="ov-result" class="hidden mt16"></div>
+  </div>
+</div>
+
+<!-- ═══ PAGE: BIO ═══ -->
+<div class="page" id="page-bio">
+  <div class="page-hero">
+    <div class="hero-eyebrow">Ferramenta nova ✦</div>
+    <h1>Reescrever bio & perfil</h1>
+    <p>Cole sua bio atual e receba versões otimizadas com CTA, palavras-chave e personalidade forte.</p>
+  </div>
+  <div class="page-body">
+    <div class="sec-title mb12">Sua bio atual</div>
+    <textarea id="bio-atual" rows="4" class="mb12" placeholder="Cole aqui sua bio atual do Instagram/TikTok… (ou deixe em branco para criar do zero)"></textarea>
+    <div class="settings-row mb16">
+      <div class="sbox"><label>Nicho principal</label><select id="bio-nicho"><option>Motivação & Reflexão</option><option>Espiritualidade & Fé</option><option>Autoconhecimento</option><option>Motivação & Lifestyle</option><option>Coach de vida</option></select></div>
+      <div class="sbox"><label>Tom de personalidade</label><select id="bio-tom"><option>Poética e sensível</option><option>Forte e determinada</option><option>Acolhedora e gentil</option><option>Espiritual e profunda</option><option>Autêntica e direta</option></select></div>
+      <div class="sbox"><label>Incluir</label><select id="bio-cta"><option>Link na bio + CTA</option><option>Frase de impacto</option><option>Especialidade clara</option><option>Proposta de valor</option></select></div>
+    </div>
+    <button class="btn btn-gold" id="btn-bio" onclick="gerarBio()">Gerar 3 versões de bio</button>
+    <div class="loading-box" id="loading-bio"><div class="spin-w spin-lg"></div><p>Reescrevendo sua bio com IA…</p></div>
+    <div id="bio-result" class="hidden mt16"></div>
+  </div>
+</div>
+
+</main>
 </div>
 
 <script>
-  // Data atual
-  const d = new Date();
-  document.getElementById('current-date').textContent =
-    d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function nav(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('on'));
+  document.getElementById('page-' + id).classList.add('on');
+  const navMap = {criar:0,temas:1,hashtags:2,library:3,guia:4,tips:5,calendario:6};
+  const btns = document.querySelectorAll('.nav-item');
+  if(navMap[id] !== undefined) btns[navMap[id]].classList.add('on');
+  document.querySelector('.main').scrollTo(0,0);
+}
 
-  function setTema(el) {
-    document.getElementById('tema-input').value = el.textContent.trim();
-    document.getElementById('tema-input').focus();
-  }
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+let toastTimer;
+function showToast(msg='Copiado!') {
+  clearTimeout(toastTimer);
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
 
-  function limpar() {
-    document.getElementById('tema-input').value = '';
-    ['output-post','output-prompts','ornament'].forEach(id => {
-      document.getElementById(id).classList.add('hidden');
+function copyText(txt, successMsg='Copiado!') {
+  navigator.clipboard.writeText(txt);
+  showToast(successMsg);
+}
+
+// ═══════════════════════════════════════════════
+// API
+// ═══════════════════════════════════════════════
+async function callClaude(system, user, maxTokens=1000) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens: maxTokens,
+      system, messages:[{role:'user',content:user}]
+    })
+  });
+  const d = await res.json();
+  return d.content[0].text;
+}
+
+function parseJSON(txt) {
+  return JSON.parse(txt.replace(/```json|```/g,'').trim());
+}
+
+// ═══════════════════════════════════════════════
+// SIZE SELECTOR
+// ═══════════════════════════════════════════════
+let currentSize = 'curto';
+function selectSize(el, size) {
+  currentSize = size;
+  document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('on'));
+  el.classList.add('on');
+}
+
+// ═══════════════════════════════════════════════
+// QUICK CHIPS — filterable from TEMAS bank
+// ═══════════════════════════════════════════════
+let quickCatAtiva = 'todos';
+function filterQuickCat(el, cat) {
+  quickCatAtiva = cat;
+  document.querySelectorAll('#quick-chips .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  renderQuickPills();
+}
+function renderQuickPills() {
+  const wrap = document.getElementById('quick-pills-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  const cats = quickCatAtiva === 'todos' ? Object.keys(TEMAS) : [quickCatAtiva];
+  let count = 0;
+  cats.forEach(cat => {
+    TEMAS[cat].forEach(t => {
+      if (count >= 90 && quickCatAtiva === 'todos') return;
+      const b = document.createElement('button');
+      b.className = 'chip';
+      b.style.fontSize = '13px';
+      b.textContent = t;
+      b.onclick = () => {
+        document.getElementById('tema-input').value = t;
+        document.getElementById('tema-input').focus();
+        document.querySelectorAll('#quick-pills-wrap .chip').forEach(c => c.classList.remove('on'));
+        b.classList.add('on');
+        showToast('Tema selecionado!');
+      };
+      wrap.appendChild(b);
+      count++;
     });
-    document.getElementById('loading-block').classList.remove('visible');
+  });
+}
+function temaAleatorioRapido() {
+  const cats = Object.keys(TEMAS);
+  const c = cats[Math.floor(Math.random() * cats.length)];
+  const ts = TEMAS[c];
+  const t = ts[Math.floor(Math.random() * ts.length)];
+  document.getElementById('tema-input').value = t;
+  showToast('Tema aleatório selecionado! ✦');
+}
+
+// ═══════════════════════════════════════════════
+// CRIAR POST
+// ═══════════════════════════════════════════════
+function useChip(el) {
+  document.getElementById('tema-input').value = el.textContent.trim();
+  document.getElementById('tema-input').focus();
+}
+function limpar() {
+  document.getElementById('tema-input').value = '';
+  document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('loading-criar').classList.remove('on');
+}
+function setBtn(id, loading, label) {
+  const b = document.getElementById(id);
+  b.disabled = loading;
+  b.innerHTML = loading ? `<span class="spin"></span> Gerando…` : label;
+}
+
+const SIZE_LABELS = {curto:'Curto · ~80 palavras',medio:'Médio · ~200 palavras',longo:'Longo · ~450 palavras',tiktok:'TikTok · 150 car.'};
+const SIZE_WIDTHS = {curto:'22%',medio:'50%',longo:'92%',tiktok:'30%'};
+const SIZE_PROMPTS = {
+  curto:`Texto CURTO: escreva APENAS 1 parágrafo compacto de 3–4 frases, máximo 80 palavras. Muito impactante, poético, direto. Ideal para colocar como overlay sobre imagem.`,
+  medio:`Texto MÉDIO: escreva 3 parágrafos bem construídos, total 150–220 palavras. Parágrafo 1: gancho emocional. Parágrafo 2: desenvolvimento da reflexão. Parágrafo 3: CTA + encerramento.`,
+  longo:`Texto LONGO: escreva 5–7 parágrafos de storytelling profundo, 380–500 palavras. Comece com gancho poderoso, desenvolva com camadas de reflexão e emoção, termine com CTA transformador. Use emojis sutis.`,
+  tiktok:`Texto TIKTOK: crie 5 frases curtas para aparecer em tela durante o vídeo (máx 8 palavras cada, impactantes, uma por tela). Coloque no campo "telas". A legenda deve ter máximo 120 caracteres.`
+};
+
+async function gerarTudo() {
+  const tema = document.getElementById('tema-input').value.trim();
+  if (!tema) {
+    const ta = document.getElementById('tema-input');
+    ta.focus(); ta.style.borderColor = 'rgba(200,165,94,.6)';
+    setTimeout(() => ta.style.borderColor = '', 1200); return;
   }
+  const plataforma = document.getElementById('plataforma').value;
+  const tom = document.getElementById('tom').value;
+  const modelo = document.getElementById('leo-model').value;
+  const paleta = document.getElementById('paleta').value;
+  const tamanho = currentSize;
 
-  function showLoading(msg) {
-    document.getElementById('loading-msg').textContent = msg;
-    document.getElementById('loading-block').classList.add('visible');
-  }
+  document.getElementById('result-area').classList.add('hidden');
+  setBtn('btn-gerar', true, 'Gerar post + prompts');
+  const load = document.getElementById('loading-criar');
+  const msgEl = document.getElementById('loading-msg');
+  load.classList.add('on');
+  msgEl.textContent = tamanho === 'tiktok' ? 'Criando conteúdo TikTok…' : `Criando legenda ${SIZE_LABELS[tamanho].split('·')[0].trim().toLowerCase()}…`;
 
-  function hideLoading() {
-    document.getElementById('loading-block').classList.remove('visible');
-  }
+  try {
+    let post;
 
-  function setBtn(loading) {
-    const btn = document.getElementById('btn-main');
-    btn.disabled = loading;
-    btn.innerHTML = loading
-      ? '<span class="spinner"></span> Criando…'
-      : 'Gerar post completo';
-  }
-
-  async function callClaude(system, user) {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system,
-        messages: [{ role: 'user', content: user }]
-      })
-    });
-    const data = await res.json();
-    return data.content[0].text;
-  }
-
-  async function gerarConteudo() {
-    const tema = document.getElementById('tema-input').value.trim();
-    if (!tema) {
-      document.getElementById('tema-input').focus();
-      document.getElementById('tema-input').style.borderColor = 'var(--gold)';
-      setTimeout(() => document.getElementById('tema-input').style.borderColor = '', 1200);
-      return;
-    }
-
-    const tipo = document.getElementById('tipo-post').value;
-    const tom = document.getElementById('tom').value;
-    const paleta = document.getElementById('paleta').value;
-
-    ['output-post','output-prompts','ornament'].forEach(id => {
-      document.getElementById(id).classList.add('hidden');
-    });
-
-    setBtn(true);
-    showLoading('Encontrando as palavras certas…');
-
-    try {
-      // ETAPA 1: POST
-      const postJSON = await callClaude(
-        `Você é uma escritora especializada em conteúdo de motivação, espiritualidade e reflexão para Instagram no Brasil. Cria textos que tocam a alma, com linguagem poética e acessível. Responda SOMENTE com JSON puro, sem markdown.`,
-        `Crie uma sugestão de post de Instagram sobre o tema: "${tema}".
-Tom desejado: ${tom}.
-Tipo de post: ${tipo}.
-
-Responda SOMENTE com JSON puro neste formato:
-{
-  "titulo": "Uma frase-título poética e impactante (máximo 12 palavras)",
-  "legenda": "Legenda completa do post (3-5 parágrafos, tom ${tom}, sem hashtags aqui, use emojis sutis se fizer sentido)",
-  "hashtags": "25 hashtags relevantes separadas por espaço, misturando populares e de nicho"
-}`
+    if (tamanho === 'tiktok') {
+      const raw = await callClaude(
+        `Você é especialista em conteúdo motivacional para TikTok no Brasil. Responda SOMENTE com JSON puro, sem markdown.`,
+        `Crie conteúdo TikTok motivacional sobre "${tema}". Tom: ${tom}.
+JSON: {"titulo":"gancho de tela de até 7 palavras impactantes","telas":["frase tela 1 (máx 8 palavras)","frase tela 2","frase tela 3","frase tela 4","frase tela 5"],"legenda":"caption TikTok máx 120 caracteres + emoji","hashtags":"#tiktok #fyp #tiktokbrasil #motivacao e mais 12 hashtags de nicho separadas por espaço"}`,
+        800
       );
-
-      let post;
-      try {
-        post = JSON.parse(postJSON.replace(/```json|```/g,'').trim());
-      } catch(e) {
-        throw new Error('Erro ao interpretar resposta do post.');
-      }
-
-      document.getElementById('badge-tipo').textContent = tipo;
-      document.getElementById('result-titulo').textContent = post.titulo;
-      document.getElementById('result-legenda').textContent = post.legenda;
-      document.getElementById('result-hashtags').textContent = post.hashtags;
-      document.getElementById('output-post').classList.remove('hidden');
-
-      // ETAPA 2: PROMPTS DE IMAGEM
-      showLoading('Criando prompts de imagem…');
-
-      const promptsJSON = await callClaude(
-        `Você é especialista em criação de prompts para geradores de imagem com IA (Midjourney, DALL-E, Adobe Firefly, Stable Diffusion). Responda SOMENTE com JSON puro, sem markdown, sem texto fora do JSON.`,
-        `Crie 3 prompts de imagem em inglês para um post de Instagram com o seguinte contexto:
-- Tema do post: "${tema}"
-- Tom: "${tom}"
-- Paleta de cores sugerida: "${paleta}"
-- Tipo: ${tipo} (formato quadrado ou retrato 4:5)
-
-Os prompts devem criar imagens que COMPLEMENTAM e ILUSTRAM o tema motivacional/reflexivo do post. Pense em composições editoriais, atmosféricas, que transmitam a essência do tema.
-
-Responda SOMENTE com JSON puro:
-{
-  "prompts": [
-    {
-      "nome": "Nome criativo desta abordagem visual (em português, máximo 5 palavras)",
-      "descricao": "Uma frase explicando a ideia visual (em português)",
-      "prompt": "Prompt completo em inglês, detalhado, profissional, com estilo fotográfico ou artístico, composição, iluminação, paleta de cores, atmosfera, aspect ratio 4:5 --ar 4:5"
-    },
-    {
-      "nome": "...",
-      "descricao": "...",
-      "prompt": "..."
-    },
-    {
-      "nome": "...",
-      "descricao": "...",
-      "prompt": "..."
-    }
-  ]
-}`
+      post = parseJSON(raw);
+    } else {
+      const maxTok = tamanho === 'longo' ? 1200 : 800;
+      const raw = await callClaude(
+        `Você é escritora especialista em conteúdo motivacional e espiritual para Instagram no Brasil. Cria textos que tocam a alma com linguagem poética e autêntica. Responda SOMENTE com JSON puro, sem markdown.`,
+        `Crie post para ${plataforma} sobre "${tema}". Tom: ${tom}. ${SIZE_PROMPTS[tamanho]}
+JSON: {"titulo":"frase-título poética impactante (máx 12 palavras)","legenda":"legenda conforme instrução de tamanho, sem hashtags","hashtags":"28 hashtags separadas por espaço, mix grandes médias e nicho"}`,
+        maxTok
       );
-
-      let prompts;
-      try {
-        prompts = JSON.parse(promptsJSON.replace(/```json|```/g,'').trim());
-      } catch(e) {
-        throw new Error('Erro ao interpretar prompts de imagem.');
-      }
-
-      const container = document.getElementById('prompts-container');
-      container.innerHTML = '';
-      prompts.prompts.forEach((p, i) => {
-        const div = document.createElement('div');
-        div.className = 'prompt-card fade-up-' + (i+1);
-        div.innerHTML = `
-          <span class="prompt-number">Opção ${i+1}</span>
-          <div class="prompt-label-name">${p.nome}</div>
-          <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; font-style:italic;">${p.descricao}</p>
-          <div class="prompt-text">${p.prompt}</div>
-          <button class="copy-btn" onclick="copiarPrompt(this, \`${p.prompt.replace(/`/g,"'")}\`)">Copiar</button>
-        `;
-        container.appendChild(div);
-      });
-
-      document.getElementById('ornament').classList.remove('hidden');
-      document.getElementById('output-prompts').classList.remove('hidden');
-
-    } catch(err) {
-      alert('Erro: ' + err.message);
+      post = parseJSON(raw);
     }
 
-    hideLoading();
-    setBtn(false);
+    // Preencher resultado
+    document.getElementById('r-plataforma').textContent = plataforma;
+    document.getElementById('r-tamanho-badge').textContent = SIZE_LABELS[tamanho].split('·')[0].trim();
+    document.getElementById('r-titulo').textContent = post.titulo || '';
 
-    // Scroll suave para o resultado
-    setTimeout(() => {
-      document.getElementById('output-post').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  }
+    const tikArea = document.getElementById('r-tiktok-area');
+    const legendaEl = document.getElementById('r-legenda');
 
-  function copiarLegenda() {
-    const titulo = document.getElementById('result-titulo').textContent;
-    const legenda = document.getElementById('result-legenda').textContent;
-    const hashtags = document.getElementById('result-hashtags').textContent;
-    const texto = titulo + '\n\n' + legenda + '\n\n' + hashtags;
-    navigator.clipboard.writeText(texto);
-    const btn = document.querySelector('#output-post .btn-secondary');
-    const original = btn.textContent;
-    btn.textContent = 'Copiado ✓';
-    setTimeout(() => btn.textContent = original, 2000);
-  }
+    if (tamanho === 'tiktok' && post.telas) {
+      tikArea.classList.remove('hidden');
+      tikArea.innerHTML = `
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Frases para tela (texto no vídeo)</div>
+        ${post.telas.map((t,i) => `<div class="tiktok-screen"><span class="tiktok-screen-num">TELA ${i+1}</span><span style="flex:1">${t}</span><button class="btn btn-ghost btn-xs" style="flex-shrink:0" onclick="copyText(${JSON.stringify(t)},'Copiado!')">Copiar</button></div>`).join('')}
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin:14px 0 8px">Caption do TikTok</div>
+        <div class="tiktok-caption-box" id="tik-caption">${post.legenda || ''}</div>`;
+      legendaEl.textContent = '';
+      legendaEl.style.display = 'none';
+      document.getElementById('r-length-bar').style.display = 'none';
+    } else {
+      tikArea.classList.add('hidden');
+      legendaEl.style.display = '';
+      legendaEl.textContent = post.legenda || '';
+      document.getElementById('r-length-bar').style.display = 'flex';
+      const wc = (post.legenda || '').split(/\s+/).filter(Boolean).length;
+      document.getElementById('r-wordcount').textContent = `${wc} palavras`;
+      document.getElementById('r-length-fill').style.width = SIZE_WIDTHS[tamanho];
+    }
+    document.getElementById('r-hashtags').textContent = post.hashtags || '';
 
-  function copiarPrompt(btn, texto) {
-    navigator.clipboard.writeText(texto);
-    btn.textContent = 'Copiado ✓';
-    setTimeout(() => btn.textContent = 'Copiar', 2000);
+    // Prompts Leonardo AI
+    msgEl.textContent = 'Criando prompts para o Leonardo AI…';
+    const fmt = (plataforma.includes('Reels') || plataforma.includes('TikTok') || plataforma.includes('Stories')) ? '9:16 vertical' : '4:5 portrait';
+    const modTip = {
+      'Lucid Origin': 'versátil, inclua mood keywords, lighting style, atmosphere',
+      'Phoenix 1.0': 'descreva narrativamente como uma cena, instrução natural e detalhada',
+      'Kino XL': 'use termos cinematográficos: lens type, movie still, anamorphic, film grain',
+      'Vision XL + PhotoReal v2': 'foco fotorrealista: 85mm f1.8, skin texture, bokeh, camera settings',
+      'Flux Dev': 'prompts diretos e descritivos, excelente para textura fina de pele e tecidos'
+    }[modelo] || 'versátil e expressivo';
+
+    const pRaw = await callClaude(
+      `Especialista em prompts para Leonardo AI. Responda SOMENTE com JSON puro.`,
+      `Crie 3 prompts para ${modelo} para ilustrar post motivacional sobre "${tema}". Paleta: ${paleta}. Formato: ${fmt}. Dica: ${modTip}.
+JSON: {"prompts":[{"nome":"nome criativo pt-br","descricao":"ideia visual pt-br","prompt":"prompt completo inglês","negative":"negative prompt inglês","modelo":"${modelo}"},{"nome":"","descricao":"","prompt":"","negative":"","modelo":"${modelo}"},{"nome":"","descricao":"","prompt":"","negative":"","modelo":"${modelo}"}]}`
+    );
+    const prompts = parseJSON(pRaw);
+    const pa = document.getElementById('prompts-area');
+    pa.innerHTML = '';
+    prompts.prompts.forEach((p, i) => {
+      const d = document.createElement('div');
+      d.className = 'pcard';
+      d.style.animationDelay = (i * .1) + 's';
+      const ps = (p.prompt || '').replace(/\\/g,'\\\\').replace(/`/g,"'");
+      const ns = (p.negative || '').replace(/\\/g,'\\\\').replace(/`/g,"'");
+      d.innerHTML = `
+        <div class="pcard-num">Opção ${i+1}</div>
+        <div class="pcard-name">${p.nome}</div>
+        <div class="pcard-desc">${p.descricao}</div>
+        <div class="prompt-code">${p.prompt}<div class="prompt-negative"><span>negative:</span>${p.negative}</div></div>
+        <div class="pcard-footer">
+          <span class="badge badge-gold" style="font-size:9px">${p.modelo}</span>
+          <div class="flex gap8">
+            <button class="btn btn-ghost btn-xs" onclick="copyText(\`${ps}\`,'Prompt copiado!')">Copiar prompt</button>
+            <button class="btn btn-ghost btn-xs" onclick="copyText(\`MODELO: ${p.modelo}\\n\\nPROMPT:\\n${ps}\\n\\nNEGATIVE:\\n${ns}\`,'Tudo copiado!')">Copiar tudo</button>
+          </div>
+        </div>`;
+      pa.appendChild(d);
+    });
+
+    document.getElementById('result-area').classList.remove('hidden');
+    setTimeout(() => document.getElementById('result-area').scrollIntoView({behavior:'smooth',block:'start'}), 100);
+
+  } catch(e) { showToast('Erro: ' + e.message); }
+  load.classList.remove('on');
+  setBtn('btn-gerar', false, 'Gerar post + prompts');
+}
+
+function copiarPost() {
+  const t = document.getElementById('r-titulo').textContent;
+  const l = document.getElementById('r-legenda').textContent;
+  const h = document.getElementById('r-hashtags').textContent;
+  const tik = document.getElementById('tik-caption');
+  if (tik && tik.offsetParent) {
+    const frames = [...document.querySelectorAll('.tiktok-screen span:nth-child(2)')].map((s,i)=>`TELA ${i+1}: ${s.textContent}`).join('\n');
+    copyText(frames + '\n\n---\nCAPTION:\n' + tik.textContent + '\n\n' + h, 'Conteúdo TikTok copiado!');
+  } else {
+    copyText(t + '\n\n' + l + '\n\n' + h, 'Legenda copiada!');
   }
+}
+
+// ═══════════════════════════════════════════════
+// BANCO DE TEMAS
+// ═══════════════════════════════════════════════
+const CAT_META = {
+  cura:    {icon:'🌿', label:'Cura & Regeneração'},
+  forca:   {icon:'⚡', label:'Força & Resiliência'},
+  fe:      {icon:'✨', label:'Fé & Espiritualidade'},
+  amor:    {icon:'🤍', label:'Amor próprio'},
+  proposito:{icon:'🔥',label:'Propósito & Missão'},
+  presente:{icon:'🍃', label:'Presença & Mindfulness'},
+  mudanca: {icon:'🌊', label:'Mudança & Transformação'},
+  gratidao:{icon:'🌸', label:'Gratidão'},
+  relacionamentos:{icon:'💛',label:'Relacionamentos'},
+  conquista:{icon:'🏆',label:'Conquista & Superação'},
+  reflexao:{icon:'🪞', label:'Reflexão Profunda'},
+};
+
+const TEMAS = {
+  cura:['Sarar sem pressa e sem culpa','A cura acontece em camadas','O que dói também ensina','Dar espaço para a própria dor','Curar as feridas que ninguém vê','Chorar também é uma forma de força','Perdoar para se libertar, não para absolver','O corpo guarda o que a mente nega','Recomeçar depois de se perder','Acolher a versão quebrada de si mesma','Transformar cicatrizes em sabedoria','A cura não é linear — e tudo bem','Amor como remédio para a alma ferida','Quando a dor vira combustível de mudança','Soltar o que pesa sem precisar de explicação','Reconhecer os gatilhos e escolher diferente','Dar atenção às próprias necessidades sem culpa','Reescrever a narrativa que te prende no passado','Respirar fundo como ato de autocura','Permitir-se ser amada mesmo com as falhas','A ferida que você sempre ignorou pedindo atenção','Curar a relação com a própria imagem','Quando o passado para de mandar no seu presente','A cicatriz que virou força sem você perceber','Perdoar a versão de você que sobreviveu como pôde','Deixar de carregar o que não é seu para carregar','O choro que limpa o que as palavras não conseguem','Reconhecer onde você ainda está em luto','A coragem de pedir ajuda quando você está despedaçada','Terapia, meditação, fé — a cura tem muitos caminhos','O dia em que você decidiu se colocar em primeiro lugar','Curar a relação com a própria história','Quando você para de se sabotar e começa a se apoiar'],
+  forca:['Levantar quando ninguém está olhando','A força que ninguém vê mas você sente','Resistência silenciosa que vira vitória','Continuar mesmo quando tudo grita pra parar','Ser sua própria âncora na tempestade','Transformar o medo em combustível','Não precisar de permissão para ser forte','Força que nasce do cansaço superado','Guerreira que escolhe a paz como arma','Provar pra si mesma que é capaz','O poder de dizer não sem se justificar','Ser corajosa mesmo com o coração na garganta','A mulher que você está se tornando','Cada obstáculo foi um treino disfarçado','Quando a determinação fala mais alto que o medo','Construir do zero com as mãos que tenho','Resiliência — cair, sentir, levantar','Aprender a confiar na própria intuição','Mostrar ao mundo o que você é feita','A vitória silenciosa que só você sabe o peso','Força não é não sentir — é sentir e continuar','A mulher que aprendeu a se defender de si mesma','Quando você escolhe si em vez do conforto','Enfrentar o que você adiou por anos','A firmeza de manter seus valores sob pressão','Levantar sem aplausos e sem precisar deles','O dia em que você parou de pedir licença para existir','Força feminina — delicada e devastadora ao mesmo tempo','Persistir quando o resultado ainda não aparece','A dureza que você precisou ter e a ternura que ainda guarda','Não deixar que o passado defina o que você pode no futuro','Silêncio como estratégia — não toda batalha pede resposta','A garra que assusta quem não acreditou em você'],
+  fe:['Confiar no processo quando ele dói','Fé que move quando a lógica não entende','Deus no silêncio que antecede a resposta','A oração que não pede — agradece','Entregar o que não posso controlar','Sinais que chegam quando você está pronta','O timing divino não atrasa nem adianta','Acreditar no que ainda não dá pra ver','Espiritualidade como lar dentro de si','A intuição como voz do universo','Momentos em que a fé foi a única saída','Gratidão como forma de oração','O propósito maior por trás da dor','Quando tudo desaba e a fé sustenta','Energia que você emana e atrai de volta','Manifestar com intenção e ação','Deixar o universo trabalhar no seu favor','Conexão com algo maior que você mesma','A bênção que veio disfarçada de perda','Rituais de espiritualidade no cotidiano','Orar não muda Deus — muda quem ora','A paz que ultrapassa o entendimento','Quando a resposta chegou de um jeito que você não esperava','Fé e ação — as duas andam juntas','O milagre que acontece devagar, dia a dia','Confiar mesmo quando o coração questiona','Proteção espiritual que você só percebe olhando pra trás','A voz interior que nunca mente','Abundância que começa na mentalidade','Oração da madrugada — quando só Deus ouve','Entregar o controle sem abrir mão da responsabilidade','Quando a fé vira certeza sem precisar de prova','O sagrado no cotidiano — encontrar Deus em tudo'],
+  amor:['Ser sua própria prioridade sem culpa','Amor próprio não é egoísmo — é sobrevivência','Olhar no espelho com gentileza','Cuidar de si como cuida de quem ama','Parar de se comparar e começar a se admirar','O que você diria pra você de 10 anos atrás?','Não precisar de validação externa','Limites como forma de amor próprio','Aprender a gostar da sua própria companhia','Celebrar as pequenas vitórias consigo mesma','Seu corpo é sua casa — trate bem','Dizer sim para si mesma antes de dizer sim ao mundo','A versão mais autêntica de você','Desaprender o que te foi ensinado sobre você','Ser fiel a si mesma em todas as situações','Parar de se punir por ser humana','Abraçar as próprias imperfeições','O relacionamento mais importante da sua vida','Você merece o amor que dá aos outros','Reaprender a se conhecer depois de uma perda','Tratar a si mesma com a gentileza que trata as amigas','Parar de se envergonhar de quem você é','O autocuidado que vai além da aparência','Quando você finalmente acredita que merece coisas boas','Não depender de mais ninguém para se sentir inteira','Fazer coisas que te enchem de vida — só porque sim','A conversa interna que você precisa mudar agora','Celebrar seu aniversário como o dia mais importante','Conhecer seus valores e não negociá-los por ninguém','A mulher plena que não precisa se diminuir para caber','Desaprender a se colocar em último lugar','Escolher roupas, lugares, pessoas que honram quem você é','A paz de não precisar provar nada para ninguém'],
+  proposito:['O que te faz levantar da cama com vontade?','Encontrar significado no que você já tem','Vida com propósito começa com escolhas pequenas','Quando o trabalho vira missão','Deixar um legado que importa','Seguir o chamado mesmo sem o mapa completo','O que o mundo precisa que só você tem?','Parar de viver por obrigação e começar por escolha','A vida que você quer construir passo a passo','Propósito não é destino — é direção','Fazer a diferença na vida de uma pessoa já basta','Quando você para de correr atrás do que não é seu','Sonhos que valem mais que o medo','Agir apesar da dúvida — isso é propósito','Reacender o fogo que o dia a dia apagou','Servir com o dom que você tem','A coragem de mudar de caminho no meio do caminho','Construir, não apenas existir','Seu talento é um presente que o mundo precisa','Começar hoje a vida que você adia há anos','O que você faria se soubesse que não ia falhar?','Encontrar prazer no processo, não só no resultado','Quando você para de imitar e começa a criar','A vida paralela que você imagina e que pode se tornar real','Seu dom não pede licença — ele insiste','Escolher uma vida menor em aparência e maior em significado','O que você quer que digam quando você não estiver mais aqui?','Alinhar o que você faz com o que você acredita','Parar de esperar o momento perfeito para começar','Missão de vida — como descobrir a sua','Viver de acordo com seus valores, não com as expectativas','O chamado que você ignora mas que não para de voltar','Impacto — o rastro que você deixa em cada pessoa'],
+  presente:['Viver o agora sem escapar para o passado','A beleza que existe neste exato momento','Desacelerar numa sociedade que glorifica a pressa','Presença plena como ato revolucionário','Encontrar paz no silêncio do dia','Respirar conscientemente como retorno a si','Estar aqui — completamente aqui','O que você perdeu por estar sempre no piloto automático?','Rituais matinais que ancoram o dia','Comer, sentir, existir — sem distrações','O telefone no bolso e o olhar no horizonte','Aprender a pausar sem se sentir preguiçosa','Encontrar Deus no ordinário','A manhã como presente que se abre devagar','Momentos que valem mais que registros','Atenção plena como prática espiritual','Viver cada estação da vida no tempo dela','O prazer simples de uma xícara quente','Mindfulness no caos do cotidiano','Estar presente é a forma mais pura de amor','A beleza de não ter pressa em nenhum lugar','Caminhada lenta como meditação em movimento','Desligar o wi-fi e ligar para si mesma','Noite sem tela — o que acontece quando você só existe','Domingo como ritual de descanso intencional','O cheiro da chuva como convite para pausar','Viver o pôr do sol sem tirar foto — só sentir','Banho como cerimônia de renovação','Fazer uma coisa de cada vez como ato de saúde mental','O momento de silêncio entre uma coisa e outra','Resistir à urgência artificial do mundo digital','A gentileza de não se apressar','Apreciar o que ainda está aqui antes de querer o próximo'],
+  mudanca:['A mudança começa antes de você estar pronta','Soltar a vida que você planejou','O que precisa morrer para o novo nascer?','Transição — o espaço entre quem era e quem será','Não ter medo do que você está se tornando','Cada fase tem um propósito que só o tempo revela','A coragem de recomeçar do zero','Quando a crise é na verdade um chamado','Deixar para trás sem olhar pra trás','A mudança que assusta e liberta ao mesmo tempo','Dizer adeus para abrir espaço ao novo','Permitir-se ser diferente do que era ontem','Abraçar a incerteza como companheira de jornada','O novo ciclo que pede uma versão renovada de você','Metamorfose — feio antes de virar borboleta','Mudar não é trair quem você foi','A versão 2.0 de si mesma que está surgindo','Quando o universo te empurra pra onde precisa ir','Escolher crescer em vez de permanecer confortável','A primeira vez que você age diferente do padrão','Virar a página sem precisar entender tudo','O vazio entre o que acabou e o que ainda vai chegar','Novas fases pedem novos hábitos','Mudar de opinião é sabedoria, não fraqueza','A vida que você conhecia e que não existe mais','Reconstruir sem saber bem o projeto final','O susto de virar quem você sempre quis ser','Encerrar um ciclo com honra e sem rancor','Quando a vida te obriga a crescer antes de estar pronta','O presente que a perda trouxe disfarçado de tragédia','Mudança de cidade, emprego, relacionamento — e de si mesma','Aceitar que você não é mais quem era — e celebrar','A dor do crescimento que parece retrocesso'],
+  gratidao:['Gratidão pelas coisas que deram errado','O que você esqueceu de agradecer hoje?','Encontrar beleza nos dias comuns','Agradecer o presente sem esperar o futuro','A gratidão que muda a frequência da sua vida','Bênçãos disfarçadas de problemas','O privilégio de respirar, existir, sentir','Diário de gratidão — por onde começar','Quando você olha pra trás e vê o quanto evoluiu','Agradecer o caminho, não só o destino','Reconhecer as pessoas que ficaram','O dom de ter exatamente o que precisa','Gratidão antecipada — agradecer antes de receber','Celebrar o que você já construiu','O simples como extraordinário quando você para pra ver','Gratidão como escudo contra a ansiedade','Agradecer o corpo que te carrega','Ver a vida com novos olhos a partir da gratidão','O que a adversidade te ensinou a valorizar','Uma lista de 10 coisas belas que aconteceram hoje','Gratidão pelo não — que te protegeu do errado','Ser grata pela pessoa que você se tornou','As pessoas invisíveis que tornam sua vida possível','O sol de toda manhã como presente renovado','Gratidão pelos amigos que ficaram na chuva','Agradecer a saúde enquanto ainda a tem','Ser grata pela jornada — não só pela chegada','O amor que recebeu e às vezes esqueceu de notar','Gratidão pela segunda chance que a vida ofereceu','Celebrar o aniversário de quem você está se tornando','Ver o extraordinário escondido no ordinário','Gratidão pela dor que te ensinou compaixão','Agradecer antes de dormir — o ritual que muda tudo'],
+  relacionamentos:['Pessoas que chegam para curar ou para ensinar','Vínculos que nutrem versus os que drenam','Amor que expande, não que aprisiona','Aprender a receber amor sem medo','O que você ensina ao mundo sobre como te tratar','Afastar com amor quem não alinha com quem você é','Conexões genuínas numa era de superficialidade','O que fica quando o relacionamento acaba','Amizades que são lar','Aprender a amar sem perder a si mesma','Comunicação não-violenta no dia a dia','Reconhecer o amor que você merece','Não confundir apego com amor','Família — laços que escolhemos ou que nos escolheram','O poder de dizer "eu preciso de você" sem vergonha','Relacionamentos que cobram quem você é','A solidão como escolha saudável às vezes','Soltar relacionamentos com gratidão','Ser presença real na vida de quem ama','O amor que começa quando as expectativas caem','Como amar alguém sem se perder no processo','Pessoas que ficam — a raridade e o valor','Recomeçar a confiar depois de uma traição','A amiga que você precisa ser para si mesma','Relacionamento saudável — o que ninguém te ensinou','O silêncio confortável de quem realmente te conhece','Aprender a pedir sem se sentir fraca','Amar à distância sem deixar de amar','Quando o amor próprio impede um relacionamento tóxico','O papel que você repete nos relacionamentos','Relacionamentos que terminaram mas que ainda te ensinam','Criar vínculos profundos num mundo superficial','O que significa realmente estar presente para alguém'],
+  conquista:['Celebrar o quanto você já chegou longe','A conquista que só você sabe o preço que custou','De onde você veio para onde está hoje','Pequenas vitórias que merecem festa','O sucesso que tem cheiro de luta','Provar pra você mesma que era possível','Quando o impossível se tornou real','Construir com consistência o que o talento sozinho não faz','Cada não que te levou para o sim certo','A mulher que você era há um ano não acreditaria','Disciplina como forma de amor próprio','O fruto do que você plantou em silêncio','Celebrar sem precisar de plateia','Metas alcançadas que ninguém apostava em você','O orgulho de si mesma — sem modéstia','Quando o esforço encontra a oportunidade','A versão de você que não desistiu nos dias difíceis','Reconhecer o seu valor sem precisar de comparação','Cada cicatriz como evidência de superação','O topo que parecia impossível de onde você estava','O dia em que você se tornou sua maior torcedora','Consistência — a habilidade mais subestimada do sucesso','Sucesso silencioso que não precisa de anúncio','Quando o plano B virou o melhor plano da sua vida','A conquista coletiva — quem te ajudou a chegar até aqui','O hábito que mudou tudo sem parecer grande coisa','Conquistas emocionais que valem mais que as materiais','O ano em que você superou o que achava insuperável','Mostrar ao mundo sem precisar gritar','A gratidão pela trajetória que te formou','Celebrar a chegada honrando a partida difícil','O que você aprendeu com cada fracasso que te formou','A versão de você daqui a 5 anos agradecendo pelo hoje'],
+  reflexao:['O que você deixaria de fazer se soubesse que vai bem?','Que parte de você ainda precisa de atenção?','Você está vivendo ou apenas sobrevivendo?','O que o cansaço que sente está tentando dizer?','Qual versão de você está sendo desperdiçada?','Se o medo sumisse, o que você faria amanhã?','O que você repete que não quer mais repetir?','Quem você seria se não tivesse sido ferida assim?','Que relacionamentos estão te custando quem você é?','O que você tolera que não deveria?','Quando foi a última vez que você foi completamente você?','O que você diria para si mesma daqui a 10 anos?','O que a criança que você foi precisava ouvir?','Em que áreas você está pedindo menos do que merece?','Qual o peso que você ainda carrega de alguém?','Onde você parou de crescer por medo de mudar?','Quais sonhos você guardou na gaveta por ser "irrealista"?','O que significaria realmente se perdoar?','Quem te tornaria mais você — quem você escolhe?','Que escolha você precisa fazer mas está adiando?','O que você está evitando sentir se ocupando demais?','Que história você conta sobre si mesma que já não é verdade?','O que você fingiria não saber se pudesse?','Que parte de você cresceu sem que você percebesse?','O que mudaria se você acreditasse que merece?','Que tipo de pessoa você está se tornando com suas escolhas diárias?','Em que momento você deixou de se conhecer?','O que você ainda não disse que precisa dizer?','Que emoção você mais evita sentir — e por quê?','Se sua vida fosse um livro, em que capítulo você está?','O que você está esperando para começar a viver de verdade?','Que versão de você mesma você mais sente falta?','Quando você parou de sonhar — e o que fez você voltar a sonhar?'],
+};
+
+let catAtiva = 'todos';
+function setCat(el, cat) {
+  catAtiva = cat;
+  document.querySelectorAll('#cat-filter .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderTemas();
+}
+function filtrarTemas() { renderTemas(); }
+
+function usarTema(t) {
+  document.getElementById('tema-input').value = t;
+  nav('criar');
+  document.getElementById('tema-input').focus();
+  showToast('Tema selecionado! Configure e gere o post.');
+}
+
+function temaAleatorio() {
+  const cats = Object.keys(TEMAS);
+  const c = cats[Math.floor(Math.random()*cats.length)];
+  const ts = TEMAS[c];
+  const t = ts[Math.floor(Math.random()*ts.length)];
+  document.getElementById('random-display').textContent = t;
+  document.getElementById('tema-input').value = t;
+}
+
+function renderTemas() {
+  const search = (document.getElementById('tema-search').value||'').toLowerCase().trim();
+  const grid = document.getElementById('temas-grid');
+  grid.innerHTML = '';
+  const cats = catAtiva==='todos' ? Object.keys(TEMAS) : [catAtiva];
+  cats.forEach(cat => {
+    const all = TEMAS[cat];
+    const filtered = search ? all.filter(t=>t.toLowerCase().includes(search)) : all;
+    if(!filtered.length) return;
+    const meta = CAT_META[cat];
+    const sec = document.createElement('div');
+    sec.className='tema-section';
+    sec.innerHTML=`
+      <div class="tema-sec-header">
+        <div class="tema-sec-icon">${meta.icon}</div>
+        <div>
+          <div class="tema-sec-title">${meta.label}</div>
+        </div>
+        <div class="tema-line"></div>
+        <div class="tema-sec-count">${filtered.length} temas</div>
+      </div>
+      <div class="tema-pills" id="tp-${cat}"></div>`;
+    grid.appendChild(sec);
+    const wrap = sec.querySelector('.tema-pills');
+    filtered.forEach((t,i)=>{
+      const b = document.createElement('button');
+      b.className='tema-pill';
+      b.textContent=t;
+      b.style.animationDelay=(i*.02)+'s';
+      b.onclick=()=>usarTema(t);
+      wrap.appendChild(b);
+    });
+  });
+  if(!grid.children.length) grid.innerHTML='<div class="no-results">Nenhum tema encontrado</div>';
+}
+
+// ═══════════════════════════════════════════════
+// HASHTAGS PAGE
+// ═══════════════════════════════════════════════
+const HASHTAG_SETS = [
+  {
+    label:'🔥 Alto alcance — Motivação geral',
+    vol:'vol-high',
+    tags:['#motivacao','#inspiracao','#reflexao','#autoestima','#crescimentopessoal','#vidacomproposito','#mentepositiva','#bomdia','#frasedodia','#meditacao'],
+  },
+  {
+    label:'🌿 Nicho espiritual & cura',
+    vol:'vol-mid',
+    tags:['#autocuidado','#curaemocional','#espiritualidade','#frasesmotivacionais','#mindfulness','#amor proprio','#saude mental','#terapia','#autoconhecimento','#pazinterior','#curainterior','#energiapositiva'],
+  },
+  {
+    label:'⚡ Força feminina & empoderamento',
+    vol:'vol-mid',
+    tags:['#mulherpoderosa','#forca feminina','#empoderamento feminino','#mulher empreendedora','#soywoman','#mulheres inspiradoras','#femininaepowerful','#donaminhavida'],
+  },
+  {
+    label:'🤍 Amor próprio & autodesenvolvimento',
+    vol:'vol-mid',
+    tags:['#amorporprio','#seacelove','#limites saudaveis','#selfcare','#rotinadebeleza','#euporprimeiro','#cuidandodemim','#evolucaopessoal','#sejamelhor'],
+  },
+  {
+    label:'🌸 Gratidão & positividade',
+    vol:'vol-low',
+    tags:['#gratidao','#abencoadaporDeus','#graça','#diariodegratidao','#contandobenções','#bendita','#gratidaoeterna','#benção','#agradecida'],
+  },
+  {
+    label:'✨ Fé & espiritualidade',
+    vol:'vol-low',
+    tags:['#fe','#Deus','#jezuscristo','#oração','#bendita seja','#fé move montanhas','#confiança em Deus','#plano de Deus','#timing divino','#milagre'],
+  },
+  {
+    label:'📱 Instagram & TikTok — Volume',
+    vol:'vol-high',
+    tags:['#reels','#reelsbrasil','#tiktokbrasil','#viral','#fyp','#foryoupage','#paravocê','#explorepage','#instagrambr','#conteudodigital'],
+  },
+  {
+    label:'🏆 Conquista & sucesso',
+    vol:'vol-mid',
+    tags:['#superacao','#metas','#objetivos','#sucesso','#trajetoria','#evoluindo','#conquistando','#resultados','#disciplina','#habitos','#consistencia'],
+  },
+];
+
+function renderHashtags() {
+  const c = document.getElementById('hashtags-content');
+  c.innerHTML = `
+    <div class="sec-title mb16">Como usar</div>
+    <div class="card mb24">
+      <div class="card-body">
+        <p style="font-size:13px;color:var(--tm);line-height:1.8;margin-bottom:10px">
+          Use <strong style="color:var(--gold2);font-weight:500">20–25 hashtags</strong> por post no Instagram. Mix ideal:<br>
+          <span style="color:var(--gold)">30%</span> grandes (+1M posts) · <span style="color:var(--tm)">50%</span> médias (100k–500k) · <span style="color:var(--ts)">20%</span> nicho (&lt;50k)
+        </p>
+        <p style="font-size:13px;color:var(--tm);line-height:1.8">
+          No <strong style="color:var(--teal);font-weight:500">TikTok</strong>: use apenas 3–5 hashtags + #fyp + 1–2 de nicho. Menos é mais.
+        </p>
+        <div class="mt12 flex gap8">
+          <button class="btn btn-gold btn-sm" onclick="gerarHashtagsIA()">Gerar hashtags com IA para meu tema</button>
+        </div>
+      </div>
+    </div>
+    <div id="htag-ia-result" class="hidden"></div>
+    <div class="sec-title mb16">Banco de hashtags</div>
+  `;
+  HASHTAG_SETS.forEach(set => {
+    const block = document.createElement('div');
+    block.className = 'card mb12';
+    block.innerHTML = `
+      <div class="card-head">
+        <span style="font-size:13px;color:var(--tx);font-family:var(--serif);font-style:italic">${set.label}</span>
+        <button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('htset-${set.label.replace(/[^a-z0-9]/gi,'_')}').textContent.replace(/\\s+/g,' ').trim(), 'Hashtags copiadas!')">Copiar set</button>
+      </div>
+      <div class="card-body">
+        <div class="htag-cloud" id="htset-${set.label.replace(/[^a-z0-9]/gi,'_')}">
+          ${set.tags.map(t=>`<span class="htag ${set.vol}" onclick="copyText('${t}','Copiado!')">${t}</span>`).join('')}
+        </div>
+      </div>`;
+    c.appendChild(block);
+  });
+}
+
+async function gerarHashtagsIA() {
+  const tema = document.getElementById('tema-input').value.trim() || 'motivação e reflexão';
+  const btn = document.querySelector('#hashtags-content .btn-gold');
+  const r = document.getElementById('htag-ia-result');
+  btn.innerHTML = '<span class="spin"></span> Gerando…'; btn.disabled=true;
+  r.classList.remove('hidden');
+  r.innerHTML='<div class="card mb24"><div class="card-body"><div class="spin-w spin-lg" style="display:block;margin:0 auto"></div></div></div>';
+  try {
+    const txt = await callClaude(
+      `Especialista em hashtags para Instagram no Brasil. Responda SOMENTE em texto puro, sem markdown.`,
+      `Gere 30 hashtags estratégicas para posts de motivação e reflexão sobre "${tema}". Separe em 3 grupos: ALTO ALCANCE (10), MÉDIO ALCANCE (10), NICHO (10). Formato: grupo em maiúsculo seguido das hashtags.`
+    );
+    r.innerHTML=`<div class="card mb24"><div class="card-head flex-sb"><span class="badge badge-gold">Hashtags geradas por IA — ${tema}</span><button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('hia').textContent,'Hashtags copiadas!')">Copiar tudo</button></div><div class="card-body"><div id="hia" style="font-size:13px;color:var(--tm);line-height:2;white-space:pre-wrap">${txt}</div></div></div>`;
+  } catch(e) { r.innerHTML=''; }
+  btn.innerHTML='Gerar hashtags com IA para meu tema'; btn.disabled=false;
+}
+
+// ═══════════════════════════════════════════════
+// BIBLIOTECA LEONARDO AI
+// ═══════════════════════════════════════════════
+const LIBRARY = [
+  {cat:'editorial',nome:'Mulher e Luz da Manhã',model:'Lucid Origin',desc:'Retrato editorial feminino em luz dourada suave — esperança e novo começo.',prompt:'A woman standing near a large window, soft golden morning light washing over her face, eyes closed in peaceful contemplation, loose flowing linen dress in cream, dust particles floating in sunlight, editorial portrait, shallow depth of field, warm amber and ivory tones, Kodak Portra 400 film grain, rule of thirds composition, 4:5 ratio',negative:'harsh lighting, dark, sad expression, cluttered background, oversaturated'},
+  {cat:'cinematic',nome:'Caminhada na Névoa',model:'Kino XL',desc:'Silhueta feminina em paisagem nebulosa — solidão poderosa, jornada interior.',prompt:'Cinematic shot of a lone woman walking on a misty forest path at dawn, silhouette against soft ethereal fog, cool blue-gray palette, god rays piercing through trees, dramatic cinematic lighting, wide angle composition, film noir mood, desaturated with gold highlights, 35mm anamorphic lens, movie still aesthetic, 4:5',negative:'blurry face, people in background, urban setting, bright colors'},
+  {cat:'natureza',nome:'Flores e Intenção',model:'Vision XL + PhotoReal v2',desc:'Flat lay fotorrealista de flores e objetos delicados — gratidão.',prompt:'Photorealistic overhead flat lay composition, dried wildflowers and petals arranged on linen fabric, handwritten journal, vintage ink pen, natural morning light from side window, earthy tones, warm ivory and sage green palette, soft shadows, high detail fabric texture, commercial photography style, 4:5 format',negative:'plastic, synthetic, dark shadows, cluttered, bright artificial light'},
+  {cat:'abstrato',nome:'Ondas de Luz Dourada',model:'Phoenix 1.0',desc:'Composição abstrata com luz e movimento — transformação, energia interior.',prompt:'Abstract artistic photograph of light waves and golden particles flowing through dark space, bokeh orbs, motion blur, dynamic diagonal composition, rich deep black background with warm amber and gold light trails, ethereal and mystical atmosphere, fine art photography, long exposure effect, spiritual energy visualization',negative:'sharp objects, text, faces, crowded, neon colors'},
+  {cat:'retrato',nome:'Olhar de Cura',model:'Flux Dev',desc:'Retrato fotorrealista close-up — autenticidade, força feminina, cura.',prompt:'Ultra-photorealistic close-up portrait of a serene woman, direct soft eye contact, natural skin texture with subtle freckles, catchlight in eyes, loose natural hair, soft diffused studio light, gentle smile, warm terracotta and caramel tones, 85mm portrait lens f1.8 bokeh background, skin pores visible, commercial beauty photography',negative:'airbrushed skin, harsh shadows, heavy makeup, busy background, distorted features'},
+  {cat:'flat',nome:'Mesa de Intenções',model:'Lucid Origin',desc:'Flatlay minimalista para stories e feed — calma, foco, propósito.',prompt:'Minimalist flat lay composition on white marble surface, single dried rose bud, small clear crystal, folded white letter, soft morning shadows, negative space, clean and airy editorial style, pale warm tones, overhead shot, lifestyle photography, breathing room in composition, calm and intentional mood',negative:'colorful, busy, multiple colors, dark, plastic items'},
+  {cat:'cinematic',nome:'Pôr do Sol Interior',model:'Kino XL',desc:'Silhueta contra pôr do sol dramático — beleza da transformação, novo ciclo.',prompt:'Cinematic silhouette of a woman with arms open wide on a hilltop at golden hour, dramatic sunset sky with orange and deep violet clouds, volumetric light, lens flare, epic landscape scale, 2.39:1 widescreen ratio, emotional and uplifting atmosphere, backlit photography, warm tones, inspirational movie poster composition',negative:'dark, sad, rain, urban background, people in foreground'},
+  {cat:'natureza',nome:'Floresta Sagrada',model:'Phoenix 1.0',desc:'Trilha em floresta com luz filtrada — conexão, espiritualidade, presença.',prompt:'Lush ancient forest path with cathedral-like tree canopy, shafts of golden light breaking through dense green foliage, mossy stones on path, morning mist near the ground, rich emerald and gold tones, sense of spiritual reverence and peace, photorealistic landscape, depth and layering, 4:5 portrait format, mystical atmosphere',negative:'people, urban elements, night, dark mood, overcrowded'},
+  {cat:'editorial',nome:'Carta para o Eu Futuro',model:'Vision XL + PhotoReal v2',desc:'Mãos escrevendo com luz suave — reflexão, autoconhecimento.',prompt:'Photorealistic close-up of elegant hands writing in an open journal with vintage fountain pen, warm amber bokeh background, soft side window light creating gentle shadows, visible paper texture and ink shine, gold ring detail, cozy and intimate atmosphere, skin texture visible, shallow depth of field, warm sepia-toned lifestyle photography',negative:'harsh flash, plastic pen, typed text, busy background'},
+  {cat:'abstrato',nome:'Kintsugi — Cicatrizes Douradas',model:'Phoenix 1.0',desc:'Arte abstrata inspirada no kintsugi — beleza nas cicatrizes.',prompt:'Abstract fine art composition inspired by Japanese kintsugi, golden liquid flowing through dark fractured surface, macro photography texture, contrast of black obsidian and liquid gold, symbolic and spiritual mood, dramatic lighting highlighting gold veins, philosophical beauty, gallery-worthy composition, rich blacks and radiant gold tones',negative:'text, faces, bright colors, cartoonish, low quality'},
+  {cat:'retrato',nome:'Mulher da Chuva',model:'Flux Dev',desc:'Retrato dramático na chuva — resiliência, beleza na tempestade.',prompt:'Dramatic photorealistic portrait of a woman standing in light rain, face turned upward with eyes closed and peaceful expression, water droplets on skin and hair, moody overcast light with subtle warm backlight, dark teal and silver tones with warm skin highlights, shallow depth of field, 50mm cinematic portrait, skin texture and water detail visible',negative:'sad expression, harsh rain, flat lighting, airbrushed'},
+  {cat:'flat',nome:'Ritual Matinal',model:'Lucid Origin',desc:'Cena de manhã com café, livro e flor — rotina sagrada, cuidado consigo.',prompt:'Cozy morning ritual scene from above, ceramic mug with black coffee, open book with handwritten notes, single white flower in small vase, soft natural light from window casting warm shadows, neutral linen and beige tones, lifestyle editorial photography, intentional and peaceful composition, negative space, subtle steam rising from coffee',negative:'busy composition, plastic items, bright colors, dark shadows, artificial light'},
+];
+
+let libCat = 'todos';
+function filtLib(el, cat) {
+  libCat = cat;
+  document.querySelectorAll('#lib-filter .chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  renderLib();
+}
+function renderLib() {
+  const items = libCat==='todos' ? LIBRARY : LIBRARY.filter(l=>l.cat===libCat);
+  const c = document.getElementById('lib-cards');
+  c.innerHTML = '';
+  items.forEach((item,i) => {
+    const d = document.createElement('div');
+    d.className='lib-card';
+    d.style.animation=`riseUp .3s ${i*.05}s ease both`;
+    d.innerHTML=`
+      <div class="lib-card-top">
+        <div>
+          <div class="lib-card-name">${item.nome}</div>
+          <div class="lib-card-desc">${item.desc}</div>
+        </div>
+        <span class="badge badge-gold">${item.model}</span>
+      </div>
+      <div class="lib-prompt-box">${item.prompt}</div>
+      <div class="lib-neg"><span style="color:rgba(220,140,140,.45)">negative: </span>${item.negative}</div>
+      <div class="flex gap8 mt12">
+        <button class="btn btn-ghost btn-xs" onclick='copyText(${JSON.stringify(item.prompt)}, "Prompt copiado!")'>Copiar prompt</button>
+        <button class="btn btn-ghost btn-xs" onclick='copyText("MODELO: ${item.model}\\n\\nPROMPT:\\n${item.prompt.replace(/'/g,"\\'")}\\n\\nNEGATIVE:\\n${item.negative.replace(/'/g,"\\'")}","Tudo copiado!")'>Copiar completo</button>
+      </div>`;
+    c.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// GUIA MODELOS
+// ═══════════════════════════════════════════════
+const MODELOS_GUIA = [
+  {nome:'Lucid Origin',badge:'Versátil',cor:'badge-gold',desc:'Modelo padrão do Leonardo AI. Excelente para a maioria dos estilos. Bom equilíbrio entre realismo e arte.',quando:['Posts editoriais e lifestyle','Flat lays e cenas de cotidiano','Qualquer estilo quando não tem certeza qual modelo usar'],como:['Descreva o mood e a atmosfera da cena','Inclua paleta de cores desejada','Adicione o estilo fotográfico (editorial, lifestyle, etc)','Use palavras de iluminação: soft light, golden hour, window light'],exemplo:'A woman sitting by a window reading, warm morning light, minimalist interior, earthy tones, editorial photography style, 4:5'},
+  {nome:'Phoenix 1.0',badge:'Qualidade máxima',cor:'badge-gold',desc:'O modelo mais poderoso do Leonardo. Entende linguagem natural e produz imagens de qualidade excepcional com prompts descritivos.',quando:['Quando você quer a melhor qualidade possível','Arte abstrata e composições artísticas','Cenas narrativas e atmosféricas'],como:['Escreva como se estivesse descrevendo uma cena para um diretor','Use linguagem natural e narrativa, não lista de palavras','Descreva a história, emoção e significado da imagem'],exemplo:'A golden hour light falls gently on a woman sitting alone in a field of wildflowers, her eyes closed, face lifted toward the sky in quiet gratitude, the world soft and warm around her, photorealistic, 4:5'},
+  {nome:'Kino XL',badge:'Cinemático',cor:'badge-teal',desc:'Especializado em imagens com estética cinematográfica. Cria frames que parecem saídos de filmes de alto orçamento.',quando:['Silhuetas dramáticas e paisagens épicas','Efeito de filme, grão e atmosfera densa','Reels e TikToks com visual cinematográfico'],como:['Use termos de cinema: movie still, cinematic frame, film grain','Mencione o tipo de lente: 35mm, 50mm, anamorphic','Descreva iluminação dramática: backlit, volumetric light, god rays','Inclua referência de gênero: thriller mood, drama film aesthetic'],exemplo:'Cinematic movie still, woman standing alone on a rainy city street at night, backlit by neon reflections on wet pavement, 35mm anamorphic lens, film grain, deep shadows, emotional and contemplative atmosphere'},
+  {nome:'Vision XL + PhotoReal v2',badge:'Fotorrealismo',cor:'badge-rose',desc:'Combinação para o máximo fotorrealismo. Ideal para retratos e imagens que precisam parecer fotografias profissionais.',quando:['Retratos femininos de alta qualidade','Produtos e flat lays ultra-realistas','Qualquer imagem que precise parecer uma foto real'],como:['Inclua configurações de câmera: 85mm f1.8, 50mm f2.4','Mencione textura de pele: natural skin texture, skin pores visible','Descreva a qualidade da foto: commercial photography, editorial shoot','Use termos de luz fotográfica: softbox, natural window light'],exemplo:'Photorealistic portrait, Brazilian woman, 35 years old, soft natural skin texture, warm studio lighting, 85mm f1.4 bokeh background, commercial beauty photography, minimal makeup'},
+  {nome:'Flux Dev',badge:'Realismo fino',cor:'badge-muted',desc:'Excelente para detalhes finos como textura de tecido, pele, materiais orgânicos e composições de produto.',quando:['Texturas detalhadas de tecido e materiais','Mãos, objetos, detalhes close-up','Composições com múltiplos elementos'],como:['Prompts diretos e descritivos','Seja específico sobre materiais e texturas','Descreva a qualidade de cada elemento separadamente'],exemplo:'Close-up of woman hands holding a cup of tea, fine skin texture, soft natural light from left, linen fabric in background, earthy warm tones, lifestyle photography'},
+];
+
+function renderGuia() {
+  const c = document.getElementById('guia-content');
+  c.innerHTML = `<div class="sec-title mb16">Estrutura do prompt perfeito</div>
+  <div class="card mb24"><div class="card-body">
+    <p style="font-size:13px;color:var(--tm);line-height:1.85;margin-bottom:14px">Todo bom prompt para Leonardo AI tem esta estrutura:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      ${['1. Sujeito principal — quem ou o quê?','2. Ação ou pose — o que está fazendo?','3. Ambiente — onde está, cenário, fundo','4. Iluminação — golden hour, soft light, dramatic','5. Estilo visual — editorial, cinematic, flat lay','6. Paleta de cores — warm tones, earthy, dark','7. Câmera / técnica — 85mm, bokeh, film grain','8. Formato — 4:5 portrait, 9:16 vertical'].map(i=>`<div style="font-size:12px;color:var(--tm);padding:8px 12px;background:var(--s3);border-radius:var(--rs);display:flex;gap:8px"><span style="color:var(--gold)">${i.split('.')[0]}.</span>${i.split('.')[1]}</div>`).join('')}
+    </div>
+  </div></div>
+  <div class="sec-title mb16">Guia por modelo</div>`;
+
+  MODELOS_GUIA.forEach((m,i) => {
+    const d = document.createElement('div');
+    d.className='tip-card';
+    d.style.animation=`riseUp .3s ${i*.07}s ease both`;
+    d.innerHTML=`
+      <div class="tip-head">
+        <div class="tip-icon-box"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        <div style="flex:1">
+          <div class="tip-title">${m.nome}</div>
+          <div class="tip-platforms"><span class="badge ${m.cor}">${m.badge}</span></div>
+        </div>
+      </div>
+      <div class="tip-body">
+        <p>${m.desc}</p>
+        <div class="g2 mb12" style="gap:12px">
+          <div>
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Quando usar</div>
+            <ul class="tip-list">${m.quando.map(w=>`<li><span class="tip-arrow">→</span>${w}</li>`).join('')}</ul>
+          </div>
+          <div>
+            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Como escrever o prompt</div>
+            <ul class="tip-list">${m.como.map(c=>`<li><span class="tip-arrow">→</span>${c}</li>`).join('')}</ul>
+          </div>
+        </div>
+        <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Exemplo de prompt</div>
+        <div class="prompt-code" style="margin-bottom:8px">${m.exemplo}</div>
+        <button class="btn btn-ghost btn-xs" onclick='copyText(${JSON.stringify(m.exemplo)},"Exemplo copiado!")'>Copiar exemplo</button>
+      </div>`;
+    c.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// TIPS
+// ═══════════════════════════════════════════════
+const TIPS = [
+  {icon:'⏰',title:'Horários que mais engajam',plat:['ig','tk'],desc:'Postar na hora certa multiplica o alcance orgânico. O algoritmo prioriza posts que recebem interações rápidas após publicação.',lista:['Instagram: 7h–9h (manhã), 12h–13h (almoço) e 19h–22h (noite) — pico no Brasil','TikTok: 7h–9h, 12h–15h e 19h–23h — mais volátil, teste nos seus analytics','Terça a quinta têm maior engajamento médio em conteúdo de motivação','Poste Stories todos os dias — mesmo nos dias sem feed post','Domingo à noite é subutilizado por criadores e tem menor concorrência']},
+  {icon:'🎬',title:'Reels e TikTok — estrutura que viraliza',plat:['ig','tk'],desc:'A estrutura dos primeiros 3 segundos define se o vídeo vira viral. Conteúdo de motivação tem taxa de salvamento e compartilhamento muito alta.',lista:['0–3s: frase de gancho visual na tela — "Se você está passando por isso leia…"','3–15s: desenvolvimento da reflexão — voz + texto animado funcionam muito bem','15–25s: virada emocional ou insight principal','25–30s: CTA suave — "Salva pra relembrar" ou "Manda pra alguém que precisa"','Use áudios trending com conteúdo reflexivo — multiplica alcance 3×','Adicione legenda automática — 80% dos Reels são vistos sem som']},
+  {icon:'💾',title:'A estratégia do salvamento',plat:['ig'],desc:'Salvamentos são o sinal mais forte para o algoritmo do Instagram. Uma imagem de alta qualidade gerada no Leonardo AI pode multiplicar drasticamente seus saves.',lista:['Imagens de alta qualidade visuais têm taxa de salvamento 4× maior que texto puro','Carrosseis motivacionais têm tempo de visualização 3× maior que fotos únicas','CTA "Salva esse post se..." aumenta salvamentos em até 40%','Use formato 4:5 (1080×1350px) — ocupa mais espaço no feed, mais cliques','Posts com imagem + citação visual têm compartilhamento 2× maior']},
+  {icon:'💬',title:'Legendas que geram comentários',plat:['ig','tk'],desc:'Comentários são o segundo maior sinal de engajamento. Legendas reflexivas que terminam com pergunta aberta transformam leitores passivos em engajados.',lista:['Termine SEMPRE com uma pergunta aberta: "O que isso desperta em você?"','Use "Me conta nos comentários…" — cria reciprocidade','Responda todos os comentários nas primeiras 2h — algoritmo prioriza isso','Faça perguntas nos Stories sobre temas dos próximos posts','No TikTok, responda comentários com um novo vídeo — gera muito alcance']},
+  {icon:'#',title:'Hashtags — estratégia completa',plat:['ig','tk'],desc:'A combinação certa de hashtags posiciona seu post exatamente na frente de quem consome conteúdo de motivação.',lista:['Use 20–25 hashtags no Instagram (não 30 — parece spam)','Mix: 30% grandes (+1M), 50% médias (100k–500k), 20% nicho (<50k)','Crie sua hashtag própria — ex: #comCassia — e use em todos os posts','No TikTok: 3–5 hashtags máximo + #fyp + 1–2 de nicho','Evite hashtags genéricas como #love e #happy — competição impossível']},
+  {icon:'📈',title:'Crescimento acelerado',plat:['ig','tk'],desc:'Para crescer rápido no nicho de motivação, algumas ações têm impacto imediato e consistente.',lista:['Collab posts com outras criadoras de motivação — crescimento mútuo e real','Repurpose: cada post de feed → Reel → TikTok (1 ideia, 3 formatos)','Live 1× por semana — Instagram prioriza contas que usam Live ativamente','Pin seus 3 melhores posts no perfil — novos visitantes veem o melhor','No TikTok: séries funcionam muito ("7 dias de reflexão matinal")','Cross-post: divulgue seu Instagram no TikTok na bio e vice-versa']},
+  {icon:'🖼️',title:'Visual que cria identidade',plat:['ig'],desc:'Um feed visualmente consistente transforma visitantes em seguidores. No nicho de motivação, a identidade visual é metade da mensagem.',lista:['Escolha 2–3 cores dominantes e mantenha em todo o feed','Paleta dourado + escuro ou paleta terrosa convertem muito bem em motivação','Use os modelos Leonardo AI com a mesma paleta para criar coesão visual','Alterne entre: imagem impactante → citação texto → imagem ambiente','Stories têm template próprio — crie 2–3 templates e reutilize sempre']},
+  {icon:'🤝',title:'Engajamento que constrói comunidade',plat:['ig','tk'],desc:'Comunidades engajadas crescem de forma orgânica e consistente. No nicho de motivação, a conexão pessoal é o diferencial.',lista:['Responda DMs — quem envia mensagem é seu seguidores mais fiel','Use caixinha de perguntas nos Stories para coletar temas de posts','Compartilhe histórias pessoais autênticas — vulnerabilidade gera conexão','Publique bastidores do processo de criação — humaniza seu conteúdo','Celebre marcos com sua comunidade — 1k, 5k, 10k seguidores']},
+];
+
+function renderTips() {
+  const c = document.getElementById('tips-content');
+  c.innerHTML = `
+    <div class="tips-hero mb24">
+      <div class="tips-metric"><div class="tm-num">4–5×</div><div class="tm-unit">posts por semana</div></div>
+      <div class="tips-metric"><div class="tm-num">4:5</div><div class="tm-unit">formato ideal feed</div></div>
+      <div class="tips-metric"><div class="tm-num">9:16</div><div class="tm-unit">Reels & TikTok</div></div>
+    </div>`;
+  TIPS.forEach((t,i) => {
+    const d = document.createElement('div');
+    d.className='tip-card';
+    d.style.animation=`riseUp .3s ${i*.05}s ease both`;
+    d.innerHTML=`
+      <div class="tip-head">
+        <div class="tip-icon-box" style="font-size:16px;font-family:var(--serif)">${t.icon}</div>
+        <div style="flex:1">
+          <div class="tip-title">${t.title}</div>
+          <div class="tip-platforms">
+            ${t.plat.includes('ig')?'<span class="badge badge-gold" style="font-size:8px">Instagram</span>':''}
+            ${t.plat.includes('tk')?'<span class="badge badge-teal" style="font-size:8px">TikTok</span>':''}
+          </div>
+        </div>
+      </div>
+      <div class="tip-body">
+        <p>${t.desc}</p>
+        <ul class="tip-list">${t.lista.map(l=>`<li><span class="tip-arrow">→</span>${l}</li>`).join('')}</ul>
+      </div>`;
+    c.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// CALENDÁRIO
+// ═══════════════════════════════════════════════
+const CAL_POSTS = [3,5,7,10,12,14,17,19,21,24,26,28,31];
+const CAL_TYPES = {3:'Feed',5:'Reels',7:'Stories',10:'Feed',12:'TikTok',14:'Carrossel',17:'Reels',19:'Feed',21:'Stories',24:'Carrossel',26:'TikTok',28:'Feed',31:'Reels'};
+
+function buildCalendar() {
+  const grid = document.getElementById('cal-visual');
+  grid.innerHTML = '';
+  ['D','S','T','Q','Q','S','S'].forEach(n => {
+    const d=document.createElement('div'); d.className='cal-day-name'; d.textContent=n; grid.appendChild(d);
+  });
+  // March 2026 starts on Sunday
+  for(let i=0;i<31;i++){
+    const day=i+1;
+    const d=document.createElement('div');
+    d.className='cal-day';
+    const hasPost=CAL_POSTS.includes(day);
+    if(hasPost) d.classList.add('has-post');
+    if(day===17) d.classList.add('today');
+    d.innerHTML=`<span>${day}</span>${hasPost?`<div class="cal-dot"></div><div class="cal-post-type">${CAL_TYPES[day]||''}</div>`:''}`;
+    if(hasPost) d.onclick=()=>showToast(`${CAL_TYPES[day]} — dia ${day}`);
+    grid.appendChild(d);
+  }
+}
+
+async function gerarCalendario() {
+  const btn=document.getElementById('btn-cal');
+  const load=document.getElementById('loading-cal');
+  const res=document.getElementById('cal-result');
+  btn.innerHTML='<span class="spin"></span> Gerando…'; btn.disabled=true;
+  load.classList.add('on'); res.classList.add('hidden');
+  try {
+    const raw = await callClaude(
+      `Estrategista de conteúdo especialista em motivação e reflexão para Instagram e TikTok no Brasil. Responda em português.`,
+      `Crie um calendário editorial de motivação e reflexão para março 2026 com 14 posts distribuídos em 4 semanas. Para cada post:\n- Dia e data\n- Plataforma (Feed/Reels/Stories/TikTok/Carrossel)\n- Tema motivacional específico\n- Gancho de abertura (1 frase impactante)\n- Tipo de imagem sugerida (1 linha)\n\nOrganize por semana. Inclua datas especiais de março 2026.`,
+      1200
+    );
+    res.innerHTML=`<div class="card"><div class="card-head flex-sb"><span class="badge badge-gold">Pauta editorial — Março 2026</span><button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('cal-txt').textContent,'Calendário copiado!')">Copiar pauta</button></div><div class="card-body"><div id="cal-txt" style="font-size:13px;color:var(--tm);line-height:1.85;white-space:pre-wrap">${raw}</div></div></div>`;
+    res.classList.remove('hidden');
+  } catch(e) { showToast('Erro: '+e.message); }
+  load.classList.remove('on');
+  btn.innerHTML='Gerar pauta completa com IA'; btn.disabled=false;
+}
+
+// ═══════════════════════════════════════════════
+// SIDEBAR QUOTES
+// ═══════════════════════════════════════════════
+const QUOTES = [
+  '"Tudo o que você precisa já existe dentro de você."',
+  '"A dor que você sente hoje é a força que sentirá amanhã."',
+  '"Seja gentil com quem você está se tornando."',
+  '"Cada recomeço é uma segunda chance disfarçada."',
+  '"A fé não remove os obstáculos — ela te dá força para atravessá-los."',
+  '"Você não precisa estar inteira para começar."',
+  '"O que resiste, persiste. O que flui, transforma."',
+  '"Gratidão não é fingir que tudo está bem — é reconhecer o que ainda é bom."',
+];
+let qIdx=0;
+function rotateQuote(){
+  qIdx=(qIdx+1)%QUOTES.length;
+  document.getElementById('sidebar-quote').textContent=QUOTES[qIdx];
+}
+setInterval(rotateQuote, 8000);
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+renderTemas();
+renderLib();
+renderGuia();
+renderTips();
+renderHashtags();
+buildCalendar();
+renderQuickPills();
+// Default size pill selection
+document.querySelectorAll('.size-pill')[0] && document.querySelectorAll('.size-pill')[0].classList.add('on');
 </script>
 </body>
 </html>

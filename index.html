@@ -8,1836 +8,1138 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#080706;
-  --s1:#0f0d0b;
-  --s2:#161310;
-  --s3:#1e1a16;
-  --s4:#26211c;
-  --b0:rgba(255,255,255,0.04);
-  --b1:rgba(255,255,255,0.07);
-  --b2:rgba(255,255,255,0.13);
-  --b3:rgba(255,255,255,0.22);
-  --gold:#c8a55e;
-  --gold2:#e2c47a;
-  --gold3:#f0d898;
-  --goldg:rgba(200,165,94,0.10);
-  --goldb:rgba(200,165,94,0.20);
-  --tx:#ede8df;
-  --tm:#9a8f80;
-  --ts:#554d44;
-  --tss:#332e28;
-  --rose:rgba(220,140,140,0.8);
-  --teal:rgba(100,200,190,0.8);
-  --r:12px;
-  --rs:8px;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Outfit',sans-serif;
-  --transition:.18s ease;
+  --bg:#080706;--s1:#0f0d0b;--s2:#161310;--s3:#1e1a16;--s4:#26211c;
+  --b0:rgba(255,255,255,0.04);--b1:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
+  --gold:#c8a55e;--gold2:#e2c47a;--goldg:rgba(200,165,94,0.10);--goldb:rgba(200,165,94,0.20);
+  --tx:#ede8df;--tm:#9a8f80;--ts:#554d44;--tss:#332e28;
+  --rose:rgba(220,140,140,0.8);--teal:rgba(100,200,190,0.8);
+  --r:12px;--rs:8px;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',sans-serif;--t:.18s ease;
 }
-
-html{font-size:15px;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-weight:300;min-height:100vh;line-height:1.65;overflow-x:hidden}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--ts);border-radius:2px}
-
-/* APP SHELL */
-.app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
-
-/* ════ SIDEBAR ════ */
-.sidebar{
-  background:var(--s1);
-  border-right:1px solid var(--b1);
-  display:flex;flex-direction:column;
-  position:sticky;top:0;height:100vh;
-  overflow-y:auto;overflow-x:hidden;
-}
-
-.sidebar-logo{
-  padding:28px 22px 22px;
-  border-bottom:1px solid var(--b1);
-  position:relative;
-  overflow:hidden;
-}
-.sidebar-logo::before{
-  content:'';
-  position:absolute;
-  top:-30px;right:-30px;
-  width:120px;height:120px;
-  background:radial-gradient(circle, rgba(200,165,94,0.08) 0%, transparent 70%);
-  pointer-events:none;
-}
-.logo-tag{
-  font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--ts);margin-bottom:8px;display:block;
-}
-.logo-name{
-  font-family:var(--serif);font-size:32px;font-weight:600;
-  font-style:italic;color:var(--gold2);letter-spacing:-0.5px;
-  line-height:1;display:block;
-}
-.logo-sub{
-  font-size:10px;letter-spacing:2px;text-transform:uppercase;
-  color:var(--ts);margin-top:6px;display:block;
-}
-.logo-dot{
-  display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--gold);margin-right:6px;
-  animation:pulse 2.5s ease infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
-/* SIDEBAR STATS */
-.sidebar-stats{
-  padding:14px 22px;
-  border-bottom:1px solid var(--b1);
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  gap:8px;
-}
-.ss{text-align:center}
-.ss-num{font-family:var(--serif);font-size:20px;color:var(--gold2);line-height:1;display:block}
-.ss-lbl{font-size:9px;color:var(--ts);letter-spacing:.5px;margin-top:2px;display:block}
-
-/* NAV */
-.nav{padding:16px 14px;flex:1}
-.nav-group{margin-bottom:20px}
-.nav-group-label{
-  font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--tss);padding:0 8px;margin-bottom:6px;display:block;
-}
-.nav-item{
-  display:flex;align-items:center;gap:10px;
-  width:100%;padding:9px 10px;
-  background:transparent;border:none;
-  border-radius:var(--rs);
-  color:var(--tm);font-family:var(--sans);
-  font-size:13px;font-weight:400;
-  cursor:pointer;text-align:left;
-  transition:all var(--transition);
-  margin-bottom:1px;position:relative;
-}
-.nav-item svg{width:16px;height:16px;opacity:.55;flex-shrink:0;transition:opacity var(--transition)}
-.nav-item:hover{background:var(--s2);color:var(--tx)}
-.nav-item:hover svg{opacity:.9}
-.nav-item.on{
-  background:var(--goldg);color:var(--gold2);
-  border:1px solid var(--goldb);
-}
-.nav-item.on svg{opacity:1}
-.nav-item .nav-count{
-  margin-left:auto;font-size:10px;
-  background:var(--s4);color:var(--ts);
-  padding:2px 7px;border-radius:10px;
-}
-.nav-item.on .nav-count{background:var(--goldb);color:var(--gold)}
-
-/* SIDEBAR QUOTE */
-.sidebar-quote{
-  padding:16px 22px;border-top:1px solid var(--b1);
-  font-family:var(--serif);font-style:italic;
-  font-size:13px;color:var(--ts);line-height:1.6;
-}
-
-/* ════ MAIN ════ */
-.main{overflow-y:auto;overflow-x:hidden;background:var(--bg)}
-.page{display:none;min-height:100vh;animation:fadeIn .3s ease}
+html{font-size:15px}body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-weight:300;min-height:100vh;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--ts);border-radius:2px}
+.app{display:grid;grid-template-columns:255px 1fr;min-height:100vh}
+.sidebar{background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{padding:22px 18px 16px;border-bottom:1px solid var(--b1)}
+.logo-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ts);display:block;margin-bottom:5px}
+.logo-name{font-family:var(--serif);font-size:28px;font-weight:600;font-style:italic;color:var(--gold2);display:block;line-height:1}
+.logo-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ts);margin-top:4px;display:block}
+.logo-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:4px;animation:pulse 2.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sbar{padding:11px 18px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between}
+.snum{font-family:var(--serif);font-size:20px;color:var(--gold2)}
+.slbl{font-size:9px;color:var(--ts)}
+.nav{padding:12px 10px;flex:1}
+.ng{margin-bottom:16px}
+.ngl{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--tss);padding:0 8px;margin-bottom:4px;display:block}
+.ni{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;background:transparent;border:none;border-radius:var(--rs);color:var(--tm);font-family:var(--sans);font-size:12.5px;cursor:pointer;text-align:left;transition:all var(--t);margin-bottom:1px}
+.ni:hover{background:var(--s2);color:var(--tx)}
+.ni.on{background:var(--goldg);color:var(--gold2);border:1px solid var(--goldb)}
+.nc{margin-left:auto;font-size:10px;background:var(--s4);color:var(--ts);padding:2px 6px;border-radius:10px}
+.ni.on .nc{background:var(--goldb);color:var(--gold)}
+.sq{padding:13px 18px;border-top:1px solid var(--b1);font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ts);line-height:1.6}
+.main{overflow-y:auto;background:var(--bg)}
+.page{display:none;min-height:100vh;animation:fi .22s ease}
 .page.on{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* PAGE HERO */
-.page-hero{
-  padding:36px 44px 28px;
-  border-bottom:1px solid var(--b1);
-  position:relative;overflow:hidden;
-  background:linear-gradient(180deg, var(--s1) 0%, transparent 100%);
-}
-.page-hero::after{
-  content:'';position:absolute;
-  top:0;right:0;bottom:0;
-  width:300px;
-  background:radial-gradient(ellipse at 80% 50%, rgba(200,165,94,0.05) 0%, transparent 70%);
-  pointer-events:none;
-}
-.hero-eyebrow{
-  font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px;
-}
-.hero-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);opacity:.5}
-.page-hero h1{
-  font-family:var(--serif);font-size:40px;font-weight:300;
-  font-style:italic;color:var(--gold2);letter-spacing:-0.5px;
-  line-height:1.1;margin-bottom:8px;
-}
-.page-hero p{font-size:13px;color:var(--tm);line-height:1.65;max-width:520px}
-
-/* PAGE CONTENT */
-.page-body{padding:28px 44px 60px}
-
-/* ════ SECTION HEADERS ════ */
-.sec-title{
-  display:flex;align-items:center;gap:12px;
-  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
-}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--b1)}
-
-/* ════ CARDS ════ */
-.card{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);overflow:hidden;
-  transition:border-color var(--transition);
-}
-.card:hover{border-color:var(--b2)}
-.card-head{
-  padding:14px 18px;border-bottom:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--s1);
-}
-.card-body{padding:20px 20px}
-
-/* GLASS CARD */
-.card-glass{
-  background:rgba(22,19,16,0.6);
-  border:1px solid var(--b1);border-radius:var(--r);
-  backdrop-filter:blur(8px);
-}
-
-/* ════ INPUTS ════ */
-textarea,input[type=text],input[type=search],select{
-  width:100%;background:var(--s3);
-  border:1px solid var(--b1);border-radius:var(--rs);
-  padding:11px 14px;font-family:var(--sans);font-size:14px;
-  color:var(--tx);outline:none;transition:border var(--transition);
-  resize:none;appearance:none;
-}
-textarea::placeholder,input::placeholder{color:var(--tss)}
-textarea:focus,input:focus,select:focus{border-color:rgba(200,165,94,.5);box-shadow:0 0 0 3px rgba(200,165,94,0.06)}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fu{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.hero{padding:28px 36px 22px;border-bottom:1px solid var(--b1);background:linear-gradient(180deg,var(--s1) 0%,transparent 100%);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:0;right:0;bottom:0;width:240px;background:radial-gradient(ellipse at 80% 50%,rgba(200,165,94,0.05) 0%,transparent 70%);pointer-events:none}
+.eb{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.eb::before{content:'';width:16px;height:1px;background:var(--gold);opacity:.5}
+.hero h1{font-family:var(--serif);font-size:32px;font-weight:300;font-style:italic;color:var(--gold2);letter-spacing:-.5px;line-height:1.1;margin-bottom:6px}
+.hero p{font-size:13px;color:var(--tm);max-width:480px}
+.pb{padding:22px 36px 56px}
+.fb{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center}
+.sw{position:relative}
+.sw svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--ts);pointer-events:none}
+.sw input{padding-left:34px}
+textarea,input,select{width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:var(--rs);padding:9px 12px;font-family:var(--sans);font-size:13px;color:var(--tx);outline:none;transition:border var(--t);resize:none;appearance:none}
+input:focus,select:focus{border-color:rgba(200,165,94,.5);box-shadow:0 0 0 3px rgba(200,165,94,.06)}
 select option{background:var(--s2)}
-
-/* ════ BUTTONS ════ */
-.btn{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--sans);font-weight:500;
-  border:none;cursor:pointer;border-radius:var(--rs);
-  transition:all var(--transition);white-space:nowrap;
-}
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-weight:500;border:none;cursor:pointer;border-radius:var(--rs);transition:all var(--t);white-space:nowrap}
 .btn:active{transform:scale(.97)}
-.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-
-.btn-gold{
-  padding:11px 22px;background:var(--gold);
-  color:#08070600;color:#08070f;color:#000;
-  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
-  color:rgba(8,7,6,0.92);
-}
-.btn-gold:hover:not(:disabled){background:var(--gold2);box-shadow:0 4px 20px rgba(200,165,94,.25)}
-
-.btn-ghost{
-  padding:9px 16px;background:transparent;
-  color:var(--tm);font-size:11px;letter-spacing:1px;text-transform:uppercase;
-  border:1px solid var(--b2);
-}
-.btn-ghost:hover{border-color:var(--b3);color:var(--tx);background:var(--s3)}
-
-.btn-xs{padding:5px 11px;font-size:10px;letter-spacing:1.2px}
-.btn-sm{padding:7px 14px;font-size:11px;letter-spacing:1px}
-.btn-icon{
-  padding:8px;background:var(--s3);border:1px solid var(--b1);
-  color:var(--tm);border-radius:var(--rs);
-}
-.btn-icon:hover{border-color:var(--b2);color:var(--tx)}
-
-.btn-danger{border:1px solid rgba(220,80,80,.2);color:rgba(220,120,120,.8)}
-.btn-danger:hover{background:rgba(220,80,80,.08);border-color:rgba(220,80,80,.35)}
-
-/* ════ BADGES ════ */
-.badge{
-  font-size:9px;letter-spacing:1.8px;text-transform:uppercase;
-  padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;
-}
-.badge-gold{color:var(--gold);background:var(--goldg);border:1px solid var(--goldb)}
-.badge-rose{color:var(--rose);background:rgba(220,140,140,0.08);border:1px solid rgba(220,140,140,0.18)}
-.badge-teal{color:var(--teal);background:rgba(100,200,190,0.08);border:1px solid rgba(100,200,190,0.18)}
-.badge-muted{color:var(--ts);background:var(--s3);border:1px solid var(--b1)}
-
-/* ════ CHIPS ════ */
-.chips{display:flex;flex-wrap:wrap;gap:7px}
-.chip{
-  font-family:var(--serif);font-style:italic;font-size:14.5px;
-  padding:6px 14px;border:1px solid var(--b1);border-radius:20px;
-  color:var(--tm);background:transparent;cursor:pointer;
-  transition:all var(--transition);white-space:nowrap;
-}
-.chip:hover,.chip.on{border-color:var(--gold);color:var(--gold2);background:var(--goldg)}
-
-/* ════ SETTINGS GRID ════ */
-.settings-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px}
-.sbox{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:14px 16px;transition:border-color var(--transition)}
-.sbox:hover{border-color:var(--b2)}
-.sbox label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ts);display:block;margin-bottom:7px}
-.sbox select,.sbox input{padding:0;background:transparent;border:none;font-size:15px;font-family:var(--serif);font-style:italic;color:var(--tx);box-shadow:none}
-
-/* ════ SPINNER ════ */
-.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(8,7,6,.25);border-top-color:rgba(8,7,6,.85);border-radius:50%;animation:rot .65s linear infinite}
-.spin-w{border:2px solid rgba(255,255,255,.15);border-top-color:var(--gold)}
-.spin-lg{width:28px;height:28px;border:2px solid var(--b2);border-top-color:var(--gold)}
-@keyframes rot{to{transform:rotate(360deg)}}
-
-/* ════ LOADING ════ */
-.loading-box{display:none;padding:48px 0;text-align:center}
-.loading-box.on{display:block}
-.loading-box p{font-family:var(--serif);font-size:17px;font-style:italic;color:var(--tm);margin-top:16px}
-
-/* ════ RESULT ELEMENTS ════ */
-.result-box{animation:riseUp .4s ease both}
-@keyframes riseUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-.post-title-display{
-  font-family:var(--serif);font-size:30px;font-weight:400;
-  font-style:italic;color:var(--gold2);line-height:1.25;margin-bottom:14px;
-}
-.post-body-display{
-  font-size:14px;color:var(--tx);line-height:1.85;
-  white-space:pre-wrap;word-break:break-word;
-}
-.post-hashtags-display{
-  margin-top:14px;font-size:12.5px;color:var(--gold);
-  line-height:2.1;word-break:break-all;
-}
-
-/* PROMPT CODE BOX */
-.prompt-code{
-  font-family:'Courier New',monospace;font-size:12px;
-  color:rgba(200,165,94,.75);
-  background:rgba(200,165,94,.04);
-  border:1px solid rgba(200,165,94,.1);
-  border-radius:var(--rs);padding:13px 15px;
-  line-height:1.75;word-break:break-word;
-  position:relative;
-}
-.prompt-negative{
-  font-family:'Courier New',monospace;font-size:11px;
-  color:var(--ts);line-height:1.65;
-  margin-top:8px;padding-top:8px;
-  border-top:1px solid var(--b1);
-}
-.prompt-negative span{color:rgba(220,140,140,.5);margin-right:5px}
-
-/* PCARD */
-.pcard{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);padding:20px;
-  margin-bottom:12px;position:relative;
-}
-.pcard:hover{border-color:var(--b2)}
-.pcard-num{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.pcard-num::after{content:'';flex:1;height:1px;background:var(--b1)}
-.pcard-name{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--tx);margin-bottom:4px}
-.pcard-desc{font-size:12.5px;color:var(--tm);font-style:italic;margin-bottom:12px;line-height:1.55}
-.pcard-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px}
-
-/* COPY INLINE */
-.copy-inline{
-  position:absolute;top:14px;right:14px;
-  padding:4px 10px;background:transparent;
-  border:1px solid var(--b1);border-radius:6px;
-  color:var(--ts);font-size:10px;font-family:var(--sans);
-  cursor:pointer;transition:all var(--transition);letter-spacing:.5px;
-}
-.copy-inline:hover{border-color:var(--gold);color:var(--gold)}
-
-/* ════ TEMAS PAGE ════ */
-.temas-stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
-  margin-bottom:24px;
-}
-.tstat{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);padding:14px 16px;
-  text-align:center;
-}
-.tstat-n{font-family:var(--serif);font-size:28px;color:var(--gold2);line-height:1}
-.tstat-l{font-size:10px;color:var(--ts);margin-top:4px}
-
-.search-wrap{position:relative;margin-bottom:18px}
-.search-wrap input{padding-left:38px}
-.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ts);pointer-events:none}
-
-.tema-section{margin-bottom:32px}
-.tema-sec-header{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:14px;
-}
-.tema-sec-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--goldg);border:1px solid var(--goldb);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
-}
-.tema-sec-title{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--gold2)}
-.tema-sec-count{font-size:10px;color:var(--ts);letter-spacing:.5px;margin-left:auto}
-.tema-line{flex:1;height:1px;background:var(--b1)}
-
-.tema-pills{display:flex;flex-wrap:wrap;gap:8px}
-.tema-pill{
-  font-family:var(--serif);font-style:italic;font-size:15px;
-  padding:7px 18px;border:1px solid var(--b1);border-radius:24px;
-  color:var(--tm);background:transparent;cursor:pointer;
-  transition:all var(--transition);
-}
-.tema-pill:hover{
-  border-color:var(--gold);color:var(--gold2);
-  background:var(--goldg);transform:translateY(-1px);
-  box-shadow:0 4px 12px rgba(200,165,94,.1);
-}
-
-/* RANDOM TEMA BTN */
-.random-btn{
-  display:flex;align-items:center;gap:10px;
-  width:100%;padding:16px 20px;
-  background:var(--goldg);border:1px solid var(--goldb);
-  border-radius:var(--r);color:var(--gold2);
-  font-family:var(--serif);font-size:18px;font-style:italic;
-  cursor:pointer;transition:all var(--transition);margin-bottom:20px;
-  text-align:left;
-}
-.random-btn:hover{background:rgba(200,165,94,.16);border-color:var(--gold);box-shadow:0 4px 24px rgba(200,165,94,.12)}
-.random-btn svg{flex-shrink:0;opacity:.7}
-#random-display{flex:1}
-
-/* ════ LIBRARY PAGE ════ */
-.lib-card{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);padding:18px 20px;
-  margin-bottom:10px;cursor:pointer;
-  transition:all var(--transition);position:relative;
-}
-.lib-card:hover{border-color:var(--b2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.lib-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
-.lib-card-name{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--tx)}
-.lib-card-desc{font-size:12.5px;color:var(--tm);line-height:1.55;margin-bottom:10px}
-.lib-prompt-box{
-  font-family:'Courier New',monospace;font-size:11.5px;
-  color:rgba(200,165,94,.65);background:rgba(200,165,94,.04);
-  border:1px solid rgba(200,165,94,.1);
-  border-radius:var(--rs);padding:10px 12px;
-  line-height:1.7;word-break:break-word;
-}
-.lib-neg{font-size:11px;color:var(--ts);margin-top:8px;font-family:'Courier New',monospace;line-height:1.5}
-
-/* ════ TIPS PAGE ════ */
-.tips-hero{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);padding:22px 24px;
-  margin-bottom:24px;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-}
-.tips-metric{text-align:center}
-.tm-num{font-family:var(--serif);font-size:36px;color:var(--gold2);line-height:1}
-.tm-unit{font-size:11px;color:var(--ts);margin-top:4px}
-.tip-card{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);margin-bottom:10px;overflow:hidden;
-}
-.tip-head{
-  padding:16px 20px;border-bottom:1px solid var(--b1);
-  display:flex;align-items:center;gap:14px;cursor:pointer;
-  transition:background var(--transition);
-}
-.tip-head:hover{background:var(--s3)}
-.tip-icon-box{
-  width:36px;height:36px;border-radius:8px;
-  background:var(--goldg);border:1px solid var(--goldb);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.tip-icon-box svg{width:16px;height:16px;color:var(--gold)}
-.tip-title{font-family:var(--serif);font-size:19px;font-style:italic;color:var(--gold2)}
-.tip-platforms{margin-top:4px;display:flex;gap:5px}
-.tip-body{padding:16px 20px;display:block}
-.tip-body p{font-size:13px;color:var(--tm);line-height:1.75;margin-bottom:12px}
-.tip-list{list-style:none}
-.tip-list li{
-  font-size:13px;color:var(--tm);padding:8px 0;
-  border-bottom:1px solid var(--b0);
-  display:flex;align-items:flex-start;gap:10px;line-height:1.6;
-}
-.tip-list li:last-child{border-bottom:none}
-.tip-arrow{color:var(--gold);font-size:11px;flex-shrink:0;margin-top:2px;opacity:.7}
-
-/* HASHTAG BANK */
-.htag-cloud{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-.htag{
-  font-size:12px;padding:4px 10px;
-  border:1px solid var(--b1);border-radius:14px;
-  color:var(--tm);background:transparent;cursor:pointer;
-  transition:all var(--transition);
-}
-.htag:hover{border-color:var(--gold);color:var(--gold);background:var(--goldg)}
-.htag.vol-high{border-color:rgba(200,165,94,.25);color:rgba(200,165,94,.7)}
-.htag.vol-mid{border-color:var(--b2);color:var(--tm)}
-.htag.vol-low{border-color:var(--b1);color:var(--ts)}
-
-/* ════ CALENDAR PAGE ════ */
-.cal-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:20px;
-}
-.cal-month{font-family:var(--serif);font-size:24px;font-style:italic;color:var(--gold2)}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:24px}
-.cal-day-name{font-size:10px;letter-spacing:1px;color:var(--ts);text-align:center;padding:6px 0;text-transform:uppercase}
-.cal-day{
-  aspect-ratio:1;border-radius:8px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  font-size:12px;color:var(--tm);cursor:pointer;
-  position:relative;transition:all var(--transition);border:1px solid transparent;
-}
-.cal-day:hover{background:var(--s3);border-color:var(--b1)}
-.cal-day.today{border-color:var(--gold);color:var(--gold2)}
-.cal-day.has-post{background:var(--goldg);color:var(--gold2);border-color:var(--goldb)}
-.cal-day.empty{opacity:.2}
-.cal-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);margin-top:2px}
-.cal-post-type{font-size:8px;letter-spacing:.5px;color:rgba(200,165,94,.5);margin-top:1px}
-
-/* WEEK PLAN */
-.week-card{
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);margin-bottom:10px;overflow:hidden;
-}
-.week-head{
-  padding:12px 18px;border-bottom:1px solid var(--b1);
-  background:var(--s1);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.week-title{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold)}
-.week-body{padding:0}
-.week-item{
-  padding:12px 18px;border-bottom:1px solid var(--b0);
-  display:flex;gap:14px;align-items:flex-start;
-  transition:background var(--transition);cursor:pointer;
-}
-.week-item:last-child{border-bottom:none}
-.week-item:hover{background:var(--s3)}
-.week-date{font-size:11px;color:var(--ts);width:28px;flex-shrink:0;padding-top:2px}
-.week-content{flex:1}
-.week-tema{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--tx);margin-bottom:3px}
-.week-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-
-/* ════ DIVIDER ════ */
-.divider{height:1px;background:var(--b1);margin:22px 0}
-.ornament{
-  text-align:center;font-family:var(--serif);
-  font-size:22px;letter-spacing:8px;color:var(--tss);
-  margin:28px 0;
-}
-
-/* ════ GRID UTILITIES ════ */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.flex{display:flex}
-.flex-c{display:flex;align-items:center}
-.flex-sb{display:flex;align-items:center;justify-content:space-between}
-.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}
-.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}
-.mb20{margin-bottom:20px}.mb24{margin-bottom:24px}
-.mt12{margin-top:12px}.mt16{margin-top:16px}.mt20{margin-top:20px}
-
-/* ════ HIDDEN ════ */
-.hidden{display:none!important}
-
-/* ════ TOAST ════ */
-.toast{
-  position:fixed;bottom:28px;right:28px;
-  background:var(--s3);border:1px solid var(--goldb);
-  border-radius:var(--rs);padding:10px 18px;
-  font-size:13px;color:var(--gold2);
-  display:flex;align-items:center;gap:8px;
-  transform:translateY(20px);opacity:0;
-  transition:all .25s ease;z-index:1000;pointer-events:none;
-}
+.bg{padding:7px 13px;background:transparent;color:var(--tm);font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--b2)}
+.bg:hover{border-color:var(--b3);color:var(--tx);background:var(--s3)}
+.bs{padding:7px 13px;background:var(--goldg);color:var(--gold2);font-size:11px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--goldb)}
+.bs:hover{background:rgba(200,165,94,.18)}
+.bgo{padding:8px 18px;background:var(--gold);color:rgba(8,7,6,.92);font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase}
+.bgo:hover{background:var(--gold2)}
+.bx{padding:4px 9px;font-size:10px;letter-spacing:.8px}
+.bd{border:1px solid rgba(220,80,80,.2);color:rgba(220,120,120,.8);background:transparent;font-size:10px;padding:4px 9px}
+.bd:hover{background:rgba(220,80,80,.08);border-color:rgba(220,80,80,.35)}
+.badge{font-size:9px;letter-spacing:1.8px;text-transform:uppercase;padding:3px 8px;border-radius:20px;display:inline-flex;align-items:center}
+.bg0{color:var(--gold);background:var(--goldg);border:1px solid var(--goldb)}
+.bt{color:var(--teal);background:rgba(100,200,190,.08);border:1px solid rgba(100,200,190,.18)}
+.br{color:var(--rose);background:rgba(220,140,140,.08);border:1px solid rgba(220,140,140,.18)}
+.bm{color:var(--ts);background:var(--s3);border:1px solid var(--b1)}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--s3);border:1px solid var(--goldb);border-radius:var(--rs);padding:9px 15px;font-size:13px;color:var(--gold2);display:flex;align-items:center;gap:6px;transform:translateY(14px);opacity:0;transition:all .2s ease;z-index:1000;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
-.toast-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0}
-
-/* ════ SIZE PILLS ════ */
-.size-pill{
-  display:flex;align-items:center;gap:12px;
-  flex:1;min-width:160px;
-  background:var(--s2);border:1px solid var(--b1);
-  border-radius:var(--r);padding:12px 16px;cursor:pointer;
-  transition:all var(--transition);
-}
-.size-pill:hover{border-color:var(--b2)}
-.size-pill.on{border-color:var(--gold);background:var(--goldg)}
-.size-pill.tiktok-pill.on{border-color:var(--teal);background:rgba(100,200,190,.08)}
-.size-icon{
-  width:32px;height:32px;border-radius:8px;
-  background:var(--s3);border:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:16px;font-weight:600;
-  color:var(--gold);flex-shrink:0;
-}
-.tk-i{color:var(--teal) !important}
-.size-pill.on .size-icon{background:var(--goldg);border-color:var(--goldb)}
-.size-name{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:2px}
-.size-desc{font-size:10px;color:var(--ts);line-height:1.4}
-
-/* ════ TIKTOK RESULT BOX ════ */
-.tiktok-result{
-  background:rgba(100,200,190,.05);
-  border:1px solid rgba(100,200,190,.2);
-  border-radius:var(--r);padding:20px;
-}
-.tiktok-screen{
-  background:var(--s1);border:1px solid var(--b2);
-  border-radius:var(--rs);padding:14px 16px;
-  margin-bottom:8px;
-  font-family:var(--serif);font-size:17px;font-style:italic;
-  color:var(--tx);line-height:1.5;
-  display:flex;align-items:flex-start;gap:10px;
-}
-.tiktok-screen-num{
-  font-family:var(--sans);font-size:9px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--teal);flex-shrink:0;
-  margin-top:3px;
-}
-.tiktok-caption-box{
-  background:var(--s3);border:1px solid var(--b1);
-  border-radius:var(--rs);padding:12px 14px;
-  font-size:13px;color:var(--tx);line-height:1.7;
-}
-
-/* ════ LENGTH INDICATOR ════ */
-.length-bar{
-  display:flex;align-items:center;gap:8px;
-  margin-top:8px;font-size:11px;color:var(--ts);
-}
-.length-track{flex:1;height:3px;background:var(--s4);border-radius:2px;overflow:hidden}
-.length-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s ease}
-
-
-  padding:40px 0;text-align:center;
-  font-family:var(--serif);font-size:18px;font-style:italic;color:var(--tss);
-}
-
-/* ════ RESPONSIVE ════ */
+.td{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.st{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:13px;text-align:center}
+.sn{font-family:var(--serif);font-size:24px;color:var(--gold2);line-height:1}
+.sl{font-size:9px;color:var(--ts);margin-top:3px}
+.pi{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r);padding:13px 15px;margin-bottom:7px;cursor:pointer;transition:all var(--t);display:flex;gap:13px;align-items:flex-start;animation:fu .22s ease both}
+.pi:hover{border-color:var(--goldb);background:var(--s3);transform:translateX(2px)}
+.pn{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-top:2px;flex-shrink:0;width:24px}
+.pc{flex:1;min-width:0}
+.pt{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--tx);margin-bottom:3px}
+.pp{font-size:11.5px;color:var(--ts);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pb2{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.pbt{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.cs{margin-bottom:28px}
+.ch{display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid var(--b1)}
+.ci{font-size:16px}
+.ct{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--gold2)}
+.cc{font-size:10px;color:var(--ts);margin-left:auto}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:500;backdrop-filter:blur(4px);padding:16px}
+.mo.hidden{display:none}
+.md{background:var(--s2);border:1px solid var(--goldb);border-radius:var(--r);width:100%;max-width:570px;max-height:88vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.65)}
+.mh{padding:16px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:0;background:var(--s2);z-index:1}
+.mt2{font-family:var(--serif);font-size:22px;font-style:italic;color:var(--gold2);line-height:1.2}
+.mc{background:none;border:1px solid var(--b2);border-radius:6px;color:var(--ts);cursor:pointer;padding:4px 9px;font-size:12px;flex-shrink:0;transition:all var(--t)}
+.mc:hover{border-color:var(--b3);color:var(--tx)}
+.mb2{padding:20px}
+.mtxt{font-size:13.5px;color:var(--tx);line-height:1.88;white-space:pre-wrap;margin-bottom:13px}
+.mhash{font-size:11.5px;color:var(--gold);line-height:2.1;word-break:break-all}
+.mf{padding:13px 20px;border-top:1px solid var(--b1);display:flex;gap:7px;flex-wrap:wrap;background:var(--s1)}
+.es{padding:56px 0;text-align:center;font-family:var(--serif);font-size:19px;font-style:italic;color:var(--tss)}
+.hidden{display:none!important}
+.ham{display:none;position:fixed;top:13px;left:13px;z-index:200;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:7px;cursor:pointer;color:var(--tm)}
+.sbk{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
 @media(max-width:768px){
   .app{grid-template-columns:1fr}
-  .sidebar{position:fixed;left:-270px;width:270px;z-index:100;transition:left .3s;height:100%}
+  .sidebar{position:fixed;left:-258px;width:255px;z-index:100;transition:left .25s ease;height:100%}
   .sidebar.open{left:0}
-  .page-hero{padding:24px 20px 20px}
-  .page-body{padding:20px 20px 48px}
-  .temas-stats{grid-template-columns:1fr 1fr}
-  .tips-hero{grid-template-columns:1fr 1fr}
+  .sbk.show{display:block}
+  .ham{display:flex}
+  .hero{padding:18px 16px 14px}
+  .pb{padding:14px 16px 48px}
+  .main{padding-top:48px}
+  .sr{grid-template-columns:1fr 1fr}
+  .md{max-width:100%}
+  .fb{flex-direction:column}
+  .sw,.fb select{width:100%}
 }
 </style>
 </head>
 <body>
-
-<div class="toast" id="toast"><span class="toast-dot"></span><span id="toast-msg">Copiado!</span></div>
-
+<div class="toast" id="toast"><span class="td"></span><span id="tmsg">Copiado!</span></div>
+<button class="ham" onclick="tgSb()"><svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<div class="sbk" id="sbk" onclick="clSb()"></div>
+<div class="mo hidden" id="mo">
+  <div class="md">
+    <div class="mh">
+      <div><div id="mt" class="mt2"></div><div id="mb" style="display:flex;gap:5px;margin-top:5px;flex-wrap:wrap"></div></div>
+      <button class="mc" onclick="clMo()">✕</button>
+    </div>
+    <div class="mb2">
+      <div id="mtxt" class="mtxt"></div>
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ts);margin-bottom:7px">Hashtags</div>
+      <div id="mhash" class="mhash"></div>
+    </div>
+    <div class="mf" id="mf"></div>
+  </div>
+</div>
 <div class="app">
-
-<!-- ════════════════════ SIDEBAR ════════════════════ -->
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-logo">
+<nav class="sidebar" id="sb">
+  <div class="logo">
     <span class="logo-tag">Content Studio</span>
     <span class="logo-name">Cassia</span>
-    <span class="logo-sub"><span class="logo-dot"></span>Instagram · TikTok · IA</span>
+    <span class="logo-sub"><span class="logo-dot"></span>Biblioteca de Posts</span>
   </div>
-
-  <div class="sidebar-stats">
-    <div class="ss"><span class="ss-num">360</span><span class="ss-lbl">temas</span></div>
-    <div class="ss"><span class="ss-num">12</span><span class="ss-lbl">prompts</span></div>
-    <div class="ss"><span class="ss-num">5</span><span class="ss-lbl">modelos</span></div>
+  <div class="sbar">
+    <div><div class="snum" id="sc">0</div><div class="slbl">posts salvos</div></div>
+    <button class="btn bd" onclick="clrSv()">Limpar</button>
   </div>
-
   <div class="nav">
-    <div class="nav-group">
-      <span class="nav-group-label">Criar conteúdo</span>
-      <button class="nav-item on" onclick="nav('criar')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-        Criar post
+    <div class="ng">
+      <span class="ngl">Navegação</span>
+      <button class="ni on" onclick="nav('lib')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        Biblioteca completa <span class="nc" id="ntot">0</span>
       </button>
-      <button class="nav-item" onclick="nav('temas')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
-        Banco de temas
-        <span class="nav-count">360+</span>
-      </button>
-      <button class="nav-item" onclick="nav('hashtags')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
-        Hashtags
-        <span class="nav-count">banco</span>
+      <button class="ni" onclick="nav('sv')">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        Posts salvos <span class="nc" id="nsv">0</span>
       </button>
     </div>
-
-    <div class="nav-group">
-      <span class="nav-group-label">Imagens IA</span>
-      <button class="nav-item" onclick="nav('library')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        Biblioteca Leonardo AI
-        <span class="nav-count">12</span>
-      </button>
-      <button class="nav-item" onclick="nav('guia')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-        Guia de modelos IA
-      </button>
-    </div>
-
-    <div class="nav-group">
-      <span class="nav-group-label">Ferramentas extras ✦</span>
-      <button class="nav-item" onclick="nav('roteiro')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.069A1 1 0 0121 8.868V17a1 1 0 01-1.447.894L15 16M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
-        Roteiro Reels & TikTok
-        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
-      </button>
-      <button class="nav-item" onclick="nav('carrossel')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
-        Carrossel completo
-        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
-      </button>
-      <button class="nav-item" onclick="nav('ganchos')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Banco de ganchos
-        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
-      </button>
-      <button class="nav-item" onclick="nav('overlay')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4"/></svg>
-        Frases para imagem
-        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
-      </button>
-      <button class="nav-item" onclick="nav('bio')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-        Reescrever bio & perfil
-        <span class="nav-count" style="background:rgba(100,200,190,.12);color:var(--teal)">novo</span>
-      </button>
-    </div>
-
-    <div class="nav-group">
-      <span class="nav-group-label">Crescer</span>
-      <button class="nav-item" onclick="nav('tips')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-        Estratégia & crescimento
-      </button>
-      <button class="nav-item" onclick="nav('calendario')">
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        Calendário editorial
-      </button>
+    <div class="ng">
+      <span class="ngl">Categorias</span>
+      <button class="ni" onclick="nCat('cura')">🌿 Cura <span class="nc" id="nc-cura"></span></button>
+      <button class="ni" onclick="nCat('forca')">⚡ Força <span class="nc" id="nc-forca"></span></button>
+      <button class="ni" onclick="nCat('fe')">✨ Fé <span class="nc" id="nc-fe"></span></button>
+      <button class="ni" onclick="nCat('amor')">🤍 Amor próprio <span class="nc" id="nc-amor"></span></button>
+      <button class="ni" onclick="nCat('proposito')">🔥 Propósito <span class="nc" id="nc-proposito"></span></button>
+      <button class="ni" onclick="nCat('presente')">🍃 Presença <span class="nc" id="nc-presente"></span></button>
+      <button class="ni" onclick="nCat('mudanca')">🌊 Mudança <span class="nc" id="nc-mudanca"></span></button>
+      <button class="ni" onclick="nCat('gratidao')">🌸 Gratidão <span class="nc" id="nc-gratidao"></span></button>
+      <button class="ni" onclick="nCat('reflexao')">🪞 Reflexão <span class="nc" id="nc-reflexao"></span></button>
+      <button class="ni" onclick="nCat('conquista')">🏆 Conquista <span class="nc" id="nc-conquista"></span></button>
+      <button class="ni" onclick="nCat('relacionamentos')">💛 Vínculos <span class="nc" id="nc-relacionamentos"></span></button>
     </div>
   </div>
-
-  <div class="sidebar-quote" id="sidebar-quote">
-    "Tudo o que você precisa já existe dentro de você. O trabalho é encontrar o caminho de volta."
-  </div>
+  <div class="sq" id="sq">"Tudo o que você precisa já existe dentro de você."</div>
 </nav>
-
-<!-- ════════════════════ MAIN ════════════════════ -->
 <main class="main">
-
-<!-- ═══ PAGE: CRIAR ═══ -->
-<div class="page on" id="page-criar">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Cassia Studio</div>
-    <h1>Criar post completo</h1>
-    <p>Legenda, hashtags e 3 prompts para o Leonardo AI — gerados com IA em segundos.</p>
+<div class="page on" id="page-lib">
+  <div class="hero">
+    <div class="eb">Cassia Studio</div>
+    <h1>Biblioteca de posts</h1>
+    <p>79 posts prontos por categoria, plataforma e tamanho. Clique para ver, copiar ou salvar.</p>
   </div>
-  <div class="page-body">
-
-    <!-- SETTINGS -->
-    <div class="sec-title">Configurações do post</div>
-    <div class="settings-row mb20">
-      <div class="sbox">
-        <label>Plataforma</label>
-        <select id="plataforma">
-          <option>Instagram Feed</option>
-          <option>Instagram Reels</option>
-          <option>Instagram Stories</option>
-          <option>TikTok</option>
-          <option>Instagram + TikTok</option>
-        </select>
+  <div class="pb">
+    <div class="sr" id="sr"></div>
+    <div class="fb">
+      <div class="sw" style="flex:1;min-width:170px">
+        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+        <input type="search" id="ls" placeholder="Buscar posts…" oninput="rLib()"/>
       </div>
-      <div class="sbox">
-        <label>Tamanho do texto</label>
-        <select id="tamanho">
-          <option value="curto">Curto — 1 parágrafo impactante</option>
-          <option value="medio" selected>Médio — 3 parágrafos</option>
-          <option value="longo">Longo — 5–7 parágrafos</option>
-          <option value="tiktok">TikTok — texto de tela (máx 150 car.)</option>
-        </select>
-      </div>
-      <div class="sbox">
-        <label>Tom da mensagem</label>
-        <select id="tom">
-          <option>Inspirador e poético</option>
-          <option>Reflexivo e profundo</option>
-          <option>Encorajador e acolhedor</option>
-          <option>Poderoso e transformador</option>
-          <option>Suave e contemplativo</option>
-          <option>Direto e impactante</option>
-          <option>Pergunta reflexiva ao público</option>
-        </select>
-      </div>
-      <div class="sbox">
-        <label>Modelo Leonardo AI</label>
-        <select id="leo-model">
-          <option value="Lucid Origin">Lucid Origin</option>
-          <option value="Phoenix 1.0">Phoenix 1.0</option>
-          <option value="Kino XL">Kino XL (cinemático)</option>
-          <option value="Vision XL + PhotoReal v2">Vision XL PhotoReal</option>
-          <option value="Flux Dev">Flux Dev (realismo)</option>
-        </select>
-      </div>
-      <div class="sbox">
-        <label>Paleta visual</label>
-        <select id="paleta">
-          <option value="warm golden tones, amber, cream, soft candlelight">Dourado & Âmbar</option>
-          <option value="earthy tones, terracotta, warm beige, sienna">Terroso & Natural</option>
-          <option value="misty cold tones, pearl white, ash gray, blue fog">Névoa & Pérola</option>
-          <option value="dark luxury, deep black, charcoal, gold accents">Dark Luxo</option>
-          <option value="soft dusty rose, antique pink, lavender, linen">Rosa Antigo</option>
-          <option value="sage green, moss, cream, botanical elements">Verde & Musgo</option>
-        </select>
-      </div>
+      <select id="lc" onchange="rLib()" style="width:auto"><option value="">Todas categorias</option><option value="cura">🌿 Cura</option><option value="forca">⚡ Força</option><option value="fe">✨ Fé</option><option value="amor">🤍 Amor próprio</option><option value="proposito">🔥 Propósito</option><option value="presente">🍃 Presença</option><option value="mudanca">🌊 Mudança</option><option value="gratidao">🌸 Gratidão</option><option value="reflexao">🪞 Reflexão</option><option value="conquista">🏆 Conquista</option><option value="relacionamentos">💛 Vínculos</option></select>
+      <select id="lp" onchange="rLib()" style="width:auto"><option value="">Todas plataformas</option><option>Instagram Feed</option><option>Instagram Reels</option><option>TikTok</option><option>Carrossel</option></select>
+      <select id="lz" onchange="rLib()" style="width:auto"><option value="">Todos tamanhos</option><option>Curto</option><option>Médio</option><option>Longo</option></select>
     </div>
-
-    <!-- SIZE PREVIEW STRIP -->
-    <div id="size-preview" style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
-      <div class="size-pill on" onclick="selectSize(this,'curto')">
-        <span class="size-icon">S</span>
-        <div>
-          <div class="size-name">Curto</div>
-          <div class="size-desc">~80 palavras · 1 parágrafo · para citar sobre imagem</div>
-        </div>
-      </div>
-      <div class="size-pill" onclick="selectSize(this,'medio')">
-        <span class="size-icon">M</span>
-        <div>
-          <div class="size-name">Médio</div>
-          <div class="size-desc">~200 palavras · 3 parágrafos · padrão Instagram</div>
-        </div>
-      </div>
-      <div class="size-pill" onclick="selectSize(this,'longo')">
-        <span class="size-icon">L</span>
-        <div>
-          <div class="size-name">Longo</div>
-          <div class="size-desc">~450 palavras · 5–7 parágrafos · storytelling</div>
-        </div>
-      </div>
-      <div class="size-pill tiktok-pill" onclick="selectSize(this,'tiktok')">
-        <span class="size-icon tk-i">T</span>
-        <div>
-          <div class="size-name">TikTok</div>
-          <div class="size-desc">≤150 car. legenda + 5 frases de tela para o vídeo</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEMA INPUT -->
-    <div class="sec-title">Tema ou intenção</div>
-    <textarea id="tema-input" rows="3" class="mb12" placeholder="Escreva o tema, uma emoção, uma frase que inspira este post…"></textarea>
-
-    <!-- SUGESTÕES RÁPIDAS -->
-    <div class="sec-title">Sugestões rápidas de tema</div>
-    <div style="margin-bottom:10px">
-      <div class="chips mb8" id="quick-chips">
-        <button class="chip on" onclick="filterQuickCat(this,'todos')">Todos</button>
-        <button class="chip" onclick="filterQuickCat(this,'cura')">🌿 Cura</button>
-        <button class="chip" onclick="filterQuickCat(this,'forca')">⚡ Força</button>
-        <button class="chip" onclick="filterQuickCat(this,'fe')">✨ Fé</button>
-        <button class="chip" onclick="filterQuickCat(this,'amor')">🤍 Amor próprio</button>
-        <button class="chip" onclick="filterQuickCat(this,'proposito')">🔥 Propósito</button>
-        <button class="chip" onclick="filterQuickCat(this,'mudanca')">🌊 Mudança</button>
-        <button class="chip" onclick="filterQuickCat(this,'gratidao')">🌸 Gratidão</button>
-        <button class="chip" onclick="filterQuickCat(this,'reflexao')">🪞 Reflexão</button>
-        <button class="chip" onclick="filterQuickCat(this,'conquista')">🏆 Conquista</button>
-        <button class="chip" onclick="filterQuickCat(this,'presente')">🍃 Presença</button>
-        <button class="chip" onclick="filterQuickCat(this,'relacionamentos')">💛 Vínculos</button>
-      </div>
-    </div>
-    <div id="quick-pills-wrap" class="chips mb20" style="max-height:180px;overflow-y:auto;padding:4px 0"></div>
-
-    <div class="flex gap10 mb8">
-      <button class="btn btn-gold" id="btn-gerar" onclick="gerarTudo()">Gerar post + prompts</button>
-      <button class="btn btn-ghost" onclick="temaAleatorioRapido()">🎲 Tema aleatório</button>
-      <button class="btn btn-ghost" onclick="nav('temas')">Ver todos os temas</button>
-      <button class="btn btn-ghost btn-danger" onclick="limpar()">Limpar</button>
-    </div>
-
-    <!-- LOADING -->
-    <div class="loading-box" id="loading-criar">
-      <div class="spin-w spin-lg"></div>
-      <p id="loading-msg">Criando sua legenda…</p>
-    </div>
-
-    <!-- RESULTADO -->
-    <div id="result-area" class="hidden result-box">
-      <div class="divider" style="margin-top:28px"></div>
-      <div class="sec-title">Sugestão de post</div>
-
-      <div class="card mb20">
-        <div class="card-head">
-          <div class="flex gap8 flex-c">
-            <span class="badge badge-gold" id="r-plataforma">Instagram Feed</span>
-            <span class="badge badge-muted" id="r-tamanho-badge">Médio</span>
-          </div>
-          <div class="flex gap8">
-            <button class="btn btn-ghost btn-xs" onclick="copiarPost()">Copiar legenda</button>
-            <button class="btn btn-ghost btn-xs" onclick="gerarTudo()">↻ Gerar novamente</button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="post-title-display" id="r-titulo"></div>
-          <div id="r-tiktok-area" class="hidden tiktok-result mb14"></div>
-          <div class="post-body-display" id="r-legenda"></div>
-          <div id="r-length-bar" class="length-bar">
-            <span id="r-wordcount" style="white-space:nowrap">— palavras</span>
-            <div class="length-track"><div class="length-fill" id="r-length-fill" style="width:50%"></div></div>
-          </div>
-          <div class="post-hashtags-display" id="r-hashtags"></div>
-        </div>
-      </div>
-
-      <div class="ornament">· · ·</div>
-
-      <div class="sec-title">Prompts para o Leonardo AI</div>
-      <div id="prompts-area"></div>
-    </div>
-
+    <div id="lg"></div>
   </div>
 </div>
-
-<!-- ═══ PAGE: TEMAS ═══ -->
-<div class="page" id="page-temas">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Banco de inspiração</div>
-    <h1>Temas & intenções</h1>
-    <p>+360 temas em 11 categorias. Clique em qualquer um para usar direto no gerador de posts.</p>
-  </div>
-  <div class="page-body">
-
-    <div class="temas-stats">
-      <div class="tstat"><div class="tstat-n">363</div><div class="tstat-l">temas no banco</div></div>
-      <div class="tstat"><div class="tstat-n">11</div><div class="tstat-l">categorias</div></div>
-      <div class="tstat"><div class="tstat-n">33</div><div class="tstat-l">temas por cat.</div></div>
-      <div class="tstat"><div class="tstat-n">∞</div><div class="tstat-l">posts possíveis</div></div>
-    </div>
-
-    <!-- RANDOM -->
-    <button class="random-btn" onclick="temaAleatorio()">
-      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-      <span id="random-display">Clique para um tema aleatório ✦</span>
-      <span style="font-size:11px;color:rgba(200,165,94,.5);font-style:normal;font-family:var(--sans);letter-spacing:1px;text-transform:uppercase;white-space:nowrap">→ usar</span>
-    </button>
-
-    <!-- BUSCA -->
-    <div class="search-wrap mb16">
-      <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
-      <input type="search" id="tema-search" placeholder="Buscar em todos os temas…" oninput="filtrarTemas()"/>
-    </div>
-
-    <!-- FILTROS -->
-    <div class="chips mb24" id="cat-filter">
-      <button class="chip on" onclick="setCat(this,'todos')">Todos</button>
-      <button class="chip" onclick="setCat(this,'cura')">🌿 Cura</button>
-      <button class="chip" onclick="setCat(this,'forca')">⚡ Força</button>
-      <button class="chip" onclick="setCat(this,'fe')">✨ Fé</button>
-      <button class="chip" onclick="setCat(this,'amor')">🤍 Amor próprio</button>
-      <button class="chip" onclick="setCat(this,'proposito')">🔥 Propósito</button>
-      <button class="chip" onclick="setCat(this,'presente')">🍃 Presença</button>
-      <button class="chip" onclick="setCat(this,'mudanca')">🌊 Mudança</button>
-      <button class="chip" onclick="setCat(this,'gratidao')">🌸 Gratidão</button>
-      <button class="chip" onclick="setCat(this,'relacionamentos')">💛 Relacionamentos</button>
-      <button class="chip" onclick="setCat(this,'conquista')">🏆 Conquista</button>
-      <button class="chip" onclick="setCat(this,'reflexao')">🪞 Reflexão</button>
-    </div>
-
-    <div id="temas-grid"></div>
-  </div>
+<div class="page" id="page-sv">
+  <div class="hero"><div class="eb">Sua coleção</div><h1>Posts salvos</h1><p>Os posts que você marcou. Prontos para usar quando precisar.</p></div>
+  <div class="pb" id="sg"></div>
 </div>
-
-<!-- ═══ PAGE: HASHTAGS ═══ -->
-<div class="page" id="page-hashtags">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Banco estratégico</div>
-    <h1>Hashtags</h1>
-    <p>Banco completo de hashtags por volume e nicho. Copie conjuntos prontos ou gere com IA.</p>
-  </div>
-  <div class="page-body">
-    <div id="hashtags-content"></div>
-  </div>
+<div class="page" id="page-cat">
+  <div class="hero"><div class="eb" id="ceb">Categoria</div><h1 id="ch1">Posts</h1><p id="cp"></p></div>
+  <div class="pb" id="cb"></div>
 </div>
-
-<!-- ═══ PAGE: LIBRARY ═══ -->
-<div class="page" id="page-library">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Leonardo AI</div>
-    <h1>Biblioteca de prompts</h1>
-    <p>12 prompts prontos, otimizados por modelo. Copie e use direto no Leonardo AI.</p>
-  </div>
-  <div class="page-body">
-    <div class="chips mb20" id="lib-filter">
-      <button class="chip on" onclick="filtLib(this,'todos')">Todos</button>
-      <button class="chip" onclick="filtLib(this,'editorial')">Editorial</button>
-      <button class="chip" onclick="filtLib(this,'cinematic')">Cinemático</button>
-      <button class="chip" onclick="filtLib(this,'natureza')">Natureza</button>
-      <button class="chip" onclick="filtLib(this,'abstrato')">Abstrato</button>
-      <button class="chip" onclick="filtLib(this,'retrato')">Retrato</button>
-      <button class="chip" onclick="filtLib(this,'flat')">Flat Lay</button>
-    </div>
-    <div id="lib-cards"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: GUIA MODELOS ═══ -->
-<div class="page" id="page-guia">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Leonardo AI — Guia</div>
-    <h1>Modelos & como usar</h1>
-    <p>Entenda cada modelo, quando usar e como montar o prompt perfeito para cada estilo.</p>
-  </div>
-  <div class="page-body" id="guia-content"></div>
-</div>
-
-<!-- ═══ PAGE: TIPS ═══ -->
-<div class="page" id="page-tips">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Estratégia de conteúdo</div>
-    <h1>Como bombar no Instagram & TikTok</h1>
-    <p>Táticas testadas para crescer no nicho de motivação e reflexão em 2025.</p>
-  </div>
-  <div class="page-body" id="tips-content"></div>
-</div>
-
-<!-- ═══ PAGE: CALENDÁRIO ═══ -->
-<div class="page" id="page-calendario">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Planejamento editorial</div>
-    <h1>Calendário de conteúdo</h1>
-    <p>Pauta mensal com temas, formatos e ganchos prontos para março 2026.</p>
-  </div>
-  <div class="page-body">
-    <div class="flex-sb mb20">
-      <div class="cal-month">Março 2026</div>
-      <button class="btn btn-gold" id="btn-cal" onclick="gerarCalendario()">Gerar pauta completa com IA</button>
-    </div>
-
-    <!-- CALENDAR VISUAL -->
-    <div class="cal-grid" id="cal-visual"></div>
-
-    <div class="loading-box" id="loading-cal">
-      <div class="spin-w spin-lg"></div>
-      <p>Montando seu calendário editorial…</p>
-    </div>
-
-    <div id="cal-result" class="hidden"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: ROTEIRO REELS/TIKTOK ═══ -->
-<div class="page" id="page-roteiro">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Ferramenta nova ✦</div>
-    <h1>Roteiro para Reels & TikTok</h1>
-    <p>Gere um roteiro completo segundo a segundo — gancho, desenvolvimento, CTA — pronto para gravar.</p>
-  </div>
-  <div class="page-body">
-    <div class="settings-row mb16">
-      <div class="sbox"><label>Tema ou mensagem</label><input type="text" id="rot-tema" placeholder="Ex: recomeçar depois da dor…"/></div>
-      <div class="sbox"><label>Duração</label><select id="rot-duracao"><option>15 segundos</option><option>30 segundos</option><option selected>60 segundos</option><option>90 segundos</option></select></div>
-      <div class="sbox"><label>Estilo de narração</label><select id="rot-estilo"><option>Voz narrativa poética</option><option>Conversa direta com a câmera</option><option>Texto na tela (sem fala)</option><option>Reflexão em voz over</option></select></div>
-      <div class="sbox"><label>Plataforma</label><select id="rot-plat"><option>Instagram Reels</option><option>TikTok</option><option>Ambas</option></select></div>
-    </div>
-    <div class="chips mb16" id="rot-chips">
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Força para recomeçar</button>
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Fé no processo</button>
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Amor próprio primeiro</button>
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Deixar ir sem culpa</button>
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">Gratidão que transforma</button>
-      <button class="chip" onclick="document.getElementById('rot-tema').value=this.textContent">A dor que ensina</button>
-    </div>
-    <button class="btn btn-gold" id="btn-roteiro" onclick="gerarRoteiro()">Gerar roteiro completo</button>
-    <div class="loading-box" id="loading-rot"><div class="spin-w spin-lg"></div><p>Escrevendo seu roteiro…</p></div>
-    <div id="rot-result" class="hidden mt16"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: CARROSSEL ═══ -->
-<div class="page" id="page-carrossel">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Ferramenta nova ✦</div>
-    <h1>Gerador de carrossel</h1>
-    <p>Crie todos os slides do carrossel com texto, título e gancho de cada tela — pronto para montar no Canva.</p>
-  </div>
-  <div class="page-body">
-    <div class="settings-row mb16">
-      <div class="sbox"><label>Tema do carrossel</label><input type="text" id="carr-tema" placeholder="Ex: 7 verdades sobre se curar…"/></div>
-      <div class="sbox"><label>Número de slides</label><select id="carr-slides"><option>5 slides</option><option selected>7 slides</option><option>8 slides</option><option>10 slides</option></select></div>
-      <div class="sbox"><label>Formato do conteúdo</label><select id="carr-formato"><option>Lista de dicas / verdades</option><option>Reflexão aprofundada</option><option>Antes e depois (transformação)</option><option>Passo a passo prático</option><option>Perguntas reflexivas</option></select></div>
-    </div>
-    <div class="chips mb16">
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">7 coisas que ninguém te conta sobre se curar</button>
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Sinais de que você está evoluindo sem perceber</button>
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">O que significa realmente amar a si mesma</button>
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Hábitos que drenam sua energia sem você notar</button>
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Como recomeçar quando tudo parece perdido</button>
-      <button class="chip" onclick="document.getElementById('carr-tema').value=this.textContent">Frases que você precisa parar de dizer para si mesma</button>
-    </div>
-    <button class="btn btn-gold" id="btn-carr" onclick="gerarCarrossel()">Gerar slides do carrossel</button>
-    <div class="loading-box" id="loading-carr"><div class="spin-w spin-lg"></div><p>Criando seus slides…</p></div>
-    <div id="carr-result" class="hidden mt16"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: GANCHOS ═══ -->
-<div class="page" id="page-ganchos">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Ferramenta nova ✦</div>
-    <h1>Banco de ganchos</h1>
-    <p>As primeiras frases que param o scroll. Organizadas por emoção e intenção.</p>
-  </div>
-  <div class="page-body" id="ganchos-content"></div>
-</div>
-
-<!-- ═══ PAGE: OVERLAY ═══ -->
-<div class="page" id="page-overlay">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Ferramenta nova ✦</div>
-    <h1>Frases para overlay de imagem</h1>
-    <p>Textos curtos e poderosos para colocar sobre as fotos geradas no Leonardo AI. Copie e cole no Canva.</p>
-  </div>
-  <div class="page-body">
-    <div class="settings-row mb16">
-      <div class="sbox"><label>Tema ou emoção</label><input type="text" id="ov-tema" placeholder="Ex: recomeço, gratidão, força…"/></div>
-      <div class="sbox"><label>Estilo da frase</label><select id="ov-estilo"><option>Poética e metafórica</option><option>Direta e impactante</option><option>Pergunta reflexiva</option><option>Declaração de poder</option><option>Sussurro suave</option></select></div>
-      <div class="sbox"><label>Tamanho</label><select id="ov-tam"><option>Uma linha (muito curta)</option><option selected>Duas linhas</option><option>Três linhas</option></select></div>
-    </div>
-    <div class="chips mb16">
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Recomeço</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Cura</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Força</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Fé</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Gratidão</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Amor próprio</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Mudança</button>
-      <button class="chip" onclick="document.getElementById('ov-tema').value=this.textContent">Propósito</button>
-    </div>
-    <button class="btn btn-gold" id="btn-ov" onclick="gerarOverlay()">Gerar 10 frases para imagem</button>
-    <div class="loading-box" id="loading-ov"><div class="spin-w spin-lg"></div><p>Criando frases para sua imagem…</p></div>
-    <div id="ov-result" class="hidden mt16"></div>
-  </div>
-</div>
-
-<!-- ═══ PAGE: BIO ═══ -->
-<div class="page" id="page-bio">
-  <div class="page-hero">
-    <div class="hero-eyebrow">Ferramenta nova ✦</div>
-    <h1>Reescrever bio & perfil</h1>
-    <p>Cole sua bio atual e receba versões otimizadas com CTA, palavras-chave e personalidade forte.</p>
-  </div>
-  <div class="page-body">
-    <div class="sec-title mb12">Sua bio atual</div>
-    <textarea id="bio-atual" rows="4" class="mb12" placeholder="Cole aqui sua bio atual do Instagram/TikTok… (ou deixe em branco para criar do zero)"></textarea>
-    <div class="settings-row mb16">
-      <div class="sbox"><label>Nicho principal</label><select id="bio-nicho"><option>Motivação & Reflexão</option><option>Espiritualidade & Fé</option><option>Autoconhecimento</option><option>Motivação & Lifestyle</option><option>Coach de vida</option></select></div>
-      <div class="sbox"><label>Tom de personalidade</label><select id="bio-tom"><option>Poética e sensível</option><option>Forte e determinada</option><option>Acolhedora e gentil</option><option>Espiritual e profunda</option><option>Autêntica e direta</option></select></div>
-      <div class="sbox"><label>Incluir</label><select id="bio-cta"><option>Link na bio + CTA</option><option>Frase de impacto</option><option>Especialidade clara</option><option>Proposta de valor</option></select></div>
-    </div>
-    <button class="btn btn-gold" id="btn-bio" onclick="gerarBio()">Gerar 3 versões de bio</button>
-    <div class="loading-box" id="loading-bio"><div class="spin-w spin-lg"></div><p>Reescrevendo sua bio com IA…</p></div>
-    <div id="bio-result" class="hidden mt16"></div>
-  </div>
-</div>
-
 </main>
 </div>
-
 <script>
-// ═══════════════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════════════
-function nav(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('on'));
-  document.getElementById('page-' + id).classList.add('on');
-  const navMap = {criar:0,temas:1,hashtags:2,library:3,guia:4,tips:5,calendario:6};
-  const btns = document.querySelectorAll('.nav-item');
-  if(navMap[id] !== undefined) btns[navMap[id]].classList.add('on');
+const CM={cura:{i:'🌿',l:'Cura & Regeneração'},forca:{i:'⚡',l:'Força & Resiliência'},fe:{i:'✨',l:'Fé & Espiritualidade'},amor:{i:'🤍',l:'Amor próprio'},proposito:{i:'🔥',l:'Propósito & Missão'},presente:{i:'🍃',l:'Presença & Mindfulness'},mudanca:{i:'🌊',l:'Mudança & Transformação'},gratidao:{i:'🌸',l:'Gratidão'},reflexao:{i:'🪞',l:'Reflexão Profunda'},conquista:{i:'🏆',l:'Conquista & Superação'},relacionamentos:{i:'💛',l:'Relacionamentos & Vínculos'}};
+const P=[
+{id:'c1',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'A cura não tem pressa',tx:`Existe uma pressa coletiva para estar bem. Para superar, seguir em frente, mostrar que você já sarou.
+
+Mas a cura real não funciona assim. Ela acontece em camadas — às vezes silenciosa, às vezes barulhenta. Às vezes você acha que já passou e a dor volta de um jeito diferente, num cheiro, numa música, num olhar parecido.
+
+E tudo bem. Isso não é fraqueza. Isso é humano.
+
+Você não precisa estar inteira para começar. Você não precisa estar pronta para recomeçar. Você só precisa continuar — devagar, com gentileza, no seu tempo.
+
+A cura não é o destino. É o caminho. E você já está nele.
+
+O que você precisaria se dizer hoje com mais gentileza?`,ht:'#cura #autocuidado #saudemental #amorproprio #curaemocional #reflexao #crescimentopessoal #motivacao #inspiracao #frasesdodia #vidacomproposito #autoconhecimento #pazinterior #gentileza #evolucaopessoal #instagrambr'},
+{id:'c2',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'O corpo guarda tudo',tx:`O corpo não esquece o que a mente finge que já passou.
+
+Aquela tensão nos ombros. O nó no estômago antes de uma conversa difícil. O cansaço que não passa nem depois de dormir.
+
+Seu corpo está falando. A pergunta é: você está ouvindo?`,ht:'#cura #corpo #emocoes #saudemental #autocuidado #reflexao #curaemocional #mindfulness #autoconhecimento #reelsbrasil #motivacao #paz'},
+{id:'c3',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'7 coisas que ninguém te conta sobre se curar',tx:`Slide 1 — CAPA
+7 coisas que ninguém te conta sobre se curar ✨
+
+Slide 2 — A cura não é linear
+Você vai melhorar, recair, melhorar de novo. Isso não é fracasso — é o processo. Cada camada que cai revela outra mais profunda esperando atenção.
+
+Slide 3 — Você vai chorar por coisas "pequenas"
+E está tudo bem. Muitas vezes aquela lágrima por algo banal é o choro de anos represados finalmente encontrando saída.
+
+Slide 4 — Algumas relações não sobrevivem à sua cura
+Quando você muda, quem precisava que você ficasse quebrada sente. E isso dói do mesmo jeito.
+
+Slide 5 — A cura pede solidão às vezes
+Não toda companhia ajuda. Aprender a estar consigo mesma — sem distração — é parte do processo.
+
+Slide 6 — Você vai precisar de ajuda profissional
+Terapia não é sinal de fraqueza. É o ato mais corajoso de autocuidado que existe.
+
+Slide 7 — A versão curada de você assusta um pouco
+Porque ela ocupa espaço. Ela diz não. Ela sabe o que quer. Isso é novo para quem viveu se apagando.
+
+Slide 8 — CTA
+Salva esse carrossel para quando precisar lembrar que você está no caminho certo 💛`,ht:'#cura #curaemocional #saudemental #autoconhecimento #crescimentopessoal #terapia #autocuidado #amorproprio #curainterior #carrossel #reflexao #motivacao #instagrambr'},
+{id:'c4',cat:'cura',pl:'TikTok',sz:'Curto',ti:'Soltar sem culpa',tx:`Soltar não é desistir.
+
+Às vezes soltar é o ato mais maduro que existe — reconhecer que segurar está te machucando mais do que abrir a mão.
+
+Você não precisa de um motivo enorme para soltar algo que já não faz bem.
+
+A dor que você sente ao soltar é real. E ainda assim — soltar é a escolha certa.`,ht:'#soltar #cura #desapego #liberdade #motivacao #reflexao #tiktokbrasil #fyp #paravocê #frasesmotivacionais #autocuidado #saudemental'},
+{id:'c5',cat:'cura',pl:'Instagram Feed',sz:'Longo',ti:'Reescrever a própria história',tx:`Tem uma narrativa que você carrega sobre si mesma. Sobre quem você é, o que você merece, o que é possível para você.
+
+Essa narrativa foi escrita cedo — em casa, na escola, nas relações que te moldaram antes de você ter vocabulário para questionar. E ela ficou. Virou a voz de fundo que comenta tudo.
+
+A boa notícia? Narrativas podem ser reescritas.
+
+Não de uma vez. Não apagando o que foi. Mas adicionando capítulos novos, com uma protagonista que cresceu, que aprendeu, que decidiu que a história não termina onde alguém disse que terminaria.
+
+Reescrever não é fingir que a dor não existiu. É decidir que ela não vai definir onde você chega.
+
+Qual parte da sua história você está pronta para reescrever?`,ht:'#cura #autoconhecimento #crescimentopessoal #historia #identidade #reflexao #motivacao #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal #autocuidado #saudemental #terapia'},
+{id:'c6',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Perdoar para se libertar',tx:`Perdoar não é dizer que o que aconteceu foi certo. Não é absolver quem te feriu nem apagar a dor que ficou.
+
+Perdoar é soltar o peso de carregar aquilo com você para todo lugar que você vai.
+
+É parar de deixar que o que aconteceu no passado tenha poder sobre quem você está tentando ser hoje.
+
+O perdão mais difícil é o de si mesma — por ter ficado mais tempo do que deveria, por ter acreditado quando não devia, por não ter se protegido quando podia.
+
+Mas você fez o que sabia fazer com o que tinha. Isso também merece compaixão.
+
+Tem algo que você ainda está carregando que já era hora de soltar?`,ht:'#perdao #cura #liberdade #amorproprio #crescimentopessoal #reflexao #motivacao #instagrambr #autocuidado #saudemental #curaemocional #autoconhecimento'},
+{id:'c7',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'Curar em silêncio',tx:`Nem toda cura precisa de plateia.
+
+Às vezes o processo mais poderoso é o que acontece em silêncio — nos momentos que ninguém vê, nas escolhas que ninguém aplaude, nos dias em que você simplesmente decidiu continuar.
+
+Sua cura não precisa de validação para ser real.`,ht:'#cura #silencio #autocuidado #crescimentopessoal #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #saudemental #curaemocional #amorproprio'},
+{id:'c8',cat:'cura',pl:'TikTok',sz:'Curto',ti:'A ferida que ensinou',tx:`A ferida que mais doeu foi a que mais ensinou.
+
+Não porque dor é necessária — mas porque quando você sobrevive a ela e olha pra trás, você vê o quanto cresceu dentro dela.
+
+Você não é o que te feriu. Você é o que decidiu fazer com isso.`,ht:'#cura #aprendizado #crescimentopessoal #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #superacao #curaemocional'},
+{id:'c9',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Dar atenção ao que dói',tx:`A dor que você ignora não some. Ela muda de endereço.
+
+Vira insônia. Vira irritação sem motivo. Vira aquela sensação de vazio que aparece nas horas mais inesperadas.
+
+E a gente fica se perguntando de onde vem, quando na verdade ela sempre esteve esperando um momento de silêncio para aparecer.
+
+Dar atenção ao que dói não é fraqueza. É inteligência emocional.
+
+O que você está anestesiando que merecia um pouco da sua atenção hoje?`,ht:'#cura #saudemental #emocoes #autocuidado #terapia #autoconhecimento #reflexao #motivacao #instagrambr #curaemocional #crescimentopessoal #frasesdodia'},
+{id:'c10',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'Como parar de se sabotar',tx:`Slide 1 — CAPA
+Como parar de se sabotar (de verdade) 🌿
+
+Slide 2 — Reconheça o padrão
+Sabotagem raramente parece sabotagem. Parece cansaço, procrastinação, "não é o momento certo". Observe quando isso aparece — geralmente é quando você está prestes a crescer.
+
+Slide 3 — Entenda de onde vem
+A autossabotagem protege você de algo — medo de fracassar, de não merecer, de que vai acabar igual das outras vezes. Identifique o medo por trás do comportamento.
+
+Slide 4 — Não se condene
+Punição não resolve sabotagem. Curiosidade sim. Pergunte: o que essa parte de mim está tentando evitar?
+
+Slide 5 — Comece menor do que parece necessário
+O cérebro sabota quando a meta parece grande demais. Reduza o passo até que a resistência desapareça.
+
+Slide 6 — Celebre cada vez que escolheu diferente
+Reforço positivo cria novos padrões. Anote. Reconheça. Festeje até o que parece pequeno.
+
+Slide 7 — Busque suporte
+Padrões de sabotagem têm raízes profundas. Terapia, grupo de apoio, ou uma amiga de confiança fazem diferença real.
+
+Slide 8 — CTA
+Salva esse conteúdo para quando a sabotagem aparecer de novo 💛`,ht:'#autossabotagem #cura #crescimentopessoal #autoconhecimento #terapia #saudemental #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #sejamelhor'},
+{id:'f1',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Força que nasce do cansaço',tx:`Tem uma força que nasce só do cansaço. Não da euforia, não do entusiasmo do começo — mas do "eu já não aguento mais e mesmo assim vou continuar."
+
+Essa é a força que transforma.
+
+Você já sentiu aquilo? Quando as pernas pesam, a mente grita pra parar, e ainda assim você dá mais um passo? Esse passo é o mais importante de todos.
+
+Porque qualquer um consegue começar quando está animado. A questão é: quem você escolhe ser quando o entusiasmo vai embora?
+
+A mulher que você está se tornando foi construída nos dias em que você continuou sem ter vontade.`,ht:'#forca #resiliencia #motivacao #inspiracao #determinacao #crescimentopessoal #mulherpoderosa #superacao #vidacomproposito #frasesdodia #instagrambr #autocuidado #evolucaopessoal'},
+{id:'f2',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Você não precisa de aplausos',tx:`Levantou sem que ninguém visse?
+
+Reconstruiu em silêncio? Escolheu continuar mesmo sem ninguém torcendo?
+
+Isso é força. A mais real que existe.
+
+O mundo aplaude resultados. Mas só você sabe o que custou cada passo.`,ht:'#forca #silencio #resiliencia #motivacao #mulherpoderosa #reelsbrasil #superacao #inspiracao #frasesmotivacionais #determinacao'},
+{id:'f3',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'A mulher que você está se tornando',tx:`Existe uma versão de você que ainda não chegou, mas que você já pode sentir chegando.
+
+Ela é mais inteira. Mais firme. Fala mais baixo mas ocupa mais espaço. Sabe dizer não sem se justificar por três parágrafos. Não precisa de aprovação para tomar decisões. Não encolhe para caber em lugar nenhum.
+
+Você está se tornando essa mulher agora. Não amanhã — agora. Em cada escolha pequena de hoje.
+
+Quando você escolhe não responder à altura de quem te desrespeita. Quando você vai dormir cedo porque sabe que precisa de descanso. Quando você termina o que começou mesmo quando ninguém está olhando. Quando você pede ajuda sem vergonha.
+
+Esses atos parecem pequenos. Não são.
+
+Eles são os tijolos da mulher que você está construindo. E ela vai agradecer cada um deles.
+
+O que você fez hoje que essa versão futura de você ficaria orgulhosa?`,ht:'#mulherpoderosa #crescimentopessoal #forca #motivacao #inspiracao #evolucaopessoal #amorproprio #vidacomproposito #autoconhecimento #reflexao #instagrambr #superacao #determinacao'},
+{id:'f4',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Você foi feita para mais',tx:`Para de se encaixar onde você claramente transborda.
+
+Você foi feita para ocupar espaço — não para pedir desculpa por existir.
+
+Sua presença não precisa de aprovação. Sua força não precisa de explicação.
+
+Sabe aquela sensação de que você tem muito mais pra dar? É real. Está esperando você acreditar nisso primeiro.`,ht:'#forca #mulherpoderosa #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #empoderamento #crescimentopessoal #frasesmotivacionais'},
+{id:'f5',cat:'forca',pl:'Carrossel',sz:'Longo',ti:'Os momentos que mais te fortaleceram',tx:`Slide 1 — CAPA
+Os momentos em que você se sentiu mais fraca foram os que mais te fortaleceram ⚡
+
+Slide 2 — Quando você pediu ajuda
+Isso não foi fraqueza. Foi coragem. A maioria prefere afundar em silêncio a admitir que não consegue sozinha.
+
+Slide 3 — Quando você chorou sem entender por quê
+Seu corpo estava processando o que sua mente ainda não conseguia nomear. Isso é inteligência emocional.
+
+Slide 4 — Quando você desistiu do que não servia
+Parar algo que não faz sentido não é fracasso. É discernimento.
+
+Slide 5 — Quando você ficou quieta em vez de explodir
+Silêncio escolhido é poder. Nem toda batalha merece sua voz.
+
+Slide 6 — Quando você recomeçou do zero
+Isso exige um tipo de coragem que só quem já perdeu tudo entende.
+
+Slide 7 — CTA
+Qual desses momentos foi o mais difícil para você? Me conta nos comentários 💛`,ht:'#forca #superacao #crescimentopessoal #mulherpoderosa #motivacao #carrossel #instagrambr #reflexao #resiliencia #evolucaopessoal'},
+{id:'f6',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Resistência silenciosa',tx:`Tem uma resistência que ninguém vê. Que não vira post, não vira história, não é compartilhada.
+
+É a resistência de acordar num dia difícil e continuar. De sorrir quando está pesado. De manter a compostura quando queria gritar. De fazer o que precisa ser feito mesmo sem ter vontade de nada.
+
+Essa resistência silenciosa é o tipo de força que molda caráter.
+
+Não espere o mundo reconhecer. Você sabe o que custou. E isso é suficiente.
+
+Em que área da sua vida você tem exercido uma resistência que ninguém vê?`,ht:'#forca #resistencia #resiliencia #motivacao #instagrambr #inspiracao #mulherpoderosa #crescimentopessoal #determinacao #superacao #frasesdodia'},
+{id:'f7',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Guerreira que escolhe a paz',tx:`A mulher mais forte que conheço não grita. Não briga. Não precisa provar nada.
+
+Ela simplesmente sabe quem é.
+
+E essa certeza — essa paz com ela mesma — é o tipo de força que nenhuma circunstância consegue tirar.`,ht:'#forca #paz #mulherpoderosa #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autoconhecimento #resiliencia'},
+{id:'f8',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Levanta. Mesmo assim.',tx:`Não precisa estar pronta.
+Não precisa ter certeza.
+Não precisa ter energia sobrando.
+
+Levanta mesmo assim.
+
+Porque às vezes a única diferença entre quem chegou e quem ficou foi isso: levantou mais uma vez do que caiu.`,ht:'#forca #levantar #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #determinacao #frasesmotivacionais #superacao #resiliencia'},
+{id:'f9',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'Quando a vida te quebra',tx:`Tem momentos que a vida simplesmente quebra você. Não metaforicamente — de verdade. Aquele tipo de dor que você sente no peito, que tira o ar, que faz você questionar tudo que acreditava.
+
+E num momento desses, o que mais dói não é a dor em si. É a sensação de que você não tem mais forças. Que essa foi a última.
+
+Mas aqui está o que ninguém te conta: você já sobreviveu a 100% dos seus piores dias. Cada um deles. Inclusive aquele que você jurou que não ia conseguir.
+
+A quebra não é o fim. Às vezes é o início de uma reconstrução que vai ser muito mais sólida do que o que existia antes. Porque dessa vez você vai construir sabendo o que resiste e o que não resiste.
+
+Você está numa quebra agora? Ou olhando pra trás para uma que já passou? Me conta. Esse espaço é seu.`,ht:'#forca #superacao #resiliencia #cura #motivacao #instagrambr #reflexao #crescimentopessoal #evolucaopessoal #vidacomproposito #frasesdodia #amorproprio #saudemental'},
+{id:'fe1',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'O timing divino não atrasa',tx:`Existe uma diferença entre esperar com ansiedade e esperar com fé.
+
+Ansiedade olha para o relógio. Fé confia no processo mesmo sem ver o relógio.
+
+O que ainda não chegou na sua vida não está atrasado. Está sendo preparado. E às vezes a demora é a maior proteção — porque você precisava chegar diferente para receber diferente.
+
+O que você perdeu te abriu espaço para o que vem. O que doeu te ensinou o que você precisava saber. O silêncio que você viveu te deu a força para segurar o que está vindo.
+
+Confie no timing. Não no seu — no Dele.`,ht:'#fe #timingdivino #confiancaemDeus #Deus #espiritualidade #oracao #gratidao #femovemontanhas #planodeDeus #milagre #reflexao #inspiracao #instagrambr #motivacao'},
+{id:'fe2',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A oração que agradece antes',tx:`A oração mais poderosa não é a que pede.
+
+É a que agradece antes de ver. Que confia antes de entender. Que diz obrigada pelo que ainda está vindo.
+
+Essa fé move o que a lógica não consegue explicar.`,ht:'#fe #oracao #gratidao #Deus #espiritualidade #confiancaemDeus #milagre #reelsbrasil #inspiracao #frasesmotivacionais #femovemontanhas'},
+{id:'fe3',cat:'fe',pl:'Instagram Feed',sz:'Longo',ti:'Quando tudo desaba e a fé sustenta',tx:`Teve um momento na minha vida em que eu não tinha mais argumentos. Não tinha plano B. Não tinha certeza do próximo passo. Tinha só uma coisa: a decisão de continuar confiando mesmo sem entender.
+
+Fé não é a ausência de dúvida. É a escolha de caminhar mesmo com ela.
+
+É olhar para uma situação que não faz sentido nenhum e dizer: mesmo assim, eu confio. Mesmo assim, eu sigo. Mesmo assim, eu acredito que isso vai ter um porquê que ainda não consigo ver.
+
+E o que acontece quando você faz isso? Não necessariamente tudo resolve na hora. Mas algo em você muda. Uma paz que não tem lógica começa a pousar.
+
+É isso que a fé faz — não remove os obstáculos. Muda quem você é ao atravessá-los.
+
+Você passou por algo que só a fé te sustentou? Me conta nos comentários 🤍`,ht:'#fe #confiancaemDeus #Deus #espiritualidade #oracao #reflexao #inspiracao #femovemontanhas #planodeDeus #gratidao #motivacao #vidacomproposito #instagrambr #milagre #paz'},
+{id:'fe4',cat:'fe',pl:'TikTok',sz:'Curto',ti:'Deus no silêncio',tx:`Às vezes Deus não responde com um milagre visível.
+
+Ele responde com paz. Com uma porta que fecha antes de você entrar no lugar errado. Com um não que você só vai entender depois.
+
+O silêncio de Deus não é ausência. É proteção que você ainda não consegue ver.`,ht:'#fe #Deus #espiritualidade #timingdivino #planodeDeus #tiktokbrasil #fyp #paravocê #confiancaemDeus #motivacao #frasesmotivacionais'},
+{id:'fe5',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'Entregar sem abrir mão',tx:`Entregar nas mãos de Deus não é desistir. Não é cruzar os braços e esperar que tudo caia do céu.
+
+É fazer a sua parte — com tudo que você tem — e confiar que o resultado não está só nas suas mãos.
+
+É a combinação mais poderosa que existe: ação humana + confiança divina.
+
+Você corre, planta, trabalha, tenta. E depois — aí sim — você descansa no colo de quem tem a visão que você não tem.
+
+O que você está tentando controlar que precisaria ser entregue?`,ht:'#fe #Deus #espiritualidade #oracao #confiancaemDeus #reflexao #motivacao #instagrambr #planodeDeus #crescimentopessoal #paz #frasesdodia'},
+{id:'fe6',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A bênção disfarçada',tx:`A perda que te arrasou era a bênção que você ainda não conseguia reconhecer.
+
+O término que te destruiu abriu espaço para o que veio depois. A porta que fechou te redirecionou para o caminho certo.
+
+Olha pra trás. Você vai ver: o que pareceu fim sempre foi passagem.`,ht:'#fe #bencao #Deus #timingdivino #reelsbrasil #motivacao #inspiracao #espiritualidade #planodeDeus #frasesmotivacionais #confiancaemDeus'},
+{id:'fe7',cat:'fe',pl:'Carrossel',sz:'Longo',ti:'Quando a fé é testada',tx:`Slide 1 — CAPA
+O que fazer quando sua fé é testada ✨
+
+Slide 2 — Permita-se questionar
+Fé real sobrevive às perguntas. Questionar não é apostasia — é honestidade.
+
+Slide 3 — Volte ao que você já viu Dele
+Em algum momento Ele esteve lá. Lembre. A memória das fidelidades passadas sustenta a fé no presente.
+
+Slide 4 — Não confunda silêncio com abandono
+Os momentos de silêncio espiritual são, muitas vezes, os de maior crescimento de raiz.
+
+Slide 5 — Ore mesmo sem vontade
+A oração mais honesta começa com "Eu não entendo". Isso também é oração.
+
+Slide 6 — Busque comunidade
+Fé sozinha se cansa. Comunidade de fé renova e sustenta.
+
+Slide 7 — Continue caminhando
+Nem sempre dá pra ver o próximo passo. Às vezes a fé é só dar o passo com a luz que você tem agora.
+
+Slide 8 — CTA
+Salva para quando sua fé estiver sendo testada. E manda para alguém que precisa ouvir isso hoje 🙏`,ht:'#fe #Deus #espiritualidade #confiancaemDeus #oracao #carrossel #instagrambr #reflexao #femovemontanhas #planodeDeus #crescimentopessoal'},
+{id:'fe8',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'A intuição como voz do sagrado',tx:`Tem uma voz que fala mais baixo que o barulho do mundo. Mais gentil que a ansiedade. Mais firme que o medo.
+
+Você provavelmente já a ouviu — e às vezes ignorou. E depois ficou pensando: "eu sabia. Eu sentia que era isso."
+
+Essa voz é a sua intuição. E para muitas pessoas, é também onde Deus fala.
+
+Aprender a ouvir essa voz — a cultivar o silêncio para que ela se faça ouvir — é um dos atos mais espirituais que existem.
+
+O que ela está te dizendo agora que você ainda não ouviu direito?`,ht:'#fe #intuicao #espiritualidade #Deus #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #paz #vidacomproposito #frasesdodia'},
+{id:'a1',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'Você merece o amor que dá',tx:`Você daria a uma amiga o que dá pra si mesma?
+
+Daria a ela o cansaço sem descanso, a crítica sem compaixão, a exigência sem gentileza? Não. Você seria suave com ela. Compreensiva. Paciente.
+
+Então por que com você é diferente?
+
+Amor próprio não é um spa ou uma frase bonita no espelho. É a maneira como você fala consigo mesma quando erra. É o que você aceita de tratamento dos outros. É saber quando dizer não sem culpa.
+
+Você merece o mesmo cuidado que você oferece tão generosamente para o mundo.
+
+Em que área da sua vida você precisa ser mais gentil consigo mesma?`,ht:'#amorproprio #selflove #autocuidado #selfcare #crescimentopessoal #limites #autoestima #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #evolucaopessoal #sejamelhor'},
+{id:'a2',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Limites são amor próprio',tx:`Dizer não não é egoísmo.
+
+É saber o que você tem de dar — e decidir, conscientemente, para quem e para o quê.
+
+Quem drena tudo que você tem não te ama do jeito que você precisa. E você não precisa provar nada esgotando o que te resta.
+
+Limites não afastam quem te ama. Afastam quem precisava que você não tivesse nenhum.`,ht:'#amorproprio #limites #selflove #autocuidado #reflexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal'},
+{id:'a3',cat:'amor',pl:'Carrossel',sz:'Longo',ti:'10 sinais de que você está evoluindo',tx:`Slide 1 — CAPA
+10 sinais de que você está evoluindo sem perceber ✨
+
+Slide 2 — Você para antes de reagir
+Aquele espaço entre o gatilho e a resposta? Foi conquistado.
+
+Slide 3 — Coisas que te machucavam antes não machucam mais
+Não porque você ficou fria — porque você cresceu além delas.
+
+Slide 4 — Você pediu desculpas por algo difícil
+Humildade é uma das maiores provas de maturidade emocional.
+
+Slide 5 — Você escolheu o desconforto do crescimento
+Em vez do conforto do que já não serve. Isso é corajoso.
+
+Slide 6 — Você não precisa mais provar nada
+Nem pra quem duvidou, nem pra você mesma.
+
+Slide 7 — Você sente a dor e continua mesmo assim
+Não sem sentir — sentindo e escolhendo seguir.
+
+Slide 8 — Você cortou o que drenou você por tempo demais
+Uma relação, um hábito, uma narrativa. Isso exige muita força.
+
+Slide 9 — Você está em paz com coisas que antes te consumiam
+Trabalho interno silencioso. Acontece devagar.
+
+Slide 10 — Você chegou até aqui
+Depois de tudo que tentou te parar. Isso já é evolução.
+
+Slide 11 — CTA
+Salva e manda pra alguém que precisa lembrar que está evoluindo 💛`,ht:'#amorproprio #evolucaopessoal #crescimentopessoal #autoconhecimento #reflexao #inspiracao #carrossel #motivacao #instagrambr #sejamelhor #selflove'},
+{id:'a4',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Você não precisa de permissão',tx:`Você não precisa de permissão para:
+
+Mudar de ideia. Ocupar espaço. Discordar. Escolher você mesma. Dizer não. Começar de novo. Querer mais.
+
+A única aprovação que você precisava sempre foi a sua própria — e você ficou anos esperando de todo mundo menos de você.`,ht:'#amorproprio #permissao #selflove #tiktokbrasil #fyp #paravocê #motivacao #empoderamento #frasesmotivacionais #crescimentopessoal #autoestima'},
+{id:'a5',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'O relacionamento mais importante',tx:`O relacionamento mais importante da sua vida é o que você tem com você mesma.
+
+E como está esse relacionamento? Você trata a si mesma com respeito? Você se dá descanso quando precisa? Você fala consigo com gentileza?
+
+Porque como você se trata define — mais do que qualquer outra coisa — o nível de relacionamento que você aceita dos outros.
+
+Quem aprende a se respeitar atrai respeito. Quem aprende a se cuidar atrai cuidado.
+
+Tudo começa em você.`,ht:'#amorproprio #selflove #autoestima #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #relacionamentos #evolucaopessoal #vidacomproposito'},
+{id:'a6',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Parar de se diminuir',tx:`Você diminui você mesma antes que alguém possa fazer isso.
+
+Soa familiar?
+
+"Ah, não é nada." "Não sou tão boa assim." "Sorte." "Qualquer um faria."
+
+Isso não é humildade. É proteção contra rejeição que você aprendeu cedo demais.
+
+Você pode parar. Você pode simplesmente dizer: eu fiz. Eu sou. Eu mereço.`,ht:'#amorproprio #autoestima #selflove #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #sejamelhor #empoderamento'},
+{id:'a7',cat:'amor',pl:'Instagram Feed',sz:'Longo',ti:'Aprender a gostar da própria companhia',tx:`Tem uma habilidade que ninguém ensina e que muda tudo: gostar da própria companhia.
+
+Estar consigo mesma sem precisar de distração. Sem celular, sem série, sem ocupação. Só você — com seus pensamentos, seu silêncio, sua presença.
+
+Parece simples. Na prática, é um dos exercícios mais difíceis que existem — especialmente se você passou a vida inteira buscando aprovação fora.
+
+Porque quando você fica em silêncio com você mesma, o que aparece primeiro são as coisas que você está evitando. A voz que você não quer ouvir.
+
+Mas se você aguentar esse desconforto inicial, algo acontece. Você começa a se conhecer de verdade. A ouvir o que você realmente quer — não o que você foi ensinada a querer.
+
+Você consegue ficar em silêncio com você mesma por 10 minutos sem pegar o celular?`,ht:'#amorproprio #solitude #autoconhecimento #selflove #reflexao #motivacao #instagrambr #presenca #mindfulness #crescimentopessoal #frasesdodia #autocuidado'},
+{id:'a8',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Escolher você mesma',tx:`Chega um ponto onde você precisa escolher: continuar sendo quem os outros precisam que você seja, ou começar a ser quem você realmente é.
+
+Essa escolha vai custar alguma coisa. Toda escolha real custa.
+
+Mas o preço de não se escolher — pago em silêncio, dia após dia — é muito mais alto.`,ht:'#amorproprio #escolha #selflove #tiktokbrasil #fyp #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autenticidade #identidade'},
+{id:'p1',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'O que te faz levantar?',tx:`Você sabe o que te faz levantar da cama com vontade?
+
+Não por obrigação. Não pelo alarme, pela conta pra pagar, pelo medo de atrasar. Mas por algo que pulsa dentro de você que diz: isso importa, isso tem sentido, isso é meu.
+
+Propósito não precisa ser grandioso. Não precisa ser uma missão de salvar o mundo.
+
+Pode ser cuidar bem das pessoas que você ama. Criar algo com suas mãos. Ser presença real na vida de alguém. Ensinar. Construir. Transformar o que é seu em algo que dura.
+
+A pergunta não é "qual é meu propósito". A pergunta é: "o que eu faço que me faz sentir viva?"
+
+O que você estaria fazendo agora se o dinheiro não fosse uma preocupação?`,ht:'#proposito #vidacomproposito #motivacao #inspiracao #missao #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #instagrambr #evolucaopessoal #sonhos'},
+{id:'p2',cat:'proposito',pl:'TikTok',sz:'Curto',ti:'Pare de esperar a hora certa',tx:`A hora certa não existe. Existe a hora que você decide que é agora.
+
+Você vai esperar estar pronta? Pronta não chega. Ela se constrói no fazer.
+
+O projeto que você adia. A mudança que você posterga. A vida que você deixa pra depois.
+
+Depois é agora.`,ht:'#proposito #agir #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #crescimentopessoal #sonhos #determinacao #frasesmotivacionais'},
+{id:'p3',cat:'proposito',pl:'Instagram Feed',sz:'Longo',ti:'Quando o trabalho vira missão',tx:`Existe uma diferença enorme entre trabalhar por necessidade e trabalhar por propósito.
+
+No trabalho por necessidade, você monitora o relógio. Conta os dias para o fim de semana. Faz o mínimo necessário para manter as coisas funcionando.
+
+No trabalho por propósito, você perde a noção do tempo. Você se preocupa com qualidade mesmo quando ninguém está olhando. Você quer que aquilo que você faz faça diferença.
+
+Essa transição não acontece de uma vez. Mas começa com uma pergunta honesta: do que eu faço hoje, o que faz sentido pra mim além do salário?
+
+Propósito não é um destino. É uma direção que você pode começar a perseguir hoje.`,ht:'#proposito #missao #vidacomproposito #trabalho #motivacao #instagrambr #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #sonhos #evolucaopessoal'},
+{id:'p4',cat:'proposito',pl:'Instagram Reels',sz:'Curto',ti:'Seu dom não pede licença',tx:`Existe algo que você faz que parece natural pra você e impressiona os outros.
+
+Algo que você não acha grande coisa — mas que as pessoas ao redor reconhecem como especial.
+
+Esse é seu dom. E ele não pede licença — ele insiste. Aparece mesmo quando você tenta ignorar.
+
+Para de diminuir o que você tem de único.`,ht:'#proposito #dom #talentos #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #vidacomproposito #autenticidade'},
+{id:'p5',cat:'proposito',pl:'Carrossel',sz:'Longo',ti:'Como descobrir seu propósito',tx:`Slide 1 — CAPA
+Como descobrir seu propósito (sem grandes revelações) 🔥
+
+Slide 2 — Observe o que te indigna
+Injustiça que te move, problema que você não consegue ignorar — pista sobre o que você veio fazer.
+
+Slide 3 — Note o que você faz de graça
+O que você faria mesmo sem receber? O que você ensina sem pensar?
+
+Slide 4 — Volte para o que você amava antes de "crescer"
+Antes da pressão por produtividade, o que te enchia de vida?
+
+Slide 5 — Teste, não planeje
+Propósito aparece quando você age, testa, cria, se expõe.
+
+Slide 6 — Aceite que ele evolui
+O propósito de hoje não precisa ser o de sempre.
+
+Slide 7 — A pergunta que muda tudo
+"O que eu posso fazer que faz bem pra mim E para pelo menos uma outra pessoa?"
+
+Slide 8 — CTA
+Salva e compartilha com alguém que está procurando seu caminho 🔥`,ht:'#proposito #missao #vidacomproposito #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #reflexao #evolucaopessoal #sonhos'},
+{id:'p6',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'Viver de acordo com seus valores',tx:`Tem uma desconexão que esgota — e é quando o que você faz não tem nada a ver com o que você acredita.
+
+Quando você trabalha em algo que vai contra seus valores. Quando você age de um jeito e pensa de outro.
+
+Essa dissonância drena. Cansa de um jeito diferente do cansaço físico.
+
+A vida que faz sentido não é necessariamente a mais fácil. Mas é aquela em que você se olha no espelho e se reconhece.
+
+O que você acredita? E o que você está fazendo está alinhado com isso?`,ht:'#proposito #valores #autenticidade #vidacomproposito #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #evolucaopessoal #frasesdodia'},
+{id:'pr1',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O presente é o único lugar real',tx:`Você já percebeu que a ansiedade mora no futuro e a tristeza mora no passado?
+
+Quando você está ansiosa, está vivendo algo que ainda não aconteceu. Quando está em luto ou arrependida, está revivendo algo que já passou.
+
+E o presente? O presente fica vazio enquanto a mente viaja.
+
+Presença não é uma técnica. É uma escolha contínua. É notar o cheiro do café. É ouvir de verdade quem está falando com você. É sentir o peso dos seus próprios pés no chão.
+
+Você não precisa resolver o futuro hoje. Mas pode estar — completamente, genuinamente — aqui.`,ht:'#presenca #mindfulness #meditacao #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #paz #vidacomproposito #ansiedade #saudemental'},
+{id:'pr2',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Respira',tx:`Para. Respira.
+
+Não tem nada que precise ser resolvido nos próximos 60 segundos.
+
+Você pode dar a si mesma esse momento. Só esse. Sem planejar o próximo passo, sem revisar o que já passou.
+
+Só existir. Por agora.`,ht:'#presenca #respirar #paz #mindfulness #ansiedade #autocuidado #reelsbrasil #motivacao #inspiracao #saudemental #meditacao'},
+{id:'pr3',cat:'presente',pl:'TikTok',sz:'Curto',ti:'O celular e a presença',tx:`O celular não roubou só o seu tempo.
+
+Roubou a sua capacidade de se entediar — e de descobrir o que acontece quando você se entedia.
+
+As melhores ideias, as conexões mais profundas, os momentos que você vai lembrar — quase nunca acontecem com a tela na mão.`,ht:'#presenca #celular #mindfulness #tiktokbrasil #fyp #paravocê #reflexao #autocuidado #frasesmotivacionais #desconectar #paz'},
+{id:'pr4',cat:'presente',pl:'Instagram Feed',sz:'Longo',ti:'Viver no automático',tx:`Você já chegou em casa sem lembrar do trajeto? Comeu uma refeição sem realmente provar nada? Passou um dia inteiro sem realmente estar presente em nenhum momento?
+
+A maioria das pessoas vive assim. No automático. O piloto assume e a consciência fica em standby.
+
+Não é preguiça. É defesa. O cérebro economiza energia no que percebe como rotina. Só que junto com a rotina, ele anestesia também os momentos que valem.
+
+O pôr do sol que você não viu porque estava olhando pro celular. A risada que você ouviu sem parar de trabalhar. A conversa que passou enquanto você planejava a resposta.
+
+Presença não é meditação de duas horas. É acordar dentro do momento em que você está — uma vez, mais uma vez, e de novo.
+
+O que você quer parar de perder por estar no automático?`,ht:'#presenca #mindfulness #automatico #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #paz #saudemental #crescimentopessoal'},
+{id:'pr5',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Rituais de presença',tx:`Você não precisa de uma hora de meditação.
+
+Precisa de 5 minutos de café sem celular. De uma caminhada sem fone. De olhar pela janela sem propósito.
+
+Pequenos rituais de presença mudam a qualidade do dia inteiro. Não porque são grandes — porque são intencionais.`,ht:'#presenca #rituais #mindfulness #reelsbrasil #autocuidado #motivacao #inspiracao #frasesmotivacionais #paz #meditacao #rotina'},
+{id:'pr6',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O que você está perdendo',tx:`Enquanto você estava no celular, seu filho cresceu um dia.
+Enquanto você se preocupava com o futuro, hoje foi embora.
+Enquanto você relembrava o passado, o presente ficou vazio.
+
+Isso não é julgamento. É um convite.
+
+Para estar mais aqui. Para notar mais. Para perder menos do que importa em troca do que não lembra depois.
+
+Qual momento você quer parar de perder a partir de hoje?`,ht:'#presenca #tempo #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #vida #autocuidado #familia #paz #crescimentopessoal'},
+{id:'m1',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'Recomeçar não é fracasso',tx:`Existe uma mentira que aprendemos cedo: que mudar de caminho é desistir.
+
+Não é. Mudar de caminho é sabedoria. É reconhecer que o que funcionava antes não precisa funcionar para sempre.
+
+Recomeçar do zero não é regredir. É construir com fundações melhores.
+
+As pessoas que mais crescem são as que tiveram a coragem de parar o que não servia — mesmo com tudo investido, mesmo com medo do julgamento, mesmo sem saber o que vinha depois.
+
+O que você precisaria largar para poder recomeçar do jeito certo?`,ht:'#mudanca #recomeço #transformacao #crescimentopessoal #motivacao #inspiracao #reflexao #coragem #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal'},
+{id:'m2',cat:'mudanca',pl:'Instagram Reels',sz:'Curto',ti:'A transformação assusta',tx:`A transformação assusta porque ela é real.
+
+Não é aquela mudança cosmética que você mostra pras pessoas. É aquela profunda, que acontece em silêncio e que às vezes você só percebe olhando pra trás.
+
+A pessoa que você era há um ano reconheceria quem você está sendo hoje?`,ht:'#transformacao #mudanca #crescimentopessoal #reflexao #reelsbrasil #motivacao #inspiracao #autoconhecimento #evolucaopessoal #frasesmotivacionais'},
+{id:'m3',cat:'mudanca',pl:'Instagram Feed',sz:'Longo',ti:'O medo de mudar',tx:`O medo de mudar não é medo do desconhecido. É medo de perder quem você é — mesmo que quem você é já não sirva mais.
+
+A identidade tem um peso estranho. Mesmo quando ela nos aprisiona, ela é familiar. E o familiar, mesmo que doloroso, parece mais seguro do que o vazio que vem antes do novo.
+
+Mas aqui está o que ninguém fala: o vazio antes do novo não é perigo. É espaço. É o silêncio antes da música. O branco antes da pintura.
+
+Você não perde quem é quando muda. Você expande.
+
+A versão mais nova de você não apaga a anterior — ela a carrega, mais sábia, mais inteira, mais livre.
+
+O que você teria se não tivesse medo de mudar?`,ht:'#mudanca #medo #transformacao #crescimentopessoal #autoconhecimento #reflexao #motivacao #instagrambr #frasesdodia #identidade #evolucaopessoal #coragem'},
+{id:'m4',cat:'mudanca',pl:'TikTok',sz:'Curto',ti:'Você é a mudança',tx:`Você fica esperando que as circunstâncias mudem.
+
+Que a pessoa mude. Que o trabalho melhore. Que o momento certo chegue.
+
+Mas e se a única mudança que precisa acontecer primeiro for dentro de você?
+
+Não porque você é o problema — porque você é a solução que está esperando permissão para aparecer.`,ht:'#mudanca #transformacao #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autoconhecimento'},
+{id:'m5',cat:'mudanca',pl:'Carrossel',sz:'Longo',ti:'Como mudar de vida de verdade',tx:`Slide 1 — CAPA
+Como mudar de vida (sem precisar largar tudo de uma vez) 🌊
+
+Slide 2 — Comece pela identidade
+"Eu sou alguém que..." é mais poderoso que "eu preciso fazer...".
+
+Slide 3 — Mude um hábito de cada vez
+Uma coisa nova por mês é mais eficaz do que dez no Ano Novo que somem em fevereiro.
+
+Slide 4 — Cuide do ambiente
+Você não age contra seu ambiente — você age de acordo com ele.
+
+Slide 5 — Encontre sua tribo
+Quem você passa tempo tem impacto direto em quem você se torna.
+
+Slide 6 — Documente o processo
+Você vai precisar olhar pra trás em algum momento e ver o quanto mudou.
+
+Slide 7 — Permita a não-linearidade
+Dois passos pra frente, um pra trás. Isso é crescimento — não fracasso.
+
+Slide 8 — CTA
+Salva e começa com uma mudança só. Qual vai ser? Me conta nos comentários 🌊`,ht:'#mudanca #transformacao #crescimentopessoal #habitos #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #vidacomproposito #sejamelhor'},
+{id:'m6',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'O ciclo que está terminando',tx:`Tem algo terminando na sua vida agora. Um ciclo, uma fase, uma versão de você.
+
+E dói — mesmo quando você sabe que é necessário. Mesmo quando você foi quem escolheu.
+
+Porque terminar é uma perda. Mesmo que seja a perda do que te prendia.
+
+Mas ciclos que terminam limpam o espaço para o que precisa começar. E o que começa depois de uma morte voluntária tende a ser muito mais verdadeiro do que o que existia antes.
+
+Que ciclo está terminando na sua vida agora?`,ht:'#mudanca #ciclo #recomeço #transformacao #reflexao #motivacao #instagrambr #crescimentopessoal #frasesdodia #evolucaopessoal #coragem'},
+{id:'g1',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Gratidão que vem antes',tx:`A gratidão mais poderosa não é aquela que vem depois que tudo dá certo.
+
+É a que vem no meio da bagunça. No meio da dúvida. No meio do processo que ainda não tem resultado visível.
+
+É dizer obrigada pela manhã que começou. Pelo corpo que funciona. Por quem ficou. Pela dor que ensinou. Pela porta que fechou — porque outra ia abrir.
+
+Gratidão não é fingir que está tudo bem. É reconhecer o que ainda é bom enquanto o resto ainda está em construção.
+
+O que você tem hoje que já pediu um dia?`,ht:'#gratidao #abençoada #espiritualidade #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #Deus #fe #vidacomproposito #paz #autocuidado'},
+{id:'g2',cat:'gratidao',pl:'Instagram Reels',sz:'Curto',ti:'Três coisas',tx:`Três coisas. É o que basta.
+
+Antes de dormir. Antes de reclamar. Antes de comparar.
+
+Três coisas pelas quais você é grata hoje.
+
+Não precisam ser grandes. Às vezes o melhor da lista é: acordei. Tomei um café quente. Fui amada por alguém.
+
+Isso muda o dia.`,ht:'#gratidao #rotina #mindfulness #paz #reelsbrasil #motivacao #inspiracao #autocuidado #frasesmotivacionais #diariodegratidao #abençoada'},
+{id:'g3',cat:'gratidao',pl:'TikTok',sz:'Curto',ti:'Gratidão muda o cérebro',tx:`Gratidão não é só espiritualidade. É neurociência.
+
+Quando você foca no que tem, seu cérebro literalmente recalibra para buscar mais do positivo.
+
+Não é lei de atração. É como o sistema de recompensa funciona.
+
+Você muda o que você nota. E o que você nota muda o que você vive.`,ht:'#gratidao #neurociencia #mindfulness #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #positividade'},
+{id:'g4',cat:'gratidao',pl:'Instagram Feed',sz:'Longo',ti:'O diário de gratidão que muda',tx:`Comecei a escrever três coisas pelas quais era grata toda manhã. Parecia pequeno. Parecia até fútil nos primeiros dias.
+
+Mas depois de algumas semanas, algo mudou. Não na minha vida — em mim. Em como eu olhava para as coisas.
+
+Comecei a notar mais. O cafezinho da manhã que antes era automático virou um ritual. A mensagem de uma amiga que antes eu respondia com distração virou um presente que eu recebia de verdade.
+
+Gratidão não é uma prática para quando as coisas estão boas. É uma prática para treinar os olhos a enxergar o bem que existe mesmo no meio do que é difícil.
+
+Quer começar? Escreve três coisas agora. Não precisa ser grande. Precisa ser verdadeiro.`,ht:'#gratidao #diariodegratidao #habitos #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #crescimentopessoal #positividade #paz'},
+{id:'g5',cat:'gratidao',pl:'Carrossel',sz:'Longo',ti:'Práticas de gratidão para o dia a dia',tx:`Slide 1 — CAPA
+7 práticas de gratidão que cabem na sua rotina 🌸
+
+Slide 2 — Diário da manhã
+Antes de abrir o celular, escreva 3 coisas pelas quais você é grata.
+
+Slide 3 — Agradecer em voz alta
+Falar "obrigada por isso" em voz alta ativa o sistema emocional de um jeito diferente.
+
+Slide 4 — Nota de gratidão para alguém
+Uma mensagem por semana para alguém dizendo o que você aprecia nessa pessoa.
+
+Slide 5 — O momento do café ou chá
+Escolha um ritual do dia para ser totalmente presente e grata por aquele momento.
+
+Slide 6 — O inventário de conquistas
+Uma vez por mês, anote o que você superou. Gratidão por você mesma também conta.
+
+Slide 7 — Reframe de dificuldades
+Para cada situação difícil, pergunte: o que isso está me ensinando?
+
+Slide 8 — CTA
+Escolhe uma prática e começa hoje. Qual vai ser? 🌸`,ht:'#gratidao #praticas #habitos #mindfulness #autocuidado #carrossel #instagrambr #motivacao #crescimentopessoal #diariodegratidao #paz'},
+{id:'g6',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Obrigada pelo que não chegou',tx:`Existe uma gratidão difícil — a pela ausência. Pelo que não veio. Pelo que não deu certo. Pelo que não ficou.
+
+Mas se você olhar para trás com honestidade, vai ver: muita coisa que você chorou por não conseguir era uma proteção que você não reconheceu na hora.
+
+O relacionamento que não foi — porque você teria se perdido nele. O emprego que não veio — porque o que veio depois era melhor.
+
+Seja qual for a sua crença — existe uma visão maior que a sua.
+
+Pelo que você consegue ser grata hoje, mesmo que tenha doído na época?`,ht:'#gratidao #fe #reflexao #motivacao #instagrambr #frasesdodia #Deus #crescimentopessoal #timingdivino #paz #vidacomproposito'},
+{id:'r1',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'Você está vivendo ou sobrevivendo?',tx:`Tem uma diferença enorme entre viver e sobreviver — e às vezes você só percebe quando para um segundo e olha de verdade.
+
+Sobreviver é acordar e já começar ansioso com o que vem. É trabalhar sem sentido, se relacionar sem presença, passar pelos dias sem realmente estar neles.
+
+Viver é diferente. Não precisa ser perfeito. Mas tem uma qualidade de presença, de sentido, de escolha.
+
+Hoje eu te pergunto, com carinho e honestidade: você está vivendo ou sobrevivendo?
+
+O que precisaria mudar para você responder diferente essa pergunta?`,ht:'#reflexao #autoconhecimento #vivendo #saudemental #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #vidacomproposito #evolucaopessoal #autocuidado'},
+{id:'r2',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'A pergunta que muda tudo',tx:`Uma pergunta que vai incomodar do jeito certo:
+
+Se daqui a 5 anos você estiver exatamente onde está hoje — mesma vida, mesmas escolhas, mesmo lugar — como você vai se sentir?
+
+Aliviada? Realizada? Ou com aquela sensação de que desperdiçou tempo?
+
+Essa resposta já é um mapa.`,ht:'#reflexao #autoconhecimento #motivacao #tiktokbrasil #fyp #paravocê #crescimentopessoal #frasesmotivacionais #vidacomproposito'},
+{id:'r3',cat:'reflexao',pl:'Instagram Feed',sz:'Longo',ti:'O que você está evitando sentir?',tx:`Tem algo que você está evitando sentir. Eu sei porque nós todos temos.
+
+A gente ocupa a agenda. Abre o celular antes de acabar de acordar. Coloca música pra não ficar em silêncio. Trabalha até ficar exausta. Maratona série até tarde.
+
+Não por maldade. Mas porque sentir dói. E é mais fácil não parar.
+
+O problema é que o que não é sentido não desaparece. Ele fica. Comprimido. Esperando. E quando não tem mais espaço pra comprimir, ele aparece do jeito mais inesperado.
+
+O que você está carregando que merecia ao menos uns 10 minutos de atenção real?
+
+Não precisa resolver. Só sentir. Só nomear.
+
+Às vezes o ato mais corajoso do dia é simplesmente parar e perguntar: o que eu estou sentindo agora?`,ht:'#reflexao #autoconhecimento #saudemental #emocoes #cura #terapia #crescimentopessoal #motivacao #inspiracao #instagrambr #frasesdodia #autocuidado'},
+{id:'r4',cat:'reflexao',pl:'Instagram Reels',sz:'Curto',ti:'Quem você seria sem o medo?',tx:`Quem você seria se não tivesse medo?
+
+Não o medo pequeno — das apresentações, das alturas. O medo grande. De não ser suficiente. De ser demais. De arriscar e perder. De ser vista de verdade.
+
+Essa versão de você que existe por baixo do medo? Ela já está aí. Esperando que você faça espaço.`,ht:'#reflexao #medo #autoconhecimento #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autenticidade #coragem'},
+{id:'r5',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'O peso que você carrega dos outros',tx:`Parte do cansaço que você sente não é seu.
+
+É a preocupação com o julgamento de alguém que mal pensa em você. É a expectativa de quem nunca vai estar satisfeito. É a culpa que colocaram em você por ter necessidades. É a vergonha que não nasceu de dentro — foi plantada de fora.
+
+Você está carregando pesos que não são seus. E isso é exaustivo de um jeito que nenhum descanso resolve.
+
+O que você pode devolver hoje? Não com raiva — com gentileza.`,ht:'#reflexao #limites #autoconhecimento #saudemental #cura #motivacao #instagrambr #frasesdodia #amorproprio #crescimentopessoal #autocuidado'},
+{id:'r6',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'Você tolera demais',tx:`O quanto você tolerou que não deveria?
+
+Não porque você é ingênua — porque você foi ensinada que tolerar é amor, que reclamar é fresco, que pedir mais é exigência demais.
+
+Mas você merecia mais do que aprendeu a pedir.
+
+E você ainda merece.`,ht:'#reflexao #limites #tolerancia #tiktokbrasil #fyp #paravocê #amorproprio #motivacao #frasesmotivacionais #autoconhecimento #crescimentopessoal'},
+{id:'r7',cat:'reflexao',pl:'Carrossel',sz:'Longo',ti:'Perguntas que mudam a perspectiva',tx:`Slide 1 — CAPA
+8 perguntas que mudam como você se vê 🪞
+
+Slide 2 — O que você faz que te enche de vida?
+Não o que você deveria gostar. O que genuinamente te energiza?
+
+Slide 3 — O que você diria para si mesma há 10 anos?
+
+Slide 4 — Que história você conta sobre si mesma que já não é verdade?
+
+Slide 5 — Em que você está investindo atenção que não merece tanto dela?
+
+Slide 6 — O que você evita assumir porque assumir exige mudança?
+
+Slide 7 — Quem você está tentando ser que não é você?
+Performance constante é exaustiva.
+
+Slide 8 — Se você soubesse que ia dar certo, o que você faria?
+Agora faça mesmo sem ter certeza.
+
+Slide 9 — CTA
+Escolhe uma pergunta e escreve a resposta honesta 🪞`,ht:'#reflexao #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #perguntas #identidade #evolucaopessoal #vidacomproposito'},
+{id:'co1',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'Celebre o que custou',tx:`Você passou por algo difícil e está aqui. E às vezes isso não parece suficiente — porque o mundo aplaude grandes conquistas e você mal consegue celebrar o fato de que não desistiu.
+
+Mas eu quero te dizer: não ter desistido é enorme.
+
+Cada vez que você escolheu continuar quando queria parar. Cada recomeço silencioso que ninguém viu. Cada "estou bem" que custou mais do que as pessoas imaginariam.
+
+Isso é conquista.
+
+Qual foi sua maior conquista silenciosa dos últimos meses?`,ht:'#conquista #superacao #forca #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #vidacomproposito #reflexao #orgulho #determinacao'},
+{id:'co2',cat:'conquista',pl:'Instagram Reels',sz:'Curto',ti:'Não subestime o quanto você cresceu',tx:`Você não é mais quem era há um ano.
+
+Talvez pareça pouco por dentro. Mas olha de fora: você atravessou coisas que você jurava que não ia conseguir. E está aqui.
+
+Não subestime o quanto você cresceu enquanto estava ocupada só sobrevivendo.`,ht:'#conquista #crescimentopessoal #superacao #forca #reelsbrasil #motivacao #inspiracao #evolucaopessoal #frasesmotivacionais #orgulho'},
+{id:'co3',cat:'conquista',pl:'Instagram Feed',sz:'Longo',ti:'O que a vitória silenciosa parece',tx:`A vitória mais importante da sua vida provavelmente não teve câmera. Não teve aplausos. Não virou post.
+
+Foi aquele dia que você decidiu que ia parar. E parou. Aquela conversa difícil que você teve e disse o que precisava ser dito. Aquele momento em que você escolheu você mesma quando era mais fácil se apagar.
+
+Vitórias silenciosas não aparecem no LinkedIn. Não viram formatura. Mas são as que mais formam caráter.
+
+E se você parar agora e listar as suas — as reais, as que custaram — vai perceber que você é muito mais forte do que a narrativa que carrega sobre si mesma.
+
+O que foi sua maior vitória silenciosa? Aquela que só você sabe o peso?`,ht:'#conquista #vitoria #superacao #forca #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #autoconhecimento #orgulho'},
+{id:'co4',cat:'conquista',pl:'TikTok',sz:'Curto',ti:'Você já provou pra si mesma',tx:`Você já provou para si mesma que consegue.
+
+Lembra de algo que parecia impossível — e você fez? Da vez que você não sabia como — e descobriu?
+
+Esse histórico de evidências é mais poderoso que qualquer motivação. Você tem provas de que é capaz.
+
+Use isso.`,ht:'#conquista #motivacao #tiktokbrasil #fyp #paravocê #forca #superacao #frasesmotivacionais #crescimentopessoal #determinacao'},
+{id:'co5',cat:'conquista',pl:'Carrossel',sz:'Longo',ti:'Como manter a disciplina quando a motivação some',tx:`Slide 1 — CAPA
+Como continuar quando a motivação vai embora 🏆
+
+Slide 2 — Aceite que a motivação é temporária
+Motivação é emoção. Emoções passam. Disciplina é estrutura — e estrutura dura.
+
+Slide 3 — Crie sistemas, não metas
+"Escreverei todos os dias" é sistema. Sistemas acontecem.
+
+Slide 4 — Reduza o passo ao mínimo absurdo
+Quando a resistência aparece, faça 2 minutos só.
+
+Slide 5 — Ancore o hábito em algo que já existe
+Depois do café, antes de dormir. O cérebro ama sequências conhecidas.
+
+Slide 6 — Elimine a decisão
+Remova o atrito entre você e a ação.
+
+Slide 7 — Celebre consistência, não perfeição
+Um dia que você falhou não desfaz 30 que você foi.
+
+Slide 8 — CTA
+Salva e aplica uma estratégia essa semana 🏆`,ht:'#conquista #disciplina #habitos #motivacao #crescimentopessoal #carrossel #instagrambr #determinacao #evolucaopessoal #sejamelhor #produtividade'},
+{id:'co6',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'O orgulho que você merece sentir',tx:`Quando foi a última vez que você se permitiu sentir orgulho de si mesma?
+
+Não o orgulho performático para mostrar. O orgulho real, quieto, que você sente sozinha quando para e reconhece: eu fiz isso. Eu cheguei aqui. Eu superei isso.
+
+A gente é muito rápida em listar o que falta, o que errou, o que podia ser melhor.
+
+Hoje eu te convido a fazer diferente: lista o que você conquistou. O que você sobreviveu. O que você fez que era difícil e fez mesmo assim.
+
+Você merece esse reconhecimento. E você não precisa esperar que alguém te dê.`,ht:'#conquista #orgulho #amorproprio #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #superacao #evolucaopessoal #autoestima'},
+{id:'rel1',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'Quem fica e quem vai',tx:`Conforme você cresce, algumas pessoas somem. Não por maldade — às vezes simplesmente porque a versão delas e a versão sua pararam de se encontrar no mesmo caminho.
+
+E dói. Mesmo quando faz sentido.
+
+Mas existe um presente escondido nisso: o espaço que fica. Porque relações que terminam fazem espaço para relações que cabem em quem você está se tornando.
+
+As pessoas certas não precisam ser convencidas da sua importância.
+
+Você já sentiu que crescer afastou alguém — e que talvez fosse necessário?`,ht:'#relacionamentos #amizade #crescimentopessoal #reflexao #autoconhecimento #limites #motivacao #instagrambr #frasesdodia #evolucaopessoal #amorproprio'},
+{id:'rel2',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Energia que você tolera',tx:`Presta atenção em como você se sente depois de passar tempo com certas pessoas.
+
+Mais leve? Mais pesada?
+
+Com vontade de agir? Ou drenada até do que tinha?
+
+Isso não é frescura. É informação. E você tem o direito de usar essa informação pra escolher melhor com quem você gasta o que é mais precioso: sua energia.`,ht:'#relacionamentos #energia #limites #amorproprio #reflexao #tiktokbrasil #fyp #motivacao #frasesmotivacionais #crescimentopessoal #autocuidado'},
+{id:'rel3',cat:'relacionamentos',pl:'Instagram Feed',sz:'Longo',ti:'Amor que não drena',tx:`Você já esteve num relacionamento — de amizade, amoroso, familiar — onde constantemente se sentia pequena? Onde sempre havia algo errado em você? Onde você se dobrava para caber e ainda assim não cabia?
+
+Isso não é amor. É dinâmica de poder.
+
+Amor real não diminui. Não exige que você se apague. Não te deixa pior sobre si mesma depois de cada conversa.
+
+Amor real te vê. Te recebe. Te desafia a crescer — mas do lado de fora, nunca às suas custas.
+
+Se você está em algo que constantemente te deixa menor, é válido perguntar: isso é amor, ou é dependência emocional me dizendo que é amor?
+
+Como você quer se sentir depois de passar tempo com quem você ama?`,ht:'#relacionamentos #amor #amorproprio #limites #saudemental #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #autoconhecimento'},
+{id:'rel4',cat:'relacionamentos',pl:'Instagram Reels',sz:'Curto',ti:'Amizade que sustenta',tx:`A amizade que você precisa não é a de quem está sempre de acordo.
+
+É a de quem está presente quando está difícil. Que diz a verdade com carinho. Que não desaparece quando você precisa de mais do que festa.
+
+Essas amizades são raras. Cuide das que você tem.`,ht:'#relacionamentos #amizade #conexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #amorproprio #comunidade #gratidao'},
+{id:'rel5',cat:'relacionamentos',pl:'Carrossel',sz:'Longo',ti:'Sinais de um relacionamento saudável',tx:`Slide 1 — CAPA
+Como é um relacionamento saudável de verdade 💛
+
+Slide 2 — Você pode ser você mesma
+Não uma versão editada, filtrada ou diminuída.
+
+Slide 3 — Discordar não é catástrofe
+Conflito existe. A diferença é que é resolvido com respeito.
+
+Slide 4 — Você se sente maior depois das conversas
+Não menor. Não esgotada.
+
+Slide 5 — Há reciprocidade
+O cuidado, a presença, o investimento precisam vir dos dois lados.
+
+Slide 6 — Seus limites são respeitados
+Mesmo quando inconvenientes.
+
+Slide 7 — Você cresceu sendo essa pessoa
+Não ficou menor, mais ansiosa, mais insegura.
+
+Slide 8 — CTA
+Salva e usa como régua para as relações na sua vida 💛`,ht:'#relacionamentos #saudavel #amorproprio #limites #reflexao #carrossel #instagrambr #motivacao #crescimentopessoal #autoconhecimento #amor'},
+{id:'rel6',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'O que você aprende sobre si nos relacionamentos',tx:`Nenhuma relação é só sobre a outra pessoa.
+
+Todo relacionamento é um espelho. Ele revela o que você busca, o que você evita, o que você ainda não resolveu dentro de si.
+
+O padrão que se repete? É informação. Os mesmos conflitos em relações diferentes? É informação.
+
+Não para se culpar — para se conhecer.
+
+Quem você se torna quando está num relacionamento difícil? E quem você se torna quando está num que te nutre? Essa diferença te diz muito sobre o que você precisa.`,ht:'#relacionamentos #autoconhecimento #espelho #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #amorproprio #evolucaopessoal #terapia'},
+{id:'rel7',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Pessoas que somem no seu sucesso',tx:`Presta atenção em quem aparece quando você está mal — e quem aparece quando você está bem.
+
+Tem gente que só fica perto da sua fragilidade. Que some quando você floresce.
+
+Isso não é amizade. É conforto com você pequena.
+
+Crescer vai afastar essas pessoas. Deixa.`,ht:'#relacionamentos #amizade #crescimentopessoal #tiktokbrasil #fyp #paravocê #reflexao #frasesmotivacionais #amorproprio #limites #motivacao'}
+];
+
+let sv=new Set();
+let _tt;
+function toast(m){clearTimeout(_tt);document.getElementById('tmsg').textContent=m||'Copiado!';const t=document.getElementById('toast');t.classList.add('show');_tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function cp(t,m){navigator.clipboard.writeText(t).then(()=>toast(m||'Copiado!'));}
+function eh(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function pb(pl){if(pl==='TikTok')return'bt';if(pl==='Carrossel')return'br';return'bg0';}
+function byId(id){return P.find(p=>p.id===id);}
+
+function tgSv(id){sv.has(id)?sv.delete(id)&&toast('Removido dos salvos'):sv.add(id)&&toast('✦ Salvo!');updSv();}
+function updSv(){
+  const n=sv.size;
+  document.getElementById('sc').textContent=n;
+  document.getElementById('nsv').textContent=n;
+  document.querySelectorAll('[data-sid]').forEach(b=>{const on=sv.has(b.dataset.sid);b.textContent=on?'✦ Salvo':'+ Salvar';b.className='btn bx '+(on?'bs':'bg');});
+  if(document.getElementById('page-sv').classList.contains('on'))rSv();
+}
+function clrSv(){if(!sv.size){toast('Nenhum salvo');return;}if(confirm('Remover todos os '+sv.size+' posts salvos?')){sv.clear();updSv();toast('Limpo!');}}
+
+function nav(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('on'));
+  document.getElementById('page-'+id).classList.add('on');
+  const bs=document.querySelectorAll('.ni');
+  if(id==='lib'&&bs[0])bs[0].classList.add('on');
+  if(id==='sv'&&bs[1])bs[1].classList.add('on');
   document.querySelector('.main').scrollTo(0,0);
+  clSb();
+  if(id==='sv')rSv();
+  if(id==='lib')rLib();
+}
+function nCat(cat){
+  const m=CM[cat];
+  document.getElementById('ceb').textContent=m.i+' Categoria';
+  document.getElementById('ch1').textContent=m.l;
+  const ps=P.filter(p=>p.cat===cat);
+  document.getElementById('cp').textContent=ps.length+' posts';
+  const b=document.getElementById('cb');b.innerHTML='';
+  ps.forEach((p,i)=>b.appendChild(mkItem(p,i)));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('page-cat').classList.add('on');
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.main').scrollTo(0,0);
+  clSb();
 }
 
-// ═══════════════════════════════════════════════
-// TOAST
-// ═══════════════════════════════════════════════
-let toastTimer;
-function showToast(msg='Copiado!') {
-  clearTimeout(toastTimer);
-  const t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+function opMo(id){
+  const p=byId(id);if(!p)return;
+  document.getElementById('mt').textContent=p.ti;
+  document.getElementById('mb').innerHTML=`<span class="badge ${pb(p.pl)}">${eh(p.pl)}</span><span class="badge bm">${eh(p.sz)}</span><span class="badge bm">${CM[p.cat].i} ${CM[p.cat].l}</span>`;
+  document.getElementById('mtxt').textContent=p.tx;
+  document.getElementById('mhash').textContent=p.ht;
+  const on=sv.has(id);
+  document.getElementById('mf').innerHTML=`
+    <button class="btn bgo bx" onclick="cp(document.getElementById('mtxt').textContent+'\\n\\n'+document.getElementById('mhash').textContent,'Post completo copiado! ✦')">Copiar tudo</button>
+    <button class="btn bg bx" onclick="cp(document.getElementById('mtxt').textContent,'Texto copiado!')">Texto</button>
+    <button class="btn bg bx" onclick="cp(document.getElementById('mhash').textContent,'Hashtags copiadas!')">Hashtags</button>
+    <button class="btn bx ${on?'bs':'bg'}" id="msv" onclick="tgMoSv('${id}')">${on?'✦ Salvo':'✦ Salvar'}</button>`;
+  document.getElementById('mo').classList.remove('hidden');
+}
+function tgMoSv(id){tgSv(id);const on=sv.has(id);const b=document.getElementById('msv');if(b){b.textContent=on?'✦ Salvo':'✦ Salvar';b.className='btn bx '+(on?'bs':'bg');}}
+function clMo(){document.getElementById('mo').classList.add('hidden');}
+document.getElementById('mo').addEventListener('click',e=>{if(e.target===document.getElementById('mo'))clMo();});
+
+function mkItem(p,i){
+  const el=document.createElement('div');
+  el.className='pi';el.style.animationDelay=(i*.03)+'s';
+  const on=sv.has(p.id);
+  el.innerHTML=`<div class="pn">${String(i+1).padStart(2,'0')}</div><div class="pc"><div class="pt">${eh(p.ti)}</div><div class="pp">${eh(p.tx)}</div><div class="pb2"><span class="badge ${pb(p.pl)}">${eh(p.pl)}</span><span class="badge bm">${eh(p.sz)}</span><span class="badge bm">${CM[p.cat].i}</span></div></div><div class="pbt"><button class="btn bg bx" onclick="event.stopPropagation();opMo('${p.id}')">Ver</button><button class="btn bx ${on?'bs':'bg'}" data-sid="${p.id}" onclick="event.stopPropagation();tgSv('${p.id}')">${on?'✦':'+'} Salvar</button></div>`;
+  el.addEventListener('click',()=>opMo(p.id));
+  return el;
 }
 
-function copyText(txt, successMsg='Copiado!') {
-  navigator.clipboard.writeText(txt);
-  showToast(successMsg);
-}
-
-// ═══════════════════════════════════════════════
-// API
-// ═══════════════════════════════════════════════
-async function callClaude(system, user, maxTokens=1000) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens: maxTokens,
-      system, messages:[{role:'user',content:user}]
-    })
+function rLib(){
+  const s=(document.getElementById('ls').value||'').toLowerCase().trim();
+  const c=document.getElementById('lc').value;
+  const pl=document.getElementById('lp').value;
+  const sz=document.getElementById('lz').value;
+  let f=P.filter(p=>{
+    if(c&&p.cat!==c)return false;
+    if(pl&&p.pl!==pl)return false;
+    if(sz&&p.sz!==sz)return false;
+    if(s&&!(p.ti+' '+p.tx+' '+p.cat).toLowerCase().includes(s))return false;
+    return true;
   });
-  const d = await res.json();
-  return d.content[0].text;
-}
-
-function parseJSON(txt) {
-  return JSON.parse(txt.replace(/```json|```/g,'').trim());
-}
-
-// ═══════════════════════════════════════════════
-// SIZE SELECTOR
-// ═══════════════════════════════════════════════
-let currentSize = 'curto';
-function selectSize(el, size) {
-  currentSize = size;
-  document.querySelectorAll('.size-pill').forEach(p => p.classList.remove('on'));
-  el.classList.add('on');
-}
-
-// ═══════════════════════════════════════════════
-// QUICK CHIPS — filterable from TEMAS bank
-// ═══════════════════════════════════════════════
-let quickCatAtiva = 'todos';
-function filterQuickCat(el, cat) {
-  quickCatAtiva = cat;
-  document.querySelectorAll('#quick-chips .chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on');
-  renderQuickPills();
-}
-function renderQuickPills() {
-  const wrap = document.getElementById('quick-pills-wrap');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  const cats = quickCatAtiva === 'todos' ? Object.keys(TEMAS) : [quickCatAtiva];
-  let count = 0;
-  cats.forEach(cat => {
-    TEMAS[cat].forEach(t => {
-      if (count >= 90 && quickCatAtiva === 'todos') return;
-      const b = document.createElement('button');
-      b.className = 'chip';
-      b.style.fontSize = '13px';
-      b.textContent = t;
-      b.onclick = () => {
-        document.getElementById('tema-input').value = t;
-        document.getElementById('tema-input').focus();
-        document.querySelectorAll('#quick-pills-wrap .chip').forEach(c => c.classList.remove('on'));
-        b.classList.add('on');
-        showToast('Tema selecionado!');
-      };
-      wrap.appendChild(b);
-      count++;
+  const g=document.getElementById('lg');g.innerHTML='';
+  if(!f.length){g.innerHTML='<div class="es">Nenhum post encontrado</div>';return;}
+  if(c||pl||sz||s){f.forEach((p,i)=>g.appendChild(mkItem(p,i)));}
+  else{
+    Object.keys(CM).forEach(cat=>{
+      const ps=f.filter(p=>p.cat===cat);if(!ps.length)return;
+      const m=CM[cat];const sec=document.createElement('div');sec.className='cs';
+      sec.innerHTML=`<div class="ch"><span class="ci">${m.i}</span><span class="ct">${m.l}</span><span class="cc">${ps.length} posts</span></div>`;
+      ps.forEach((p,i)=>sec.appendChild(mkItem(p,i)));
+      g.appendChild(sec);
     });
-  });
-}
-function temaAleatorioRapido() {
-  const cats = Object.keys(TEMAS);
-  const c = cats[Math.floor(Math.random() * cats.length)];
-  const ts = TEMAS[c];
-  const t = ts[Math.floor(Math.random() * ts.length)];
-  document.getElementById('tema-input').value = t;
-  showToast('Tema aleatório selecionado! ✦');
-}
-
-// ═══════════════════════════════════════════════
-// CRIAR POST
-// ═══════════════════════════════════════════════
-function useChip(el) {
-  document.getElementById('tema-input').value = el.textContent.trim();
-  document.getElementById('tema-input').focus();
-}
-function limpar() {
-  document.getElementById('tema-input').value = '';
-  document.getElementById('result-area').classList.add('hidden');
-  document.getElementById('loading-criar').classList.remove('on');
-}
-function setBtn(id, loading, label) {
-  const b = document.getElementById(id);
-  b.disabled = loading;
-  b.innerHTML = loading ? `<span class="spin"></span> Gerando…` : label;
-}
-
-const SIZE_LABELS = {curto:'Curto · ~80 palavras',medio:'Médio · ~200 palavras',longo:'Longo · ~450 palavras',tiktok:'TikTok · 150 car.'};
-const SIZE_WIDTHS = {curto:'22%',medio:'50%',longo:'92%',tiktok:'30%'};
-const SIZE_PROMPTS = {
-  curto:`Texto CURTO: escreva APENAS 1 parágrafo compacto de 3–4 frases, máximo 80 palavras. Muito impactante, poético, direto. Ideal para colocar como overlay sobre imagem.`,
-  medio:`Texto MÉDIO: escreva 3 parágrafos bem construídos, total 150–220 palavras. Parágrafo 1: gancho emocional. Parágrafo 2: desenvolvimento da reflexão. Parágrafo 3: CTA + encerramento.`,
-  longo:`Texto LONGO: escreva 5–7 parágrafos de storytelling profundo, 380–500 palavras. Comece com gancho poderoso, desenvolva com camadas de reflexão e emoção, termine com CTA transformador. Use emojis sutis.`,
-  tiktok:`Texto TIKTOK: crie 5 frases curtas para aparecer em tela durante o vídeo (máx 8 palavras cada, impactantes, uma por tela). Coloque no campo "telas". A legenda deve ter máximo 120 caracteres.`
-};
-
-async function gerarTudo() {
-  const tema = document.getElementById('tema-input').value.trim();
-  if (!tema) {
-    const ta = document.getElementById('tema-input');
-    ta.focus(); ta.style.borderColor = 'rgba(200,165,94,.6)';
-    setTimeout(() => ta.style.borderColor = '', 1200); return;
-  }
-  const plataforma = document.getElementById('plataforma').value;
-  const tom = document.getElementById('tom').value;
-  const modelo = document.getElementById('leo-model').value;
-  const paleta = document.getElementById('paleta').value;
-  const tamanho = currentSize;
-
-  document.getElementById('result-area').classList.add('hidden');
-  setBtn('btn-gerar', true, 'Gerar post + prompts');
-  const load = document.getElementById('loading-criar');
-  const msgEl = document.getElementById('loading-msg');
-  load.classList.add('on');
-  msgEl.textContent = tamanho === 'tiktok' ? 'Criando conteúdo TikTok…' : `Criando legenda ${SIZE_LABELS[tamanho].split('·')[0].trim().toLowerCase()}…`;
-
-  try {
-    let post;
-
-    if (tamanho === 'tiktok') {
-      const raw = await callClaude(
-        `Você é especialista em conteúdo motivacional para TikTok no Brasil. Responda SOMENTE com JSON puro, sem markdown.`,
-        `Crie conteúdo TikTok motivacional sobre "${tema}". Tom: ${tom}.
-JSON: {"titulo":"gancho de tela de até 7 palavras impactantes","telas":["frase tela 1 (máx 8 palavras)","frase tela 2","frase tela 3","frase tela 4","frase tela 5"],"legenda":"caption TikTok máx 120 caracteres + emoji","hashtags":"#tiktok #fyp #tiktokbrasil #motivacao e mais 12 hashtags de nicho separadas por espaço"}`,
-        800
-      );
-      post = parseJSON(raw);
-    } else {
-      const maxTok = tamanho === 'longo' ? 1200 : 800;
-      const raw = await callClaude(
-        `Você é escritora especialista em conteúdo motivacional e espiritual para Instagram no Brasil. Cria textos que tocam a alma com linguagem poética e autêntica. Responda SOMENTE com JSON puro, sem markdown.`,
-        `Crie post para ${plataforma} sobre "${tema}". Tom: ${tom}. ${SIZE_PROMPTS[tamanho]}
-JSON: {"titulo":"frase-título poética impactante (máx 12 palavras)","legenda":"legenda conforme instrução de tamanho, sem hashtags","hashtags":"28 hashtags separadas por espaço, mix grandes médias e nicho"}`,
-        maxTok
-      );
-      post = parseJSON(raw);
-    }
-
-    // Preencher resultado
-    document.getElementById('r-plataforma').textContent = plataforma;
-    document.getElementById('r-tamanho-badge').textContent = SIZE_LABELS[tamanho].split('·')[0].trim();
-    document.getElementById('r-titulo').textContent = post.titulo || '';
-
-    const tikArea = document.getElementById('r-tiktok-area');
-    const legendaEl = document.getElementById('r-legenda');
-
-    if (tamanho === 'tiktok' && post.telas) {
-      tikArea.classList.remove('hidden');
-      tikArea.innerHTML = `
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Frases para tela (texto no vídeo)</div>
-        ${post.telas.map((t,i) => `<div class="tiktok-screen"><span class="tiktok-screen-num">TELA ${i+1}</span><span style="flex:1">${t}</span><button class="btn btn-ghost btn-xs" style="flex-shrink:0" onclick="copyText(${JSON.stringify(t)},'Copiado!')">Copiar</button></div>`).join('')}
-        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin:14px 0 8px">Caption do TikTok</div>
-        <div class="tiktok-caption-box" id="tik-caption">${post.legenda || ''}</div>`;
-      legendaEl.textContent = '';
-      legendaEl.style.display = 'none';
-      document.getElementById('r-length-bar').style.display = 'none';
-    } else {
-      tikArea.classList.add('hidden');
-      legendaEl.style.display = '';
-      legendaEl.textContent = post.legenda || '';
-      document.getElementById('r-length-bar').style.display = 'flex';
-      const wc = (post.legenda || '').split(/\s+/).filter(Boolean).length;
-      document.getElementById('r-wordcount').textContent = `${wc} palavras`;
-      document.getElementById('r-length-fill').style.width = SIZE_WIDTHS[tamanho];
-    }
-    document.getElementById('r-hashtags').textContent = post.hashtags || '';
-
-    // Prompts Leonardo AI
-    msgEl.textContent = 'Criando prompts para o Leonardo AI…';
-    const fmt = (plataforma.includes('Reels') || plataforma.includes('TikTok') || plataforma.includes('Stories')) ? '9:16 vertical' : '4:5 portrait';
-    const modTip = {
-      'Lucid Origin': 'versátil, inclua mood keywords, lighting style, atmosphere',
-      'Phoenix 1.0': 'descreva narrativamente como uma cena, instrução natural e detalhada',
-      'Kino XL': 'use termos cinematográficos: lens type, movie still, anamorphic, film grain',
-      'Vision XL + PhotoReal v2': 'foco fotorrealista: 85mm f1.8, skin texture, bokeh, camera settings',
-      'Flux Dev': 'prompts diretos e descritivos, excelente para textura fina de pele e tecidos'
-    }[modelo] || 'versátil e expressivo';
-
-    const pRaw = await callClaude(
-      `Especialista em prompts para Leonardo AI. Responda SOMENTE com JSON puro.`,
-      `Crie 3 prompts para ${modelo} para ilustrar post motivacional sobre "${tema}". Paleta: ${paleta}. Formato: ${fmt}. Dica: ${modTip}.
-JSON: {"prompts":[{"nome":"nome criativo pt-br","descricao":"ideia visual pt-br","prompt":"prompt completo inglês","negative":"negative prompt inglês","modelo":"${modelo}"},{"nome":"","descricao":"","prompt":"","negative":"","modelo":"${modelo}"},{"nome":"","descricao":"","prompt":"","negative":"","modelo":"${modelo}"}]}`
-    );
-    const prompts = parseJSON(pRaw);
-    const pa = document.getElementById('prompts-area');
-    pa.innerHTML = '';
-    prompts.prompts.forEach((p, i) => {
-      const d = document.createElement('div');
-      d.className = 'pcard';
-      d.style.animationDelay = (i * .1) + 's';
-      const ps = (p.prompt || '').replace(/\\/g,'\\\\').replace(/`/g,"'");
-      const ns = (p.negative || '').replace(/\\/g,'\\\\').replace(/`/g,"'");
-      d.innerHTML = `
-        <div class="pcard-num">Opção ${i+1}</div>
-        <div class="pcard-name">${p.nome}</div>
-        <div class="pcard-desc">${p.descricao}</div>
-        <div class="prompt-code">${p.prompt}<div class="prompt-negative"><span>negative:</span>${p.negative}</div></div>
-        <div class="pcard-footer">
-          <span class="badge badge-gold" style="font-size:9px">${p.modelo}</span>
-          <div class="flex gap8">
-            <button class="btn btn-ghost btn-xs" onclick="copyText(\`${ps}\`,'Prompt copiado!')">Copiar prompt</button>
-            <button class="btn btn-ghost btn-xs" onclick="copyText(\`MODELO: ${p.modelo}\\n\\nPROMPT:\\n${ps}\\n\\nNEGATIVE:\\n${ns}\`,'Tudo copiado!')">Copiar tudo</button>
-          </div>
-        </div>`;
-      pa.appendChild(d);
-    });
-
-    document.getElementById('result-area').classList.remove('hidden');
-    setTimeout(() => document.getElementById('result-area').scrollIntoView({behavior:'smooth',block:'start'}), 100);
-
-  } catch(e) { showToast('Erro: ' + e.message); }
-  load.classList.remove('on');
-  setBtn('btn-gerar', false, 'Gerar post + prompts');
-}
-
-function copiarPost() {
-  const t = document.getElementById('r-titulo').textContent;
-  const l = document.getElementById('r-legenda').textContent;
-  const h = document.getElementById('r-hashtags').textContent;
-  const tik = document.getElementById('tik-caption');
-  if (tik && tik.offsetParent) {
-    const frames = [...document.querySelectorAll('.tiktok-screen span:nth-child(2)')].map((s,i)=>`TELA ${i+1}: ${s.textContent}`).join('\n');
-    copyText(frames + '\n\n---\nCAPTION:\n' + tik.textContent + '\n\n' + h, 'Conteúdo TikTok copiado!');
-  } else {
-    copyText(t + '\n\n' + l + '\n\n' + h, 'Legenda copiada!');
   }
 }
 
-// ═══════════════════════════════════════════════
-// BANCO DE TEMAS
-// ═══════════════════════════════════════════════
-const CAT_META = {
-  cura:    {icon:'🌿', label:'Cura & Regeneração'},
-  forca:   {icon:'⚡', label:'Força & Resiliência'},
-  fe:      {icon:'✨', label:'Fé & Espiritualidade'},
-  amor:    {icon:'🤍', label:'Amor próprio'},
-  proposito:{icon:'🔥',label:'Propósito & Missão'},
-  presente:{icon:'🍃', label:'Presença & Mindfulness'},
-  mudanca: {icon:'🌊', label:'Mudança & Transformação'},
-  gratidao:{icon:'🌸', label:'Gratidão'},
-  relacionamentos:{icon:'💛',label:'Relacionamentos'},
-  conquista:{icon:'🏆',label:'Conquista & Superação'},
-  reflexao:{icon:'🪞', label:'Reflexão Profunda'},
-};
-
-const TEMAS = {
-  cura:['Sarar sem pressa e sem culpa','A cura acontece em camadas','O que dói também ensina','Dar espaço para a própria dor','Curar as feridas que ninguém vê','Chorar também é uma forma de força','Perdoar para se libertar, não para absolver','O corpo guarda o que a mente nega','Recomeçar depois de se perder','Acolher a versão quebrada de si mesma','Transformar cicatrizes em sabedoria','A cura não é linear — e tudo bem','Amor como remédio para a alma ferida','Quando a dor vira combustível de mudança','Soltar o que pesa sem precisar de explicação','Reconhecer os gatilhos e escolher diferente','Dar atenção às próprias necessidades sem culpa','Reescrever a narrativa que te prende no passado','Respirar fundo como ato de autocura','Permitir-se ser amada mesmo com as falhas','A ferida que você sempre ignorou pedindo atenção','Curar a relação com a própria imagem','Quando o passado para de mandar no seu presente','A cicatriz que virou força sem você perceber','Perdoar a versão de você que sobreviveu como pôde','Deixar de carregar o que não é seu para carregar','O choro que limpa o que as palavras não conseguem','Reconhecer onde você ainda está em luto','A coragem de pedir ajuda quando você está despedaçada','Terapia, meditação, fé — a cura tem muitos caminhos','O dia em que você decidiu se colocar em primeiro lugar','Curar a relação com a própria história','Quando você para de se sabotar e começa a se apoiar'],
-  forca:['Levantar quando ninguém está olhando','A força que ninguém vê mas você sente','Resistência silenciosa que vira vitória','Continuar mesmo quando tudo grita pra parar','Ser sua própria âncora na tempestade','Transformar o medo em combustível','Não precisar de permissão para ser forte','Força que nasce do cansaço superado','Guerreira que escolhe a paz como arma','Provar pra si mesma que é capaz','O poder de dizer não sem se justificar','Ser corajosa mesmo com o coração na garganta','A mulher que você está se tornando','Cada obstáculo foi um treino disfarçado','Quando a determinação fala mais alto que o medo','Construir do zero com as mãos que tenho','Resiliência — cair, sentir, levantar','Aprender a confiar na própria intuição','Mostrar ao mundo o que você é feita','A vitória silenciosa que só você sabe o peso','Força não é não sentir — é sentir e continuar','A mulher que aprendeu a se defender de si mesma','Quando você escolhe si em vez do conforto','Enfrentar o que você adiou por anos','A firmeza de manter seus valores sob pressão','Levantar sem aplausos e sem precisar deles','O dia em que você parou de pedir licença para existir','Força feminina — delicada e devastadora ao mesmo tempo','Persistir quando o resultado ainda não aparece','A dureza que você precisou ter e a ternura que ainda guarda','Não deixar que o passado defina o que você pode no futuro','Silêncio como estratégia — não toda batalha pede resposta','A garra que assusta quem não acreditou em você'],
-  fe:['Confiar no processo quando ele dói','Fé que move quando a lógica não entende','Deus no silêncio que antecede a resposta','A oração que não pede — agradece','Entregar o que não posso controlar','Sinais que chegam quando você está pronta','O timing divino não atrasa nem adianta','Acreditar no que ainda não dá pra ver','Espiritualidade como lar dentro de si','A intuição como voz do universo','Momentos em que a fé foi a única saída','Gratidão como forma de oração','O propósito maior por trás da dor','Quando tudo desaba e a fé sustenta','Energia que você emana e atrai de volta','Manifestar com intenção e ação','Deixar o universo trabalhar no seu favor','Conexão com algo maior que você mesma','A bênção que veio disfarçada de perda','Rituais de espiritualidade no cotidiano','Orar não muda Deus — muda quem ora','A paz que ultrapassa o entendimento','Quando a resposta chegou de um jeito que você não esperava','Fé e ação — as duas andam juntas','O milagre que acontece devagar, dia a dia','Confiar mesmo quando o coração questiona','Proteção espiritual que você só percebe olhando pra trás','A voz interior que nunca mente','Abundância que começa na mentalidade','Oração da madrugada — quando só Deus ouve','Entregar o controle sem abrir mão da responsabilidade','Quando a fé vira certeza sem precisar de prova','O sagrado no cotidiano — encontrar Deus em tudo'],
-  amor:['Ser sua própria prioridade sem culpa','Amor próprio não é egoísmo — é sobrevivência','Olhar no espelho com gentileza','Cuidar de si como cuida de quem ama','Parar de se comparar e começar a se admirar','O que você diria pra você de 10 anos atrás?','Não precisar de validação externa','Limites como forma de amor próprio','Aprender a gostar da sua própria companhia','Celebrar as pequenas vitórias consigo mesma','Seu corpo é sua casa — trate bem','Dizer sim para si mesma antes de dizer sim ao mundo','A versão mais autêntica de você','Desaprender o que te foi ensinado sobre você','Ser fiel a si mesma em todas as situações','Parar de se punir por ser humana','Abraçar as próprias imperfeições','O relacionamento mais importante da sua vida','Você merece o amor que dá aos outros','Reaprender a se conhecer depois de uma perda','Tratar a si mesma com a gentileza que trata as amigas','Parar de se envergonhar de quem você é','O autocuidado que vai além da aparência','Quando você finalmente acredita que merece coisas boas','Não depender de mais ninguém para se sentir inteira','Fazer coisas que te enchem de vida — só porque sim','A conversa interna que você precisa mudar agora','Celebrar seu aniversário como o dia mais importante','Conhecer seus valores e não negociá-los por ninguém','A mulher plena que não precisa se diminuir para caber','Desaprender a se colocar em último lugar','Escolher roupas, lugares, pessoas que honram quem você é','A paz de não precisar provar nada para ninguém'],
-  proposito:['O que te faz levantar da cama com vontade?','Encontrar significado no que você já tem','Vida com propósito começa com escolhas pequenas','Quando o trabalho vira missão','Deixar um legado que importa','Seguir o chamado mesmo sem o mapa completo','O que o mundo precisa que só você tem?','Parar de viver por obrigação e começar por escolha','A vida que você quer construir passo a passo','Propósito não é destino — é direção','Fazer a diferença na vida de uma pessoa já basta','Quando você para de correr atrás do que não é seu','Sonhos que valem mais que o medo','Agir apesar da dúvida — isso é propósito','Reacender o fogo que o dia a dia apagou','Servir com o dom que você tem','A coragem de mudar de caminho no meio do caminho','Construir, não apenas existir','Seu talento é um presente que o mundo precisa','Começar hoje a vida que você adia há anos','O que você faria se soubesse que não ia falhar?','Encontrar prazer no processo, não só no resultado','Quando você para de imitar e começa a criar','A vida paralela que você imagina e que pode se tornar real','Seu dom não pede licença — ele insiste','Escolher uma vida menor em aparência e maior em significado','O que você quer que digam quando você não estiver mais aqui?','Alinhar o que você faz com o que você acredita','Parar de esperar o momento perfeito para começar','Missão de vida — como descobrir a sua','Viver de acordo com seus valores, não com as expectativas','O chamado que você ignora mas que não para de voltar','Impacto — o rastro que você deixa em cada pessoa'],
-  presente:['Viver o agora sem escapar para o passado','A beleza que existe neste exato momento','Desacelerar numa sociedade que glorifica a pressa','Presença plena como ato revolucionário','Encontrar paz no silêncio do dia','Respirar conscientemente como retorno a si','Estar aqui — completamente aqui','O que você perdeu por estar sempre no piloto automático?','Rituais matinais que ancoram o dia','Comer, sentir, existir — sem distrações','O telefone no bolso e o olhar no horizonte','Aprender a pausar sem se sentir preguiçosa','Encontrar Deus no ordinário','A manhã como presente que se abre devagar','Momentos que valem mais que registros','Atenção plena como prática espiritual','Viver cada estação da vida no tempo dela','O prazer simples de uma xícara quente','Mindfulness no caos do cotidiano','Estar presente é a forma mais pura de amor','A beleza de não ter pressa em nenhum lugar','Caminhada lenta como meditação em movimento','Desligar o wi-fi e ligar para si mesma','Noite sem tela — o que acontece quando você só existe','Domingo como ritual de descanso intencional','O cheiro da chuva como convite para pausar','Viver o pôr do sol sem tirar foto — só sentir','Banho como cerimônia de renovação','Fazer uma coisa de cada vez como ato de saúde mental','O momento de silêncio entre uma coisa e outra','Resistir à urgência artificial do mundo digital','A gentileza de não se apressar','Apreciar o que ainda está aqui antes de querer o próximo'],
-  mudanca:['A mudança começa antes de você estar pronta','Soltar a vida que você planejou','O que precisa morrer para o novo nascer?','Transição — o espaço entre quem era e quem será','Não ter medo do que você está se tornando','Cada fase tem um propósito que só o tempo revela','A coragem de recomeçar do zero','Quando a crise é na verdade um chamado','Deixar para trás sem olhar pra trás','A mudança que assusta e liberta ao mesmo tempo','Dizer adeus para abrir espaço ao novo','Permitir-se ser diferente do que era ontem','Abraçar a incerteza como companheira de jornada','O novo ciclo que pede uma versão renovada de você','Metamorfose — feio antes de virar borboleta','Mudar não é trair quem você foi','A versão 2.0 de si mesma que está surgindo','Quando o universo te empurra pra onde precisa ir','Escolher crescer em vez de permanecer confortável','A primeira vez que você age diferente do padrão','Virar a página sem precisar entender tudo','O vazio entre o que acabou e o que ainda vai chegar','Novas fases pedem novos hábitos','Mudar de opinião é sabedoria, não fraqueza','A vida que você conhecia e que não existe mais','Reconstruir sem saber bem o projeto final','O susto de virar quem você sempre quis ser','Encerrar um ciclo com honra e sem rancor','Quando a vida te obriga a crescer antes de estar pronta','O presente que a perda trouxe disfarçado de tragédia','Mudança de cidade, emprego, relacionamento — e de si mesma','Aceitar que você não é mais quem era — e celebrar','A dor do crescimento que parece retrocesso'],
-  gratidao:['Gratidão pelas coisas que deram errado','O que você esqueceu de agradecer hoje?','Encontrar beleza nos dias comuns','Agradecer o presente sem esperar o futuro','A gratidão que muda a frequência da sua vida','Bênçãos disfarçadas de problemas','O privilégio de respirar, existir, sentir','Diário de gratidão — por onde começar','Quando você olha pra trás e vê o quanto evoluiu','Agradecer o caminho, não só o destino','Reconhecer as pessoas que ficaram','O dom de ter exatamente o que precisa','Gratidão antecipada — agradecer antes de receber','Celebrar o que você já construiu','O simples como extraordinário quando você para pra ver','Gratidão como escudo contra a ansiedade','Agradecer o corpo que te carrega','Ver a vida com novos olhos a partir da gratidão','O que a adversidade te ensinou a valorizar','Uma lista de 10 coisas belas que aconteceram hoje','Gratidão pelo não — que te protegeu do errado','Ser grata pela pessoa que você se tornou','As pessoas invisíveis que tornam sua vida possível','O sol de toda manhã como presente renovado','Gratidão pelos amigos que ficaram na chuva','Agradecer a saúde enquanto ainda a tem','Ser grata pela jornada — não só pela chegada','O amor que recebeu e às vezes esqueceu de notar','Gratidão pela segunda chance que a vida ofereceu','Celebrar o aniversário de quem você está se tornando','Ver o extraordinário escondido no ordinário','Gratidão pela dor que te ensinou compaixão','Agradecer antes de dormir — o ritual que muda tudo'],
-  relacionamentos:['Pessoas que chegam para curar ou para ensinar','Vínculos que nutrem versus os que drenam','Amor que expande, não que aprisiona','Aprender a receber amor sem medo','O que você ensina ao mundo sobre como te tratar','Afastar com amor quem não alinha com quem você é','Conexões genuínas numa era de superficialidade','O que fica quando o relacionamento acaba','Amizades que são lar','Aprender a amar sem perder a si mesma','Comunicação não-violenta no dia a dia','Reconhecer o amor que você merece','Não confundir apego com amor','Família — laços que escolhemos ou que nos escolheram','O poder de dizer "eu preciso de você" sem vergonha','Relacionamentos que cobram quem você é','A solidão como escolha saudável às vezes','Soltar relacionamentos com gratidão','Ser presença real na vida de quem ama','O amor que começa quando as expectativas caem','Como amar alguém sem se perder no processo','Pessoas que ficam — a raridade e o valor','Recomeçar a confiar depois de uma traição','A amiga que você precisa ser para si mesma','Relacionamento saudável — o que ninguém te ensinou','O silêncio confortável de quem realmente te conhece','Aprender a pedir sem se sentir fraca','Amar à distância sem deixar de amar','Quando o amor próprio impede um relacionamento tóxico','O papel que você repete nos relacionamentos','Relacionamentos que terminaram mas que ainda te ensinam','Criar vínculos profundos num mundo superficial','O que significa realmente estar presente para alguém'],
-  conquista:['Celebrar o quanto você já chegou longe','A conquista que só você sabe o preço que custou','De onde você veio para onde está hoje','Pequenas vitórias que merecem festa','O sucesso que tem cheiro de luta','Provar pra você mesma que era possível','Quando o impossível se tornou real','Construir com consistência o que o talento sozinho não faz','Cada não que te levou para o sim certo','A mulher que você era há um ano não acreditaria','Disciplina como forma de amor próprio','O fruto do que você plantou em silêncio','Celebrar sem precisar de plateia','Metas alcançadas que ninguém apostava em você','O orgulho de si mesma — sem modéstia','Quando o esforço encontra a oportunidade','A versão de você que não desistiu nos dias difíceis','Reconhecer o seu valor sem precisar de comparação','Cada cicatriz como evidência de superação','O topo que parecia impossível de onde você estava','O dia em que você se tornou sua maior torcedora','Consistência — a habilidade mais subestimada do sucesso','Sucesso silencioso que não precisa de anúncio','Quando o plano B virou o melhor plano da sua vida','A conquista coletiva — quem te ajudou a chegar até aqui','O hábito que mudou tudo sem parecer grande coisa','Conquistas emocionais que valem mais que as materiais','O ano em que você superou o que achava insuperável','Mostrar ao mundo sem precisar gritar','A gratidão pela trajetória que te formou','Celebrar a chegada honrando a partida difícil','O que você aprendeu com cada fracasso que te formou','A versão de você daqui a 5 anos agradecendo pelo hoje'],
-  reflexao:['O que você deixaria de fazer se soubesse que vai bem?','Que parte de você ainda precisa de atenção?','Você está vivendo ou apenas sobrevivendo?','O que o cansaço que sente está tentando dizer?','Qual versão de você está sendo desperdiçada?','Se o medo sumisse, o que você faria amanhã?','O que você repete que não quer mais repetir?','Quem você seria se não tivesse sido ferida assim?','Que relacionamentos estão te custando quem você é?','O que você tolera que não deveria?','Quando foi a última vez que você foi completamente você?','O que você diria para si mesma daqui a 10 anos?','O que a criança que você foi precisava ouvir?','Em que áreas você está pedindo menos do que merece?','Qual o peso que você ainda carrega de alguém?','Onde você parou de crescer por medo de mudar?','Quais sonhos você guardou na gaveta por ser "irrealista"?','O que significaria realmente se perdoar?','Quem te tornaria mais você — quem você escolhe?','Que escolha você precisa fazer mas está adiando?','O que você está evitando sentir se ocupando demais?','Que história você conta sobre si mesma que já não é verdade?','O que você fingiria não saber se pudesse?','Que parte de você cresceu sem que você percebesse?','O que mudaria se você acreditasse que merece?','Que tipo de pessoa você está se tornando com suas escolhas diárias?','Em que momento você deixou de se conhecer?','O que você ainda não disse que precisa dizer?','Que emoção você mais evita sentir — e por quê?','Se sua vida fosse um livro, em que capítulo você está?','O que você está esperando para começar a viver de verdade?','Que versão de você mesma você mais sente falta?','Quando você parou de sonhar — e o que fez você voltar a sonhar?'],
-};
-
-let catAtiva = 'todos';
-function setCat(el, cat) {
-  catAtiva = cat;
-  document.querySelectorAll('#cat-filter .chip').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  renderTemas();
-}
-function filtrarTemas() { renderTemas(); }
-
-function usarTema(t) {
-  document.getElementById('tema-input').value = t;
-  nav('criar');
-  document.getElementById('tema-input').focus();
-  showToast('Tema selecionado! Configure e gere o post.');
+function rSv(){
+  const g=document.getElementById('sg');g.innerHTML='';
+  if(!sv.size){g.innerHTML='<div class="es">Nenhum post salvo ainda.<br><span style="font-size:13px;color:var(--ts)">Explore a biblioteca e salve os que mais te representam ✦</span></div>';return;}
+  P.filter(p=>sv.has(p.id)).forEach((p,i)=>g.appendChild(mkItem(p,i)));
 }
 
-function temaAleatorio() {
-  const cats = Object.keys(TEMAS);
-  const c = cats[Math.floor(Math.random()*cats.length)];
-  const ts = TEMAS[c];
-  const t = ts[Math.floor(Math.random()*ts.length)];
-  document.getElementById('random-display').textContent = t;
-  document.getElementById('tema-input').value = t;
+function initSt(){
+  document.getElementById('sr').innerHTML=[{n:P.length,l:'posts prontos'},{n:Object.keys(CM).length,l:'categorias'},{n:[...new Set(P.map(p=>p.pl))].length,l:'plataformas'},{n:P.filter(p=>p.sz==='Longo').length,l:'textos longos'}].map(s=>`<div class="st"><div class="sn">${s.n}</div><div class="sl">${s.l}</div></div>`).join('');
+  document.getElementById('ntot').textContent=P.length;
+  Object.keys(CM).forEach(c=>{const el=document.getElementById('nc-'+c);if(el)el.textContent=P.filter(p=>p.cat===c).length;});
 }
 
-function renderTemas() {
-  const search = (document.getElementById('tema-search').value||'').toLowerCase().trim();
-  const grid = document.getElementById('temas-grid');
-  grid.innerHTML = '';
-  const cats = catAtiva==='todos' ? Object.keys(TEMAS) : [catAtiva];
-  cats.forEach(cat => {
-    const all = TEMAS[cat];
-    const filtered = search ? all.filter(t=>t.toLowerCase().includes(search)) : all;
-    if(!filtered.length) return;
-    const meta = CAT_META[cat];
-    const sec = document.createElement('div');
-    sec.className='tema-section';
-    sec.innerHTML=`
-      <div class="tema-sec-header">
-        <div class="tema-sec-icon">${meta.icon}</div>
-        <div>
-          <div class="tema-sec-title">${meta.label}</div>
-        </div>
-        <div class="tema-line"></div>
-        <div class="tema-sec-count">${filtered.length} temas</div>
-      </div>
-      <div class="tema-pills" id="tp-${cat}"></div>`;
-    grid.appendChild(sec);
-    const wrap = sec.querySelector('.tema-pills');
-    filtered.forEach((t,i)=>{
-      const b = document.createElement('button');
-      b.className='tema-pill';
-      b.textContent=t;
-      b.style.animationDelay=(i*.02)+'s';
-      b.onclick=()=>usarTema(t);
-      wrap.appendChild(b);
-    });
-  });
-  if(!grid.children.length) grid.innerHTML='<div class="no-results">Nenhum tema encontrado</div>';
-}
+const QQ=['"Tudo o que você precisa já existe dentro de você."','"A dor que você sente hoje é a força que sentirá amanhã."','"Seja gentil com quem você está se tornando."','"Cada recomeço é uma segunda chance disfarçada."','"Você não precisa estar inteira para começar."','"O que resiste, persiste. O que flui, transforma."','"A sua cura é o maior ato de amor."'];
+let qi=0;setInterval(()=>{qi=(qi+1)%QQ.length;document.getElementById('sq').textContent=QQ[qi];},8000);
 
-// ═══════════════════════════════════════════════
-// HASHTAGS PAGE
-// ═══════════════════════════════════════════════
-const HASHTAG_SETS = [
-  {
-    label:'🔥 Alto alcance — Motivação geral',
-    vol:'vol-high',
-    tags:['#motivacao','#inspiracao','#reflexao','#autoestima','#crescimentopessoal','#vidacomproposito','#mentepositiva','#bomdia','#frasedodia','#meditacao'],
-  },
-  {
-    label:'🌿 Nicho espiritual & cura',
-    vol:'vol-mid',
-    tags:['#autocuidado','#curaemocional','#espiritualidade','#frasesmotivacionais','#mindfulness','#amor proprio','#saude mental','#terapia','#autoconhecimento','#pazinterior','#curainterior','#energiapositiva'],
-  },
-  {
-    label:'⚡ Força feminina & empoderamento',
-    vol:'vol-mid',
-    tags:['#mulherpoderosa','#forca feminina','#empoderamento feminino','#mulher empreendedora','#soywoman','#mulheres inspiradoras','#femininaepowerful','#donaminhavida'],
-  },
-  {
-    label:'🤍 Amor próprio & autodesenvolvimento',
-    vol:'vol-mid',
-    tags:['#amorporprio','#seacelove','#limites saudaveis','#selfcare','#rotinadebeleza','#euporprimeiro','#cuidandodemim','#evolucaopessoal','#sejamelhor'],
-  },
-  {
-    label:'🌸 Gratidão & positividade',
-    vol:'vol-low',
-    tags:['#gratidao','#abencoadaporDeus','#graça','#diariodegratidao','#contandobenções','#bendita','#gratidaoeterna','#benção','#agradecida'],
-  },
-  {
-    label:'✨ Fé & espiritualidade',
-    vol:'vol-low',
-    tags:['#fe','#Deus','#jezuscristo','#oração','#bendita seja','#fé move montanhas','#confiança em Deus','#plano de Deus','#timing divino','#milagre'],
-  },
-  {
-    label:'📱 Instagram & TikTok — Volume',
-    vol:'vol-high',
-    tags:['#reels','#reelsbrasil','#tiktokbrasil','#viral','#fyp','#foryoupage','#paravocê','#explorepage','#instagrambr','#conteudodigital'],
-  },
-  {
-    label:'🏆 Conquista & sucesso',
-    vol:'vol-mid',
-    tags:['#superacao','#metas','#objetivos','#sucesso','#trajetoria','#evoluindo','#conquistando','#resultados','#disciplina','#habitos','#consistencia'],
-  },
-];
+function tgSb(){document.getElementById('sb').classList.toggle('open');document.getElementById('sbk').classList.toggle('show');}
+function clSb(){document.getElementById('sb').classList.remove('open');document.getElementById('sbk').classList.remove('show');}
 
-function renderHashtags() {
-  const c = document.getElementById('hashtags-content');
-  c.innerHTML = `
-    <div class="sec-title mb16">Como usar</div>
-    <div class="card mb24">
-      <div class="card-body">
-        <p style="font-size:13px;color:var(--tm);line-height:1.8;margin-bottom:10px">
-          Use <strong style="color:var(--gold2);font-weight:500">20–25 hashtags</strong> por post no Instagram. Mix ideal:<br>
-          <span style="color:var(--gold)">30%</span> grandes (+1M posts) · <span style="color:var(--tm)">50%</span> médias (100k–500k) · <span style="color:var(--ts)">20%</span> nicho (&lt;50k)
-        </p>
-        <p style="font-size:13px;color:var(--tm);line-height:1.8">
-          No <strong style="color:var(--teal);font-weight:500">TikTok</strong>: use apenas 3–5 hashtags + #fyp + 1–2 de nicho. Menos é mais.
-        </p>
-        <div class="mt12 flex gap8">
-          <button class="btn btn-gold btn-sm" onclick="gerarHashtagsIA()">Gerar hashtags com IA para meu tema</button>
-        </div>
-      </div>
-    </div>
-    <div id="htag-ia-result" class="hidden"></div>
-    <div class="sec-title mb16">Banco de hashtags</div>
-  `;
-  HASHTAG_SETS.forEach(set => {
-    const block = document.createElement('div');
-    block.className = 'card mb12';
-    block.innerHTML = `
-      <div class="card-head">
-        <span style="font-size:13px;color:var(--tx);font-family:var(--serif);font-style:italic">${set.label}</span>
-        <button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('htset-${set.label.replace(/[^a-z0-9]/gi,'_')}').textContent.replace(/\\s+/g,' ').trim(), 'Hashtags copiadas!')">Copiar set</button>
-      </div>
-      <div class="card-body">
-        <div class="htag-cloud" id="htset-${set.label.replace(/[^a-z0-9]/gi,'_')}">
-          ${set.tags.map(t=>`<span class="htag ${set.vol}" onclick="copyText('${t}','Copiado!')">${t}</span>`).join('')}
-        </div>
-      </div>`;
-    c.appendChild(block);
-  });
-}
-
-async function gerarHashtagsIA() {
-  const tema = document.getElementById('tema-input').value.trim() || 'motivação e reflexão';
-  const btn = document.querySelector('#hashtags-content .btn-gold');
-  const r = document.getElementById('htag-ia-result');
-  btn.innerHTML = '<span class="spin"></span> Gerando…'; btn.disabled=true;
-  r.classList.remove('hidden');
-  r.innerHTML='<div class="card mb24"><div class="card-body"><div class="spin-w spin-lg" style="display:block;margin:0 auto"></div></div></div>';
-  try {
-    const txt = await callClaude(
-      `Especialista em hashtags para Instagram no Brasil. Responda SOMENTE em texto puro, sem markdown.`,
-      `Gere 30 hashtags estratégicas para posts de motivação e reflexão sobre "${tema}". Separe em 3 grupos: ALTO ALCANCE (10), MÉDIO ALCANCE (10), NICHO (10). Formato: grupo em maiúsculo seguido das hashtags.`
-    );
-    r.innerHTML=`<div class="card mb24"><div class="card-head flex-sb"><span class="badge badge-gold">Hashtags geradas por IA — ${tema}</span><button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('hia').textContent,'Hashtags copiadas!')">Copiar tudo</button></div><div class="card-body"><div id="hia" style="font-size:13px;color:var(--tm);line-height:2;white-space:pre-wrap">${txt}</div></div></div>`;
-  } catch(e) { r.innerHTML=''; }
-  btn.innerHTML='Gerar hashtags com IA para meu tema'; btn.disabled=false;
-}
-
-// ═══════════════════════════════════════════════
-// BIBLIOTECA LEONARDO AI
-// ═══════════════════════════════════════════════
-const LIBRARY = [
-  {cat:'editorial',nome:'Mulher e Luz da Manhã',model:'Lucid Origin',desc:'Retrato editorial feminino em luz dourada suave — esperança e novo começo.',prompt:'A woman standing near a large window, soft golden morning light washing over her face, eyes closed in peaceful contemplation, loose flowing linen dress in cream, dust particles floating in sunlight, editorial portrait, shallow depth of field, warm amber and ivory tones, Kodak Portra 400 film grain, rule of thirds composition, 4:5 ratio',negative:'harsh lighting, dark, sad expression, cluttered background, oversaturated'},
-  {cat:'cinematic',nome:'Caminhada na Névoa',model:'Kino XL',desc:'Silhueta feminina em paisagem nebulosa — solidão poderosa, jornada interior.',prompt:'Cinematic shot of a lone woman walking on a misty forest path at dawn, silhouette against soft ethereal fog, cool blue-gray palette, god rays piercing through trees, dramatic cinematic lighting, wide angle composition, film noir mood, desaturated with gold highlights, 35mm anamorphic lens, movie still aesthetic, 4:5',negative:'blurry face, people in background, urban setting, bright colors'},
-  {cat:'natureza',nome:'Flores e Intenção',model:'Vision XL + PhotoReal v2',desc:'Flat lay fotorrealista de flores e objetos delicados — gratidão.',prompt:'Photorealistic overhead flat lay composition, dried wildflowers and petals arranged on linen fabric, handwritten journal, vintage ink pen, natural morning light from side window, earthy tones, warm ivory and sage green palette, soft shadows, high detail fabric texture, commercial photography style, 4:5 format',negative:'plastic, synthetic, dark shadows, cluttered, bright artificial light'},
-  {cat:'abstrato',nome:'Ondas de Luz Dourada',model:'Phoenix 1.0',desc:'Composição abstrata com luz e movimento — transformação, energia interior.',prompt:'Abstract artistic photograph of light waves and golden particles flowing through dark space, bokeh orbs, motion blur, dynamic diagonal composition, rich deep black background with warm amber and gold light trails, ethereal and mystical atmosphere, fine art photography, long exposure effect, spiritual energy visualization',negative:'sharp objects, text, faces, crowded, neon colors'},
-  {cat:'retrato',nome:'Olhar de Cura',model:'Flux Dev',desc:'Retrato fotorrealista close-up — autenticidade, força feminina, cura.',prompt:'Ultra-photorealistic close-up portrait of a serene woman, direct soft eye contact, natural skin texture with subtle freckles, catchlight in eyes, loose natural hair, soft diffused studio light, gentle smile, warm terracotta and caramel tones, 85mm portrait lens f1.8 bokeh background, skin pores visible, commercial beauty photography',negative:'airbrushed skin, harsh shadows, heavy makeup, busy background, distorted features'},
-  {cat:'flat',nome:'Mesa de Intenções',model:'Lucid Origin',desc:'Flatlay minimalista para stories e feed — calma, foco, propósito.',prompt:'Minimalist flat lay composition on white marble surface, single dried rose bud, small clear crystal, folded white letter, soft morning shadows, negative space, clean and airy editorial style, pale warm tones, overhead shot, lifestyle photography, breathing room in composition, calm and intentional mood',negative:'colorful, busy, multiple colors, dark, plastic items'},
-  {cat:'cinematic',nome:'Pôr do Sol Interior',model:'Kino XL',desc:'Silhueta contra pôr do sol dramático — beleza da transformação, novo ciclo.',prompt:'Cinematic silhouette of a woman with arms open wide on a hilltop at golden hour, dramatic sunset sky with orange and deep violet clouds, volumetric light, lens flare, epic landscape scale, 2.39:1 widescreen ratio, emotional and uplifting atmosphere, backlit photography, warm tones, inspirational movie poster composition',negative:'dark, sad, rain, urban background, people in foreground'},
-  {cat:'natureza',nome:'Floresta Sagrada',model:'Phoenix 1.0',desc:'Trilha em floresta com luz filtrada — conexão, espiritualidade, presença.',prompt:'Lush ancient forest path with cathedral-like tree canopy, shafts of golden light breaking through dense green foliage, mossy stones on path, morning mist near the ground, rich emerald and gold tones, sense of spiritual reverence and peace, photorealistic landscape, depth and layering, 4:5 portrait format, mystical atmosphere',negative:'people, urban elements, night, dark mood, overcrowded'},
-  {cat:'editorial',nome:'Carta para o Eu Futuro',model:'Vision XL + PhotoReal v2',desc:'Mãos escrevendo com luz suave — reflexão, autoconhecimento.',prompt:'Photorealistic close-up of elegant hands writing in an open journal with vintage fountain pen, warm amber bokeh background, soft side window light creating gentle shadows, visible paper texture and ink shine, gold ring detail, cozy and intimate atmosphere, skin texture visible, shallow depth of field, warm sepia-toned lifestyle photography',negative:'harsh flash, plastic pen, typed text, busy background'},
-  {cat:'abstrato',nome:'Kintsugi — Cicatrizes Douradas',model:'Phoenix 1.0',desc:'Arte abstrata inspirada no kintsugi — beleza nas cicatrizes.',prompt:'Abstract fine art composition inspired by Japanese kintsugi, golden liquid flowing through dark fractured surface, macro photography texture, contrast of black obsidian and liquid gold, symbolic and spiritual mood, dramatic lighting highlighting gold veins, philosophical beauty, gallery-worthy composition, rich blacks and radiant gold tones',negative:'text, faces, bright colors, cartoonish, low quality'},
-  {cat:'retrato',nome:'Mulher da Chuva',model:'Flux Dev',desc:'Retrato dramático na chuva — resiliência, beleza na tempestade.',prompt:'Dramatic photorealistic portrait of a woman standing in light rain, face turned upward with eyes closed and peaceful expression, water droplets on skin and hair, moody overcast light with subtle warm backlight, dark teal and silver tones with warm skin highlights, shallow depth of field, 50mm cinematic portrait, skin texture and water detail visible',negative:'sad expression, harsh rain, flat lighting, airbrushed'},
-  {cat:'flat',nome:'Ritual Matinal',model:'Lucid Origin',desc:'Cena de manhã com café, livro e flor — rotina sagrada, cuidado consigo.',prompt:'Cozy morning ritual scene from above, ceramic mug with black coffee, open book with handwritten notes, single white flower in small vase, soft natural light from window casting warm shadows, neutral linen and beige tones, lifestyle editorial photography, intentional and peaceful composition, negative space, subtle steam rising from coffee',negative:'busy composition, plastic items, bright colors, dark shadows, artificial light'},
-];
-
-let libCat = 'todos';
-function filtLib(el, cat) {
-  libCat = cat;
-  document.querySelectorAll('#lib-filter .chip').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  renderLib();
-}
-function renderLib() {
-  const items = libCat==='todos' ? LIBRARY : LIBRARY.filter(l=>l.cat===libCat);
-  const c = document.getElementById('lib-cards');
-  c.innerHTML = '';
-  items.forEach((item,i) => {
-    const d = document.createElement('div');
-    d.className='lib-card';
-    d.style.animation=`riseUp .3s ${i*.05}s ease both`;
-    d.innerHTML=`
-      <div class="lib-card-top">
-        <div>
-          <div class="lib-card-name">${item.nome}</div>
-          <div class="lib-card-desc">${item.desc}</div>
-        </div>
-        <span class="badge badge-gold">${item.model}</span>
-      </div>
-      <div class="lib-prompt-box">${item.prompt}</div>
-      <div class="lib-neg"><span style="color:rgba(220,140,140,.45)">negative: </span>${item.negative}</div>
-      <div class="flex gap8 mt12">
-        <button class="btn btn-ghost btn-xs" onclick='copyText(${JSON.stringify(item.prompt)}, "Prompt copiado!")'>Copiar prompt</button>
-        <button class="btn btn-ghost btn-xs" onclick='copyText("MODELO: ${item.model}\\n\\nPROMPT:\\n${item.prompt.replace(/'/g,"\\'")}\\n\\nNEGATIVE:\\n${item.negative.replace(/'/g,"\\'")}","Tudo copiado!")'>Copiar completo</button>
-      </div>`;
-    c.appendChild(d);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// GUIA MODELOS
-// ═══════════════════════════════════════════════
-const MODELOS_GUIA = [
-  {nome:'Lucid Origin',badge:'Versátil',cor:'badge-gold',desc:'Modelo padrão do Leonardo AI. Excelente para a maioria dos estilos. Bom equilíbrio entre realismo e arte.',quando:['Posts editoriais e lifestyle','Flat lays e cenas de cotidiano','Qualquer estilo quando não tem certeza qual modelo usar'],como:['Descreva o mood e a atmosfera da cena','Inclua paleta de cores desejada','Adicione o estilo fotográfico (editorial, lifestyle, etc)','Use palavras de iluminação: soft light, golden hour, window light'],exemplo:'A woman sitting by a window reading, warm morning light, minimalist interior, earthy tones, editorial photography style, 4:5'},
-  {nome:'Phoenix 1.0',badge:'Qualidade máxima',cor:'badge-gold',desc:'O modelo mais poderoso do Leonardo. Entende linguagem natural e produz imagens de qualidade excepcional com prompts descritivos.',quando:['Quando você quer a melhor qualidade possível','Arte abstrata e composições artísticas','Cenas narrativas e atmosféricas'],como:['Escreva como se estivesse descrevendo uma cena para um diretor','Use linguagem natural e narrativa, não lista de palavras','Descreva a história, emoção e significado da imagem'],exemplo:'A golden hour light falls gently on a woman sitting alone in a field of wildflowers, her eyes closed, face lifted toward the sky in quiet gratitude, the world soft and warm around her, photorealistic, 4:5'},
-  {nome:'Kino XL',badge:'Cinemático',cor:'badge-teal',desc:'Especializado em imagens com estética cinematográfica. Cria frames que parecem saídos de filmes de alto orçamento.',quando:['Silhuetas dramáticas e paisagens épicas','Efeito de filme, grão e atmosfera densa','Reels e TikToks com visual cinematográfico'],como:['Use termos de cinema: movie still, cinematic frame, film grain','Mencione o tipo de lente: 35mm, 50mm, anamorphic','Descreva iluminação dramática: backlit, volumetric light, god rays','Inclua referência de gênero: thriller mood, drama film aesthetic'],exemplo:'Cinematic movie still, woman standing alone on a rainy city street at night, backlit by neon reflections on wet pavement, 35mm anamorphic lens, film grain, deep shadows, emotional and contemplative atmosphere'},
-  {nome:'Vision XL + PhotoReal v2',badge:'Fotorrealismo',cor:'badge-rose',desc:'Combinação para o máximo fotorrealismo. Ideal para retratos e imagens que precisam parecer fotografias profissionais.',quando:['Retratos femininos de alta qualidade','Produtos e flat lays ultra-realistas','Qualquer imagem que precise parecer uma foto real'],como:['Inclua configurações de câmera: 85mm f1.8, 50mm f2.4','Mencione textura de pele: natural skin texture, skin pores visible','Descreva a qualidade da foto: commercial photography, editorial shoot','Use termos de luz fotográfica: softbox, natural window light'],exemplo:'Photorealistic portrait, Brazilian woman, 35 years old, soft natural skin texture, warm studio lighting, 85mm f1.4 bokeh background, commercial beauty photography, minimal makeup'},
-  {nome:'Flux Dev',badge:'Realismo fino',cor:'badge-muted',desc:'Excelente para detalhes finos como textura de tecido, pele, materiais orgânicos e composições de produto.',quando:['Texturas detalhadas de tecido e materiais','Mãos, objetos, detalhes close-up','Composições com múltiplos elementos'],como:['Prompts diretos e descritivos','Seja específico sobre materiais e texturas','Descreva a qualidade de cada elemento separadamente'],exemplo:'Close-up of woman hands holding a cup of tea, fine skin texture, soft natural light from left, linen fabric in background, earthy warm tones, lifestyle photography'},
-];
-
-function renderGuia() {
-  const c = document.getElementById('guia-content');
-  c.innerHTML = `<div class="sec-title mb16">Estrutura do prompt perfeito</div>
-  <div class="card mb24"><div class="card-body">
-    <p style="font-size:13px;color:var(--tm);line-height:1.85;margin-bottom:14px">Todo bom prompt para Leonardo AI tem esta estrutura:</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      ${['1. Sujeito principal — quem ou o quê?','2. Ação ou pose — o que está fazendo?','3. Ambiente — onde está, cenário, fundo','4. Iluminação — golden hour, soft light, dramatic','5. Estilo visual — editorial, cinematic, flat lay','6. Paleta de cores — warm tones, earthy, dark','7. Câmera / técnica — 85mm, bokeh, film grain','8. Formato — 4:5 portrait, 9:16 vertical'].map(i=>`<div style="font-size:12px;color:var(--tm);padding:8px 12px;background:var(--s3);border-radius:var(--rs);display:flex;gap:8px"><span style="color:var(--gold)">${i.split('.')[0]}.</span>${i.split('.')[1]}</div>`).join('')}
-    </div>
-  </div></div>
-  <div class="sec-title mb16">Guia por modelo</div>`;
-
-  MODELOS_GUIA.forEach((m,i) => {
-    const d = document.createElement('div');
-    d.className='tip-card';
-    d.style.animation=`riseUp .3s ${i*.07}s ease both`;
-    d.innerHTML=`
-      <div class="tip-head">
-        <div class="tip-icon-box"><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
-        <div style="flex:1">
-          <div class="tip-title">${m.nome}</div>
-          <div class="tip-platforms"><span class="badge ${m.cor}">${m.badge}</span></div>
-        </div>
-      </div>
-      <div class="tip-body">
-        <p>${m.desc}</p>
-        <div class="g2 mb12" style="gap:12px">
-          <div>
-            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Quando usar</div>
-            <ul class="tip-list">${m.quando.map(w=>`<li><span class="tip-arrow">→</span>${w}</li>`).join('')}</ul>
-          </div>
-          <div>
-            <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Como escrever o prompt</div>
-            <ul class="tip-list">${m.como.map(c=>`<li><span class="tip-arrow">→</span>${c}</li>`).join('')}</ul>
-          </div>
-        </div>
-        <div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ts);margin-bottom:8px">Exemplo de prompt</div>
-        <div class="prompt-code" style="margin-bottom:8px">${m.exemplo}</div>
-        <button class="btn btn-ghost btn-xs" onclick='copyText(${JSON.stringify(m.exemplo)},"Exemplo copiado!")'>Copiar exemplo</button>
-      </div>`;
-    c.appendChild(d);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// TIPS
-// ═══════════════════════════════════════════════
-const TIPS = [
-  {icon:'⏰',title:'Horários que mais engajam',plat:['ig','tk'],desc:'Postar na hora certa multiplica o alcance orgânico. O algoritmo prioriza posts que recebem interações rápidas após publicação.',lista:['Instagram: 7h–9h (manhã), 12h–13h (almoço) e 19h–22h (noite) — pico no Brasil','TikTok: 7h–9h, 12h–15h e 19h–23h — mais volátil, teste nos seus analytics','Terça a quinta têm maior engajamento médio em conteúdo de motivação','Poste Stories todos os dias — mesmo nos dias sem feed post','Domingo à noite é subutilizado por criadores e tem menor concorrência']},
-  {icon:'🎬',title:'Reels e TikTok — estrutura que viraliza',plat:['ig','tk'],desc:'A estrutura dos primeiros 3 segundos define se o vídeo vira viral. Conteúdo de motivação tem taxa de salvamento e compartilhamento muito alta.',lista:['0–3s: frase de gancho visual na tela — "Se você está passando por isso leia…"','3–15s: desenvolvimento da reflexão — voz + texto animado funcionam muito bem','15–25s: virada emocional ou insight principal','25–30s: CTA suave — "Salva pra relembrar" ou "Manda pra alguém que precisa"','Use áudios trending com conteúdo reflexivo — multiplica alcance 3×','Adicione legenda automática — 80% dos Reels são vistos sem som']},
-  {icon:'💾',title:'A estratégia do salvamento',plat:['ig'],desc:'Salvamentos são o sinal mais forte para o algoritmo do Instagram. Uma imagem de alta qualidade gerada no Leonardo AI pode multiplicar drasticamente seus saves.',lista:['Imagens de alta qualidade visuais têm taxa de salvamento 4× maior que texto puro','Carrosseis motivacionais têm tempo de visualização 3× maior que fotos únicas','CTA "Salva esse post se..." aumenta salvamentos em até 40%','Use formato 4:5 (1080×1350px) — ocupa mais espaço no feed, mais cliques','Posts com imagem + citação visual têm compartilhamento 2× maior']},
-  {icon:'💬',title:'Legendas que geram comentários',plat:['ig','tk'],desc:'Comentários são o segundo maior sinal de engajamento. Legendas reflexivas que terminam com pergunta aberta transformam leitores passivos em engajados.',lista:['Termine SEMPRE com uma pergunta aberta: "O que isso desperta em você?"','Use "Me conta nos comentários…" — cria reciprocidade','Responda todos os comentários nas primeiras 2h — algoritmo prioriza isso','Faça perguntas nos Stories sobre temas dos próximos posts','No TikTok, responda comentários com um novo vídeo — gera muito alcance']},
-  {icon:'#',title:'Hashtags — estratégia completa',plat:['ig','tk'],desc:'A combinação certa de hashtags posiciona seu post exatamente na frente de quem consome conteúdo de motivação.',lista:['Use 20–25 hashtags no Instagram (não 30 — parece spam)','Mix: 30% grandes (+1M), 50% médias (100k–500k), 20% nicho (<50k)','Crie sua hashtag própria — ex: #comCassia — e use em todos os posts','No TikTok: 3–5 hashtags máximo + #fyp + 1–2 de nicho','Evite hashtags genéricas como #love e #happy — competição impossível']},
-  {icon:'📈',title:'Crescimento acelerado',plat:['ig','tk'],desc:'Para crescer rápido no nicho de motivação, algumas ações têm impacto imediato e consistente.',lista:['Collab posts com outras criadoras de motivação — crescimento mútuo e real','Repurpose: cada post de feed → Reel → TikTok (1 ideia, 3 formatos)','Live 1× por semana — Instagram prioriza contas que usam Live ativamente','Pin seus 3 melhores posts no perfil — novos visitantes veem o melhor','No TikTok: séries funcionam muito ("7 dias de reflexão matinal")','Cross-post: divulgue seu Instagram no TikTok na bio e vice-versa']},
-  {icon:'🖼️',title:'Visual que cria identidade',plat:['ig'],desc:'Um feed visualmente consistente transforma visitantes em seguidores. No nicho de motivação, a identidade visual é metade da mensagem.',lista:['Escolha 2–3 cores dominantes e mantenha em todo o feed','Paleta dourado + escuro ou paleta terrosa convertem muito bem em motivação','Use os modelos Leonardo AI com a mesma paleta para criar coesão visual','Alterne entre: imagem impactante → citação texto → imagem ambiente','Stories têm template próprio — crie 2–3 templates e reutilize sempre']},
-  {icon:'🤝',title:'Engajamento que constrói comunidade',plat:['ig','tk'],desc:'Comunidades engajadas crescem de forma orgânica e consistente. No nicho de motivação, a conexão pessoal é o diferencial.',lista:['Responda DMs — quem envia mensagem é seu seguidores mais fiel','Use caixinha de perguntas nos Stories para coletar temas de posts','Compartilhe histórias pessoais autênticas — vulnerabilidade gera conexão','Publique bastidores do processo de criação — humaniza seu conteúdo','Celebre marcos com sua comunidade — 1k, 5k, 10k seguidores']},
-];
-
-function renderTips() {
-  const c = document.getElementById('tips-content');
-  c.innerHTML = `
-    <div class="tips-hero mb24">
-      <div class="tips-metric"><div class="tm-num">4–5×</div><div class="tm-unit">posts por semana</div></div>
-      <div class="tips-metric"><div class="tm-num">4:5</div><div class="tm-unit">formato ideal feed</div></div>
-      <div class="tips-metric"><div class="tm-num">9:16</div><div class="tm-unit">Reels & TikTok</div></div>
-    </div>`;
-  TIPS.forEach((t,i) => {
-    const d = document.createElement('div');
-    d.className='tip-card';
-    d.style.animation=`riseUp .3s ${i*.05}s ease both`;
-    d.innerHTML=`
-      <div class="tip-head">
-        <div class="tip-icon-box" style="font-size:16px;font-family:var(--serif)">${t.icon}</div>
-        <div style="flex:1">
-          <div class="tip-title">${t.title}</div>
-          <div class="tip-platforms">
-            ${t.plat.includes('ig')?'<span class="badge badge-gold" style="font-size:8px">Instagram</span>':''}
-            ${t.plat.includes('tk')?'<span class="badge badge-teal" style="font-size:8px">TikTok</span>':''}
-          </div>
-        </div>
-      </div>
-      <div class="tip-body">
-        <p>${t.desc}</p>
-        <ul class="tip-list">${t.lista.map(l=>`<li><span class="tip-arrow">→</span>${l}</li>`).join('')}</ul>
-      </div>`;
-    c.appendChild(d);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// CALENDÁRIO
-// ═══════════════════════════════════════════════
-const CAL_POSTS = [3,5,7,10,12,14,17,19,21,24,26,28,31];
-const CAL_TYPES = {3:'Feed',5:'Reels',7:'Stories',10:'Feed',12:'TikTok',14:'Carrossel',17:'Reels',19:'Feed',21:'Stories',24:'Carrossel',26:'TikTok',28:'Feed',31:'Reels'};
-
-function buildCalendar() {
-  const grid = document.getElementById('cal-visual');
-  grid.innerHTML = '';
-  ['D','S','T','Q','Q','S','S'].forEach(n => {
-    const d=document.createElement('div'); d.className='cal-day-name'; d.textContent=n; grid.appendChild(d);
-  });
-  // March 2026 starts on Sunday
-  for(let i=0;i<31;i++){
-    const day=i+1;
-    const d=document.createElement('div');
-    d.className='cal-day';
-    const hasPost=CAL_POSTS.includes(day);
-    if(hasPost) d.classList.add('has-post');
-    if(day===17) d.classList.add('today');
-    d.innerHTML=`<span>${day}</span>${hasPost?`<div class="cal-dot"></div><div class="cal-post-type">${CAL_TYPES[day]||''}</div>`:''}`;
-    if(hasPost) d.onclick=()=>showToast(`${CAL_TYPES[day]} — dia ${day}`);
-    grid.appendChild(d);
-  }
-}
-
-async function gerarCalendario() {
-  const btn=document.getElementById('btn-cal');
-  const load=document.getElementById('loading-cal');
-  const res=document.getElementById('cal-result');
-  btn.innerHTML='<span class="spin"></span> Gerando…'; btn.disabled=true;
-  load.classList.add('on'); res.classList.add('hidden');
-  try {
-    const raw = await callClaude(
-      `Estrategista de conteúdo especialista em motivação e reflexão para Instagram e TikTok no Brasil. Responda em português.`,
-      `Crie um calendário editorial de motivação e reflexão para março 2026 com 14 posts distribuídos em 4 semanas. Para cada post:\n- Dia e data\n- Plataforma (Feed/Reels/Stories/TikTok/Carrossel)\n- Tema motivacional específico\n- Gancho de abertura (1 frase impactante)\n- Tipo de imagem sugerida (1 linha)\n\nOrganize por semana. Inclua datas especiais de março 2026.`,
-      1200
-    );
-    res.innerHTML=`<div class="card"><div class="card-head flex-sb"><span class="badge badge-gold">Pauta editorial — Março 2026</span><button class="btn btn-ghost btn-xs" onclick="copyText(document.getElementById('cal-txt').textContent,'Calendário copiado!')">Copiar pauta</button></div><div class="card-body"><div id="cal-txt" style="font-size:13px;color:var(--tm);line-height:1.85;white-space:pre-wrap">${raw}</div></div></div>`;
-    res.classList.remove('hidden');
-  } catch(e) { showToast('Erro: '+e.message); }
-  load.classList.remove('on');
-  btn.innerHTML='Gerar pauta completa com IA'; btn.disabled=false;
-}
-
-// ═══════════════════════════════════════════════
-// SIDEBAR QUOTES
-// ═══════════════════════════════════════════════
-const QUOTES = [
-  '"Tudo o que você precisa já existe dentro de você."',
-  '"A dor que você sente hoje é a força que sentirá amanhã."',
-  '"Seja gentil com quem você está se tornando."',
-  '"Cada recomeço é uma segunda chance disfarçada."',
-  '"A fé não remove os obstáculos — ela te dá força para atravessá-los."',
-  '"Você não precisa estar inteira para começar."',
-  '"O que resiste, persiste. O que flui, transforma."',
-  '"Gratidão não é fingir que tudo está bem — é reconhecer o que ainda é bom."',
-];
-let qIdx=0;
-function rotateQuote(){
-  qIdx=(qIdx+1)%QUOTES.length;
-  document.getElementById('sidebar-quote').textContent=QUOTES[qIdx];
-}
-setInterval(rotateQuote, 8000);
-
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
-renderTemas();
-renderLib();
-renderGuia();
-renderTips();
-renderHashtags();
-buildCalendar();
-renderQuickPills();
-// Default size pill selection
-document.querySelectorAll('.size-pill')[0] && document.querySelectorAll('.size-pill')[0].classList.add('on');
+initSt();rLib();document.querySelector('.ni').classList.add('on');
 </script>
 </body>
 </html>

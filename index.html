@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cassia — Painel de Conteúdo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0c0a;
+    --surface: #161410;
+    --card: #1c1916;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(255,255,255,0.14);
+    --gold: #c9a96e;
+    --gold-light: #e2c88a;
+    --gold-dim: rgba(201,169,110,0.15);
+    --text: #f0ebe3;
+    --text-muted: #8a8070;
+    --text-subtle: #4a4540;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 52px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .brand h1 {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .brand p {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--text-subtle);
+    letter-spacing: 0.5px;
+  }
+
+  .header-meta span {
+    display: block;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CONFIGURAÇÃO ── */
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .config-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .config-card:hover { border-color: var(--border-hover); }
+
+  .config-card label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .config-card select,
+  .config-card input[type=text] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .config-card select option {
+    background: #1c1916;
+    color: var(--text);
+  }
+
+  /* ── TEMA INPUT ── */
+  .tema-block {
+    margin-bottom: 48px;
+  }
+
+  .tema-textarea {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    font-family: var(--serif);
+    font-size: 19px;
+    font-style: italic;
+    color: var(--text);
+    outline: none;
+    resize: none;
+    line-height: 1.65;
+    transition: border-color 0.2s;
+    min-height: 90px;
+  }
+
+  .tema-textarea::placeholder { color: var(--text-subtle); }
+  .tema-textarea:focus { border-color: var(--gold); }
+
+  /* ── BOTÃO PRINCIPAL ── */
+  .btn-generate {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 13px 28px;
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-generate:hover { background: var(--gold-light); }
+  .btn-generate:active { transform: scale(0.98); }
+  .btn-generate:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--border-hover); color: var(--text); }
+
+  /* ── SPINNER ── */
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(14,12,10,0.3);
+    border-top-color: var(--bg);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── OUTPUT BLOCK ── */
+  .output-section { margin-bottom: 52px; }
+
+  .output-section.hidden { display: none; }
+
+  /* ── POST CARD ── */
+  .post-result {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .post-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .post-type-badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .post-actions { display: flex; gap: 8px; }
+
+  .post-body { padding: 22px 20px; }
+
+  .post-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+
+  .post-legenda {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .post-hashtags {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--gold);
+    line-height: 1.9;
+    word-break: break-all;
+  }
+
+  /* ── DIVIDER ORNAMENTO ── */
+  .ornament {
+    text-align: center;
+    color: var(--text-subtle);
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin: 32px 0;
+    font-family: var(--serif);
+  }
+
+  /* ── PROMPTS DE IMAGEM ── */
+  .prompt-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .prompt-card:hover { border-color: var(--border-hover); }
+
+  .prompt-number {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .prompt-label-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .prompt-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-family: 'Courier New', monospace;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    padding: 5px 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-family: var(--sans);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .copy-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── SUGGESTION CHIPS ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .chip {
+    font-size: 12px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .chip:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  /* ── PLACEHOLDER STATE ── */
+  .placeholder-state {
+    padding: 52px 24px;
+    text-align: center;
+    color: var(--text-subtle);
+  }
+
+  .placeholder-state .icon {
+    font-family: var(--serif);
+    font-size: 48px;
+    color: var(--text-subtle);
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.4;
+  }
+
+  .placeholder-state p {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-subtle);
+  }
+
+  /* ── LOADING STATE ── */
+  .loading-block {
+    padding: 48px 24px;
+    text-align: center;
+    display: none;
+  }
+
+  .loading-block.visible { display: block; }
+
+  .loading-block p {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-top: 16px;
+  }
+
+  .loading-spinner-lg {
+    width: 28px; height: 28px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    display: inline-block;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--text-subtle);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.45s ease both; }
+  .fade-up-2 { animation: fadeUp 0.45s 0.1s ease both; }
+  .fade-up-3 { animation: fadeUp 0.45s 0.2s ease both; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--text-subtle); border-radius: 2px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .config-grid { grid-template-columns: 1fr; }
+    .brand h1 { font-size: 32px; }
+    header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="brand">
+      <h1>Cassia</h1>
+      <p>Painel de conteúdo · Motivação & Reflexão</p>
+    </div>
+    <div class="header-meta">
+      Instagram
+      <span id="current-date"></span>
+    </div>
+  </header>
+
+  <!-- CONFIGURAÇÕES -->
+  <div class="section-label">Configurar post</div>
+
+  <div class="config-grid">
+    <div class="config-card">
+      <label>Tipo de post</label>
+      <select id="tipo-post">
+        <option value="Feed">Feed</option>
+        <option value="Carrossel">Carrossel</option>
+        <option value="Reels">Reels</option>
+        <option value="Stories">Stories</option>
+      </select>
+    </div>
+    <div class="config-card">
+      <label>Tom da mensagem</label>
+      <select id="tom">
+        <option value="Inspirador e poético">Inspirador e poético</option>
+        <option value="Reflexivo e profundo">Reflexivo e profundo</option>
+        <option value="Encorajador e acolhedor">Encorajador e acolhedor</option>
+        <option value="Poderoso e transformador">Poderoso e transformador</option>
+        <option value="Suave e contemplativo">Suave e contemplativo</option>
+      </select>
+    </div>
+    <div class="config-card">
+      <label>Paleta da imagem</label>
+      <select id="paleta">
+        <option value="tons quentes, dourado, âmbar e creme">Dourado & Creme</option>
+        <option value="tons terrosos, marrom, bege e siena">Terroso & Natural</option>
+        <option value="tons frios, azul acinzentado, névoa e pérola">Névoa & Pérola</option>
+        <option value="tons escuros, preto, carvão e ouro">Dark & Luxo</option>
+        <option value="tons suaves, rosa antigo, lavanda e linho">Rosa Antigo & Lavanda</option>
+        <option value="tons verdes, musgo, salva e creme">Verde & Musgo</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- TEMA DO POST -->
+  <div class="section-label">Tema ou intenção</div>
+
+  <div class="tema-block">
+    <textarea class="tema-textarea" id="tema-input" rows="3"
+      placeholder="Escreva o tema, uma frase de intenção, ou uma palavra que inspira este post…"></textarea>
+
+    <!-- SUGESTÕES RÁPIDAS -->
+    <div class="chips" id="chips-container">
+      <button class="chip" onclick="setTema(this)">Recomeçar depois da dor</button>
+      <button class="chip" onclick="setTema(this)">Presença no momento atual</button>
+      <button class="chip" onclick="setTema(this)">Força interior silenciosa</button>
+      <button class="chip" onclick="setTema(this)">Gratidão pelas pequenas coisas</button>
+      <button class="chip" onclick="setTema(this)">Soltar o que não serve mais</button>
+      <button class="chip" onclick="setTema(this)">Fé quando tudo parece incerto</button>
+      <button class="chip" onclick="setTema(this)">Autoconhecimento e cura</button>
+      <button class="chip" onclick="setTema(this)">Leveza como escolha diária</button>
+    </div>
+
+    <div style="margin-top:20px; display:flex; gap:12px; align-items:center;">
+      <button class="btn-generate" id="btn-main" onclick="gerarConteudo()">
+        Gerar post completo
+      </button>
+      <button class="btn-secondary" onclick="limpar()">Limpar tudo</button>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-block" id="loading-block">
+    <div class="loading-spinner-lg"></div>
+    <p id="loading-msg">Encontrando as palavras certas…</p>
+  </div>
+
+  <!-- RESULTADO: POST -->
+  <div class="output-section hidden" id="output-post">
+    <div class="section-label">Sugestão de post</div>
+    <div class="post-result fade-up">
+      <div class="post-header">
+        <span class="post-type-badge" id="badge-tipo">Feed</span>
+        <div class="post-actions">
+          <button class="btn-secondary" onclick="copiarLegenda()">Copiar legenda</button>
+        </div>
+      </div>
+      <div class="post-body">
+        <div class="post-title" id="result-titulo"></div>
+        <div class="post-legenda" id="result-legenda"></div>
+        <div class="post-hashtags" id="result-hashtags"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORNAMENTO DIVISOR -->
+  <div class="ornament hidden" id="ornament">· · ·</div>
+
+  <!-- RESULTADO: PROMPTS DE IMAGEM -->
+  <div class="output-section hidden" id="output-prompts">
+    <div class="section-label">Prompts para gerar a imagem</div>
+    <div id="prompts-container" class="fade-up-2"></div>
+  </div>
+
+  <footer>
+    Cassia &nbsp;·&nbsp; Motivação & Reflexão &nbsp;·&nbsp; Instagram
+  </footer>
+
+</div>
+
+<script>
+  // Data atual
+  const d = new Date();
+  document.getElementById('current-date').textContent =
+    d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+  function setTema(el) {
+    document.getElementById('tema-input').value = el.textContent.trim();
+    document.getElementById('tema-input').focus();
+  }
+
+  function limpar() {
+    document.getElementById('tema-input').value = '';
+    ['output-post','output-prompts','ornament'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById('loading-block').classList.remove('visible');
+  }
+
+  function showLoading(msg) {
+    document.getElementById('loading-msg').textContent = msg;
+    document.getElementById('loading-block').classList.add('visible');
+  }
+
+  function hideLoading() {
+    document.getElementById('loading-block').classList.remove('visible');
+  }
+
+  function setBtn(loading) {
+    const btn = document.getElementById('btn-main');
+    btn.disabled = loading;
+    btn.innerHTML = loading
+      ? '<span class="spinner"></span> Criando…'
+      : 'Gerar post completo';
+  }
+
+  async function callClaude(system, user) {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system,
+        messages: [{ role: 'user', content: user }]
+      })
+    });
+    const data = await res.json();
+    return data.content[0].text;
+  }
+
+  async function gerarConteudo() {
+    const tema = document.getElementById('tema-input').value.trim();
+    if (!tema) {
+      document.getElementById('tema-input').focus();
+      document.getElementById('tema-input').style.borderColor = 'var(--gold)';
+      setTimeout(() => document.getElementById('tema-input').style.borderColor = '', 1200);
+      return;
+    }
+
+    const tipo = document.getElementById('tipo-post').value;
+    const tom = document.getElementById('tom').value;
+    const paleta = document.getElementById('paleta').value;
+
+    ['output-post','output-prompts','ornament'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+
+    setBtn(true);
+    showLoading('Encontrando as palavras certas…');
+
+    try {
+      // ETAPA 1: POST
+      const postJSON = await callClaude(
+        `Você é uma escritora especializada em conteúdo de motivação, espiritualidade e reflexão para Instagram no Brasil. Cria textos que tocam a alma, com linguagem poética e acessível. Responda SOMENTE com JSON puro, sem markdown.`,
+        `Crie uma sugestão de post de Instagram sobre o tema: "${tema}".
+Tom desejado: ${tom}.
+Tipo de post: ${tipo}.
+
+Responda SOMENTE com JSON puro neste formato:
+{
+  "titulo": "Uma frase-título poética e impactante (máximo 12 palavras)",
+  "legenda": "Legenda completa do post (3-5 parágrafos, tom ${tom}, sem hashtags aqui, use emojis sutis se fizer sentido)",
+  "hashtags": "25 hashtags relevantes separadas por espaço, misturando populares e de nicho"
+}`
+      );
+
+      let post;
+      try {
+        post = JSON.parse(postJSON.replace(/```json|```/g,'').trim());
+      } catch(e) {
+        throw new Error('Erro ao interpretar resposta do post.');
+      }
+
+      document.getElementById('badge-tipo').textContent = tipo;
+      document.getElementById('result-titulo').textContent = post.titulo;
+      document.getElementById('result-legenda').textContent = post.legenda;
+      document.getElementById('result-hashtags').textContent = post.hashtags;
+      document.getElementById('output-post').classList.remove('hidden');
+
+      // ETAPA 2: PROMPTS DE IMAGEM
+      showLoading('Criando prompts de imagem…');
+
+      const promptsJSON = await callClaude(
+        `Você é especialista em criação de prompts para geradores de imagem com IA (Midjourney, DALL-E, Adobe Firefly, Stable Diffusion). Responda SOMENTE com JSON puro, sem markdown, sem texto fora do JSON.`,
+        `Crie 3 prompts de imagem em inglês para um post de Instagram com o seguinte contexto:
+- Tema do post: "${tema}"
+- Tom: "${tom}"
+- Paleta de cores sugerida: "${paleta}"
+- Tipo: ${tipo} (formato quadrado ou retrato 4:5)
+
+Os prompts devem criar imagens que COMPLEMENTAM e ILUSTRAM o tema motivacional/reflexivo do post. Pense em composições editoriais, atmosféricas, que transmitam a essência do tema.
+
+Responda SOMENTE com JSON puro:
+{
+  "prompts": [
+    {
+      "nome": "Nome criativo desta abordagem visual (em português, máximo 5 palavras)",
+      "descricao": "Uma frase explicando a ideia visual (em português)",
+      "prompt": "Prompt completo em inglês, detalhado, profissional, com estilo fotográfico ou artístico, composição, iluminação, paleta de cores, atmosfera, aspect ratio 4:5 --ar 4:5"
+    },
+    {
+      "nome": "...",
+      "descricao": "...",
+      "prompt": "..."
+    },
+    {
+      "nome": "...",
+      "descricao": "...",
+      "prompt": "..."
+    }
+  ]
+}`
+      );
+
+      let prompts;
+      try {
+        prompts = JSON.parse(promptsJSON.replace(/```json|```/g,'').trim());
+      } catch(e) {
+        throw new Error('Erro ao interpretar prompts de imagem.');
+      }
+
+      const container = document.getElementById('prompts-container');
+      container.innerHTML = '';
+      prompts.prompts.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'prompt-card fade-up-' + (i+1);
+        div.innerHTML = `
+          <span class="prompt-number">Opção ${i+1}</span>
+          <div class="prompt-label-name">${p.nome}</div>
+          <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px; font-style:italic;">${p.descricao}</p>
+          <div class="prompt-text">${p.prompt}</div>
+          <button class="copy-btn" onclick="copiarPrompt(this, \`${p.prompt.replace(/`/g,"'")}\`)">Copiar</button>
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById('ornament').classList.remove('hidden');
+      document.getElementById('output-prompts').classList.remove('hidden');
+
+    } catch(err) {
+      alert('Erro: ' + err.message);
+    }
+
+    hideLoading();
+    setBtn(false);
+
+    // Scroll suave para o resultado
+    setTimeout(() => {
+      document.getElementById('output-post').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function copiarLegenda() {
+    const titulo = document.getElementById('result-titulo').textContent;
+    const legenda = document.getElementById('result-legenda').textContent;
+    const hashtags = document.getElementById('result-hashtags').textContent;
+    const texto = titulo + '\n\n' + legenda + '\n\n' + hashtags;
+    navigator.clipboard.writeText(texto);
+    const btn = document.querySelector('#output-post .btn-secondary');
+    const original = btn.textContent;
+    btn.textContent = 'Copiado ✓';
+    setTimeout(() => btn.textContent = original, 2000);
+  }
+
+  function copiarPrompt(btn, texto) {
+    navigator.clipboard.writeText(texto);
+    btn.textContent = 'Copiado ✓';
+    setTimeout(() => btn.textContent = 'Copiar', 2000);
+  }
+</script>
+</body>
+</html>

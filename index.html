@@ -137,6 +137,12 @@ select option{background:var(--s2)}
       <div id="mtxt" class="mtxt"></div>
       <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ts);margin-bottom:7px">Hashtags</div>
       <div id="mhash" class="mhash"></div>
+      <div style="margin-top:18px;padding-top:18px;border-top:1px solid var(--b1)">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px">✦ Prompt Leonardo AI<span style="height:1px;flex:1;background:var(--b1);display:block"></span></div>
+        <div id="mpr-model" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ts);margin-bottom:7px"></div>
+        <div id="mpr" style="font-family:'Courier New',monospace;font-size:12px;color:rgba(200,165,94,.75);background:rgba(200,165,94,.04);border:1px solid rgba(200,165,94,.1);border-radius:var(--rs);padding:13px 15px;line-height:1.75;word-break:break-word;margin-bottom:8px"></div>
+        <div id="mpr-neg" style="font-family:'Courier New',monospace;font-size:11px;color:var(--ts);background:var(--s3);border:1px solid var(--b1);border-radius:var(--rs);padding:10px 13px;line-height:1.65;word-break:break-word"></div>
+      </div>
     </div>
     <div class="mf" id="mf"></div>
   </div>
@@ -215,7 +221,9 @@ select option{background:var(--s2)}
 <script>
 const CM={cura:{i:'🌿',l:'Cura & Regeneração'},forca:{i:'⚡',l:'Força & Resiliência'},fe:{i:'✨',l:'Fé & Espiritualidade'},amor:{i:'🤍',l:'Amor próprio'},proposito:{i:'🔥',l:'Propósito & Missão'},presente:{i:'🍃',l:'Presença & Mindfulness'},mudanca:{i:'🌊',l:'Mudança & Transformação'},gratidao:{i:'🌸',l:'Gratidão'},reflexao:{i:'🪞',l:'Reflexão Profunda'},conquista:{i:'🏆',l:'Conquista & Superação'},relacionamentos:{i:'💛',l:'Relacionamentos & Vínculos'}};
 const P=[
-{id:'c1',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'A cura não tem pressa',tx:`Existe uma pressa coletiva para estar bem. Para superar, seguir em frente, mostrar que você já sarou.
+// ══ CURA ══
+{id:'c1',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'A cura não tem pressa',
+tx:`Existe uma pressa coletiva para estar bem. Para superar, seguir em frente, mostrar que você já sarou.
 
 Mas a cura real não funciona assim. Ela acontece em camadas — às vezes silenciosa, às vezes barulhenta. Às vezes você acha que já passou e a dor volta de um jeito diferente, num cheiro, numa música, num olhar parecido.
 
@@ -225,13 +233,21 @@ Você não precisa estar inteira para começar. Você não precisa estar pronta 
 
 A cura não é o destino. É o caminho. E você já está nele.
 
-O que você precisaria se dizer hoje com mais gentileza?`,ht:'#cura #autocuidado #saudemental #amorproprio #curaemocional #reflexao #crescimentopessoal #motivacao #inspiracao #frasesdodia #vidacomproposito #autoconhecimento #pazinterior #gentileza #evolucaopessoal #instagrambr'},
-{id:'c2',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'O corpo guarda tudo',tx:`O corpo não esquece o que a mente finge que já passou.
+O que você precisaria se dizer hoje com mais gentileza?`,
+ht:'#cura #autocuidado #saudemental #amorproprio #curaemocional #reflexao #crescimentopessoal #motivacao #inspiracao #frasesdodia #vidacomproposito #autoconhecimento #pazinterior #gentileza #evolucaopessoal #instagrambr',
+pr:{model:'Phoenix 1.0',prompt:'A woman sitting alone by a large window in soft morning light, hands wrapped around a warm cup, eyes closed in peaceful contemplation, golden hour glow on her skin, soft cream and amber tones, fine art photography, healing and gentle mood, 4:5 portrait',neg:'harsh light, dark, sad expression, busy background, oversaturated, people in background'}},
+
+{id:'c2',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'O corpo guarda tudo',
+tx:`O corpo não esquece o que a mente finge que já passou.
 
 Aquela tensão nos ombros. O nó no estômago antes de uma conversa difícil. O cansaço que não passa nem depois de dormir.
 
-Seu corpo está falando. A pergunta é: você está ouvindo?`,ht:'#cura #corpo #emocoes #saudemental #autocuidado #reflexao #curaemocional #mindfulness #autoconhecimento #reelsbrasil #motivacao #paz'},
-{id:'c3',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'7 coisas que ninguém te conta sobre se curar',tx:`Slide 1 — CAPA
+Seu corpo está falando. A pergunta é: você está ouvindo?`,
+ht:'#cura #corpo #emocoes #saudemental #autocuidado #reflexao #curaemocional #mindfulness #autoconhecimento #reelsbrasil #motivacao #paz',
+pr:{model:'Flux Dev',prompt:'Close-up of a woman\'s hands resting gently on her chest, eyes closed, soft natural light, fine skin texture visible, warm neutral tones, quiet and introspective mood, 9:16 vertical, mindfulness photography',neg:'busy background, jewelry, harsh lighting, cold tones'}},
+
+{id:'c3',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'7 coisas que ninguém te conta sobre se curar',
+tx:`Slide 1 — CAPA
 7 coisas que ninguém te conta sobre se curar ✨
 
 Slide 2 — A cura não é linear
@@ -253,15 +269,23 @@ Slide 7 — A versão curada de você assusta um pouco
 Porque ela ocupa espaço. Ela diz não. Ela sabe o que quer. Isso é novo para quem viveu se apagando.
 
 Slide 8 — CTA
-Salva esse carrossel para quando precisar lembrar que você está no caminho certo 💛`,ht:'#cura #curaemocional #saudemental #autoconhecimento #crescimentopessoal #terapia #autocuidado #amorproprio #curainterior #carrossel #reflexao #motivacao #instagrambr'},
-{id:'c4',cat:'cura',pl:'TikTok',sz:'Curto',ti:'Soltar sem culpa',tx:`Soltar não é desistir.
+Salva esse carrossel para quando precisar lembrar que você está no caminho certo 💛`,
+ht:'#cura #curaemocional #saudemental #autoconhecimento #crescimentopessoal #terapia #autocuidado #amorproprio #curainterior #carrossel #reflexao #motivacao #instagrambr',
+pr:{model:'Lucid Origin',prompt:'Minimal flat lay from above, dried wildflowers, open journal with soft handwriting, white linen background, warm ivory and sage tones, soft natural window light, healing and intentional mood, editorial lifestyle photography, 4:5',neg:'dark colors, plastic, cluttered, synthetic items, harsh shadows'}},
+
+{id:'c4',cat:'cura',pl:'TikTok',sz:'Curto',ti:'Soltar sem culpa',
+tx:`Soltar não é desistir.
 
 Às vezes soltar é o ato mais maduro que existe — reconhecer que segurar está te machucando mais do que abrir a mão.
 
 Você não precisa de um motivo enorme para soltar algo que já não faz bem.
 
-A dor que você sente ao soltar é real. E ainda assim — soltar é a escolha certa.`,ht:'#soltar #cura #desapego #liberdade #motivacao #reflexao #tiktokbrasil #fyp #paravocê #frasesmotivacionais #autocuidado #saudemental'},
-{id:'c5',cat:'cura',pl:'Instagram Feed',sz:'Longo',ti:'Reescrever a própria história',tx:`Tem uma narrativa que você carrega sobre si mesma. Sobre quem você é, o que você merece, o que é possível para você.
+A dor que você sente ao soltar é real. E ainda assim — soltar é a escolha certa.`,
+ht:'#soltar #cura #desapego #liberdade #motivacao #reflexao #tiktokbrasil #fyp #paravocê #frasesmotivacionais #autocuidado #saudemental',
+pr:{model:'Kino XL',prompt:'Cinematic shot of a woman opening her hands releasing dried flower petals into the wind, slow motion feel, golden hour backlight, bokeh background of blurred nature, warm amber and dust tones, spiritual and liberating mood, 9:16 vertical',neg:'sad expression, dark mood, people in background, urban setting'}},
+
+{id:'c5',cat:'cura',pl:'Instagram Feed',sz:'Longo',ti:'Reescrever a própria história',
+tx:`Tem uma narrativa que você carrega sobre si mesma. Sobre quem você é, o que você merece, o que é possível para você.
 
 Essa narrativa foi escrita cedo — em casa, na escola, nas relações que te moldaram antes de você ter vocabulário para questionar. E ela ficou. Virou a voz de fundo que comenta tudo.
 
@@ -271,8 +295,12 @@ Não de uma vez. Não apagando o que foi. Mas adicionando capítulos novos, com 
 
 Reescrever não é fingir que a dor não existiu. É decidir que ela não vai definir onde você chega.
 
-Qual parte da sua história você está pronta para reescrever?`,ht:'#cura #autoconhecimento #crescimentopessoal #historia #identidade #reflexao #motivacao #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal #autocuidado #saudemental #terapia'},
-{id:'c6',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Perdoar para se libertar',tx:`Perdoar não é dizer que o que aconteceu foi certo. Não é absolver quem te feriu nem apagar a dor que ficou.
+Qual parte da sua história você está pronta para reescrever?`,
+ht:'#cura #autoconhecimento #crescimentopessoal #historia #identidade #reflexao #motivacao #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal #autocuidado #saudemental #terapia',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Photorealistic close-up of woman\'s hands writing in an open journal with a fountain pen, warm amber bokeh background, soft side window light, visible paper texture and ink, skin texture detail, 85mm f1.8, cozy and introspective lifestyle photography, 4:5',neg:'harsh flash, plastic pen, typed text, busy background, cold tones'}},
+
+{id:'c6',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Perdoar para se libertar',
+tx:`Perdoar não é dizer que o que aconteceu foi certo. Não é absolver quem te feriu nem apagar a dor que ficou.
 
 Perdoar é soltar o peso de carregar aquilo com você para todo lugar que você vai.
 
@@ -282,18 +310,30 @@ O perdão mais difícil é o de si mesma — por ter ficado mais tempo do que de
 
 Mas você fez o que sabia fazer com o que tinha. Isso também merece compaixão.
 
-Tem algo que você ainda está carregando que já era hora de soltar?`,ht:'#perdao #cura #liberdade #amorproprio #crescimentopessoal #reflexao #motivacao #instagrambr #autocuidado #saudemental #curaemocional #autoconhecimento'},
-{id:'c7',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'Curar em silêncio',tx:`Nem toda cura precisa de plateia.
+Tem algo que você ainda está carregando que já era hora de soltar?`,
+ht:'#perdao #cura #liberdade #amorproprio #crescimentopessoal #reflexao #motivacao #instagrambr #autocuidado #saudemental #curaemocional #autoconhecimento',
+pr:{model:'Phoenix 1.0',prompt:'A woman standing in a golden field at sunset, arms relaxed at sides, head tilted gently upward, soft smile, backlit by warm amber light, sense of release and peace, fine art portrait, earthy and golden tones, 4:5',neg:'sad expression, dark tones, rain, people, urban background'}},
+
+{id:'c7',cat:'cura',pl:'Instagram Reels',sz:'Curto',ti:'Curar em silêncio',
+tx:`Nem toda cura precisa de plateia.
 
 Às vezes o processo mais poderoso é o que acontece em silêncio — nos momentos que ninguém vê, nas escolhas que ninguém aplaude, nos dias em que você simplesmente decidiu continuar.
 
-Sua cura não precisa de validação para ser real.`,ht:'#cura #silencio #autocuidado #crescimentopessoal #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #saudemental #curaemocional #amorproprio'},
-{id:'c8',cat:'cura',pl:'TikTok',sz:'Curto',ti:'A ferida que ensinou',tx:`A ferida que mais doeu foi a que mais ensinou.
+Sua cura não precisa de validação para ser real.`,
+ht:'#cura #silencio #autocuidado #crescimentopessoal #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #saudemental #curaemocional #amorproprio',
+pr:{model:'Kino XL',prompt:'Silhouette of a woman sitting alone on a bed near a window, soft morning light casting long shadows, peaceful and solitary atmosphere, cinematic framing, cool blue and warm gold contrast, 9:16 vertical',neg:'other people, dark mood, night, busy room'}},
+
+{id:'c8',cat:'cura',pl:'TikTok',sz:'Curto',ti:'A ferida que ensinou',
+tx:`A ferida que mais doeu foi a que mais ensinou.
 
 Não porque dor é necessária — mas porque quando você sobrevive a ela e olha pra trás, você vê o quanto cresceu dentro dela.
 
-Você não é o que te feriu. Você é o que decidiu fazer com isso.`,ht:'#cura #aprendizado #crescimentopessoal #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #superacao #curaemocional'},
-{id:'c9',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Dar atenção ao que dói',tx:`A dor que você ignora não some. Ela muda de endereço.
+Você não é o que te feriu. Você é o que decidiu fazer com isso.`,
+ht:'#cura #aprendizado #crescimentopessoal #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #superacao #curaemocional',
+pr:{model:'Phoenix 1.0',prompt:'Abstract fine art inspired by kintsugi, golden veins running through dark cracked surface, contrast of black obsidian and liquid gold, symbolic beauty in brokenness, dramatic gallery lighting, 9:16 vertical',neg:'realistic human, text, bright colors, cartoonish'}},
+
+{id:'c9',cat:'cura',pl:'Instagram Feed',sz:'Médio',ti:'Dar atenção ao que dói',
+tx:`A dor que você ignora não some. Ela muda de endereço.
 
 Vira insônia. Vira irritação sem motivo. Vira aquela sensação de vazio que aparece nas horas mais inesperadas.
 
@@ -301,15 +341,19 @@ E a gente fica se perguntando de onde vem, quando na verdade ela sempre esteve e
 
 Dar atenção ao que dói não é fraqueza. É inteligência emocional.
 
-O que você está anestesiando que merecia um pouco da sua atenção hoje?`,ht:'#cura #saudemental #emocoes #autocuidado #terapia #autoconhecimento #reflexao #motivacao #instagrambr #curaemocional #crescimentopessoal #frasesdodia'},
-{id:'c10',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'Como parar de se sabotar',tx:`Slide 1 — CAPA
+O que você está anestesiando que merecia um pouco da sua atenção hoje?`,
+ht:'#cura #saudemental #emocoes #autocuidado #terapia #autoconhecimento #reflexao #motivacao #instagrambr #curaemocional #crescimentopessoal #frasesdodia',
+pr:{model:'Flux Dev',prompt:'Woman sitting cross-legged on wooden floor, head gently bowed, soft diffused light from a nearby window, minimalist room, fine skin and hair texture, warm neutral tones, quiet and emotionally honest portrait, 4:5',neg:'harsh shadows, cold tones, busy room, jewelry, heavy makeup'}},
+
+{id:'c10',cat:'cura',pl:'Carrossel',sz:'Longo',ti:'Como parar de se sabotar',
+tx:`Slide 1 — CAPA
 Como parar de se sabotar (de verdade) 🌿
 
 Slide 2 — Reconheça o padrão
 Sabotagem raramente parece sabotagem. Parece cansaço, procrastinação, "não é o momento certo". Observe quando isso aparece — geralmente é quando você está prestes a crescer.
 
 Slide 3 — Entenda de onde vem
-A autossabotagem protege você de algo — medo de fracassar, de não merecer, de que vai acabar igual das outras vezes. Identifique o medo por trás do comportamento.
+A autossabotagem protege você de algo — medo de fracassar, de não merecer. Identifique o medo por trás do comportamento.
 
 Slide 4 — Não se condene
 Punição não resolve sabotagem. Curiosidade sim. Pergunte: o que essa parte de mim está tentando evitar?
@@ -321,11 +365,16 @@ Slide 6 — Celebre cada vez que escolheu diferente
 Reforço positivo cria novos padrões. Anote. Reconheça. Festeje até o que parece pequeno.
 
 Slide 7 — Busque suporte
-Padrões de sabotagem têm raízes profundas. Terapia, grupo de apoio, ou uma amiga de confiança fazem diferença real.
+Terapia, grupo de apoio, ou uma amiga de confiança fazem diferença real.
 
 Slide 8 — CTA
-Salva esse conteúdo para quando a sabotagem aparecer de novo 💛`,ht:'#autossabotagem #cura #crescimentopessoal #autoconhecimento #terapia #saudemental #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #sejamelhor'},
-{id:'f1',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Força que nasce do cansaço',tx:`Tem uma força que nasce só do cansaço. Não da euforia, não do entusiasmo do começo — mas do "eu já não aguento mais e mesmo assim vou continuar."
+Salva esse conteúdo para quando a sabotagem aparecer de novo 💛`,
+ht:'#autossabotagem #cura #crescimentopessoal #autoconhecimento #terapia #saudemental #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #sejamelhor',
+pr:{model:'Lucid Origin',prompt:'Woman standing at a crossroads in a misty forest path, two paths diverging, soft morning light filtering through trees, sense of choice and possibility, earthy green and gold tones, editorial photography, 4:5',neg:'dark mood, signs with text, urban, night'}},
+
+// ══ FORÇA ══
+{id:'f1',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Força que nasce do cansaço',
+tx:`Tem uma força que nasce só do cansaço. Não da euforia, não do entusiasmo do começo — mas do "eu já não aguento mais e mesmo assim vou continuar."
 
 Essa é a força que transforma.
 
@@ -333,15 +382,23 @@ Você já sentiu aquilo? Quando as pernas pesam, a mente grita pra parar, e aind
 
 Porque qualquer um consegue começar quando está animado. A questão é: quem você escolhe ser quando o entusiasmo vai embora?
 
-A mulher que você está se tornando foi construída nos dias em que você continuou sem ter vontade.`,ht:'#forca #resiliencia #motivacao #inspiracao #determinacao #crescimentopessoal #mulherpoderosa #superacao #vidacomproposito #frasesdodia #instagrambr #autocuidado #evolucaopessoal'},
-{id:'f2',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Você não precisa de aplausos',tx:`Levantou sem que ninguém visse?
+A mulher que você está se tornando foi construída nos dias em que você continuou sem ter vontade.`,
+ht:'#forca #resiliencia #motivacao #inspiracao #determinacao #crescimentopessoal #mulherpoderosa #superacao #vidacomproposito #frasesdodia #instagrambr #autocuidado #evolucaopessoal',
+pr:{model:'Kino XL',prompt:'Cinematic shot of a woman walking alone on a long empty road at dawn, strong backlight from rising sun, dramatic silhouette, dusty warm tones, sense of perseverance and quiet determination, 4:5 portrait ratio',neg:'crowd, urban, night, sad mood, dark'}},
+
+{id:'f2',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Você não precisa de aplausos',
+tx:`Levantou sem que ninguém visse?
 
 Reconstruiu em silêncio? Escolheu continuar mesmo sem ninguém torcendo?
 
 Isso é força. A mais real que existe.
 
-O mundo aplaude resultados. Mas só você sabe o que custou cada passo.`,ht:'#forca #silencio #resiliencia #motivacao #mulherpoderosa #reelsbrasil #superacao #inspiracao #frasesmotivacionais #determinacao'},
-{id:'f3',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'A mulher que você está se tornando',tx:`Existe uma versão de você que ainda não chegou, mas que você já pode sentir chegando.
+O mundo aplaude resultados. Mas só você sabe o que custou cada passo.`,
+ht:'#forca #silencio #resiliencia #motivacao #mulherpoderosa #reelsbrasil #superacao #inspiracao #frasesmotivacionais #determinacao',
+pr:{model:'Kino XL',prompt:'Woman standing alone at top of a hill at golden hour, arms relaxed, looking at the horizon, backlit silhouette with warm volumetric light, cinematic and epic atmosphere, 9:16 vertical',neg:'crowd, urban, night, sad expression'}},
+
+{id:'f3',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'A mulher que você está se tornando',
+tx:`Existe uma versão de você que ainda não chegou, mas que você já pode sentir chegando.
 
 Ela é mais inteira. Mais firme. Fala mais baixo mas ocupa mais espaço. Sabe dizer não sem se justificar por três parágrafos. Não precisa de aprovação para tomar decisões. Não encolhe para caber em lugar nenhum.
 
@@ -353,15 +410,23 @@ Esses atos parecem pequenos. Não são.
 
 Eles são os tijolos da mulher que você está construindo. E ela vai agradecer cada um deles.
 
-O que você fez hoje que essa versão futura de você ficaria orgulhosa?`,ht:'#mulherpoderosa #crescimentopessoal #forca #motivacao #inspiracao #evolucaopessoal #amorproprio #vidacomproposito #autoconhecimento #reflexao #instagrambr #superacao #determinacao'},
-{id:'f4',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Você foi feita para mais',tx:`Para de se encaixar onde você claramente transborda.
+O que você fez hoje que essa versão futura de você ficaria orgulhosa?`,
+ht:'#mulherpoderosa #crescimentopessoal #forca #motivacao #inspiracao #evolucaopessoal #amorproprio #vidacomproposito #autoconhecimento #reflexao #instagrambr #superacao #determinacao',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Photorealistic editorial portrait of a confident woman in natural light, direct soft gaze, loose natural hair, minimal makeup, natural skin texture, warm studio light, strong yet gentle energy, 85mm f1.4, commercial photography, 4:5',neg:'heavy makeup, harsh lighting, busy background, jewelry, cold tones'}},
+
+{id:'f4',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Você foi feita para mais',
+tx:`Para de se encaixar onde você claramente transborda.
 
 Você foi feita para ocupar espaço — não para pedir desculpa por existir.
 
 Sua presença não precisa de aprovação. Sua força não precisa de explicação.
 
-Sabe aquela sensação de que você tem muito mais pra dar? É real. Está esperando você acreditar nisso primeiro.`,ht:'#forca #mulherpoderosa #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #empoderamento #crescimentopessoal #frasesmotivacionais'},
-{id:'f5',cat:'forca',pl:'Carrossel',sz:'Longo',ti:'Os momentos que mais te fortaleceram',tx:`Slide 1 — CAPA
+Sabe aquela sensação de que você tem muito mais pra dar? É real. Está esperando você acreditar nisso primeiro.`,
+ht:'#forca #mulherpoderosa #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #empoderamento #crescimentopessoal #frasesmotivacionais',
+pr:{model:'Phoenix 1.0',prompt:'Woman with arms stretched wide open facing the sky in a vast open field, sunrise light, sense of freedom and expansion, warm golden tones, dreamy and empowering, cinematic landscape, 9:16 vertical',neg:'dark, confined space, sad, crowd'}},
+
+{id:'f5',cat:'forca',pl:'Carrossel',sz:'Longo',ti:'Os momentos que mais te fortaleceram',
+tx:`Slide 1 — CAPA
 Os momentos em que você se sentiu mais fraca foram os que mais te fortaleceram ⚡
 
 Slide 2 — Quando você pediu ajuda
@@ -380,8 +445,12 @@ Slide 6 — Quando você recomeçou do zero
 Isso exige um tipo de coragem que só quem já perdeu tudo entende.
 
 Slide 7 — CTA
-Qual desses momentos foi o mais difícil para você? Me conta nos comentários 💛`,ht:'#forca #superacao #crescimentopessoal #mulherpoderosa #motivacao #carrossel #instagrambr #reflexao #resiliencia #evolucaopessoal'},
-{id:'f6',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Resistência silenciosa',tx:`Tem uma resistência que ninguém vê. Que não vira post, não vira história, não é compartilhada.
+Qual desses momentos foi o mais difícil para você? Me conta nos comentários 💛`,
+ht:'#forca #superacao #crescimentopessoal #mulherpoderosa #motivacao #carrossel #instagrambr #reflexao #resiliencia #evolucaopessoal',
+pr:{model:'Phoenix 1.0',prompt:'Abstract art composition of cracked stone with golden light pouring through the cracks, kintsugi-inspired concept, dark stone texture with luminous gold, strength and beauty in brokenness, gallery quality, 4:5',neg:'text, faces, bright neon colors, cartoonish'}},
+
+{id:'f6',cat:'forca',pl:'Instagram Feed',sz:'Médio',ti:'Resistência silenciosa',
+tx:`Tem uma resistência que ninguém vê. Que não vira post, não vira história, não é compartilhada.
 
 É a resistência de acordar num dia difícil e continuar. De sorrir quando está pesado. De manter a compostura quando queria gritar. De fazer o que precisa ser feito mesmo sem ter vontade de nada.
 
@@ -389,29 +458,46 @@ Essa resistência silenciosa é o tipo de força que molda caráter.
 
 Não espere o mundo reconhecer. Você sabe o que custou. E isso é suficiente.
 
-Em que área da sua vida você tem exercido uma resistência que ninguém vê?`,ht:'#forca #resistencia #resiliencia #motivacao #instagrambr #inspiracao #mulherpoderosa #crescimentopessoal #determinacao #superacao #frasesdodia'},
-{id:'f7',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Guerreira que escolhe a paz',tx:`A mulher mais forte que conheço não grita. Não briga. Não precisa provar nada.
+Em que área da sua vida você tem exercido uma resistência que ninguém vê?`,
+ht:'#forca #resistencia #resiliencia #motivacao #instagrambr #inspiracao #mulherpoderosa #crescimentopessoal #determinacao #superacao #frasesdodia',
+pr:{model:'Kino XL',prompt:'Woman alone in light rain, face slightly turned upward, peaceful expression, wet hair, moody cinematic lighting with warm backlight cutting through grey sky, 50mm lens, film grain, emotional resilience, 4:5',neg:'extreme rain, dark expression, harsh lighting, airbrushed'}},
+
+{id:'f7',cat:'forca',pl:'Instagram Reels',sz:'Curto',ti:'Guerreira que escolhe a paz',
+tx:`A mulher mais forte que conheço não grita. Não briga. Não precisa provar nada.
 
 Ela simplesmente sabe quem é.
 
-E essa certeza — essa paz com ela mesma — é o tipo de força que nenhuma circunstância consegue tirar.`,ht:'#forca #paz #mulherpoderosa #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autoconhecimento #resiliencia'},
-{id:'f8',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Levanta. Mesmo assim.',tx:`Não precisa estar pronta.
+E essa certeza — essa paz com ela mesma — é o tipo de força que nenhuma circunstância consegue tirar.`,
+ht:'#forca #paz #mulherpoderosa #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autoconhecimento #resiliencia',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Photorealistic portrait of a serene woman, direct confident gaze, soft smile, natural light from large window, clean minimal background, natural skin, 85mm portrait, peaceful strength energy, 9:16 vertical',neg:'heavy makeup, harsh shadows, busy background, jewelry'}},
+
+{id:'f8',cat:'forca',pl:'TikTok',sz:'Curto',ti:'Levanta. Mesmo assim.',
+tx:`Não precisa estar pronta.
 Não precisa ter certeza.
 Não precisa ter energia sobrando.
 
 Levanta mesmo assim.
 
-Porque às vezes a única diferença entre quem chegou e quem ficou foi isso: levantou mais uma vez do que caiu.`,ht:'#forca #levantar #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #determinacao #frasesmotivacionais #superacao #resiliencia'},
-{id:'f9',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'Quando a vida te quebra',tx:`Tem momentos que a vida simplesmente quebra você. Não metaforicamente — de verdade. Aquele tipo de dor que você sente no peito, que tira o ar, que faz você questionar tudo que acreditava.
+Porque às vezes a única diferença entre quem chegou e quem ficou foi isso: levantou mais uma vez do que caiu.`,
+ht:'#forca #levantar #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #determinacao #frasesmotivacionais #superacao #resiliencia',
+pr:{model:'Kino XL',prompt:'Cinematic low angle shot of woman\'s feet stepping forward on a stone path at dawn, long shadows, sunrise light ahead, powerful and determined mood, 9:16 vertical',neg:'people in background, dark mood, night'}},
+
+{id:'f9',cat:'forca',pl:'Instagram Feed',sz:'Longo',ti:'Quando a vida te quebra',
+tx:`Tem momentos que a vida simplesmente quebra você. Não metaforicamente — de verdade. Aquele tipo de dor que você sente no peito, que tira o ar, que faz você questionar tudo que acreditava.
 
 E num momento desses, o que mais dói não é a dor em si. É a sensação de que você não tem mais forças. Que essa foi a última.
 
 Mas aqui está o que ninguém te conta: você já sobreviveu a 100% dos seus piores dias. Cada um deles. Inclusive aquele que você jurou que não ia conseguir.
 
-A quebra não é o fim. Às vezes é o início de uma reconstrução que vai ser muito mais sólida do que o que existia antes. Porque dessa vez você vai construir sabendo o que resiste e o que não resiste.
+A quebra não é o fim. Às vezes é o início de uma reconstrução que vai ser muito mais sólida do que o que existia antes.
 
-Você está numa quebra agora? Ou olhando pra trás para uma que já passou? Me conta. Esse espaço é seu.`,ht:'#forca #superacao #resiliencia #cura #motivacao #instagrambr #reflexao #crescimentopessoal #evolucaopessoal #vidacomproposito #frasesdodia #amorproprio #saudemental'},
-{id:'fe1',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'O timing divino não atrasa',tx:`Existe uma diferença entre esperar com ansiedade e esperar com fé.
+Você está numa quebra agora? Ou olhando pra trás para uma que já passou? Me conta. Esse espaço é seu.`,
+ht:'#forca #superacao #resiliencia #cura #motivacao #instagrambr #reflexao #crescimentopessoal #evolucaopessoal #vidacomproposito #frasesdodia #amorproprio #saudemental',
+pr:{model:'Phoenix 1.0',prompt:'Woman sitting on the floor against a white wall, knees drawn up, soft afternoon light, contemplative and raw emotional mood, natural skin texture, minimal styling, earthy and honest portrait photography, 4:5',neg:'heavy makeup, sad crying, dark tones, cold light'}},
+
+// ══ FÉ ══
+{id:'fe1',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'O timing divino não atrasa',
+tx:`Existe uma diferença entre esperar com ansiedade e esperar com fé.
 
 Ansiedade olha para o relógio. Fé confia no processo mesmo sem ver o relógio.
 
@@ -419,29 +505,45 @@ O que ainda não chegou na sua vida não está atrasado. Está sendo preparado. 
 
 O que você perdeu te abriu espaço para o que vem. O que doeu te ensinou o que você precisava saber. O silêncio que você viveu te deu a força para segurar o que está vindo.
 
-Confie no timing. Não no seu — no Dele.`,ht:'#fe #timingdivino #confiancaemDeus #Deus #espiritualidade #oracao #gratidao #femovemontanhas #planodeDeus #milagre #reflexao #inspiracao #instagrambr #motivacao'},
-{id:'fe2',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A oração que agradece antes',tx:`A oração mais poderosa não é a que pede.
+Confie no timing. Não no seu — no Dele.`,
+ht:'#fe #timingdivino #confiancaemDeus #Deus #espiritualidade #oracao #gratidao #femovemontanhas #planodeDeus #milagre #reflexao #inspiracao #instagrambr #motivacao',
+pr:{model:'Phoenix 1.0',prompt:'Woman standing in a misty field at golden hour, soft ethereal light, dust particles floating in warm beams of sunlight, peaceful and spiritual mood, arms slightly open, sense of divine trust, 4:5 portrait',neg:'dark, sad expression, rain, urban, cold tones'}},
+
+{id:'fe2',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A oração que agradece antes',
+tx:`A oração mais poderosa não é a que pede.
 
 É a que agradece antes de ver. Que confia antes de entender. Que diz obrigada pelo que ainda está vindo.
 
-Essa fé move o que a lógica não consegue explicar.`,ht:'#fe #oracao #gratidao #Deus #espiritualidade #confiancaemDeus #milagre #reelsbrasil #inspiracao #frasesmotivacionais #femovemontanhas'},
-{id:'fe3',cat:'fe',pl:'Instagram Feed',sz:'Longo',ti:'Quando tudo desaba e a fé sustenta',tx:`Teve um momento na minha vida em que eu não tinha mais argumentos. Não tinha plano B. Não tinha certeza do próximo passo. Tinha só uma coisa: a decisão de continuar confiando mesmo sem entender.
+Essa fé move o que a lógica não consegue explicar.`,
+ht:'#fe #oracao #gratidao #Deus #espiritualidade #confiancaemDeus #milagre #reelsbrasil #inspiracao #frasesmotivacionais #femovemontanhas',
+pr:{model:'Lucid Origin',prompt:'Hands clasped in prayer with soft candlelight, warm amber glow, bokeh background, fine skin texture, intimate and spiritual mood, shallow depth of field, 9:16 vertical',neg:'cold light, dark background, harsh shadows'}},
+
+{id:'fe3',cat:'fe',pl:'Instagram Feed',sz:'Longo',ti:'Quando tudo desaba e a fé sustenta',
+tx:`Teve um momento na minha vida em que eu não tinha mais argumentos. Não tinha plano B. Não tinha certeza do próximo passo. Tinha só uma coisa: a decisão de continuar confiando mesmo sem entender.
 
 Fé não é a ausência de dúvida. É a escolha de caminhar mesmo com ela.
 
-É olhar para uma situação que não faz sentido nenhum e dizer: mesmo assim, eu confio. Mesmo assim, eu sigo. Mesmo assim, eu acredito que isso vai ter um porquê que ainda não consigo ver.
+É olhar para uma situação que não faz sentido nenhum e dizer: mesmo assim, eu confio. Mesmo assim, eu sigo.
 
-E o que acontece quando você faz isso? Não necessariamente tudo resolve na hora. Mas algo em você muda. Uma paz que não tem lógica começa a pousar.
+E o que acontece quando você faz isso? Uma paz que não tem lógica começa a pousar.
 
 É isso que a fé faz — não remove os obstáculos. Muda quem você é ao atravessá-los.
 
-Você passou por algo que só a fé te sustentou? Me conta nos comentários 🤍`,ht:'#fe #confiancaemDeus #Deus #espiritualidade #oracao #reflexao #inspiracao #femovemontanhas #planodeDeus #gratidao #motivacao #vidacomproposito #instagrambr #milagre #paz'},
-{id:'fe4',cat:'fe',pl:'TikTok',sz:'Curto',ti:'Deus no silêncio',tx:`Às vezes Deus não responde com um milagre visível.
+Você passou por algo que só a fé te sustentou? Me conta nos comentários 🤍`,
+ht:'#fe #confiancaemDeus #Deus #espiritualidade #oracao #reflexao #inspiracao #femovemontanhas #planodeDeus #gratidao #motivacao #vidacomproposito #instagrambr #milagre #paz',
+pr:{model:'Phoenix 1.0',prompt:'Woman walking through a narrow path in an ancient forest, cathedral-like trees, shafts of golden light breaking through the canopy, spiritual and reverent atmosphere, warm emerald and gold tones, 4:5',neg:'dark, threatening, people, urban, night'}},
+
+{id:'fe4',cat:'fe',pl:'TikTok',sz:'Curto',ti:'Deus no silêncio',
+tx:`Às vezes Deus não responde com um milagre visível.
 
 Ele responde com paz. Com uma porta que fecha antes de você entrar no lugar errado. Com um não que você só vai entender depois.
 
-O silêncio de Deus não é ausência. É proteção que você ainda não consegue ver.`,ht:'#fe #Deus #espiritualidade #timingdivino #planodeDeus #tiktokbrasil #fyp #paravocê #confiancaemDeus #motivacao #frasesmotivacionais'},
-{id:'fe5',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'Entregar sem abrir mão',tx:`Entregar nas mãos de Deus não é desistir. Não é cruzar os braços e esperar que tudo caia do céu.
+O silêncio de Deus não é ausência. É proteção que você ainda não consegue ver.`,
+ht:'#fe #Deus #espiritualidade #timingdivino #planodeDeus #tiktokbrasil #fyp #paravocê #confiancaemDeus #motivacao #frasesmotivacionais',
+pr:{model:'Kino XL',prompt:'Cinematic shot of light rays streaming through a small church window onto an empty wooden bench, dust particles visible, sacred silence mood, warm golden light, 9:16 vertical',neg:'people, dark, horror mood, cold blue tones'}},
+
+{id:'fe5',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'Entregar sem abrir mão',
+tx:`Entregar nas mãos de Deus não é desistir. Não é cruzar os braços e esperar que tudo caia do céu.
 
 É fazer a sua parte — com tudo que você tem — e confiar que o resultado não está só nas suas mãos.
 
@@ -449,23 +551,31 @@ O silêncio de Deus não é ausência. É proteção que você ainda não conseg
 
 Você corre, planta, trabalha, tenta. E depois — aí sim — você descansa no colo de quem tem a visão que você não tem.
 
-O que você está tentando controlar que precisaria ser entregue?`,ht:'#fe #Deus #espiritualidade #oracao #confiancaemDeus #reflexao #motivacao #instagrambr #planodeDeus #crescimentopessoal #paz #frasesdodia'},
-{id:'fe6',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A bênção disfarçada',tx:`A perda que te arrasou era a bênção que você ainda não conseguia reconhecer.
+O que você está tentando controlar que precisaria ser entregue?`,
+ht:'#fe #Deus #espiritualidade #oracao #confiancaemDeus #reflexao #motivacao #instagrambr #planodeDeus #crescimentopessoal #paz #frasesdodia',
+pr:{model:'Lucid Origin',prompt:'Woman tending to a garden at golden hour, planting seeds in rich soil, warm backlight, peaceful and intentional mood, earthy tones of terracotta and green, editorial lifestyle photography, 4:5',neg:'dark, cold, rushed, urban, winter'}},
+
+{id:'fe6',cat:'fe',pl:'Instagram Reels',sz:'Curto',ti:'A bênção disfarçada',
+tx:`A perda que te arrasou era a bênção que você ainda não conseguia reconhecer.
 
 O término que te destruiu abriu espaço para o que veio depois. A porta que fechou te redirecionou para o caminho certo.
 
-Olha pra trás. Você vai ver: o que pareceu fim sempre foi passagem.`,ht:'#fe #bencao #Deus #timingdivino #reelsbrasil #motivacao #inspiracao #espiritualidade #planodeDeus #frasesmotivacionais #confiancaemDeus'},
-{id:'fe7',cat:'fe',pl:'Carrossel',sz:'Longo',ti:'Quando a fé é testada',tx:`Slide 1 — CAPA
+Olha pra trás. Você vai ver: o que pareceu fim sempre foi passagem.`,
+ht:'#fe #bencao #Deus #timingdivino #reelsbrasil #motivacao #inspiracao #espiritualidade #planodeDeus #frasesmotivacionais #confiancaemDeus',
+pr:{model:'Phoenix 1.0',prompt:'A closed door in soft light with warm golden glow coming from under it and from around the frame, symbolic and hopeful, minimal interior, 9:16 vertical, spiritual concept photography',neg:'dark horror mood, cold tones, scary'}},
+
+{id:'fe7',cat:'fe',pl:'Carrossel',sz:'Longo',ti:'Quando a fé é testada',
+tx:`Slide 1 — CAPA
 O que fazer quando sua fé é testada ✨
 
 Slide 2 — Permita-se questionar
 Fé real sobrevive às perguntas. Questionar não é apostasia — é honestidade.
 
 Slide 3 — Volte ao que você já viu Dele
-Em algum momento Ele esteve lá. Lembre. A memória das fidelidades passadas sustenta a fé no presente.
+A memória das fidelidades passadas sustenta a fé no presente.
 
 Slide 4 — Não confunda silêncio com abandono
-Os momentos de silêncio espiritual são, muitas vezes, os de maior crescimento de raiz.
+Os momentos de silêncio espiritual são os de maior crescimento de raiz.
 
 Slide 5 — Ore mesmo sem vontade
 A oração mais honesta começa com "Eu não entendo". Isso também é oração.
@@ -474,11 +584,15 @@ Slide 6 — Busque comunidade
 Fé sozinha se cansa. Comunidade de fé renova e sustenta.
 
 Slide 7 — Continue caminhando
-Nem sempre dá pra ver o próximo passo. Às vezes a fé é só dar o passo com a luz que você tem agora.
+Às vezes a fé é só dar o passo com a luz que você tem agora.
 
 Slide 8 — CTA
-Salva para quando sua fé estiver sendo testada. E manda para alguém que precisa ouvir isso hoje 🙏`,ht:'#fe #Deus #espiritualidade #confiancaemDeus #oracao #carrossel #instagrambr #reflexao #femovemontanhas #planodeDeus #crescimentopessoal'},
-{id:'fe8',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'A intuição como voz do sagrado',tx:`Tem uma voz que fala mais baixo que o barulho do mundo. Mais gentil que a ansiedade. Mais firme que o medo.
+Salva para quando sua fé estiver sendo testada 🙏`,
+ht:'#fe #Deus #espiritualidade #confiancaemDeus #oracao #carrossel #instagrambr #reflexao #femovemontanhas #planodeDeus #crescimentopessoal',
+pr:{model:'Lucid Origin',prompt:'Open Bible on a wooden table with soft morning light, dried flowers as bookmark, steam from a cup of tea nearby, warm ivory and amber tones, peaceful morning ritual, lifestyle photography, 4:5',neg:'dark, cold, harsh light, modern plastic elements'}},
+
+{id:'fe8',cat:'fe',pl:'Instagram Feed',sz:'Médio',ti:'A intuição como voz do sagrado',
+tx:`Tem uma voz que fala mais baixo que o barulho do mundo. Mais gentil que a ansiedade. Mais firme que o medo.
 
 Você provavelmente já a ouviu — e às vezes ignorou. E depois ficou pensando: "eu sabia. Eu sentia que era isso."
 
@@ -486,8 +600,13 @@ Essa voz é a sua intuição. E para muitas pessoas, é também onde Deus fala.
 
 Aprender a ouvir essa voz — a cultivar o silêncio para que ela se faça ouvir — é um dos atos mais espirituais que existem.
 
-O que ela está te dizendo agora que você ainda não ouviu direito?`,ht:'#fe #intuicao #espiritualidade #Deus #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #paz #vidacomproposito #frasesdodia'},
-{id:'a1',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'Você merece o amor que dá',tx:`Você daria a uma amiga o que dá pra si mesma?
+O que ela está te dizendo agora que você ainda não ouviu direito?`,
+ht:'#fe #intuicao #espiritualidade #Deus #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #paz #vidacomproposito #frasesdodia',
+pr:{model:'Phoenix 1.0',prompt:'Woman sitting in meditation in a serene forest clearing, soft light filtering through leaves, butterflies nearby, ethereal and sacred atmosphere, soft greens and golds, spiritual portrait, 4:5',neg:'urban, night, cold tones, people, busy background'}},
+
+// ══ AMOR PRÓPRIO ══
+{id:'a1',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'Você merece o amor que dá',
+tx:`Você daria a uma amiga o que dá pra si mesma?
 
 Daria a ela o cansaço sem descanso, a crítica sem compaixão, a exigência sem gentileza? Não. Você seria suave com ela. Compreensiva. Paciente.
 
@@ -497,15 +616,23 @@ Amor próprio não é um spa ou uma frase bonita no espelho. É a maneira como v
 
 Você merece o mesmo cuidado que você oferece tão generosamente para o mundo.
 
-Em que área da sua vida você precisa ser mais gentil consigo mesma?`,ht:'#amorproprio #selflove #autocuidado #selfcare #crescimentopessoal #limites #autoestima #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #evolucaopessoal #sejamelhor'},
-{id:'a2',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Limites são amor próprio',tx:`Dizer não não é egoísmo.
+Em que área da sua vida você precisa ser mais gentil consigo mesma?`,
+ht:'#amorproprio #selflove #autocuidado #selfcare #crescimentopessoal #limites #autoestima #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #evolucaopessoal #sejamelhor',
+pr:{model:'Lucid Origin',prompt:'Woman in a cozy bathrobe holding a cup of tea, smiling softly to herself by a sunlit window, self-care morning ritual, warm ivory tones, candles nearby, editorial lifestyle photography, 4:5',neg:'dark, cold, rushed, sad, busy background'}},
+
+{id:'a2',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Limites são amor próprio',
+tx:`Dizer não não é egoísmo.
 
 É saber o que você tem de dar — e decidir, conscientemente, para quem e para o quê.
 
 Quem drena tudo que você tem não te ama do jeito que você precisa. E você não precisa provar nada esgotando o que te resta.
 
-Limites não afastam quem te ama. Afastam quem precisava que você não tivesse nenhum.`,ht:'#amorproprio #limites #selflove #autocuidado #reflexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal'},
-{id:'a3',cat:'amor',pl:'Carrossel',sz:'Longo',ti:'10 sinais de que você está evoluindo',tx:`Slide 1 — CAPA
+Limites não afastam quem te ama. Afastam quem precisava que você não tivesse nenhum.`,
+ht:'#amorproprio #limites #selflove #autocuidado #reflexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Photorealistic portrait of a woman with a calm, firm, confident expression, direct gaze, soft natural light, minimal styling, clean background, 85mm portrait, quiet strength and self-assurance, 9:16',neg:'heavy makeup, cold tones, harsh shadows, busy background'}},
+
+{id:'a3',cat:'amor',pl:'Carrossel',sz:'Longo',ti:'10 sinais de que você está evoluindo',
+tx:`Slide 1 — CAPA
 10 sinais de que você está evoluindo sem perceber ✨
 
 Slide 2 — Você para antes de reagir
@@ -527,22 +654,30 @@ Slide 7 — Você sente a dor e continua mesmo assim
 Não sem sentir — sentindo e escolhendo seguir.
 
 Slide 8 — Você cortou o que drenou você por tempo demais
-Uma relação, um hábito, uma narrativa. Isso exige muita força.
+Uma relação, um hábito, uma narrativa.
 
 Slide 9 — Você está em paz com coisas que antes te consumiam
-Trabalho interno silencioso. Acontece devagar.
+Trabalho interno silencioso.
 
 Slide 10 — Você chegou até aqui
 Depois de tudo que tentou te parar. Isso já é evolução.
 
 Slide 11 — CTA
-Salva e manda pra alguém que precisa lembrar que está evoluindo 💛`,ht:'#amorproprio #evolucaopessoal #crescimentopessoal #autoconhecimento #reflexao #inspiracao #carrossel #motivacao #instagrambr #sejamelhor #selflove'},
-{id:'a4',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Você não precisa de permissão',tx:`Você não precisa de permissão para:
+Salva e manda pra alguém que precisa lembrar que está evoluindo 💛`,
+ht:'#amorproprio #evolucaopessoal #crescimentopessoal #autoconhecimento #reflexao #inspiracao #carrossel #motivacao #instagrambr #sejamelhor #selflove',
+pr:{model:'Lucid Origin',prompt:'Woman looking at her reflection in a calm lake, surrounded by lush greenery, golden hour light, introspective and peaceful mood, earthy tones, editorial fine art photography, 4:5',neg:'dark, night, cold, urban, sad'}},
+
+{id:'a4',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Você não precisa de permissão',
+tx:`Você não precisa de permissão para:
 
 Mudar de ideia. Ocupar espaço. Discordar. Escolher você mesma. Dizer não. Começar de novo. Querer mais.
 
-A única aprovação que você precisava sempre foi a sua própria — e você ficou anos esperando de todo mundo menos de você.`,ht:'#amorproprio #permissao #selflove #tiktokbrasil #fyp #paravocê #motivacao #empoderamento #frasesmotivacionais #crescimentopessoal #autoestima'},
-{id:'a5',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'O relacionamento mais importante',tx:`O relacionamento mais importante da sua vida é o que você tem com você mesma.
+A única aprovação que você precisava sempre foi a sua própria — e você ficou anos esperando de todo mundo menos de você.`,
+ht:'#amorproprio #permissao #selflove #tiktokbrasil #fyp #paravocê #motivacao #empoderamento #frasesmotivacionais #crescimentopessoal #autoestima',
+pr:{model:'Kino XL',prompt:'Cinematic portrait of a woman throwing her head back laughing freely, outdoors in natural light, motion blur in hair, carefree and liberated energy, warm tones, 9:16 vertical',neg:'dark, sad, posed, forced smile, cold tones'}},
+
+{id:'a5',cat:'amor',pl:'Instagram Feed',sz:'Médio',ti:'O relacionamento mais importante',
+tx:`O relacionamento mais importante da sua vida é o que você tem com você mesma.
 
 E como está esse relacionamento? Você trata a si mesma com respeito? Você se dá descanso quando precisa? Você fala consigo com gentileza?
 
@@ -550,8 +685,12 @@ Porque como você se trata define — mais do que qualquer outra coisa — o ní
 
 Quem aprende a se respeitar atrai respeito. Quem aprende a se cuidar atrai cuidado.
 
-Tudo começa em você.`,ht:'#amorproprio #selflove #autoestima #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #relacionamentos #evolucaopessoal #vidacomproposito'},
-{id:'a6',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Parar de se diminuir',tx:`Você diminui você mesma antes que alguém possa fazer isso.
+Tudo começa em você.`,
+ht:'#amorproprio #selflove #autoestima #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #relacionamentos #evolucaopessoal #vidacomproposito',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Woman sitting alone at a beautifully set table with candles, dining with herself, warm intimate lighting, elegant yet approachable, 85mm, self-love concept, warm golden tones, 4:5',neg:'sad, cold, dark, rushed, cheap'}},
+
+{id:'a6',cat:'amor',pl:'Instagram Reels',sz:'Curto',ti:'Parar de se diminuir',
+tx:`Você diminui você mesma antes que alguém possa fazer isso.
 
 Soa familiar?
 
@@ -559,68 +698,97 @@ Soa familiar?
 
 Isso não é humildade. É proteção contra rejeição que você aprendeu cedo demais.
 
-Você pode parar. Você pode simplesmente dizer: eu fiz. Eu sou. Eu mereço.`,ht:'#amorproprio #autoestima #selflove #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #sejamelhor #empoderamento'},
-{id:'a7',cat:'amor',pl:'Instagram Feed',sz:'Longo',ti:'Aprender a gostar da própria companhia',tx:`Tem uma habilidade que ninguém ensina e que muda tudo: gostar da própria companhia.
+Você pode parar. Você pode simplesmente dizer: eu fiz. Eu sou. Eu mereço.`,
+ht:'#amorproprio #autoestima #selflove #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #sejamelhor #empoderamento',
+pr:{model:'Phoenix 1.0',prompt:'Woman standing tall and centered, direct confident gaze at camera, warm natural light, shoulders back, sense of self-worth and presence, editorial portrait, minimal background, warm tones, 9:16',neg:'uncertain pose, cold tones, busy background, heavy makeup'}},
+
+{id:'a7',cat:'amor',pl:'Instagram Feed',sz:'Longo',ti:'Aprender a gostar da própria companhia',
+tx:`Tem uma habilidade que ninguém ensina e que muda tudo: gostar da própria companhia.
 
 Estar consigo mesma sem precisar de distração. Sem celular, sem série, sem ocupação. Só você — com seus pensamentos, seu silêncio, sua presença.
 
-Parece simples. Na prática, é um dos exercícios mais difíceis que existem — especialmente se você passou a vida inteira buscando aprovação fora.
+Parece simples. Na prática, é um dos exercícios mais difíceis que existem.
 
-Porque quando você fica em silêncio com você mesma, o que aparece primeiro são as coisas que você está evitando. A voz que você não quer ouvir.
+Porque quando você fica em silêncio com você mesma, o que aparece primeiro são as coisas que você está evitando.
 
-Mas se você aguentar esse desconforto inicial, algo acontece. Você começa a se conhecer de verdade. A ouvir o que você realmente quer — não o que você foi ensinada a querer.
+Mas se você aguentar esse desconforto inicial, algo acontece. Você começa a se conhecer de verdade.
 
-Você consegue ficar em silêncio com você mesma por 10 minutos sem pegar o celular?`,ht:'#amorproprio #solitude #autoconhecimento #selflove #reflexao #motivacao #instagrambr #presenca #mindfulness #crescimentopessoal #frasesdodia #autocuidado'},
-{id:'a8',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Escolher você mesma',tx:`Chega um ponto onde você precisa escolher: continuar sendo quem os outros precisam que você seja, ou começar a ser quem você realmente é.
+Você consegue ficar em silêncio com você mesma por 10 minutos sem pegar o celular?`,
+ht:'#amorproprio #solitude #autoconhecimento #selflove #reflexao #motivacao #instagrambr #presenca #mindfulness #crescimentopessoal #frasesdodia #autocuidado',
+pr:{model:'Lucid Origin',prompt:'Woman reading alone in a cozy armchair by a window, soft afternoon light, cup of tea on the side table, cat curled nearby, peaceful solitude, warm amber and cream tones, lifestyle photography, 4:5',neg:'phone, TV, dark, cold, busy room'}},
+
+{id:'a8',cat:'amor',pl:'TikTok',sz:'Curto',ti:'Escolher você mesma',
+tx:`Chega um ponto onde você precisa escolher: continuar sendo quem os outros precisam que você seja, ou começar a ser quem você realmente é.
 
 Essa escolha vai custar alguma coisa. Toda escolha real custa.
 
-Mas o preço de não se escolher — pago em silêncio, dia após dia — é muito mais alto.`,ht:'#amorproprio #escolha #selflove #tiktokbrasil #fyp #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autenticidade #identidade'},
-{id:'p1',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'O que te faz levantar?',tx:`Você sabe o que te faz levantar da cama com vontade?
+Mas o preço de não se escolher — pago em silêncio, dia após dia — é muito mais alto.`,
+ht:'#amorproprio #escolha #selflove #tiktokbrasil #fyp #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autenticidade #identidade',
+pr:{model:'Kino XL',prompt:'Cinematic close-up of a woman looking at herself in a mirror, warm light, introspective and resolute expression, sense of self-recognition, soft film grain, 9:16 vertical',neg:'dark, sad, cracked mirror, cold tones'}},
+
+// ══ PROPÓSITO ══
+{id:'p1',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'O que te faz levantar?',
+tx:`Você sabe o que te faz levantar da cama com vontade?
 
 Não por obrigação. Não pelo alarme, pela conta pra pagar, pelo medo de atrasar. Mas por algo que pulsa dentro de você que diz: isso importa, isso tem sentido, isso é meu.
 
 Propósito não precisa ser grandioso. Não precisa ser uma missão de salvar o mundo.
 
-Pode ser cuidar bem das pessoas que você ama. Criar algo com suas mãos. Ser presença real na vida de alguém. Ensinar. Construir. Transformar o que é seu em algo que dura.
+Pode ser cuidar bem das pessoas que você ama. Criar algo com suas mãos. Ser presença real na vida de alguém.
 
 A pergunta não é "qual é meu propósito". A pergunta é: "o que eu faço que me faz sentir viva?"
 
-O que você estaria fazendo agora se o dinheiro não fosse uma preocupação?`,ht:'#proposito #vidacomproposito #motivacao #inspiracao #missao #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #instagrambr #evolucaopessoal #sonhos'},
-{id:'p2',cat:'proposito',pl:'TikTok',sz:'Curto',ti:'Pare de esperar a hora certa',tx:`A hora certa não existe. Existe a hora que você decide que é agora.
+O que você estaria fazendo agora se o dinheiro não fosse uma preocupação?`,
+ht:'#proposito #vidacomproposito #motivacao #inspiracao #missao #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #instagrambr #evolucaopessoal #sonhos',
+pr:{model:'Lucid Origin',prompt:'Woman working with clay or painting in a bright studio, natural light, focused and absorbed in her craft, creative flow state, warm earthy tones, flour or paint on hands, editorial lifestyle, 4:5',neg:'corporate, dark, rushed, cold, phone'}},
+
+{id:'p2',cat:'proposito',pl:'TikTok',sz:'Curto',ti:'Pare de esperar a hora certa',
+tx:`A hora certa não existe. Existe a hora que você decide que é agora.
 
 Você vai esperar estar pronta? Pronta não chega. Ela se constrói no fazer.
 
 O projeto que você adia. A mudança que você posterga. A vida que você deixa pra depois.
 
-Depois é agora.`,ht:'#proposito #agir #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #crescimentopessoal #sonhos #determinacao #frasesmotivacionais'},
-{id:'p3',cat:'proposito',pl:'Instagram Feed',sz:'Longo',ti:'Quando o trabalho vira missão',tx:`Existe uma diferença enorme entre trabalhar por necessidade e trabalhar por propósito.
+Depois é agora.`,
+ht:'#proposito #agir #motivacao #tiktokbrasil #fyp #paravocê #inspiracao #crescimentopessoal #sonhos #determinacao #frasesmotivacionais',
+pr:{model:'Kino XL',prompt:'Woman stepping off a ledge onto a path with confidence, symbolic first step, sunrise ahead, cinematic and empowering, warm tones, 9:16 vertical',neg:'falling, fear, dark, night, urban'}},
 
-No trabalho por necessidade, você monitora o relógio. Conta os dias para o fim de semana. Faz o mínimo necessário para manter as coisas funcionando.
+{id:'p3',cat:'proposito',pl:'Instagram Feed',sz:'Longo',ti:'Quando o trabalho vira missão',
+tx:`Existe uma diferença enorme entre trabalhar por necessidade e trabalhar por propósito.
 
-No trabalho por propósito, você perde a noção do tempo. Você se preocupa com qualidade mesmo quando ninguém está olhando. Você quer que aquilo que você faz faça diferença.
+No trabalho por necessidade, você monitora o relógio. Conta os dias para o fim de semana.
+
+No trabalho por propósito, você perde a noção do tempo. Você se preocupa com qualidade mesmo quando ninguém está olhando.
 
 Essa transição não acontece de uma vez. Mas começa com uma pergunta honesta: do que eu faço hoje, o que faz sentido pra mim além do salário?
 
-Propósito não é um destino. É uma direção que você pode começar a perseguir hoje.`,ht:'#proposito #missao #vidacomproposito #trabalho #motivacao #instagrambr #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #sonhos #evolucaopessoal'},
-{id:'p4',cat:'proposito',pl:'Instagram Reels',sz:'Curto',ti:'Seu dom não pede licença',tx:`Existe algo que você faz que parece natural pra você e impressiona os outros.
+Propósito não é um destino. É uma direção que você pode começar a perseguir hoje.`,
+ht:'#proposito #missao #vidacomproposito #trabalho #motivacao #instagrambr #crescimentopessoal #autoconhecimento #reflexao #frasesdodia #sonhos #evolucaopessoal',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Woman at a beautifully organized desk, surrounded by plants and natural light, deeply focused on her work, content and energized expression, warm home office, 85mm, 4:5',neg:'corporate office, dark, stressed expression, phone in hand'}},
+
+{id:'p4',cat:'proposito',pl:'Instagram Reels',sz:'Curto',ti:'Seu dom não pede licença',
+tx:`Existe algo que você faz que parece natural pra você e impressiona os outros.
 
 Algo que você não acha grande coisa — mas que as pessoas ao redor reconhecem como especial.
 
 Esse é seu dom. E ele não pede licença — ele insiste. Aparece mesmo quando você tenta ignorar.
 
-Para de diminuir o que você tem de único.`,ht:'#proposito #dom #talentos #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #vidacomproposito #autenticidade'},
-{id:'p5',cat:'proposito',pl:'Carrossel',sz:'Longo',ti:'Como descobrir seu propósito',tx:`Slide 1 — CAPA
+Para de diminuir o que você tem de único.`,
+ht:'#proposito #dom #talentos #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #vidacomproposito #autenticidade',
+pr:{model:'Lucid Origin',prompt:'Woman painting or writing at sunrise, light pouring over her workspace, absorbed in creation, warm golden tones, creative energy visible, editorial lifestyle photography, 9:16 vertical',neg:'dark, corporate, stressed, rushed'}},
+
+{id:'p5',cat:'proposito',pl:'Carrossel',sz:'Longo',ti:'Como descobrir seu propósito',
+tx:`Slide 1 — CAPA
 Como descobrir seu propósito (sem grandes revelações) 🔥
 
 Slide 2 — Observe o que te indigna
-Injustiça que te move, problema que você não consegue ignorar — pista sobre o que você veio fazer.
+Injustiça que te move — pista sobre o que você veio fazer.
 
 Slide 3 — Note o que você faz de graça
-O que você faria mesmo sem receber? O que você ensina sem pensar?
+O que você faria mesmo sem receber?
 
 Slide 4 — Volte para o que você amava antes de "crescer"
-Antes da pressão por produtividade, o que te enchia de vida?
+Muitas vezes o propósito estava lá desde sempre.
 
 Slide 5 — Teste, não planeje
 Propósito aparece quando você age, testa, cria, se expõe.
@@ -632,136 +800,189 @@ Slide 7 — A pergunta que muda tudo
 "O que eu posso fazer que faz bem pra mim E para pelo menos uma outra pessoa?"
 
 Slide 8 — CTA
-Salva e compartilha com alguém que está procurando seu caminho 🔥`,ht:'#proposito #missao #vidacomproposito #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #reflexao #evolucaopessoal #sonhos'},
-{id:'p6',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'Viver de acordo com seus valores',tx:`Tem uma desconexão que esgota — e é quando o que você faz não tem nada a ver com o que você acredita.
+Salva e compartilha com alguém que está procurando seu caminho 🔥`,
+ht:'#proposito #missao #vidacomproposito #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #reflexao #evolucaopessoal #sonhos',
+pr:{model:'Phoenix 1.0',prompt:'Compass resting on an open map on a wooden table, warm side light, travel and direction concept, earthy tones, intentional and purposeful mood, lifestyle flat lay photography, 4:5',neg:'digital screen, cold tones, dark, rushed'}},
 
-Quando você trabalha em algo que vai contra seus valores. Quando você age de um jeito e pensa de outro.
+{id:'p6',cat:'proposito',pl:'Instagram Feed',sz:'Médio',ti:'Viver de acordo com seus valores',
+tx:`Tem uma desconexão que esgota — e é quando o que você faz não tem nada a ver com o que você acredita.
 
-Essa dissonância drena. Cansa de um jeito diferente do cansaço físico.
+Quando você age de um jeito e pensa de outro. Essa dissonância drena.
 
 A vida que faz sentido não é necessariamente a mais fácil. Mas é aquela em que você se olha no espelho e se reconhece.
 
-O que você acredita? E o que você está fazendo está alinhado com isso?`,ht:'#proposito #valores #autenticidade #vidacomproposito #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #evolucaopessoal #frasesdodia'},
-{id:'pr1',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O presente é o único lugar real',tx:`Você já percebeu que a ansiedade mora no futuro e a tristeza mora no passado?
+O que você acredita? E o que você está fazendo está alinhado com isso?`,
+ht:'#proposito #valores #autenticidade #vidacomproposito #reflexao #motivacao #instagrambr #autoconhecimento #crescimentopessoal #evolucaopessoal #frasesdodia',
+pr:{model:'Lucid Origin',prompt:'Woman walking confidently on a tree-lined path in autumn, natural light, leaves falling, sense of clarity and alignment, warm amber and gold tones, editorial photography, 4:5',neg:'urban, cold, rushed, dark, sad'}},
 
-Quando você está ansiosa, está vivendo algo que ainda não aconteceu. Quando está em luto ou arrependida, está revivendo algo que já passou.
+// ══ PRESENÇA ══
+{id:'pr1',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O presente é o único lugar real',
+tx:`Você já percebeu que a ansiedade mora no futuro e a tristeza mora no passado?
+
+Quando você está ansiosa, está vivendo algo que ainda não aconteceu. Quando está em luto, está revivendo algo que já passou.
 
 E o presente? O presente fica vazio enquanto a mente viaja.
 
-Presença não é uma técnica. É uma escolha contínua. É notar o cheiro do café. É ouvir de verdade quem está falando com você. É sentir o peso dos seus próprios pés no chão.
+Presença não é uma técnica. É uma escolha contínua. É notar o cheiro do café. É ouvir de verdade quem está falando com você.
 
-Você não precisa resolver o futuro hoje. Mas pode estar — completamente, genuinamente — aqui.`,ht:'#presenca #mindfulness #meditacao #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #paz #vidacomproposito #ansiedade #saudemental'},
-{id:'pr2',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Respira',tx:`Para. Respira.
+Você não precisa resolver o futuro hoje. Mas pode estar — completamente, genuinamente — aqui.`,
+ht:'#presenca #mindfulness #meditacao #autocuidado #reflexao #motivacao #instagrambr #frasesdodia #paz #vidacomproposito #ansiedade #saudemental',
+pr:{model:'Lucid Origin',prompt:'Close-up of hands holding a warm ceramic coffee cup in soft morning light, steam rising, blurred background, mindful and present moment photography, warm cream and amber tones, 4:5',neg:'phone, screen, dark, cold, rushed'}},
+
+{id:'pr2',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Respira',
+tx:`Para. Respira.
 
 Não tem nada que precise ser resolvido nos próximos 60 segundos.
 
 Você pode dar a si mesma esse momento. Só esse. Sem planejar o próximo passo, sem revisar o que já passou.
 
-Só existir. Por agora.`,ht:'#presenca #respirar #paz #mindfulness #ansiedade #autocuidado #reelsbrasil #motivacao #inspiracao #saudemental #meditacao'},
-{id:'pr3',cat:'presente',pl:'TikTok',sz:'Curto',ti:'O celular e a presença',tx:`O celular não roubou só o seu tempo.
+Só existir. Por agora.`,
+ht:'#presenca #respirar #paz #mindfulness #ansiedade #autocuidado #reelsbrasil #motivacao #inspiracao #saudemental #meditacao',
+pr:{model:'Phoenix 1.0',prompt:'Woman meditating outdoors in soft morning light, sitting in a field of wildflowers, eyes closed, gentle breeze in her hair, peaceful and present, warm natural tones, 9:16 vertical',neg:'urban, phone, dark, rushed, cold'}},
+
+{id:'pr3',cat:'presente',pl:'TikTok',sz:'Curto',ti:'O celular e a presença',
+tx:`O celular não roubou só o seu tempo.
 
 Roubou a sua capacidade de se entediar — e de descobrir o que acontece quando você se entedia.
 
-As melhores ideias, as conexões mais profundas, os momentos que você vai lembrar — quase nunca acontecem com a tela na mão.`,ht:'#presenca #celular #mindfulness #tiktokbrasil #fyp #paravocê #reflexao #autocuidado #frasesmotivacionais #desconectar #paz'},
-{id:'pr4',cat:'presente',pl:'Instagram Feed',sz:'Longo',ti:'Viver no automático',tx:`Você já chegou em casa sem lembrar do trajeto? Comeu uma refeição sem realmente provar nada? Passou um dia inteiro sem realmente estar presente em nenhum momento?
+As melhores ideias, as conexões mais profundas, os momentos que você vai lembrar — quase nunca acontecem com a tela na mão.`,
+ht:'#presenca #celular #mindfulness #tiktokbrasil #fyp #paravocê #reflexao #autocuidado #frasesmotivacionais #desconectar #paz',
+pr:{model:'Lucid Origin',prompt:'Phone face-down on a wooden table beside a window overlooking nature, untouched, morning light, intentional stillness, concept of digital detox, warm tones, 9:16',neg:'screen on, dark, urban, cold'}},
+
+{id:'pr4',cat:'presente',pl:'Instagram Feed',sz:'Longo',ti:'Viver no automático',
+tx:`Você já chegou em casa sem lembrar do trajeto? Comeu uma refeição sem realmente provar nada?
 
 A maioria das pessoas vive assim. No automático. O piloto assume e a consciência fica em standby.
 
-Não é preguiça. É defesa. O cérebro economiza energia no que percebe como rotina. Só que junto com a rotina, ele anestesia também os momentos que valem.
-
-O pôr do sol que você não viu porque estava olhando pro celular. A risada que você ouviu sem parar de trabalhar. A conversa que passou enquanto você planejava a resposta.
+O pôr do sol que você não viu porque estava olhando pro celular. A conversa que passou enquanto você planejava a resposta.
 
 Presença não é meditação de duas horas. É acordar dentro do momento em que você está — uma vez, mais uma vez, e de novo.
 
-O que você quer parar de perder por estar no automático?`,ht:'#presenca #mindfulness #automatico #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #paz #saudemental #crescimentopessoal'},
-{id:'pr5',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Rituais de presença',tx:`Você não precisa de uma hora de meditação.
+O que você quer parar de perder por estar no automático?`,
+ht:'#presenca #mindfulness #automatico #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #paz #saudemental #crescimentopessoal',
+pr:{model:'Kino XL',prompt:'Cinematic golden hour shot through a car window, blurred landscape outside, moment of realizing the beauty being missed, warm and contemplative mood, film grain, 4:5',neg:'ugly view, dark, night, cold tones'}},
+
+{id:'pr5',cat:'presente',pl:'Instagram Reels',sz:'Curto',ti:'Rituais de presença',
+tx:`Você não precisa de uma hora de meditação.
 
 Precisa de 5 minutos de café sem celular. De uma caminhada sem fone. De olhar pela janela sem propósito.
 
-Pequenos rituais de presença mudam a qualidade do dia inteiro. Não porque são grandes — porque são intencionais.`,ht:'#presenca #rituais #mindfulness #reelsbrasil #autocuidado #motivacao #inspiracao #frasesmotivacionais #paz #meditacao #rotina'},
-{id:'pr6',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O que você está perdendo',tx:`Enquanto você estava no celular, seu filho cresceu um dia.
+Pequenos rituais de presença mudam a qualidade do dia inteiro. Não porque são grandes — porque são intencionais.`,
+ht:'#presenca #rituais #mindfulness #reelsbrasil #autocuidado #motivacao #inspiracao #frasesmotivacionais #paz #meditacao #rotina',
+pr:{model:'Lucid Origin',prompt:'Morning ritual scene, woman barefoot in kitchen making tea, early light streaming through window, peaceful routine, plants on windowsill, warm cream and green tones, lifestyle photography, 9:16',neg:'phone, screen, dark, rushed, cold'}},
+
+{id:'pr6',cat:'presente',pl:'Instagram Feed',sz:'Médio',ti:'O que você está perdendo',
+tx:`Enquanto você estava no celular, seu filho cresceu um dia.
 Enquanto você se preocupava com o futuro, hoje foi embora.
 Enquanto você relembrava o passado, o presente ficou vazio.
 
 Isso não é julgamento. É um convite.
 
-Para estar mais aqui. Para notar mais. Para perder menos do que importa em troca do que não lembra depois.
+Para estar mais aqui. Para notar mais. Para perder menos do que importa.
 
-Qual momento você quer parar de perder a partir de hoje?`,ht:'#presenca #tempo #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #vida #autocuidado #familia #paz #crescimentopessoal'},
-{id:'m1',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'Recomeçar não é fracasso',tx:`Existe uma mentira que aprendemos cedo: que mudar de caminho é desistir.
+Qual momento você quer parar de perder a partir de hoje?`,
+ht:'#presenca #tempo #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #vida #autocuidado #familia #paz #crescimentopessoal',
+pr:{model:'Phoenix 1.0',prompt:'Mother and child walking hand in hand in a park at golden hour, from behind, warm backlight, candid and real, emotional and tender, soft bokeh, 4:5',neg:'phone in hand, posed, cold, urban, dark'}},
+
+// ══ MUDANÇA ══
+{id:'m1',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'Recomeçar não é fracasso',
+tx:`Existe uma mentira que aprendemos cedo: que mudar de caminho é desistir.
 
 Não é. Mudar de caminho é sabedoria. É reconhecer que o que funcionava antes não precisa funcionar para sempre.
 
 Recomeçar do zero não é regredir. É construir com fundações melhores.
 
-As pessoas que mais crescem são as que tiveram a coragem de parar o que não servia — mesmo com tudo investido, mesmo com medo do julgamento, mesmo sem saber o que vinha depois.
+As pessoas que mais crescem são as que tiveram a coragem de parar o que não servia — mesmo com tudo investido, mesmo com medo do julgamento.
 
-O que você precisaria largar para poder recomeçar do jeito certo?`,ht:'#mudanca #recomeço #transformacao #crescimentopessoal #motivacao #inspiracao #reflexao #coragem #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal'},
-{id:'m2',cat:'mudanca',pl:'Instagram Reels',sz:'Curto',ti:'A transformação assusta',tx:`A transformação assusta porque ela é real.
+O que você precisaria largar para poder recomeçar do jeito certo?`,
+ht:'#mudanca #recomeço #transformacao #crescimentopessoal #motivacao #inspiracao #reflexao #coragem #instagrambr #frasesdodia #vidacomproposito #evolucaopessoal',
+pr:{model:'Kino XL',prompt:'Woman standing at the edge of a cliff overlooking a vast new landscape, sunrise, symbolic of new beginnings, cinematic wide shot, warm gold and amber tones, sense of courage and possibility, 4:5',neg:'dark, sad, cold, threatening, fall'}},
+
+{id:'m2',cat:'mudanca',pl:'Instagram Reels',sz:'Curto',ti:'A transformação assusta',
+tx:`A transformação assusta porque ela é real.
 
 Não é aquela mudança cosmética que você mostra pras pessoas. É aquela profunda, que acontece em silêncio e que às vezes você só percebe olhando pra trás.
 
-A pessoa que você era há um ano reconheceria quem você está sendo hoje?`,ht:'#transformacao #mudanca #crescimentopessoal #reflexao #reelsbrasil #motivacao #inspiracao #autoconhecimento #evolucaopessoal #frasesmotivacionais'},
-{id:'m3',cat:'mudanca',pl:'Instagram Feed',sz:'Longo',ti:'O medo de mudar',tx:`O medo de mudar não é medo do desconhecido. É medo de perder quem você é — mesmo que quem você é já não sirva mais.
+A pessoa que você era há um ano reconheceria quem você está sendo hoje?`,
+ht:'#transformacao #mudanca #crescimentopessoal #reflexao #reelsbrasil #motivacao #inspiracao #autoconhecimento #evolucaopessoal #frasesmotivacionais',
+pr:{model:'Phoenix 1.0',prompt:'Butterfly emerging from a cocoon, macro photography, warm backlight, soft amber and golden tones, transformation and metamorphosis concept, fine art nature photography, 9:16 vertical',neg:'dark, cold, dead insect, harsh light'}},
 
-A identidade tem um peso estranho. Mesmo quando ela nos aprisiona, ela é familiar. E o familiar, mesmo que doloroso, parece mais seguro do que o vazio que vem antes do novo.
+{id:'m3',cat:'mudanca',pl:'Instagram Feed',sz:'Longo',ti:'O medo de mudar',
+tx:`O medo de mudar não é medo do desconhecido. É medo de perder quem você é — mesmo que quem você é já não sirva mais.
 
-Mas aqui está o que ninguém fala: o vazio antes do novo não é perigo. É espaço. É o silêncio antes da música. O branco antes da pintura.
+A identidade tem um peso estranho. Mesmo quando ela nos aprisiona, ela é familiar.
+
+Mas aqui está o que ninguém fala: o vazio antes do novo não é perigo. É espaço.
 
 Você não perde quem é quando muda. Você expande.
 
-A versão mais nova de você não apaga a anterior — ela a carrega, mais sábia, mais inteira, mais livre.
+O que você teria se não tivesse medo de mudar?`,
+ht:'#mudanca #medo #transformacao #crescimentopessoal #autoconhecimento #reflexao #motivacao #instagrambr #frasesdodia #identidade #evolucaopessoal #coragem',
+pr:{model:'Lucid Origin',prompt:'Open door at the end of a dark hallway with bright warm light pouring through from the other side, symbolic and hopeful, minimalist interior photography, 4:5',neg:'horror mood, threatening, cold, dark horror'}},
 
-O que você teria se não tivesse medo de mudar?`,ht:'#mudanca #medo #transformacao #crescimentopessoal #autoconhecimento #reflexao #motivacao #instagrambr #frasesdodia #identidade #evolucaopessoal #coragem'},
-{id:'m4',cat:'mudanca',pl:'TikTok',sz:'Curto',ti:'Você é a mudança',tx:`Você fica esperando que as circunstâncias mudem.
+{id:'m4',cat:'mudanca',pl:'TikTok',sz:'Curto',ti:'Você é a mudança',
+tx:`Você fica esperando que as circunstâncias mudem.
 
 Que a pessoa mude. Que o trabalho melhore. Que o momento certo chegue.
 
 Mas e se a única mudança que precisa acontecer primeiro for dentro de você?
 
-Não porque você é o problema — porque você é a solução que está esperando permissão para aparecer.`,ht:'#mudanca #transformacao #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autoconhecimento'},
-{id:'m5',cat:'mudanca',pl:'Carrossel',sz:'Longo',ti:'Como mudar de vida de verdade',tx:`Slide 1 — CAPA
+Não porque você é o problema — porque você é a solução que está esperando permissão para aparecer.`,
+ht:'#mudanca #transformacao #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #crescimentopessoal #autoconhecimento',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Woman looking at her reflection in a calm puddle of water after rain, contemplative expression, wet city street softly blurred, sense of self-discovery, 9:16 vertical, photorealistic',neg:'dark, cold, sad, heavy rain'}},
+
+{id:'m5',cat:'mudanca',pl:'Carrossel',sz:'Longo',ti:'Como mudar de vida de verdade',
+tx:`Slide 1 — CAPA
 Como mudar de vida (sem precisar largar tudo de uma vez) 🌊
 
 Slide 2 — Comece pela identidade
 "Eu sou alguém que..." é mais poderoso que "eu preciso fazer...".
 
 Slide 3 — Mude um hábito de cada vez
-Uma coisa nova por mês é mais eficaz do que dez no Ano Novo que somem em fevereiro.
+Uma coisa nova por mês é mais eficaz do que dez no Ano Novo.
 
 Slide 4 — Cuide do ambiente
-Você não age contra seu ambiente — você age de acordo com ele.
+Você age de acordo com o ambiente que cria.
 
 Slide 5 — Encontre sua tribo
 Quem você passa tempo tem impacto direto em quem você se torna.
 
 Slide 6 — Documente o processo
-Você vai precisar olhar pra trás em algum momento e ver o quanto mudou.
+Você vai precisar olhar pra trás e ver o quanto mudou.
 
 Slide 7 — Permita a não-linearidade
-Dois passos pra frente, um pra trás. Isso é crescimento — não fracasso.
+Dois passos pra frente, um pra trás. Isso é crescimento.
 
 Slide 8 — CTA
-Salva e começa com uma mudança só. Qual vai ser? Me conta nos comentários 🌊`,ht:'#mudanca #transformacao #crescimentopessoal #habitos #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #vidacomproposito #sejamelhor'},
-{id:'m6',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'O ciclo que está terminando',tx:`Tem algo terminando na sua vida agora. Um ciclo, uma fase, uma versão de você.
+Começa com uma mudança só. Qual vai ser? 🌊`,
+ht:'#mudanca #transformacao #crescimentopessoal #habitos #motivacao #instagrambr #carrossel #reflexao #evolucaopessoal #vidacomproposito #sejamelhor',
+pr:{model:'Lucid Origin',prompt:'Seed being planted in rich dark soil, hands gently covering it, close-up, warm earthy tones, concept of beginning and growth, natural light, 4:5',neg:'dark, dead plant, cold, winter'}},
 
-E dói — mesmo quando você sabe que é necessário. Mesmo quando você foi quem escolheu.
+{id:'m6',cat:'mudanca',pl:'Instagram Feed',sz:'Médio',ti:'O ciclo que está terminando',
+tx:`Tem algo terminando na sua vida agora. Um ciclo, uma fase, uma versão de você.
 
-Porque terminar é uma perda. Mesmo que seja a perda do que te prendia.
+E dói — mesmo quando você sabe que é necessário.
 
-Mas ciclos que terminam limpam o espaço para o que precisa começar. E o que começa depois de uma morte voluntária tende a ser muito mais verdadeiro do que o que existia antes.
+Mas ciclos que terminam limpam o espaço para o que precisa começar.
 
-Que ciclo está terminando na sua vida agora?`,ht:'#mudanca #ciclo #recomeço #transformacao #reflexao #motivacao #instagrambr #crescimentopessoal #frasesdodia #evolucaopessoal #coragem'},
-{id:'g1',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Gratidão que vem antes',tx:`A gratidão mais poderosa não é aquela que vem depois que tudo dá certo.
+Que ciclo está terminando na sua vida agora?`,
+ht:'#mudanca #ciclo #recomeço #transformacao #reflexao #motivacao #instagrambr #crescimentopessoal #frasesdodia #evolucaopessoal #coragem',
+pr:{model:'Phoenix 1.0',prompt:'Last autumn leaf falling from a bare tree in soft light, slow and peaceful, warm amber and golden background bokeh, concept of endings and beginnings, fine art nature photography, 4:5',neg:'dark, harsh wind, winter storm, cold'}},
 
-É a que vem no meio da bagunça. No meio da dúvida. No meio do processo que ainda não tem resultado visível.
+// ══ GRATIDÃO ══
+{id:'g1',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Gratidão que vem antes',
+tx:`A gratidão mais poderosa não é aquela que vem depois que tudo dá certo.
 
-É dizer obrigada pela manhã que começou. Pelo corpo que funciona. Por quem ficou. Pela dor que ensinou. Pela porta que fechou — porque outra ia abrir.
+É a que vem no meio da bagunça. É dizer obrigada pela manhã que começou. Pelo corpo que funciona. Por quem ficou. Pela dor que ensinou.
 
 Gratidão não é fingir que está tudo bem. É reconhecer o que ainda é bom enquanto o resto ainda está em construção.
 
-O que você tem hoje que já pediu um dia?`,ht:'#gratidao #abençoada #espiritualidade #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #Deus #fe #vidacomproposito #paz #autocuidado'},
-{id:'g2',cat:'gratidao',pl:'Instagram Reels',sz:'Curto',ti:'Três coisas',tx:`Três coisas. É o que basta.
+O que você tem hoje que já pediu um dia?`,
+ht:'#gratidao #abençoada #espiritualidade #reflexao #motivacao #inspiracao #instagrambr #frasesdodia #Deus #fe #vidacomproposito #paz #autocuidado',
+pr:{model:'Lucid Origin',prompt:'Morning flat lay from above, hands holding a journal open to a gratitude page, fresh flowers, warm coffee, soft natural light on linen, warm cream and sage tones, 4:5',neg:'phone, dark, cold, cluttered, plastic'}},
+
+{id:'g2',cat:'gratidao',pl:'Instagram Reels',sz:'Curto',ti:'Três coisas',
+tx:`Três coisas. É o que basta.
 
 Antes de dormir. Antes de reclamar. Antes de comparar.
 
@@ -769,24 +990,34 @@ Três coisas pelas quais você é grata hoje.
 
 Não precisam ser grandes. Às vezes o melhor da lista é: acordei. Tomei um café quente. Fui amada por alguém.
 
-Isso muda o dia.`,ht:'#gratidao #rotina #mindfulness #paz #reelsbrasil #motivacao #inspiracao #autocuidado #frasesmotivacionais #diariodegratidao #abençoada'},
-{id:'g3',cat:'gratidao',pl:'TikTok',sz:'Curto',ti:'Gratidão muda o cérebro',tx:`Gratidão não é só espiritualidade. É neurociência.
+Isso muda o dia.`,
+ht:'#gratidao #rotina #mindfulness #paz #reelsbrasil #motivacao #inspiracao #autocuidado #frasesmotivacionais #diariodegratidao #abençoada',
+pr:{model:'Flux Dev',prompt:'Close-up of hand writing "3 things I\'m grateful for" in a beautiful journal with a fine pen, warm morning light, paper texture visible, cozy and intentional, 9:16 vertical',neg:'dark, cold, rushed, phone screen'}},
+
+{id:'g3',cat:'gratidao',pl:'TikTok',sz:'Curto',ti:'Gratidão muda o cérebro',
+tx:`Gratidão não é só espiritualidade. É neurociência.
 
 Quando você foca no que tem, seu cérebro literalmente recalibra para buscar mais do positivo.
 
 Não é lei de atração. É como o sistema de recompensa funciona.
 
-Você muda o que você nota. E o que você nota muda o que você vive.`,ht:'#gratidao #neurociencia #mindfulness #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #positividade'},
-{id:'g4',cat:'gratidao',pl:'Instagram Feed',sz:'Longo',ti:'O diário de gratidão que muda',tx:`Comecei a escrever três coisas pelas quais era grata toda manhã. Parecia pequeno. Parecia até fútil nos primeiros dias.
+Você muda o que você nota. E o que você nota muda o que você vive.`,
+ht:'#gratidao #neurociencia #mindfulness #tiktokbrasil #fyp #paravocê #motivacao #reflexao #frasesmotivacionais #positividade',
+pr:{model:'Phoenix 1.0',prompt:'Abstract visualization of neural pathways as golden light streams in a dark space, brain rewiring concept, beautiful and scientific, gold and black tones, 9:16 vertical',neg:'scary, clinical, cold, dark horror'}},
+
+{id:'g4',cat:'gratidao',pl:'Instagram Feed',sz:'Longo',ti:'O diário de gratidão que muda',
+tx:`Comecei a escrever três coisas pelas quais era grata toda manhã. Parecia pequeno. Parecia até fútil nos primeiros dias.
 
 Mas depois de algumas semanas, algo mudou. Não na minha vida — em mim. Em como eu olhava para as coisas.
 
-Comecei a notar mais. O cafezinho da manhã que antes era automático virou um ritual. A mensagem de uma amiga que antes eu respondia com distração virou um presente que eu recebia de verdade.
+Comecei a notar mais. O cafezinho da manhã que antes era automático virou um ritual.
 
-Gratidão não é uma prática para quando as coisas estão boas. É uma prática para treinar os olhos a enxergar o bem que existe mesmo no meio do que é difícil.
+Quer começar? Escreve três coisas agora. Não precisa ser grande. Precisa ser verdadeiro.`,
+ht:'#gratidao #diariodegratidao #habitos #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #crescimentopessoal #positividade #paz',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Beautiful gratitude journal open on a wooden table, sunlight streaming through window, fresh flowers nearby, handwritten pages visible, morning ritual atmosphere, warm and inviting, 85mm, 4:5',neg:'dark, cold, phone, digital screen, cluttered'}},
 
-Quer começar? Escreve três coisas agora. Não precisa ser grande. Precisa ser verdadeiro.`,ht:'#gratidao #diariodegratidao #habitos #mindfulness #reflexao #motivacao #instagrambr #frasesdodia #autocuidado #crescimentopessoal #positividade #paz'},
-{id:'g5',cat:'gratidao',pl:'Carrossel',sz:'Longo',ti:'Práticas de gratidão para o dia a dia',tx:`Slide 1 — CAPA
+{id:'g5',cat:'gratidao',pl:'Carrossel',sz:'Longo',ti:'Práticas de gratidão para o dia a dia',
+tx:`Slide 1 — CAPA
 7 práticas de gratidão que cabem na sua rotina 🌸
 
 Slide 2 — Diário da manhã
@@ -796,77 +1027,106 @@ Slide 3 — Agradecer em voz alta
 Falar "obrigada por isso" em voz alta ativa o sistema emocional de um jeito diferente.
 
 Slide 4 — Nota de gratidão para alguém
-Uma mensagem por semana para alguém dizendo o que você aprecia nessa pessoa.
+Uma mensagem por semana dizendo o que você aprecia nessa pessoa.
 
 Slide 5 — O momento do café ou chá
-Escolha um ritual do dia para ser totalmente presente e grata por aquele momento.
+Escolha um ritual para ser totalmente presente e grata por aquele momento.
 
 Slide 6 — O inventário de conquistas
-Uma vez por mês, anote o que você superou. Gratidão por você mesma também conta.
+Uma vez por mês, anote o que você superou.
 
 Slide 7 — Reframe de dificuldades
-Para cada situação difícil, pergunte: o que isso está me ensinando?
+Para cada situação difícil: o que isso está me ensinando?
 
 Slide 8 — CTA
-Escolhe uma prática e começa hoje. Qual vai ser? 🌸`,ht:'#gratidao #praticas #habitos #mindfulness #autocuidado #carrossel #instagrambr #motivacao #crescimentopessoal #diariodegratidao #paz'},
-{id:'g6',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Obrigada pelo que não chegou',tx:`Existe uma gratidão difícil — a pela ausência. Pelo que não veio. Pelo que não deu certo. Pelo que não ficou.
+Escolhe uma prática e começa hoje 🌸`,
+ht:'#gratidao #praticas #habitos #mindfulness #autocuidado #carrossel #instagrambr #motivacao #crescimentopessoal #diariodegratidao #paz',
+pr:{model:'Lucid Origin',prompt:'Collection of small beautiful objects — a journal, a candle, a flower, a crystal — arranged on a linen cloth, soft natural light, gratitude altar concept, warm cream and gold tones, overhead flat lay, 4:5',neg:'dark, plastic, cluttered, cold'}},
 
-Mas se você olhar para trás com honestidade, vai ver: muita coisa que você chorou por não conseguir era uma proteção que você não reconheceu na hora.
+{id:'g6',cat:'gratidao',pl:'Instagram Feed',sz:'Médio',ti:'Obrigada pelo que não chegou',
+tx:`Existe uma gratidão difícil — a pela ausência. Pelo que não veio. Pelo que não deu certo. Pelo que não ficou.
 
-O relacionamento que não foi — porque você teria se perdido nele. O emprego que não veio — porque o que veio depois era melhor.
+Mas se você olhar para trás com honestidade: muita coisa que você chorou por não conseguir era uma proteção que você não reconheceu na hora.
 
 Seja qual for a sua crença — existe uma visão maior que a sua.
 
-Pelo que você consegue ser grata hoje, mesmo que tenha doído na época?`,ht:'#gratidao #fe #reflexao #motivacao #instagrambr #frasesdodia #Deus #crescimentopessoal #timingdivino #paz #vidacomproposito'},
-{id:'r1',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'Você está vivendo ou sobrevivendo?',tx:`Tem uma diferença enorme entre viver e sobreviver — e às vezes você só percebe quando para um segundo e olha de verdade.
+Pelo que você consegue ser grata hoje, mesmo que tenha doído na época?`,
+ht:'#gratidao #fe #reflexao #motivacao #instagrambr #frasesdodia #Deus #crescimentopessoal #timingdivino #paz #vidacomproposito',
+pr:{model:'Phoenix 1.0',prompt:'Road stretching into the horizon at golden hour, one path closed with a gate, another open ahead in warm light, concept of redirection and divine guidance, 4:5',neg:'dark, sad, dead end, cold tones'}},
 
-Sobreviver é acordar e já começar ansioso com o que vem. É trabalhar sem sentido, se relacionar sem presença, passar pelos dias sem realmente estar neles.
+// ══ REFLEXÃO ══
+{id:'r1',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'Você está vivendo ou sobrevivendo?',
+tx:`Tem uma diferença enorme entre viver e sobreviver — e às vezes você só percebe quando para um segundo e olha de verdade.
 
-Viver é diferente. Não precisa ser perfeito. Mas tem uma qualidade de presença, de sentido, de escolha.
+Sobreviver é acordar e já começar ansioso com o que vem. É trabalhar sem sentido, passar pelos dias sem realmente estar neles.
+
+Viver tem uma qualidade de presença, de sentido, de escolha.
 
 Hoje eu te pergunto, com carinho e honestidade: você está vivendo ou sobrevivendo?
 
-O que precisaria mudar para você responder diferente essa pergunta?`,ht:'#reflexao #autoconhecimento #vivendo #saudemental #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #vidacomproposito #evolucaopessoal #autocuidado'},
-{id:'r2',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'A pergunta que muda tudo',tx:`Uma pergunta que vai incomodar do jeito certo:
+O que precisaria mudar para você responder diferente essa pergunta?`,
+ht:'#reflexao #autoconhecimento #vivendo #saudemental #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #vidacomproposito #evolucaopessoal #autocuidado',
+pr:{model:'Lucid Origin',prompt:'Woman sitting on the floor in a sunlit room, a book open on her lap, looking out the window thoughtfully, introspective and present, warm afternoon light, minimalist space, 4:5',neg:'phone, dark, rushed, cold, busy room'}},
+
+{id:'r2',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'A pergunta que muda tudo',
+tx:`Uma pergunta que vai incomodar do jeito certo:
 
 Se daqui a 5 anos você estiver exatamente onde está hoje — mesma vida, mesmas escolhas, mesmo lugar — como você vai se sentir?
 
 Aliviada? Realizada? Ou com aquela sensação de que desperdiçou tempo?
 
-Essa resposta já é um mapa.`,ht:'#reflexao #autoconhecimento #motivacao #tiktokbrasil #fyp #paravocê #crescimentopessoal #frasesmotivacionais #vidacomproposito'},
-{id:'r3',cat:'reflexao',pl:'Instagram Feed',sz:'Longo',ti:'O que você está evitando sentir?',tx:`Tem algo que você está evitando sentir. Eu sei porque nós todos temos.
+Essa resposta já é um mapa.`,
+ht:'#reflexao #autoconhecimento #motivacao #tiktokbrasil #fyp #paravocê #crescimentopessoal #frasesmotivacionais #vidacomproposito',
+pr:{model:'Phoenix 1.0',prompt:'An hourglass with golden sand on a wooden surface, soft natural light, concept of time and choice, warm amber tones, fine art still life photography, 9:16 vertical',neg:'dark, rushed, cold, broken glass'}},
 
-A gente ocupa a agenda. Abre o celular antes de acabar de acordar. Coloca música pra não ficar em silêncio. Trabalha até ficar exausta. Maratona série até tarde.
+{id:'r3',cat:'reflexao',pl:'Instagram Feed',sz:'Longo',ti:'O que você está evitando sentir?',
+tx:`Tem algo que você está evitando sentir. Eu sei porque nós todos temos.
+
+A gente ocupa a agenda. Abre o celular antes de acabar de acordar. Trabalha até ficar exausta.
 
 Não por maldade. Mas porque sentir dói. E é mais fácil não parar.
 
-O problema é que o que não é sentido não desaparece. Ele fica. Comprimido. Esperando. E quando não tem mais espaço pra comprimir, ele aparece do jeito mais inesperado.
+O problema é que o que não é sentido não desaparece. Ele fica. Comprimido.
 
 O que você está carregando que merecia ao menos uns 10 minutos de atenção real?
 
-Não precisa resolver. Só sentir. Só nomear.
+Às vezes o ato mais corajoso do dia é simplesmente parar e perguntar: o que eu estou sentindo agora?`,
+ht:'#reflexao #autoconhecimento #saudemental #emocoes #cura #terapia #crescimentopessoal #motivacao #inspiracao #instagrambr #frasesdodia #autocuidado',
+pr:{model:'Kino XL',prompt:'Woman sitting alone in a quiet cafe by a rain-streaked window, untouched coffee on the table, contemplative expression, moody cinematic lighting, warm amber and blue contrast, introspective mood, 4:5',neg:'phone, dark horror, crying heavily, harsh light'}},
 
-Às vezes o ato mais corajoso do dia é simplesmente parar e perguntar: o que eu estou sentindo agora?`,ht:'#reflexao #autoconhecimento #saudemental #emocoes #cura #terapia #crescimentopessoal #motivacao #inspiracao #instagrambr #frasesdodia #autocuidado'},
-{id:'r4',cat:'reflexao',pl:'Instagram Reels',sz:'Curto',ti:'Quem você seria sem o medo?',tx:`Quem você seria se não tivesse medo?
+{id:'r4',cat:'reflexao',pl:'Instagram Reels',sz:'Curto',ti:'Quem você seria sem o medo?',
+tx:`Quem você seria se não tivesse medo?
 
-Não o medo pequeno — das apresentações, das alturas. O medo grande. De não ser suficiente. De ser demais. De arriscar e perder. De ser vista de verdade.
+Não o medo pequeno — das apresentações, das alturas. O medo grande. De não ser suficiente. De ser demais. De ser vista de verdade.
 
-Essa versão de você que existe por baixo do medo? Ela já está aí. Esperando que você faça espaço.`,ht:'#reflexao #medo #autoconhecimento #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autenticidade #coragem'},
-{id:'r5',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'O peso que você carrega dos outros',tx:`Parte do cansaço que você sente não é seu.
+Essa versão de você que existe por baixo do medo? Ela já está aí. Esperando que você faça espaço.`,
+ht:'#reflexao #medo #autoconhecimento #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #crescimentopessoal #autenticidade #coragem',
+pr:{model:'Phoenix 1.0',prompt:'Woman stepping out of a dark shadow into bright warm sunlight, symbolic of shedding fear, warm golden tones, sense of liberation and authenticity, fine art photography, 9:16 vertical',neg:'threatening shadow, cold, dark horror'}},
 
-É a preocupação com o julgamento de alguém que mal pensa em você. É a expectativa de quem nunca vai estar satisfeito. É a culpa que colocaram em você por ter necessidades. É a vergonha que não nasceu de dentro — foi plantada de fora.
+{id:'r5',cat:'reflexao',pl:'Instagram Feed',sz:'Médio',ti:'O peso que você carrega dos outros',
+tx:`Parte do cansaço que você sente não é seu.
+
+É a preocupação com o julgamento de alguém que mal pensa em você. É a culpa que colocaram em você por ter necessidades.
 
 Você está carregando pesos que não são seus. E isso é exaustivo de um jeito que nenhum descanso resolve.
 
-O que você pode devolver hoje? Não com raiva — com gentileza.`,ht:'#reflexao #limites #autoconhecimento #saudemental #cura #motivacao #instagrambr #frasesdodia #amorproprio #crescimentopessoal #autocuidado'},
-{id:'r6',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'Você tolera demais',tx:`O quanto você tolerou que não deveria?
+O que você pode devolver hoje? Não com raiva — com gentileza.`,
+ht:'#reflexao #limites #autoconhecimento #saudemental #cura #motivacao #instagrambr #frasesdodia #amorproprio #crescimentopessoal #autocuidado',
+pr:{model:'Kino XL',prompt:'Woman removing heavy stones from her shoulders in a symbolic gesture, warm light behind her, sense of relief and release, cinematic portrait, earthy tones, 4:5',neg:'dark, violent, cold, harsh'}},
+
+{id:'r6',cat:'reflexao',pl:'TikTok',sz:'Curto',ti:'Você tolera demais',
+tx:`O quanto você tolerou que não deveria?
 
 Não porque você é ingênua — porque você foi ensinada que tolerar é amor, que reclamar é fresco, que pedir mais é exigência demais.
 
 Mas você merecia mais do que aprendeu a pedir.
 
-E você ainda merece.`,ht:'#reflexao #limites #tolerancia #tiktokbrasil #fyp #paravocê #amorproprio #motivacao #frasesmotivacionais #autoconhecimento #crescimentopessoal'},
-{id:'r7',cat:'reflexao',pl:'Carrossel',sz:'Longo',ti:'Perguntas que mudam a perspectiva',tx:`Slide 1 — CAPA
+E você ainda merece.`,
+ht:'#reflexao #limites #tolerancia #tiktokbrasil #fyp #paravocê #amorproprio #motivacao #frasesmotivacionais #autoconhecimento #crescimentopessoal',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Woman standing at an open door with sunlight streaming in, one foot forward, confident posture, symbolic of choosing better, 9:16 vertical, photorealistic, warm tones',neg:'dark, sad, cold, closed door'}},
+
+{id:'r7',cat:'reflexao',pl:'Carrossel',sz:'Longo',ti:'Perguntas que mudam a perspectiva',
+tx:`Slide 1 — CAPA
 8 perguntas que mudam como você se vê 🪞
 
 Slide 2 — O que você faz que te enche de vida?
@@ -881,48 +1141,65 @@ Slide 5 — Em que você está investindo atenção que não merece tanto dela?
 Slide 6 — O que você evita assumir porque assumir exige mudança?
 
 Slide 7 — Quem você está tentando ser que não é você?
-Performance constante é exaustiva.
 
 Slide 8 — Se você soubesse que ia dar certo, o que você faria?
-Agora faça mesmo sem ter certeza.
 
 Slide 9 — CTA
-Escolhe uma pergunta e escreve a resposta honesta 🪞`,ht:'#reflexao #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #perguntas #identidade #evolucaopessoal #vidacomproposito'},
-{id:'co1',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'Celebre o que custou',tx:`Você passou por algo difícil e está aqui. E às vezes isso não parece suficiente — porque o mundo aplaude grandes conquistas e você mal consegue celebrar o fato de que não desistiu.
+Escolhe uma pergunta e escreve a resposta honesta 🪞`,
+ht:'#reflexao #autoconhecimento #crescimentopessoal #carrossel #instagrambr #motivacao #perguntas #identidade #evolucaopessoal #vidacomproposito',
+pr:{model:'Lucid Origin',prompt:'Beautiful antique mirror with soft light reflection, flowers and journal nearby on a vanity, introspective mood, warm cream and gold tones, lifestyle photography, 4:5',neg:'dark, cracked, cold, horror mood'}},
+
+// ══ CONQUISTA ══
+{id:'co1',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'Celebre o que custou',
+tx:`Você passou por algo difícil e está aqui. E às vezes isso não parece suficiente — porque o mundo aplaude grandes conquistas e você mal consegue celebrar o fato de que não desistiu.
 
 Mas eu quero te dizer: não ter desistido é enorme.
 
-Cada vez que você escolheu continuar quando queria parar. Cada recomeço silencioso que ninguém viu. Cada "estou bem" que custou mais do que as pessoas imaginariam.
+Cada vez que você escolheu continuar quando queria parar. Cada recomeço silencioso que ninguém viu.
 
 Isso é conquista.
 
-Qual foi sua maior conquista silenciosa dos últimos meses?`,ht:'#conquista #superacao #forca #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #vidacomproposito #reflexao #orgulho #determinacao'},
-{id:'co2',cat:'conquista',pl:'Instagram Reels',sz:'Curto',ti:'Não subestime o quanto você cresceu',tx:`Você não é mais quem era há um ano.
+Qual foi sua maior conquista silenciosa dos últimos meses?`,
+ht:'#conquista #superacao #forca #motivacao #inspiracao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #vidacomproposito #reflexao #orgulho #determinacao',
+pr:{model:'Phoenix 1.0',prompt:'Woman standing at the top of a mountain looking at the sunrise, arms slightly open, exhausted but triumphant, golden light, cinematic and emotional, sense of earned victory, 4:5',neg:'dark, cold, falling, sad, crowd'}},
+
+{id:'co2',cat:'conquista',pl:'Instagram Reels',sz:'Curto',ti:'Não subestime o quanto você cresceu',
+tx:`Você não é mais quem era há um ano.
 
 Talvez pareça pouco por dentro. Mas olha de fora: você atravessou coisas que você jurava que não ia conseguir. E está aqui.
 
-Não subestime o quanto você cresceu enquanto estava ocupada só sobrevivendo.`,ht:'#conquista #crescimentopessoal #superacao #forca #reelsbrasil #motivacao #inspiracao #evolucaopessoal #frasesmotivacionais #orgulho'},
-{id:'co3',cat:'conquista',pl:'Instagram Feed',sz:'Longo',ti:'O que a vitória silenciosa parece',tx:`A vitória mais importante da sua vida provavelmente não teve câmera. Não teve aplausos. Não virou post.
+Não subestime o quanto você cresceu enquanto estava ocupada só sobrevivendo.`,
+ht:'#conquista #crescimentopessoal #superacao #forca #reelsbrasil #motivacao #inspiracao #evolucaopessoal #frasesmotivacionais #orgulho',
+pr:{model:'Lucid Origin',prompt:'Tall blooming sunflower reaching toward the sun, lush background, warm golden light, concept of quiet growth and reaching potential, fine art nature photography, 9:16 vertical',neg:'wilting, dark, cold, gloomy'}},
 
-Foi aquele dia que você decidiu que ia parar. E parou. Aquela conversa difícil que você teve e disse o que precisava ser dito. Aquele momento em que você escolheu você mesma quando era mais fácil se apagar.
+{id:'co3',cat:'conquista',pl:'Instagram Feed',sz:'Longo',ti:'O que a vitória silenciosa parece',
+tx:`A vitória mais importante da sua vida provavelmente não teve câmera. Não teve aplausos. Não virou post.
 
-Vitórias silenciosas não aparecem no LinkedIn. Não viram formatura. Mas são as que mais formam caráter.
+Foi aquele dia que você decidiu que ia parar. E parou. Aquele momento em que você escolheu você mesma quando era mais fácil se apagar.
 
-E se você parar agora e listar as suas — as reais, as que custaram — vai perceber que você é muito mais forte do que a narrativa que carrega sobre si mesma.
+Vitórias silenciosas não aparecem no LinkedIn. Mas são as que mais formam caráter.
 
-O que foi sua maior vitória silenciosa? Aquela que só você sabe o peso?`,ht:'#conquista #vitoria #superacao #forca #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #autoconhecimento #orgulho'},
-{id:'co4',cat:'conquista',pl:'TikTok',sz:'Curto',ti:'Você já provou pra si mesma',tx:`Você já provou para si mesma que consegue.
+O que foi sua maior vitória silenciosa? Aquela que só você sabe o peso?`,
+ht:'#conquista #vitoria #superacao #forca #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #evolucaopessoal #autoconhecimento #orgulho',
+pr:{model:'Kino XL',prompt:'Cinematic close-up of a woman\'s hand holding a small glowing light in the dark, warmth and victory in solitude, quiet triumph concept, warm amber tones, film grain, 4:5',neg:'crowd, dark horror, cold, sad'}},
+
+{id:'co4',cat:'conquista',pl:'TikTok',sz:'Curto',ti:'Você já provou pra si mesma',
+tx:`Você já provou para si mesma que consegue.
 
 Lembra de algo que parecia impossível — e você fez? Da vez que você não sabia como — e descobriu?
 
 Esse histórico de evidências é mais poderoso que qualquer motivação. Você tem provas de que é capaz.
 
-Use isso.`,ht:'#conquista #motivacao #tiktokbrasil #fyp #paravocê #forca #superacao #frasesmotivacionais #crescimentopessoal #determinacao'},
-{id:'co5',cat:'conquista',pl:'Carrossel',sz:'Longo',ti:'Como manter a disciplina quando a motivação some',tx:`Slide 1 — CAPA
+Use isso.`,
+ht:'#conquista #motivacao #tiktokbrasil #fyp #paravocê #forca #superacao #frasesmotivacionais #crescimentopessoal #determinacao',
+pr:{model:'Lucid Origin',prompt:'Woman crossing a finish line tape with joy and relief, outdoors in natural light, sense of personal achievement, warm tones, candid and real, editorial sports photography, 9:16 vertical',neg:'dark, cold, crowd cheering, rushed'}},
+
+{id:'co5',cat:'conquista',pl:'Carrossel',sz:'Longo',ti:'Como manter a disciplina quando a motivação some',
+tx:`Slide 1 — CAPA
 Como continuar quando a motivação vai embora 🏆
 
 Slide 2 — Aceite que a motivação é temporária
-Motivação é emoção. Emoções passam. Disciplina é estrutura — e estrutura dura.
+Motivação é emoção. Disciplina é estrutura — e estrutura dura.
 
 Slide 3 — Crie sistemas, não metas
 "Escreverei todos os dias" é sistema. Sistemas acontecem.
@@ -931,7 +1208,7 @@ Slide 4 — Reduza o passo ao mínimo absurdo
 Quando a resistência aparece, faça 2 minutos só.
 
 Slide 5 — Ancore o hábito em algo que já existe
-Depois do café, antes de dormir. O cérebro ama sequências conhecidas.
+O cérebro ama sequências conhecidas.
 
 Slide 6 — Elimine a decisão
 Remova o atrito entre você e a ação.
@@ -940,49 +1217,70 @@ Slide 7 — Celebre consistência, não perfeição
 Um dia que você falhou não desfaz 30 que você foi.
 
 Slide 8 — CTA
-Salva e aplica uma estratégia essa semana 🏆`,ht:'#conquista #disciplina #habitos #motivacao #crescimentopessoal #carrossel #instagrambr #determinacao #evolucaopessoal #sejamelhor #produtividade'},
-{id:'co6',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'O orgulho que você merece sentir',tx:`Quando foi a última vez que você se permitiu sentir orgulho de si mesma?
+Salva e aplica uma estratégia essa semana 🏆`,
+ht:'#conquista #disciplina #habitos #motivacao #crescimentopessoal #carrossel #instagrambr #determinacao #evolucaopessoal #sejamelhor #produtividade',
+pr:{model:'Lucid Origin',prompt:'Calendar on a wall with consistent check marks, a single desk lamp, focused working environment, concept of daily discipline and consistency, warm minimalist tones, 4:5',neg:'dark, messy, cold, rushed, phone'}},
 
-Não o orgulho performático para mostrar. O orgulho real, quieto, que você sente sozinha quando para e reconhece: eu fiz isso. Eu cheguei aqui. Eu superei isso.
+{id:'co6',cat:'conquista',pl:'Instagram Feed',sz:'Médio',ti:'O orgulho que você merece sentir',
+tx:`Quando foi a última vez que você se permitiu sentir orgulho de si mesma?
 
-A gente é muito rápida em listar o que falta, o que errou, o que podia ser melhor.
+Não o orgulho performático para mostrar. O orgulho real, quieto, que você sente sozinha quando para e reconhece: eu fiz isso. Eu cheguei aqui.
 
-Hoje eu te convido a fazer diferente: lista o que você conquistou. O que você sobreviveu. O que você fez que era difícil e fez mesmo assim.
+Hoje eu te convido a fazer diferente: lista o que você conquistou. O que você sobreviveu.
 
-Você merece esse reconhecimento. E você não precisa esperar que alguém te dê.`,ht:'#conquista #orgulho #amorproprio #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #superacao #evolucaopessoal #autoestima'},
-{id:'rel1',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'Quem fica e quem vai',tx:`Conforme você cresce, algumas pessoas somem. Não por maldade — às vezes simplesmente porque a versão delas e a versão sua pararam de se encontrar no mesmo caminho.
+Você merece esse reconhecimento. E você não precisa esperar que alguém te dê.`,
+ht:'#conquista #orgulho #amorproprio #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #superacao #evolucaopessoal #autoestima',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Woman looking at herself in a mirror with a quiet proud smile, warm side light, natural skin, minimal setting, genuine self-appreciation moment, 85mm portrait, 4:5',neg:'heavy makeup, posed, cold, dark, busy background'}},
+
+// ══ RELACIONAMENTOS ══
+{id:'rel1',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'Quem fica e quem vai',
+tx:`Conforme você cresce, algumas pessoas somem. Não por maldade — às vezes simplesmente porque a versão delas e a versão sua pararam de se encontrar no mesmo caminho.
 
 E dói. Mesmo quando faz sentido.
 
-Mas existe um presente escondido nisso: o espaço que fica. Porque relações que terminam fazem espaço para relações que cabem em quem você está se tornando.
+Mas existe um presente escondido nisso: o espaço que fica.
 
 As pessoas certas não precisam ser convencidas da sua importância.
 
-Você já sentiu que crescer afastou alguém — e que talvez fosse necessário?`,ht:'#relacionamentos #amizade #crescimentopessoal #reflexao #autoconhecimento #limites #motivacao #instagrambr #frasesdodia #evolucaopessoal #amorproprio'},
-{id:'rel2',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Energia que você tolera',tx:`Presta atenção em como você se sente depois de passar tempo com certas pessoas.
+Você já sentiu que crescer afastou alguém — e que talvez fosse necessário?`,
+ht:'#relacionamentos #amizade #crescimentopessoal #reflexao #autoconhecimento #limites #motivacao #instagrambr #frasesdodia #evolucaopessoal #amorproprio',
+pr:{model:'Lucid Origin',prompt:'Two paths diverging in an autumn forest, warm and melancholic golden light, each path going a different way, concept of growing apart, fine art nature photography, 4:5',neg:'dark, cold, horror, threatening'}},
+
+{id:'rel2',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Energia que você tolera',
+tx:`Presta atenção em como você se sente depois de passar tempo com certas pessoas.
 
 Mais leve? Mais pesada?
 
 Com vontade de agir? Ou drenada até do que tinha?
 
-Isso não é frescura. É informação. E você tem o direito de usar essa informação pra escolher melhor com quem você gasta o que é mais precioso: sua energia.`,ht:'#relacionamentos #energia #limites #amorproprio #reflexao #tiktokbrasil #fyp #motivacao #frasesmotivacionais #crescimentopessoal #autocuidado'},
-{id:'rel3',cat:'relacionamentos',pl:'Instagram Feed',sz:'Longo',ti:'Amor que não drena',tx:`Você já esteve num relacionamento — de amizade, amoroso, familiar — onde constantemente se sentia pequena? Onde sempre havia algo errado em você? Onde você se dobrava para caber e ainda assim não cabia?
+Isso não é frescura. É informação. E você tem o direito de usar essa informação pra escolher melhor com quem você gasta o que é mais precioso: sua energia.`,
+ht:'#relacionamentos #energia #limites #amorproprio #reflexao #tiktokbrasil #fyp #motivacao #frasesmotivacionais #crescimentopessoal #autocuidado',
+pr:{model:'Phoenix 1.0',prompt:'Abstract visualization of energy — one side warm glowing golden light, other side cool draining blue, balance and energy concept, 9:16 vertical, spiritual art',neg:'dark horror, cold, threatening, sad'}},
+
+{id:'rel3',cat:'relacionamentos',pl:'Instagram Feed',sz:'Longo',ti:'Amor que não drena',
+tx:`Você já esteve num relacionamento onde constantemente se sentia pequena? Onde você se dobrava para caber e ainda assim não cabia?
 
 Isso não é amor. É dinâmica de poder.
 
-Amor real não diminui. Não exige que você se apague. Não te deixa pior sobre si mesma depois de cada conversa.
-
-Amor real te vê. Te recebe. Te desafia a crescer — mas do lado de fora, nunca às suas custas.
+Amor real não diminui. Não exige que você se apague.
 
 Se você está em algo que constantemente te deixa menor, é válido perguntar: isso é amor, ou é dependência emocional me dizendo que é amor?
 
-Como você quer se sentir depois de passar tempo com quem você ama?`,ht:'#relacionamentos #amor #amorproprio #limites #saudemental #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #autoconhecimento'},
-{id:'rel4',cat:'relacionamentos',pl:'Instagram Reels',sz:'Curto',ti:'Amizade que sustenta',tx:`A amizade que você precisa não é a de quem está sempre de acordo.
+Como você quer se sentir depois de passar tempo com quem você ama?`,
+ht:'#relacionamentos #amor #amorproprio #limites #saudemental #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #autoconhecimento',
+pr:{model:'Lucid Origin',prompt:'Two women friends laughing together in a sunny outdoor setting, genuine and equal energy, warm golden light, editorial lifestyle photography, candid and real, 4:5',neg:'dark, tense, cold, posed, conflict'}},
+
+{id:'rel4',cat:'relacionamentos',pl:'Instagram Reels',sz:'Curto',ti:'Amizade que sustenta',
+tx:`A amizade que você precisa não é a de quem está sempre de acordo.
 
 É a de quem está presente quando está difícil. Que diz a verdade com carinho. Que não desaparece quando você precisa de mais do que festa.
 
-Essas amizades são raras. Cuide das que você tem.`,ht:'#relacionamentos #amizade #conexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #amorproprio #comunidade #gratidao'},
-{id:'rel5',cat:'relacionamentos',pl:'Carrossel',sz:'Longo',ti:'Sinais de um relacionamento saudável',tx:`Slide 1 — CAPA
+Essas amizades são raras. Cuide das que você tem.`,
+ht:'#relacionamentos #amizade #conexao #reelsbrasil #motivacao #inspiracao #frasesmotivacionais #amorproprio #comunidade #gratidao',
+pr:{model:'Vision XL + PhotoReal v2',prompt:'Two women sitting closely together on a porch at dusk, warm candlelight, deep in conversation, genuine connection and warmth, photorealistic, 85mm, 9:16 vertical',neg:'dark, cold, posed, conflict, night bar scene'}},
+
+{id:'rel5',cat:'relacionamentos',pl:'Carrossel',sz:'Longo',ti:'Sinais de um relacionamento saudável',
+tx:`Slide 1 — CAPA
 Como é um relacionamento saudável de verdade 💛
 
 Slide 2 — Você pode ser você mesma
@@ -995,7 +1293,7 @@ Slide 4 — Você se sente maior depois das conversas
 Não menor. Não esgotada.
 
 Slide 5 — Há reciprocidade
-O cuidado, a presença, o investimento precisam vir dos dois lados.
+O cuidado e o investimento precisam vir dos dois lados.
 
 Slide 6 — Seus limites são respeitados
 Mesmo quando inconvenientes.
@@ -1004,23 +1302,31 @@ Slide 7 — Você cresceu sendo essa pessoa
 Não ficou menor, mais ansiosa, mais insegura.
 
 Slide 8 — CTA
-Salva e usa como régua para as relações na sua vida 💛`,ht:'#relacionamentos #saudavel #amorproprio #limites #reflexao #carrossel #instagrambr #motivacao #crescimentopessoal #autoconhecimento #amor'},
-{id:'rel6',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'O que você aprende sobre si nos relacionamentos',tx:`Nenhuma relação é só sobre a outra pessoa.
+Salva e usa como régua para as relações na sua vida 💛`,
+ht:'#relacionamentos #saudavel #amorproprio #limites #reflexao #carrossel #instagrambr #motivacao #crescimentopessoal #autoconhecimento #amor',
+pr:{model:'Lucid Origin',prompt:'Two people\'s hands intertwined gently on a table, warm morning light, equal and loving gesture, fine skin texture, warm tones, concept of healthy connection, 4:5',neg:'dark, tense, cold, conflict, harsh light'}},
+
+{id:'rel6',cat:'relacionamentos',pl:'Instagram Feed',sz:'Médio',ti:'O que você aprende sobre si nos relacionamentos',
+tx:`Nenhuma relação é só sobre a outra pessoa.
 
 Todo relacionamento é um espelho. Ele revela o que você busca, o que você evita, o que você ainda não resolveu dentro de si.
 
-O padrão que se repete? É informação. Os mesmos conflitos em relações diferentes? É informação.
+O padrão que se repete? É informação.
 
-Não para se culpar — para se conhecer.
+Quem você se torna quando está num relacionamento difícil? E quem você se torna quando está num que te nutre? Essa diferença te diz muito.`,
+ht:'#relacionamentos #autoconhecimento #espelho #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #amorproprio #evolucaopessoal #terapia',
+pr:{model:'Phoenix 1.0',prompt:'Woman looking into an ornate mirror, reflection slightly different — more glowing and confident version of herself, warm golden tones, concept of self-discovery through relationships, 4:5',neg:'dark, cracked mirror, cold, horror mood'}},
 
-Quem você se torna quando está num relacionamento difícil? E quem você se torna quando está num que te nutre? Essa diferença te diz muito sobre o que você precisa.`,ht:'#relacionamentos #autoconhecimento #espelho #reflexao #motivacao #instagrambr #frasesdodia #crescimentopessoal #amorproprio #evolucaopessoal #terapia'},
-{id:'rel7',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Pessoas que somem no seu sucesso',tx:`Presta atenção em quem aparece quando você está mal — e quem aparece quando você está bem.
+{id:'rel7',cat:'relacionamentos',pl:'TikTok',sz:'Curto',ti:'Pessoas que somem no seu sucesso',
+tx:`Presta atenção em quem aparece quando você está mal — e quem aparece quando você está bem.
 
 Tem gente que só fica perto da sua fragilidade. Que some quando você floresce.
 
 Isso não é amizade. É conforto com você pequena.
 
-Crescer vai afastar essas pessoas. Deixa.`,ht:'#relacionamentos #amizade #crescimentopessoal #tiktokbrasil #fyp #paravocê #reflexao #frasesmotivacionais #amorproprio #limites #motivacao'}
+Crescer vai afastar essas pessoas. Deixa.`,
+ht:'#relacionamentos #amizade #crescimentopessoal #tiktokbrasil #fyp #paravocê #reflexao #frasesmotivacionais #amorproprio #limites #motivacao',
+pr:{model:'Lucid Origin',prompt:'Single flower blooming fully in a field, others around it still budding or dried, concept of individual growth standing out, warm golden light, fine art nature photography, 9:16 vertical',neg:'dark, wilting, cold, gloomy'}}
 ];
 
 let sv=new Set();
@@ -1074,11 +1380,15 @@ function opMo(id){
   document.getElementById('mb').innerHTML=`<span class="badge ${pb(p.pl)}">${eh(p.pl)}</span><span class="badge bm">${eh(p.sz)}</span><span class="badge bm">${CM[p.cat].i} ${CM[p.cat].l}</span>`;
   document.getElementById('mtxt').textContent=p.tx;
   document.getElementById('mhash').textContent=p.ht;
+  document.getElementById('mpr-model').textContent='Modelo recomendado: '+p.pr.model;
+  document.getElementById('mpr').textContent=p.pr.prompt;
+  document.getElementById('mpr-neg').innerHTML='<span style="color:rgba(220,140,140,.5);margin-right:6px">negative:</span>'+eh(p.pr.neg);
   const on=sv.has(id);
   document.getElementById('mf').innerHTML=`
-    <button class="btn bgo bx" onclick="cp(document.getElementById('mtxt').textContent+'\\n\\n'+document.getElementById('mhash').textContent,'Post completo copiado! ✦')">Copiar tudo</button>
+    <button class="btn bgo bx" onclick="cp(document.getElementById('mtxt').textContent+'\\n\\n'+document.getElementById('mhash').textContent,'Post copiado! ✦')">Copiar post</button>
     <button class="btn bg bx" onclick="cp(document.getElementById('mtxt').textContent,'Texto copiado!')">Texto</button>
     <button class="btn bg bx" onclick="cp(document.getElementById('mhash').textContent,'Hashtags copiadas!')">Hashtags</button>
+    <button class="btn bg bx" onclick="cp(document.getElementById('mpr').textContent,'Prompt copiado! ✦')">Copiar prompt</button>
     <button class="btn bx ${on?'bs':'bg'}" id="msv" onclick="tgMoSv('${id}')">${on?'✦ Salvo':'✦ Salvar'}</button>`;
   document.getElementById('mo').classList.remove('hidden');
 }
